@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SmileWayStudio | Bespoke Beverly Hills Cosmetic Dentistry</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --apple-titanium: #eaedf2;
+      --card-pure-white: #ffffff;
+      --apple-dark: #111827;
+      --apple-gray: #64748b;
+      --apple-border: rgba(0, 0, 0, 0.08);
+      --apple-blue: #0071e3;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent !important;
+      -webkit-touch-callout: none !important;
+      user-select: none !important;
+    }
+
+    input, select, textarea, button {
+      user-select: auto !important;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--apple-titanium);
+      color: var(--apple-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+      overflow-x: hidden;
+      touch-action: pan-y;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.015em;
+    }
+
+    .app-shell {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--apple-titanium);
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .app-shell { max-width: 680px; }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(234, 237, 242, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--apple-border);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--apple-dark);
+      letter-spacing: -0.035em;
+    }
+
+    .brand-title span { color: var(--apple-blue); }
+
+    .phone-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: var(--apple-blue);
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .status-dot-green {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34c759;
+      box-shadow: 0 0 6px rgba(52, 199, 89, 0.6);
+    }
+
+    .rating-strip {
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--apple-gray);
+      background: var(--card-pure-white);
+      border-bottom: 1px solid var(--apple-border);
+    }
+
+    .g-icon { font-weight: 800; color: #4285f4; }
+    .stars { color: #ff9500; letter-spacing: 2px; }
+
+    /* Fully Active Smooth Press Trust Bar */
+    .press-trust-bar {
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid var(--apple-border);
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      cursor: grab;
+      touch-action: pan-x;
+    }
+    .press-trust-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #475569;
+      animation: continuousScroll 15s linear infinite;
+    }
+    .press-trust-bar:hover .press-trust-inner { animation-play-state: paused; }
+    .press-trust-inner span { opacity: 0.75; }
+
+    @keyframes continuousScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Zero-Glitch Hero Studio Frame with Matching Titanium Background */
+    .hero-box {
+      position: relative;
+      width: calc(100% - 32px);
+      margin: 16px auto 22px auto;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 9 / 14;
+      background: var(--apple-titanium);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      transform: translate3d(0, 0, 0);
+    }
+
+    .hero-vid {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s ease;
+      will-change: opacity;
+      background-color: var(--apple-titanium);
+    }
+
+    #vidStart { z-index: 1; opacity: 1; }
+    #vidTrans { z-index: 2; opacity: 0; pointer-events: none; }
+    #vidEnd   { z-index: 3; opacity: 0; pointer-events: none; }
+
+    .glass-sound-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 30;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(29, 29, 31, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
+
+    /* Clean Swipe Zone with Electric Glow Prompt */
+    .swipe-interactive-zone {
+      position: absolute;
+      bottom: 26px;
+      left: 20px;
+      right: 20px;
+      height: 52px;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      z-index: 20;
+      touch-action: none;
+    }
+
+    .swipe-light-trail {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(0,113,227,0.2), rgba(0, 113, 227, 0.9), rgba(0,113,227,0.2));
+      background-size: 200% 100%;
+      animation: electricPulse 1.8s infinite linear;
+      pointer-events: none;
+      box-shadow: 0 0 12px rgba(0, 113, 227, 0.6);
+    }
+
+    .swipe-interactive-zone.reverse .swipe-light-trail {
+      animation: electricPulseReverse 1.8s infinite linear;
+      background: linear-gradient(90deg, rgba(52,199,89,0.2), rgba(52, 199, 89, 0.95), rgba(52,199,89,0.2));
+      background-size: 200% 100%;
+      box-shadow: 0 0 12px rgba(52, 199, 89, 0.7);
+    }
+
+    @keyframes electricPulse {
+      0% { background-position: 200% 0; opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { background-position: -200% 0; opacity: 0.6; }
+    }
+    @keyframes electricPulseReverse {
+      0% { background-position: -200% 0; opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { background-position: 200% 0; opacity: 0.6; }
+    }
+
+    /* Minimalist Swipe Handle without White Box */
+    .swipe-arrow-handle {
+      width: 38px;
+      height: 38px;
+      background: transparent;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      position: absolute;
+      left: 2px;
+      top: 50%;
+      transform: translate3d(0, -50%, 0);
+      will-change: transform;
+      z-index: 2;
+    }
+
+    .swipe-arrow-handle:active { cursor: grabbing; }
+
+    .swipe-arrow-handle svg {
+      width: 32px;
+      height: 32px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .half-form-drawer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18);
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 20px;
+      transform: translate3d(0, 100%, 0);
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      border-top: 1px solid var(--apple-border);
+    }
+
+    .half-form-drawer.open { transform: translate3d(0, 0, 0); }
+
+    .drawer-header {
+      text-align: center;
+      margin-bottom: 14px;
+      padding-right: 20px;
+    }
+
+    .drawer-title {
+      color: var(--apple-dark);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .drawer-sub {
+      color: var(--apple-gray);
+      font-size: 0.76rem;
+      margin-top: 3px;
+    }
+
+    .drawer-input {
+      width: 100%;
+      background: var(--apple-titanium);
+      border: 1px solid var(--apple-border);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      color: var(--apple-dark);
+      margin-bottom: 10px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .drawer-input:focus {
+      border-color: var(--apple-blue);
+      background: #ffffff;
+    }
+
+    .drawer-btn {
+      width: 100%;
+      background: var(--apple-blue);
+      border: none;
+      padding: 13px;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
+    }
+
+    .drawer-dismiss {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--apple-titanium);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      color: var(--apple-gray);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .animate-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-padding { padding: 40px 22px; }
+    .section-top-tight { padding-top: 10px; }
+    
+    .sec-tag {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--apple-blue);
+      margin-bottom: 8px;
+    }
+    
+    .sec-heading {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--apple-dark);
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .doctor-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    .doc-img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .doc-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--apple-blue);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .stat-pill {
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      border-radius: 14px;
+      padding: 16px 14px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+    }
+
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--apple-dark);
+      margin-bottom: 3px;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: var(--apple-gray);
+    }
+
+    .accreditation-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .acc-badge {
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      color: var(--apple-dark);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 7px 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    }
+
+    /* Draggable & Auto-Scrolling Google Reviews Marquee */
+    .infinite-marquee-box {
+      width: 100%;
+      overflow-x: auto;
+      position: relative;
+      margin: 8px 0 16px 0;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+      touch-action: pan-x;
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .infinite-marquee-box::-webkit-scrollbar { display: none; }
+
+    .infinite-marquee-inner {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      animation: marqueeScroll 24s linear infinite;
+    }
+    .infinite-marquee-box:hover .infinite-marquee-inner { animation-play-state: paused; }
+
+    .review-bubble {
+      width: 270px;
+      flex-shrink: 0;
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+      pointer-events: none;
+    }
+
+    .rev-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .rev-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--apple-dark);
+    }
+
+    .rev-quote {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--apple-gray);
+    }
+
+    /* Draggable & Auto-Scrolling Clinical Cases */
+    .interactive-cases-box {
+      width: 100%;
+      overflow-x: auto;
+      position: relative;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      margin: 8px 0 16px 0;
+      touch-action: pan-x;
+      mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    }
+
+    .interactive-cases-box::-webkit-scrollbar { display: none; }
+
+    .interactive-cases-inner {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      animation: marqueeCases 26s linear infinite;
+      will-change: transform;
+    }
+    .interactive-cases-box:hover .interactive-cases-inner { animation-play-state: paused; }
+
+    .case-card-stream {
+      width: 250px;
+      flex-shrink: 0;
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+      pointer-events: none;
+    }
+
+    .case-photo-slot {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 135px;
+      margin-bottom: 10px;
+      background: #e2e5e9;
+    }
+
+    .case-photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .case-slot-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .badge-b { background: rgba(29, 29, 31, 0.85); backdrop-filter: blur(4px); }
+    .badge-a { background: var(--apple-blue); }
+
+    .treatment-card {
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .treat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--apple-titanium);
+      border: 1px solid var(--apple-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--apple-blue);
+      font-size: 1.2rem;
+    }
+
+    .treat-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--apple-dark);
+      margin-bottom: 4px;
+    }
+
+    .treat-desc {
+      font-size: 0.82rem;
+      color: var(--apple-gray);
+      line-height: 1.5;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 16px 18px;
+      background: transparent;
+      border: none;
+      outline: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--apple-dark);
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .faq-chevron {
+      font-size: 1.2rem;
+      color: var(--apple-gray);
+      transition: transform 0.25s ease;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 18px;
+      font-size: 0.84rem;
+      color: var(--apple-gray);
+      line-height: 1.55;
+    }
+
+    .faq-item.active .faq-answer { max-height: 160px; padding-bottom: 16px; }
+    .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
+
+    .consult-card {
+      background: var(--card-pure-white);
+      border: 1px solid var(--apple-border);
+      border-radius: 18px;
+      padding: 24px 20px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+      margin-bottom: 26px;
+    }
+
+    .slots-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #fff8eb;
+      border: 1px solid #ffe2b3;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #b25e00;
+      margin-bottom: 16px;
+    }
+
+    .slots-dot { width: 6px; height: 6px; border-radius: 50%; background: #ff9500; }
+
+    .guarantee-strip {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      background: #f2faf4;
+      border: 1px solid #d1edd8;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #248a3d;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--apple-titanium);
+      border: 1px solid var(--apple-border);
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      color: var(--apple-dark);
+      margin-bottom: 12px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .form-input:focus { border-color: var(--apple-blue); background: #ffffff; }
+
+    .btn-confirm {
+      width: 100%;
+      background: var(--apple-blue);
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.94rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
+    }
+
+    /* Clean GPS Map Card with Direct Action Link */
+    .gps-map-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--apple-border);
+      margin-bottom: 40px;
+      height: 220px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+      background: #e2e5e9;
+      text-decoration: none;
+      display: block;
+    }
+
+    .gps-map-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .gps-map-card:hover .gps-map-img { transform: scale(1.03); }
+
+    .map-neighborhood-pill {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--apple-border);
+      z-index: 10;
+    }
+
+    .map-loc-title { font-size: 0.8rem; font-weight: 700; color: var(--apple-dark); }
+    .map-loc-road { font-size: 0.72rem; color: var(--apple-gray); font-weight: 500; }
+
+    .gps-open-link {
+      background: var(--apple-blue);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .floating-ai {
+      position: fixed;
+      bottom: 20px;
+      right: 18px;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--apple-border);
+      padding: 7px 14px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(16px);
+      cursor: pointer;
+    }
+
+    .ai-avatar { font-size: 0.95rem; line-height: 1; }
+    .ai-main { font-size: 0.76rem; font-weight: 600; color: var(--apple-dark); }
+    .status-dot-tiny { width: 6px; height: 6px; border-radius: 50%; background: #34c759; box-shadow: 0 0 6px #34c759; }
+
+    .ai-chat-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .ai-chat-modal.active { opacity: 1; pointer-events: auto; }
+
+    .ai-chat-window {
+      background: #ffffff;
+      width: 100%;
+      max-width: 500px;
+      height: 500px;
+      border-radius: 20px 20px 0 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .ai-chat-header {
+      padding: 16px 20px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--apple-border);
+      color: var(--apple-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ai-chat-body {
+      flex: 1;
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--apple-titanium);
+    }
+
+    .ai-msg {
+      max-width: 82%;
+      padding: 11px 16px;
+      border-radius: 16px;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    .ai-bot { background: #e2e5e9; color: var(--apple-dark); align-self: flex-start; }
+    .ai-user { background: var(--apple-blue); color: #ffffff; align-self: flex-end; }
+
+    .ai-chat-footer {
+      padding: 12px 18px;
+      border-top: 1px solid var(--apple-border);
+      display: flex;
+      gap: 10px;
+      background: #ffffff;
+    }
+
+    .ai-chat-input {
+      flex: 1;
+      border: 1px solid var(--apple-border);
+      background: var(--apple-titanium);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.86rem;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .ai-send-btn {
+      background: var(--apple-blue);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    footer {
+      padding: 30px 20px 90px 20px;
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--apple-gray);
+      border-top: 1px solid var(--apple-border);
+      background: var(--card-pure-white);
+    }
+
+    @keyframes lightSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @keyframes lightSweepReverse { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes marqueeCases { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    
+    <header>
+      <div class="brand-title">SmileWay<span>Studio</span></div>
+      <a href="tel:5552347890" class="phone-badge">
+        <span class="status-dot-green"></span>
+        <span>(555) 234-7890</span>
+      </a>
+    </header>
+
+    <div class="rating-strip">
+      <span class="g-icon">G</span>
+      <span class="stars">★★★★★</span>
+      <span>4.9 Rating (380+ Verified Beverly Hills Reviews)</span>
+    </div>
+
+    <!-- Active Scrolling & Draggable Press Trust Bar -->
+    <div class="press-trust-bar" id="pressBar">
+      <div class="press-trust-inner">
+        <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
+        <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> •
+        <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span>
+      </div>
+    </div>
+
+    <!-- Zero-Glitch Hero Studio Frame -->
+    <div class="hero-box" id="heroSec">
+      <video id="vidStart" class="hero-vid" src="start.mp4" playsinline webkit-playsinline preload="auto" loop muted autoplay></video>
+      <video id="vidTrans" class="hero-vid" src="trans.mp4" playsinline webkit-playsinline preload="auto" muted></video>
+      <video id="vidEnd"   class="hero-vid" src="end.mp4" playsinline webkit-playsinline preload="auto" loop muted></video>
+
+      <button class="glass-sound-btn" id="soundBtn" aria-label="Toggle Sound">
+        <svg id="soundIcon" viewBox="0 0 24 24">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+      </button>
+
+      <!-- Minimalist Swipe Track with Electric Pulse Prompt -->
+      <div class="swipe-interactive-zone" id="swipeTrack">
+        <div class="swipe-light-trail"></div>
+        <div class="swipe-arrow-handle" id="swipeKnob">
+          <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </div>
+      </div>
+
+      <!-- Swipe Drawer Form -->
+      <div class="half-form-drawer" id="heroDrawer">
+        <button class="drawer-dismiss" onclick="closeHeroDrawer()">×</button>
+        <div class="drawer-header">
+          <h3 class="drawer-title">Claim Your Radiance</h3>
+          <p class="drawer-sub">Direct senior cosmetic triage confirmed via backend.</p>
+        </div>
+        <input type="text" id="drawerName" class="drawer-input" placeholder="Your Full Name" />
+        <input type="tel" id="drawerPhone" class="drawer-input" placeholder="Direct Phone (SMS Enabled)" />
+        <select id="drawerTreatment" class="drawer-input">
+          <option value="Handcrafted Porcelain Veneers">Handcrafted Porcelain Veneers</option>
+          <option value="Micro-Enamel Bio-Seal">Micro-Enamel Bio-Seal</option>
+          <option value="Full Arch Smile Alignment">Full Arch Smile Alignment</option>
+        </select>
+        <button class="drawer-btn" onclick="submitDrawerForm()">Confirm Priority Slot</button>
+      </div>
+    </div>
+
+    <!-- Doctor Authority Section -->
+    <section class="section-padding section-top-tight animate-on-scroll">
+      <div class="doctor-card">
+        <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" alt="Dr Julian Vance" class="doc-img" />
+        <div class="doc-tag">★ Chief Cosmetic Dentist</div>
+      </div>
+
+      <div class="sec-tag">Oral Restoration Authority</div>
+      <h2 class="sec-heading">Dr. Julian Vance, DDS</h2>
+      <p style="font-size: 0.92rem; color: var(--apple-gray); line-height: 1.65;">
+        Specializing in zero-pain bio-enamel restoration and handcrafted porcelain veneers. Delivering transformative bite alignment and natural aesthetic radiance for high-profile smiles.
+      </p>
+
+      <div class="stats-row">
+        <div class="stat-pill">
+          <div class="stat-num">12,400+</div>
+          <div class="stat-label">Cases Handled</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-num">99.8%</div>
+          <div class="stat-label">Success Rate</div>
+        </div>
+      </div>
+
+      <div class="accreditation-row">
+        <span class="acc-badge">✓ AACD Accredited</span>
+        <span class="acc-badge">✓ ADA Member</span>
+        <span class="acc-badge">★ Top Doctor 2026</span>
+        <span class="acc-badge">✦ Invisalign Diamond</span>
+      </div>
+    </section>
+
+    <!-- Google Reviews Marquee (Auto + Draggable) -->
+    <section class="section-padding animate-on-scroll" style="padding-top: 0;">
+      <div class="sec-tag">Real Experiences</div>
+      <h2 class="sec-heading">Google Patient Reviews</h2>
+
+      <div class="infinite-marquee-box" id="reviewsBox">
+        <div class="infinite-marquee-inner">
+          <div class="review-bubble">
+            <div class="rev-head">
+              <span class="rev-name">Elena R. <span style="color:var(--apple-blue);">✓ Verified</span></span>
+              <span style="color:#ff9500; font-size: 0.75rem;">★★★★★</span>
+            </div>
+            <p class="rev-quote">"Got my veneers done here. 100% pain-free and natural white. Transformed my self-confidence completely!"</p>
+          </div>
+          <div class="review-bubble">
+            <div class="rev-head">
+              <span class="rev-name">Marcus T. <span style="color:var(--apple-blue);">✓ Verified</span></span>
+              <span style="color:#ff9500; font-size: 0.75rem;">★★★★★</span>
+            </div>
+            <p class="rev-quote">"Dr. Vance is an absolute artist. Same-day triage and the precision mapping blew my mind."</p>
+          </div>
+          <div class="review-bubble">
+            <div class="rev-head">
+              <span class="rev-name">Sophia L. <span style="color:var(--apple-blue);">✓ Verified</span></span>
+              <span style="color:#ff9500; font-size: 0.75rem;">★★★★★</span>
+            </div>
+            <p class="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
+          </div>
+          <!-- Loop Clones -->
+          <div class="review-bubble">
+            <div class="rev-head">
+              <span class="rev-name">Elena R. <span style="color:var(--apple-blue);">✓ Verified</span></span>
+              <span style="color:#ff9500; font-size: 0.75rem;">★★★★★</span>
+            </div>
+            <p class="rev-quote">"Got my veneers done here. 100% pain-free and natural white. Transformed my self-confidence completely!"</p>
+          </div>
+          <div class="review-bubble">
+            <div class="rev-head">
+              <span class="rev-name">Marcus T. <span style="color:var(--apple-blue);">✓ Verified</span></span>
+              <span style="color:#ff9500; font-size: 0.75rem;">★★★★★</span>
+            </div>
+            <p class="rev-quote">"Dr. Vance is an absolute artist. Same-day triage and the precision mapping blew my mind."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clinical Transformation (Auto + Draggable) -->
+    <section class="section-padding animate-on-scroll" style="padding-top: 0;">
+      <div class="sec-tag">Proven Results</div>
+      <h2 class="sec-heading">Clinical Transformation</h2>
+
+      <div class="interactive-cases-box" id="casesBox">
+        <div class="interactive-cases-inner">
+          <div class="case-card-stream">
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Teeth Before Veneers" />
+              <span class="case-slot-badge badge-b">Before</span>
+            </div>
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Teeth After Veneers" />
+              <span class="case-slot-badge badge-a">After</span>
+            </div>
+            <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #481: Full Arch Veneers</p>
+          </div>
+
+          <div class="case-card-stream">
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Unaligned Enamel Before" />
+              <span class="case-slot-badge badge-b">Before</span>
+            </div>
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Perfect Radiant Smile After" />
+              <span class="case-slot-badge badge-a">After</span>
+            </div>
+            <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #512: Bio-Enamel Seal</p>
+          </div>
+
+          <div class="case-card-stream">
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Stained Enamel Before" />
+              <span class="case-slot-badge badge-b">Before</span>
+            </div>
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Laser Whitened Smile After" />
+              <span class="case-slot-badge badge-a">After</span>
+            </div>
+            <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #604: Laser Whitening</p>
+          </div>
+          <!-- Loop Clones -->
+          <div class="case-card-stream">
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Teeth Before Veneers" />
+              <span class="case-slot-badge badge-b">Before</span>
+            </div>
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Teeth After Veneers" />
+              <span class="case-slot-badge badge-a">After</span>
+            </div>
+            <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #481: Full Arch Veneers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Precision Treatments -->
+    <section class="section-padding animate-on-scroll" style="padding-top: 0;">
+      <div class="sec-tag">Restoration Portfolio</div>
+      <h2 class="sec-heading">Precision Treatments</h2>
+
+      <div class="treatment-card">
+        <div class="treat-icon">✦</div>
+        <div>
+          <div class="treat-title">Micro-Enamel Bio-Seal</div>
+          <div class="treat-desc">Non-invasive sealing of micro-cracks, restoring structural strength instantly.</div>
+        </div>
+      </div>
+
+      <div class="treatment-card">
+        <div class="treat-icon">✦</div>
+        <div>
+          <div class="treat-title">Custom Handcrafted Veneers</div>
+          <div class="treat-desc">Ultra-thin aesthetic shells designed to match your individual facial structure.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="section-padding animate-on-scroll" style="padding-top: 0;">
+      <div class="sec-tag">Patient Guidance</div>
+      <h2 class="sec-heading">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>Is the porcelain veneer procedure painful?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Zero discomfort. We utilize gentle micro-sedation and localized numbing protocols, ensuring complete tranquility throughout your cosmetic appointment.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How long do bespoke veneers last?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>With Dr. Vance’s bio-enamel bonding technique, our handcrafted veneers typically endure 15 to 20+ years with routine oral hygiene.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>How many clinic visits are required?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Just two visits. Visit 1 involves digital 3D bite mapping and aesthetic preview; Visit 2 completes the final bonding in under 90 minutes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2nd Form: Main Bottom Consultation Form Connected to API -->
+    <section class="section-padding animate-on-scroll" style="padding-top: 0;">
+      <div class="consult-card">
+        <div class="slots-pill">
+          <span class="slots-dot"></span>
+          <span>Only 3 Priority Triage Slots Left This Week</span>
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 6px;">Reserve Your Consultation</h3>
+        <p style="font-size: 0.84rem; color: var(--apple-gray); margin-bottom: 16px;">
+          Select your primary concern. 60s SMS triage confirmed instantly.
+        </p>
+
+        <div class="guarantee-strip">
+          <div>🛡️ 10-Year Comprehensive Structural Warranty</div>
+          <div>🔒 100% Private VIP Suite & Rear Valet Access (Strict NDA Compliant)</div>
+          <div>💳 0% APR Flexible Monthly Installments Available</div>
+        </div>
+
+        <input type="text" id="mainName" class="form-input" placeholder="Your Full Name" />
+        <input type="tel" id="mainPhone" class="form-input" placeholder="Mobile Phone (SMS Enabled)" />
+        <select id="mainTreatment" class="form-input">
+          <option value="Handcrafted Porcelain Veneers">Handcrafted Porcelain Veneers</option>
+          <option value="Micro-Enamel Bio-Seal">Micro-Enamel Bio-Seal</option>
+          <option value="Full Arch Smile Alignment">Full Arch Smile Alignment</option>
+        </select>
+        <button class="btn-confirm" onclick="submitMainForm()">Confirm Priority Appointment</button>
+      </div>
+
+      <!-- Clean GPS Map Image with Direct Google Maps Link -->
+      <a href="https://maps.google.com/?q=Beverly+Hills+CA" target="_blank" class="gps-map-card">
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Beverly Hills Studio Map" class="gps-map-img" />
+        <div class="map-neighborhood-pill">
+          <div>
+            <div class="map-loc-title">SmileWay Studio Beverly Hills</div>
+            <div class="map-loc-road">Bedford Dr & Wilshire Blvd Corner</div>
+          </div>
+          <span class="gps-open-link">Open GPS ↗</span>
+        </div>
+      </a>
+    </section>
+
+    <footer>
+      <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Floating AI Pill -->
+    <div class="floating-ai" onclick="openAiChat()">
+      <span class="ai-avatar">🤖</span>
+      <span class="ai-main">AI Assistant</span>
+      <span class="status-dot-tiny"></span>
+    </div>
+
+    <!-- AI Chat Modal -->
+    <div class="ai-chat-modal" id="aiChatModal">
+      <div class="ai-chat-window">
+        <div class="ai-chat-header">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="width:8px; height:8px; border-radius:50%; background:#34c759;"></div>
+            <strong>SmileWay AI Assistant</strong>
+          </div>
+          <button onclick="closeAiChat()" style="background:none; border:none; color:var(--apple-gray); font-size:1.4rem; cursor:pointer;">×</button>
+        </div>
+        <div class="ai-chat-body" id="aiChatBody">
+          <div class="ai-msg ai-bot">Hello! I am your AI Assistant. How can I assist with your Beverly Hills aesthetic smile preview today?</div>
+        </div>
+        <div class="ai-chat-footer">
+          <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Type your message..." />
+          <button class="ai-send-btn" onclick="sendAiMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const vidStart = document.getElementById('vidStart');
+    const vidTrans = document.getElementById('vidTrans');
+    const vidEnd   = document.getElementById('vidEnd');
+
+    const heroSec   = document.getElementById('heroSec');
+    const track     = document.getElementById('swipeTrack');
+    const knob      = document.getElementById('swipeKnob');
+    const knobSvg   = document.getElementById('knobSvg');
+    const heroDrawer= document.getElementById('heroDrawer');
+    const soundBtn  = document.getElementById('soundBtn');
+    const soundIcon = document.getElementById('soundIcon');
+    const aiChatModal = document.getElementById('aiChatModal');
+
+    let funnelStep = 0; 
+    let isDragging = false;
+    let startX = 0;
+    let currentX = 0;
+    let isMuted = true;
+
+    function triggerHaptic(pattern) {
+      if (typeof navigator !== 'undefined' && navigator.vibrate) {
+        try { navigator.vibrate(pattern); } catch (e) {}
+      }
+    }
+
+    const unmutedSvg = `<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>`;
+    const mutedSvg   = `<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>`;
+
+    soundBtn.addEventListener('click', () => {
+      triggerHaptic(20);
+      isMuted = !isMuted;
+      soundIcon.innerHTML = isMuted ? mutedSvg : unmutedSvg;
+      vidStart.muted = isMuted;
+      vidTrans.muted = isMuted;
+      vidEnd.muted = isMuted;
+    });
+
+    function wakeActiveVideos() {
+      if (funnelStep === 0) {
+        if (vidStart.paused) vidStart.play().catch(() => {});
+      } else if (funnelStep >= 2) {
+        if (vidEnd.paused) vidEnd.play().catch(() => {});
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) wakeActiveVideos();
+    });
+    window.addEventListener('pageshow', wakeActiveVideos);
+    window.addEventListener('focus', wakeActiveVideos);
+
+    const playInitialVideo = () => {
+      vidStart.muted = true;
+      vidStart.play().catch(() => {});
+      vidTrans.load();
+      vidEnd.load();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', playInitialVideo);
+    } else {
+      playInitialVideo();
+    }
+    
+    document.addEventListener('touchstart', () => {
+      if (funnelStep === 0 && vidStart.paused) vidStart.play().catch(() => {});
+    }, { once: true });
+
+    knob.addEventListener('pointerdown', (e) => {
+      if (funnelStep === 1) return;
+      triggerHaptic(20);
+      isDragging = true;
+      startX = e.clientX;
+      currentX = startX;
+      knob.setPointerCapture(e.pointerId);
+    });
+
+    knob.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      currentX = e.clientX;
+      const maxMove = track.clientWidth - knob.clientWidth - 8;
+
+      if (funnelStep === 0) {
+        let delta = currentX - startX;
+        let move = Math.max(0, Math.min(delta, maxMove));
+        knob.style.transform = `translate3d(${move}px, -50%, 0)`;
+
+        if (move >= maxMove * 0.65) {
+          executeForwardTransition(maxMove);
+        }
+      } else if (funnelStep === 2) {
+        let delta = startX - currentX;
+        let move = Math.max(0, Math.min(delta, maxMove));
+        knob.style.transform = `translate3d(${maxMove - move}px, -50%, 0)`;
+
+        if (move >= maxMove * 0.65) {
+          executeReverseCompletion();
+        }
+      }
+    });
+
+    const finishSwipe = () => {
+      if (!isDragging) return;
+      isDragging = false;
+      const maxMove = track.clientWidth - knob.clientWidth - 8;
+
+      if (funnelStep === 0) {
+        knob.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+        knob.style.transform = 'translate3d(0, -50%, 0)';
+      } else if (funnelStep === 2) {
+        knob.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+        knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+      }
+    };
+
+    knob.addEventListener('pointerup', finishSwipe);
+    knob.addEventListener('pointercancel', finishSwipe);
+
+    function executeForwardTransition(maxMove) {
+      funnelStep = 1;
+      isDragging = false;
+      triggerHaptic(30);
+
+      knob.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+      knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+
+      vidStart.pause();
+      vidStart.style.opacity = '0';
+
+      vidTrans.style.opacity = '1';
+      vidTrans.currentTime = 0;
+      vidTrans.muted = isMuted;
+      vidTrans.play().catch(() => {});
+
+      vidTrans.onended = () => {
+        vidTrans.style.opacity = '0';
+        vidEnd.style.opacity = '1';
+        vidEnd.currentTime = 0;
+        vidEnd.muted = isMuted;
+        vidEnd.loop = true;
+        
+        const playPromise = vidEnd.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            vidEnd.muted = true;
+            vidEnd.play().catch(() => {});
+          });
+        }
+
+        funnelStep = 2;
+        knob.style.transition = 'none';
+        knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+        knobSvg.style.transform = 'rotate(180deg)';
+        track.classList.add('reverse');
+      };
+    }
+
+    function executeReverseCompletion() {
+      funnelStep = 3;
+      isDragging = false;
+      triggerHaptic(35);
+
+      knob.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+      knob.style.transform = 'translate3d(0, -50%, 0)';
+
+      setTimeout(() => {
+        openHeroDrawer();
+      }, 200);
+    }
+
+    function openHeroDrawer() { heroDrawer.classList.add('open'); }
+    function closeHeroDrawer() { 
+      heroDrawer.classList.remove('open');
+      if (funnelStep === 3) {
+        funnelStep = 2;
+        const maxMove = track.clientWidth - knob.clientWidth - 8;
+        knob.style.transition = 'none';
+        knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+      }
+    }
+
+    async function submitDrawerForm() {
+      const fullName = document.getElementById('drawerName').value.trim();
+      const phone = document.getElementById('drawerPhone').value.trim();
+      const treatment = document.getElementById('drawerTreatment').value;
+
+      if (!fullName || !phone) {
+        alert('Please fill in both your name and phone number.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/leads/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName, phone, treatment })
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('Success! Priority appointment slot reserved. Dr. Vance’s team will text you within 60s.');
+          closeHeroDrawer();
+        } else {
+          alert('Error: ' + (result.error || 'Something went wrong'));
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Server connection failed.');
+      }
+    }
+
+    async function submitMainForm() {
+      const fullName = document.getElementById('mainName').value.trim();
+      const phone = document.getElementById('mainPhone').value.trim();
+      const treatment = document.getElementById('mainTreatment').value;
+
+      if (!fullName || !phone) {
+        alert('Please fill in both your name and phone number.');
+        return;
+      }
+
+      try {
+        const response = await fetch('/api/leads/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName, phone, treatment })
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('Success! Priority appointment slot reserved. Dr. Vance’s team will text you within 60s.');
+          document.getElementById('mainName').value = '';
+          document.getElementById('mainPhone').value = '';
+        } else {
+          alert('Error: ' + (result.error || 'Something went wrong'));
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Server connection failed.');
+      }
+    }
+
+    function toggleFaq(btn) {
+      triggerHaptic(15);
+      const item = btn.closest('.faq-item');
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    }
+
+    function openAiChat() { triggerHaptic(20); aiChatModal.classList.add('active'); }
+    function closeAiChat() { aiChatModal.classList.remove('active'); }
+
+    async function sendAiMessage() {
+      const input = document.getElementById('aiUserInput');
+      const body = document.getElementById('aiChatBody');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const userDiv = document.createElement('div');
+      userDiv.className = 'ai-msg ai-user';
+      userDiv.innerText = text;
+      body.appendChild(userDiv);
+      input.value = '';
+      body.scrollTop = body.scrollHeight;
+
+      try {
+        const response = await fetch('/api/ai/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text, userPhone: "WebVisitor" })
+        });
+        const result = await response.json();
+
+        const botDiv = document.createElement('div');
+        botDiv.className = 'ai-msg ai-bot';
+        botDiv.innerText = result.success ? result.reply : "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
+        body.appendChild(botDiv);
+        body.scrollTop = body.scrollHeight;
+        triggerHaptic(20);
+      } catch (error) {
+        console.error("AI Chat Error:", error);
+        const botDiv = document.createElement('div');
+        botDiv.className = 'ai-msg ai-bot';
+        botDiv.innerText = "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
+        body.appendChild(botDiv);
+        body.scrollTop = body.scrollHeight;
+      }
+    }
+
+    // Touch & Mouse Draggable Scroller Helper for Press, Reviews & Cases
+    function enableDragScroll(containerId) {
+      const slider = document.getElementById(containerId);
+      if (!slider) return;
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        slider.style.cursor = 'grabbing';
+        startX = e.clientX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        try { slider.setPointerCapture(e.pointerId); } catch(err){}
+      });
+
+      slider.addEventListener('pointerleave', () => {
+        isDown = false;
+        slider.style.cursor = 'grab';
+      });
+
+      slider.addEventListener('pointerup', (e) => {
+        isDown = false;
+        slider.style.cursor = 'grab';
+        try { slider.releasePointerCapture(e.pointerId); } catch(err){}
+      });
+
+      slider.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.clientX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+    }
+
+    // Initialize Draggable Touch Sliders
+    document.addEventListener("DOMContentLoaded", function() {
+      enableDragScroll('pressBar');
+      enableDragScroll('reviewsBox');
+      enableDragScroll('casesBox');
+
+      // Scroll Fade-In Observer
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.animate-on-scroll').forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
