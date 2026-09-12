@@ -17,7 +17,6 @@
       --apple-gray: #64748b;
       --apple-border: rgba(0, 0, 0, 0.06);
       --apple-blue: #0071e3;
-      --hero-transition-cubic: cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     * {
@@ -153,7 +152,7 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* GPU-Accelerated Zero-Hanging Hero Frame */
+    /* Zero-Glitch Instant Hero Studio Frame with Poster Attribute */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -173,13 +172,14 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      opacity: 0;
-      transition: opacity 0.5s var(--hero-transition-cubic);
-      will-change: opacity;
-      background: #0d131f;
+      transition: opacity 0.3s ease;
+      will-change: opacity, transform;
+      background-color: #0d131f;
     }
 
-    .hero-vid.active { opacity: 1; }
+    #vidStart { z-index: 1; opacity: 1; }
+    #vidTrans { z-index: 2; opacity: 0; pointer-events: none; }
+    #vidEnd   { z-index: 3; opacity: 0; pointer-events: none; }
 
     .glass-sound-btn {
       position: absolute;
@@ -197,12 +197,11 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: opacity 0.3s ease;
     }
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Completely Transparent Interaction Track */
+    /* Transparent Track without blur box */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
@@ -240,11 +239,10 @@
       will-change: transform;
       z-index: 25;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s var(--hero-transition-cubic), background 0.2s ease, box-shadow 0.2s ease;
       pointer-events: auto;
     }
 
-    .swipe-arrow-handle:active { cursor: grabbing; background: rgba(255, 255, 255, 0.3); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); }
+    .swipe-arrow-handle:active { cursor: grabbing; }
 
     .swipe-arrow-handle svg {
       width: 20px;
@@ -270,8 +268,7 @@
       flex-direction: column;
       padding: 24px 20px;
       transform: translate3d(0, 100%, 0);
-      transition: transform 0.5s var(--hero-transition-cubic);
-      will-change: transform;
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
       border-top: 1px solid var(--apple-border);
     }
 
@@ -921,11 +918,11 @@
       </div>
     </div>
 
-    <!-- GPU-Accelerated Zero-Hanging Hero Frame -->
+    <!-- Zero-Glitch Instant Hero Studio Frame with Poster Attribute -->
     <div class="hero-box" id="heroSec">
-      <video id="vidStart" class="hero-vid active" src="./start.mp4" playsinline webkit-playsinline preload="auto" loop muted autoplay></video>
-      <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="auto" muted></video>
-      <video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="auto" loop muted></video>
+      <video id="vidStart" class="hero-vid" src="./start.mp4" poster="./start-poster.jpg" playsinline webkit-playsinline preload="auto" loop muted autoplay></video>
+      <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="none" muted></video>
+      <video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="none" loop muted></video>
 
       <button class="glass-sound-btn" id="soundBtn" aria-label="Toggle Sound">
         <svg id="soundIcon" viewBox="0 0 24 24">
@@ -1262,6 +1259,7 @@
     let startX = 0;
     let currentX = 0;
     let isMuted = true;
+    let videosPreloaded = false;
 
     function triggerHaptic(pattern) {
       if (typeof navigator !== 'undefined' && navigator.vibrate) {
@@ -1313,7 +1311,17 @@
       if (funnelStep === 0 && vidStart.paused) vidStart.play().catch(() => {});
     }, { once: true });
 
-    // Intersection Observer to auto-mute video sound when hero section scrolls out of view
+    function preloadRemainingVideos() {
+      if (!videosPreloaded) {
+        videosPreloaded = true;
+        vidTrans.load();
+        vidEnd.load();
+      }
+    }
+
+    heroSec.addEventListener('pointerdown', preloadRemainingVideos, { once: true });
+    heroSec.addEventListener('touchstart', preloadRemainingVideos, { once: true });
+
     const heroObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) {
@@ -1329,9 +1337,9 @@
     }, { threshold: 0.1 });
     heroObserver.observe(heroSec);
 
-    // Fully Fixed Pointer Dragging Mechanics for Real-Time Swipe Movement
     knob.addEventListener('pointerdown', (e) => {
       if (funnelStep === 1) return;
+      preloadRemainingVideos();
       triggerHaptic(25);
       isDragging = true;
       startX = e.clientX;
@@ -1398,23 +1406,21 @@
     function executeForwardTransition(maxMove) {
       funnelStep = 1;
       triggerHaptic(40);
-      heroSec.classList.add('transitioning');
 
       knob.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
       knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
 
       vidStart.pause();
-      vidStart.classList.remove('active');
+      vidStart.style.opacity = '0';
 
-      vidTrans.classList.add('active');
+      vidTrans.style.opacity = '1';
       vidTrans.currentTime = 0;
       vidTrans.muted = isMuted;
       vidTrans.play().catch(() => {});
 
       vidTrans.onended = () => {
-        heroSec.classList.remove('transitioning');
-        vidTrans.classList.remove('active');
-        vidEnd.classList.add('active');
+        vidTrans.style.opacity = '0';
+        vidEnd.style.opacity = '1';
         vidEnd.currentTime = 0;
         vidEnd.muted = isMuted;
         vidEnd.loop = true;
@@ -1459,8 +1465,8 @@
       
       funnelStep = 0;
       vidEnd.pause();
-      vidEnd.classList.remove('active');
-      vidStart.classList.add('active');
+      vidEnd.style.opacity = '0';
+      vidStart.style.opacity = '1';
       vidStart.currentTime = 0;
       vidStart.muted = isMuted;
       vidStart.play().catch(() => {});
@@ -1575,13 +1581,12 @@
         console.error("AI Chat Error:", error);
         const botDiv = document.createElement('div');
         botDiv.className = 'ai-msg ai-bot';
-        botDiv.innerText = "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
+        botDiv.innerText = "Thank you! Dr. Vance's team will top you shortly regarding priority consultation.";
         body.appendChild(botDiv);
         body.scrollTop = body.scrollHeight;
       }
     }
 
-    // Inertial Momentum Infinite Marquee Engine
     function initInertialMarquee(boxId, innerId, baseSpeed = 0.6) {
       const box = document.getElementById(boxId);
       const inner = document.getElementById(innerId);
