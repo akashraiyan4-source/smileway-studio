@@ -1455,14 +1455,23 @@
 
     function closeHeroDrawer() { 
       heroDrawer.classList.remove('open');
+      
+      // Reset back to initial start state cleanly with knob on the left (0px)
+      funnelStep = 0;
+      vidEnd.pause();
+      vidEnd.style.opacity = '0';
+      vidStart.style.opacity = '1';
+      vidStart.currentTime = 0;
+      vidStart.muted = isMuted;
+      vidStart.play().catch(() => {});
+
       track.style.opacity = '1';
       track.style.pointerEvents = 'auto';
-      if (funnelStep === 3) {
-        funnelStep = 2;
-        const maxMove = track.clientWidth - knob.clientWidth - 8;
-        knob.style.transition = 'none';
-        knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
-      }
+      track.classList.remove('reverse');
+
+      knob.style.transition = 'none';
+      knob.style.transform = 'translate3d(0, -50%, 0)';
+      knobSvg.style.transform = 'rotate(0deg)';
     }
 
     async function submitDrawerForm() {
