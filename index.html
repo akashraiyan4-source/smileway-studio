@@ -201,33 +201,31 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Water-Glass Swipe Track */
+    /* Seamless Transparent Swipe Track matching video layout */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
       left: 20px;
       right: 20px;
       height: 56px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
-      border-radius: 999px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: transparent;
+      border: none;
       display: flex;
       align-items: center;
-      z-index: 20;
+      z-index: 50;
       touch-action: none;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
+      overflow: visible;
     }
 
-    /* Perfect Water-Glass Arrow Handle matching exact arrow shape */
+    /* Crystal-Clear Glass Arrow Handle (Zero extra background block, matches background video arrow style) */
     .swipe-arrow-handle {
       height: 44px;
-      width: 72px;
-      background: rgba(255, 255, 255, 0.42);
-      border: 1.5px solid rgba(255, 255, 255, 0.85);
-      clip-path: polygon(0% 20%, 75% 20%, 75% 0%, 100% 50%, 75% 100%, 75% 80%, 0% 80%);
+      width: 60px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -237,58 +235,20 @@
       top: 50%;
       transform: translate3d(0, -50%, 0);
       will-change: transform;
-      z-index: 2;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      animation: handleGentleBounce 1.6s infinite ease-in-out;
+      z-index: 60;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      pointer-events: auto;
     }
 
-    .swipe-arrow-handle:active { cursor: grabbing; animation: none; }
-
-    @keyframes handleGentleBounce {
-      0%, 100% { transform: translate3d(0, -50%, 0); }
-      50% { transform: translate3d(6px, -50%, 0); }
-    }
+    .swipe-arrow-handle:active { cursor: grabbing; }
 
     .swipe-arrow-handle svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       fill: #ffffff;
-      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
       transition: transform 0.3s ease;
       pointer-events: none;
-    }
-
-    /* Arrow-Shaped Ghost Current Stream */
-    .swipe-arrow-electric-pulse {
-      position: absolute;
-      height: 44px;
-      top: 50%;
-      transform: translateY(-50%);
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.8), rgba(0,113,227,0.05));
-      box-shadow: 0 0 18px rgba(0, 113, 227, 0.9);
-      pointer-events: none;
-      animation: arrowGhostFlow 2s infinite linear;
-      z-index: 1;
-      will-change: left, width;
-    }
-
-    .swipe-interactive-zone.reverse .swipe-arrow-electric-pulse {
-      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.85), rgba(52,199,89,0.05));
-      box-shadow: 0 0 18px rgba(52, 199, 89, 0.95);
-      animation: arrowGhostFlowReverse 2s infinite linear;
-    }
-
-    @keyframes arrowGhostFlow {
-      0% { left: 10%; width: 35px; opacity: 0.2; }
-      50% { width: 85%; opacity: 1; }
-      100% { left: 80%; width: 35px; opacity: 0.2; }
-    }
-
-    @keyframes arrowGhostFlowReverse {
-      0% { right: 10%; width: 35px; opacity: 0.2; left: auto; }
-      50% { width: 85%; opacity: 1; left: auto; }
-      100% { right: 80%; width: 35px; opacity: 0.2; left: auto; }
     }
 
     .half-form-drawer {
@@ -967,9 +927,8 @@
         </svg>
       </button>
 
-      <!-- Water-Glass Swipe Handle matching exact arrow style -->
+      <!-- Seamless Transparent Swipe Track -->
       <div class="swipe-interactive-zone" id="swipeTrack">
-        <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
         </div>
@@ -1365,7 +1324,7 @@
     }, { threshold: 0.1 });
     heroObserver.observe(heroSec);
 
-    // Robust Real-Time Swipe & Touch Mechanics with Haptic Feedback & Snap Threshold
+    // Fully Fixed Pointer Dragging Mechanics for Real-Time Swipe Movement
     knob.addEventListener('pointerdown', (e) => {
       if (funnelStep === 1) return;
       triggerHaptic(25);
