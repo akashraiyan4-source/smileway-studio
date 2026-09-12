@@ -201,7 +201,7 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Water-Glass Swipe Track matching reference layout */
+    /* Water-Glass Swipe Track */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
@@ -221,13 +221,13 @@
       box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
     }
 
-    /* Exact Water-Glass Arrow Handle mimicking reference design */
+    /* Perfect Water-Glass Arrow Handle matching the background arrow shape */
     .swipe-arrow-handle {
       height: 44px;
-      width: 64px;
+      width: 72px;
       background: rgba(255, 255, 255, 0.42);
-      border: 1px solid rgba(255, 255, 255, 0.75);
-      border-radius: 999px;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      clip-path: polygon(0% 20%, 75% 20%, 75% 0%, 100% 50%, 75% 100%, 75% 80%, 0% 80%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -250,10 +250,10 @@
     }
 
     .swipe-arrow-handle svg {
-      width: 22px;
-      height: 22px;
+      width: 18px;
+      height: 18px;
       fill: #ffffff;
-      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
       transition: transform 0.3s ease;
       pointer-events: none;
     }
@@ -967,7 +967,7 @@
         </svg>
       </button>
 
-      <!-- Water-Glass Swipe Handle matching exact arrow style -->
+      <!-- Water-Glass Swipe Handle matching exact arrow shape -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
