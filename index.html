@@ -221,7 +221,7 @@
       box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
     }
 
-    /* Perfect Water-Glass Arrow Handle matching the background arrow shape */
+    /* Perfect Water-Glass Arrow Handle matching exact arrow shape */
     .swipe-arrow-handle {
       height: 44px;
       width: 72px;
@@ -967,7 +967,7 @@
         </svg>
       </button>
 
-      <!-- Water-Glass Swipe Handle matching exact arrow shape -->
+      <!-- Water-Glass Swipe Handle matching exact arrow style -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
@@ -1365,13 +1365,15 @@
     }, { threshold: 0.1 });
     heroObserver.observe(heroSec);
 
+    // Robust Real-Time Swipe & Touch Mechanics with Haptic Feedback & Snap Threshold
     knob.addEventListener('pointerdown', (e) => {
       if (funnelStep === 1) return;
-      triggerHaptic(20);
+      triggerHaptic(25);
       isDragging = true;
       startX = e.clientX;
       currentX = startX;
-      knob.setPointerCapture(e.pointerId);
+      knob.style.transition = 'none';
+      try { knob.setPointerCapture(e.pointerId); } catch(err) {}
     });
 
     knob.addEventListener('pointermove', (e) => {
@@ -1383,42 +1385,55 @@
         let delta = currentX - startX;
         let move = Math.max(0, Math.min(delta, maxMove));
         knob.style.transform = `translate3d(${move}px, -50%, 0)`;
-
-        if (move >= maxMove * 0.65) {
-          executeForwardTransition(maxMove);
-        }
       } else if (funnelStep === 2) {
         let delta = startX - currentX;
         let move = Math.max(0, Math.min(delta, maxMove));
         knob.style.transform = `translate3d(${maxMove - move}px, -50%, 0)`;
-
-        if (move >= maxMove * 0.65) {
-          executeReverseCompletion();
-        }
       }
     });
 
-    const finishSwipe = () => {
+    const finishSwipe = (e) => {
       if (!isDragging) return;
       isDragging = false;
       const maxMove = track.clientWidth - knob.clientWidth - 8;
+      const currentTranslateX = getCurrentTranslateX(knob);
 
       if (funnelStep === 0) {
-        knob.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
-        knob.style.transform = 'translate3d(0, -50%, 0)';
+        if (currentTranslateX >= maxMove * 0.5) {
+          executeForwardTransition(maxMove);
+        } else {
+          knob.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+          knob.style.transform = 'translate3d(0, -50%, 0)';
+        }
       } else if (funnelStep === 2) {
-        knob.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
-        knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+        let pulledBackDistance = maxMove - currentTranslateX;
+        if (pulledBackDistance >= maxMove * 0.5) {
+          executeReverseCompletion();
+        } else {
+          knob.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+          knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+        }
       }
+      try { knob.releasePointerCapture(e.pointerId); } catch(err) {}
     };
+
+    function getCurrentTranslateX(el) {
+      const st = window.getComputedStyle(el);
+      const tm = st.transform || st.webkitTransform;
+      if (!tm || tm === 'none') return 0;
+      const values = tm.split(', ');
+      if (values.length >= 6) {
+        return parseFloat(values[4]);
+      }
+      return 0;
+    }
 
     knob.addEventListener('pointerup', finishSwipe);
     knob.addEventListener('pointercancel', finishSwipe);
 
     function executeForwardTransition(maxMove) {
       funnelStep = 1;
-      isDragging = false;
-      triggerHaptic(30);
+      triggerHaptic(40);
 
       knob.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
       knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
@@ -1449,6 +1464,8 @@
         funnelStep = 2;
         knob.style.transition = 'none';
         knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+        
+        // Flip arrow icon to face left for reverse swipe
         knobSvg.style.transform = 'rotate(180deg)';
         track.classList.add('reverse');
       };
@@ -1456,8 +1473,7 @@
 
     function executeReverseCompletion() {
       funnelStep = 3;
-      isDragging = false;
-      triggerHaptic(35);
+      triggerHaptic(50);
 
       knob.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
       knob.style.transform = 'translate3d(0, -50%, 0)';
@@ -1585,7 +1601,7 @@
       }
     }
 
-    // Inertial Momentum Infinite Marquee Engine (Never locks, supports velocity & drag)
+    // Inertial Momentum Infinite Marquee Engine
     function initInertialMarquee(boxId, innerId, baseSpeed = 0.6) {
       const box = document.getElementById(boxId);
       const inner = document.getElementById(innerId);
@@ -1599,7 +1615,6 @@
       let lastTime = Date.now();
       let animationFrameId;
 
-      // Duplicate content for seamless infinite looping
       inner.innerHTML += inner.innerHTML;
       const totalWidth = inner.scrollWidth / 2;
 
