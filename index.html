@@ -152,7 +152,7 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Zero-Glitch Hero Studio Frame with pure black background to eliminate white flashes */
+    /* Zero-Glitch Optimized Hero Studio Frame */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -219,7 +219,7 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Crystal-Clear Glass Arrow Handle (Matches video arrow perfectly) */
+    /* Crystal-Clear Glass Arrow Handle */
     .swipe-arrow-handle {
       height: 44px;
       width: 68px;
@@ -921,8 +921,8 @@
     <!-- Zero-Glitch Hero Studio Frame -->
     <div class="hero-box" id="heroSec">
       <video id="vidStart" class="hero-vid" src="./start.mp4" playsinline webkit-playsinline preload="auto" loop muted autoplay></video>
-      <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="auto" muted></video>
-      <video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="auto" loop muted></video>
+      <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="none" muted></video>
+      <video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="none" loop muted></video>
 
       <button class="glass-sound-btn" id="soundBtn" aria-label="Toggle Sound">
         <svg id="soundIcon" viewBox="0 0 24 24">
@@ -930,7 +930,7 @@
         </svg>
       </button>
 
-      <!-- Fully Transparent Track without blur box, featuring crystal arrow handle -->
+      <!-- Transparent Track without blur box -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -1259,6 +1259,7 @@
     let startX = 0;
     let currentX = 0;
     let isMuted = true;
+    let videosPreloaded = false;
 
     function triggerHaptic(pattern) {
       if (typeof navigator !== 'undefined' && navigator.vibrate) {
@@ -1295,11 +1296,10 @@
     window.addEventListener('pageshow', wakeActiveVideos);
     window.addEventListener('focus', wakeActiveVideos);
 
+    // Optimized: Only load vidStart initially to prevent startup stutter/glitch
     const playInitialVideo = () => {
       vidStart.muted = isMuted;
       vidStart.play().catch(() => {});
-      vidTrans.load();
-      vidEnd.load();
     };
 
     if (document.readyState === 'loading') {
@@ -1311,6 +1311,18 @@
     document.addEventListener('touchstart', () => {
       if (funnelStep === 0 && vidStart.paused) vidStart.play().catch(() => {});
     }, { once: true });
+
+    // Lazy load transition and end videos on first user interaction (touch/pointer on hero)
+    function preloadRemainingVideos() {
+      if (!videosPreloaded) {
+        videosPreloaded = true;
+        vidTrans.load();
+        vidEnd.load();
+      }
+    }
+
+    heroSec.addEventListener('pointerdown', preloadRemainingVideos, { once: true });
+    heroSec.addEventListener('touchstart', preloadRemainingVideos, { once: true });
 
     // Intersection Observer to auto-mute video sound when hero section scrolls out of view
     const heroObserver = new IntersectionObserver((entries) => {
@@ -1331,6 +1343,7 @@
     // Fully Fixed Pointer Dragging Mechanics for Real-Time Swipe Movement
     knob.addEventListener('pointerdown', (e) => {
       if (funnelStep === 1) return;
+      preloadRemainingVideos();
       triggerHaptic(25);
       isDragging = true;
       startX = e.clientX;
