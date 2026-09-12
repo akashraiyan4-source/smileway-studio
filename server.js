@@ -41,7 +41,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static frontend files from 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // API Routes
 app.use('/api/leads', leadsRouter);
