@@ -15,7 +15,6 @@ Strict rules:
 4. Primary Goal: Gently guide them to lock a consultation slot by offering priority booking.
 `;
 
-// চ্যাট বা ভয়েস কোয়েরি হ্যান্ডেল করার জন্য এআই এন্ডপয়েন্ট
 router.post('/chat', async (req, res) => {
     try {
         const { message, userPhone } = req.body;
@@ -24,17 +23,18 @@ router.post('/chat', async (req, res) => {
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Message: ${message}\nAI Concierge Reply:`;
         const apiKey = (process.env.GEMINI_API_KEY || '').trim();
 
-        // URL query parameter এবং x-goog-api-key উভয়ভাবেই কি পাস করা হয়েছে
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+        // v1 স্টেবল এন্ডপয়েন্ট ও ইউআরএল প্যারামিটার
+        const endpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
         const geminiResponse = await fetch(endpoint, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'x-goog-api-key': apiKey
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }]
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
             })
         });
 
@@ -57,7 +57,7 @@ router.post('/chat', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('[AI Concierge Error]:', error);
+        console.error('[AI Concierge Error]:', error.message);
         res.status(500).json({ success: false, error: 'AI Concierge failed to process request.' });
     }
 });
