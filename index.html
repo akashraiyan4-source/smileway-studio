@@ -1491,7 +1491,7 @@
       }
 
       try {
-        const response = await fetch('/api/leads/submit', {
+        const response = await fetch('http://localhost:5000/api/leads/submit',{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ fullName, phone, treatment })
@@ -1520,19 +1520,17 @@
       }
 
       try {
-        const response = await fetch('/api/leads/submit', {
+        const response = await fetch('http://localhost:5000/api/ai/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fullName, phone, treatment })
+          body: JSON.stringify({ message: userMessage })
         });
         const result = await response.json();
         if (result.success) {
-          alert('Success! Priority appointment slot reserved. Dr. Vance’s team will text you within 60s.');
-          document.getElementById('mainName').value = '';
-          document.getElementById('mainPhone').value = '';
-        } else {
-          alert('Error: ' + (result.error || 'Something went wrong'));
-        }
+        appendMessageToChat('AI', result.reply);
+    } else {
+        appendMessageToChat('AI', "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.");
+    }
       } catch (err) {
         console.error(err);
         alert('Server connection failed.');
@@ -1564,7 +1562,7 @@
       body.scrollTop = body.scrollHeight;
 
       try {
-        const response = await fetch('/api/ai/chat', {
+        const response = await fetch('http://localhost:5000/api/ai/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ message: text, userPhone: "WebVisitor" })

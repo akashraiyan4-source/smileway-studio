@@ -2,12 +2,8 @@
 // MODULE: AI VOICE & CHAT CONCIERGE AGENT
 // ==========================================
 import express from 'express';
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const router = express.Router();
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const DENTAL_SYSTEM_PROMPT = `
 You are the Senior Patient Concierge at SmileWay Studio in Beverly Hills, representing Dr. Julian Vance, DDS.
@@ -19,18 +15,39 @@ Strict rules:
 4. Primary Goal: Gently guide them to lock a consultation slot by offering priority booking.
 `;
 
-// চ্যাট বা ভয়েস কোয়েরি হ্যান্ডেল করার জন্য এআই এন্ডপয়েন্ট
+// চ্যাট বা ভয়েস কোয়েরি হ্যান্ডেল করার জন্য এআই এন্ডপয়েন্ট
 router.post('/chat', async (req, res) => {
     try {
         const { message, userPhone } = req.body;
         console.log(`[AI Concierge] Received query from ${userPhone || 'Anonymous'}: "${message}"`);
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Message: ${message}\nAI Concierge Reply:`;
+        const apiKey = (process.env.GEMINI_API_KEY || '').trim();
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const aiResponse = response.text() ? response.text().trim() : "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
+        // URL query parameter এবং x-goog-api-key উভয়ভাবেই কি পাস করা হয়েছে
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+        const geminiResponse = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-goog-api-key': apiKey
+            },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }]
+            })
+        });
+
+        const data = await geminiResponse.json();
+
+        if (!geminiResponse.ok) {
+            console.error('[Gemini API Error]:', data);
+            throw new Error(data.error?.message || 'Failed to communicate with Gemini API');
+        }
+
+        const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text 
+            ? data.candidates[0].content.parts[0].text.trim() 
+            : "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
 
         console.log(`[AI Concierge Reply] "${aiResponse}"`);
 
