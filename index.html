@@ -201,13 +201,13 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Water-Glass Swipe Track */
+    /* Water-Glass Swipe Track matching reference image layout */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
       left: 20px;
       right: 20px;
-      height: 54px;
+      height: 56px;
       background: rgba(255, 255, 255, 0.12);
       border: 1.5px solid rgba(255, 255, 255, 0.4);
       border-radius: 999px;
@@ -221,12 +221,12 @@
       box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
     }
 
-    /* Small Water-Glass Arrow Handle matching 10% start zone with gentle bounce */
+    /* Exact Arrow-Shaped Handle mimicking reference design with gentle bounce */
     .swipe-arrow-handle {
-      height: 42px;
-      width: 58px;
-      background: rgba(255, 255, 255, 0.38);
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      height: 44px;
+      width: 64px;
+      background: rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.75);
       border-radius: 999px;
       display: flex;
       align-items: center;
@@ -239,56 +239,55 @@
       will-change: transform;
       z-index: 2;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      animation: gentleBounce 1.6s infinite ease-in-out;
+      animation: handleGentleBounce 1.6s infinite ease-in-out;
     }
 
     .swipe-arrow-handle:active { cursor: grabbing; animation: none; }
 
-    @keyframes gentleBounce {
+    @keyframes handleGentleBounce {
       0%, 100% { transform: translate3d(0, -50%, 0); }
       50% { transform: translate3d(6px, -50%, 0); }
     }
 
     .swipe-arrow-handle svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       fill: #ffffff;
       filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
-      transition: transform 0.3s ease;
       pointer-events: none;
     }
 
-    /* Ghost Arrow / Electric Flow matching exact arrow shape moving towards right tip */
+    /* Arrow-Shaped Ghost Current Stream matching reference aesthetic */
     .swipe-arrow-electric-pulse {
       position: absolute;
-      height: 42px;
+      height: 44px;
       top: 50%;
       transform: translateY(-50%);
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.75), rgba(0,113,227,0.05));
-      box-shadow: 0 0 16px rgba(0, 113, 227, 0.85);
+      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.8), rgba(0,113,227,0.05));
+      box-shadow: 0 0 18px rgba(0, 113, 227, 0.9);
       pointer-events: none;
-      animation: waterCurrentFlow 2s infinite linear;
+      animation: arrowGhostFlow 2s infinite linear;
       z-index: 1;
       will-change: left, width;
     }
 
     .swipe-interactive-zone.reverse .swipe-arrow-electric-pulse {
-      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.8), rgba(52,199,89,0.05));
-      box-shadow: 0 0 16px rgba(52, 199, 89, 0.9);
-      animation: waterCurrentFlowReverse 2s infinite linear;
+      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.85), rgba(52,199,89,0.05));
+      box-shadow: 0 0 18px rgba(52, 199, 89, 0.95);
+      animation: arrowGhostFlowReverse 2s infinite linear;
     }
 
-    @keyframes waterCurrentFlow {
-      0% { left: 10%; width: 30px; opacity: 0.3; }
+    @keyframes arrowGhostFlow {
+      0% { left: 10%; width: 35px; opacity: 0.2; }
       50% { width: 85%; opacity: 1; }
-      100% { left: 80%; width: 30px; opacity: 0.3; }
+      100% { left: 80%; width: 35px; opacity: 0.2; }
     }
 
-    @keyframes waterCurrentFlowReverse {
-      0% { right: 10%; width: 30px; opacity: 0.3; left: auto; }
+    @keyframes arrowGhostFlowReverse {
+      0% { right: 10%; width: 35px; opacity: 0.2; left: auto; }
       50% { width: 85%; opacity: 1; left: auto; }
-      100% { right: 80%; width: 30px; opacity: 0.3; left: auto; }
+      100% { right: 80%; width: 35px; opacity: 0.2; left: auto; }
     }
 
     .half-form-drawer {
@@ -497,7 +496,7 @@
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
     }
 
-    /* Infinite Marquee Loops (Never stopping, locked full speed) */
+    /* Inertial Momentum Infinite Marquee Loops (Never stopping, supports flick momentum) */
     .infinite-marquee-box {
       width: 100%;
       overflow: hidden;
@@ -513,13 +512,7 @@
       display: flex;
       gap: 16px;
       width: max-content;
-      animation: continuousLoopScroll 22s linear infinite;
       will-change: transform;
-    }
-
-    @keyframes continuousLoopScroll {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-50%, 0, 0); }
     }
 
     .review-bubble {
@@ -566,13 +559,7 @@
       display: flex;
       gap: 16px;
       width: max-content;
-      animation: continuousLoopCases 24s linear infinite;
       will-change: transform;
-    }
-
-    @keyframes continuousLoopCases {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-50%, 0, 0); }
     }
 
     .case-card-stream {
@@ -979,7 +966,7 @@
         </svg>
       </button>
 
-      <!-- Water-Glass Swipe Handle with Ghost Arrow Current Flow -->
+      <!-- Water-Glass Swipe Handle matching reference arrow style -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
@@ -1037,13 +1024,13 @@
       </div>
     </section>
 
-    <!-- Infinite Google Patient Reviews Loop -->
+    <!-- Infinite Momentum Google Patient Reviews Loop -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Real Experiences</div>
       <h2 class="sec-heading">Google Patient Reviews</h2>
 
       <div class="infinite-marquee-box" id="reviewsBox">
-        <div class="infinite-marquee-inner">
+        <div class="infinite-marquee-inner" id="reviewsInner">
           <div class="review-bubble">
             <div class="rev-head">
               <span class="rev-name">Elena R. <span style="color:var(--apple-blue);">✓ Verified</span></span>
@@ -1091,13 +1078,13 @@
       </div>
     </section>
 
-    <!-- Infinite Clinical Transformation Loop with Corrected Before/After Teeth Images -->
+    <!-- Infinite Momentum Clinical Transformation Loop with Corrected Teeth Images -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Proven Results</div>
       <h2 class="sec-heading">Clinical Transformation</h2>
 
       <div class="interactive-cases-box" id="casesBox">
-        <div class="interactive-cases-inner">
+        <div class="interactive-cases-inner" id="casesInner">
           <div class="case-card-stream">
             <div class="case-photo-slot">
               <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Yellow Discolored Teeth Before" />
@@ -1581,46 +1568,87 @@
       }
     }
 
-    // Interactive Drag and Continuous Auto-Scrolling Scroller Helper
-    function enableContinuousDragScroll(sliderId) {
-      const slider = document.getElementById(sliderId);
-      if (!slider) return;
-      let isDown = false;
-      let startX;
-      let scrollLeft;
+    // Inertial Momentum Infinite Marquee Engine (Never locks, supports velocity & drag)
+    function initInertialMarquee(boxId, innerId, baseSpeed = 0.6) {
+      const box = document.getElementById(boxId);
+      const inner = document.getElementById(innerId);
+      if (!box || !inner) return;
 
-      slider.addEventListener('pointerdown', (e) => {
-        isDown = true;
-        slider.style.cursor = 'grabbing';
-        startX = e.clientX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-        try { slider.setPointerCapture(e.pointerId); } catch(err){}
+      let scrollX = 0;
+      let velocity = baseSpeed;
+      let isDragging = false;
+      let startX = 0;
+      let lastX = 0;
+      let lastTime = Date.now();
+      let animationFrameId;
+
+      // Duplicate content for seamless infinite looping
+      inner.innerHTML += inner.innerHTML;
+      const totalWidth = inner.scrollWidth / 2;
+
+      function step() {
+        if (!isDragging) {
+          // Apply velocity with smooth decay back to base automatic speed
+          velocity = velocity * 0.95 + baseSpeed * 0.05;
+          scrollX += velocity;
+
+          if (scrollX >= totalWidth) {
+            scrollX -= totalWidth;
+          } else if (scrollX < 0) {
+            scrollX += totalWidth;
+          }
+          inner.style.transform = `translate3d(${-scrollX}px, 0, 0)`;
+        }
+        animationFrameId = requestAnimationFrame(step);
+      }
+
+      box.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        lastX = e.clientX;
+        lastTime = Date.now();
+        box.style.cursor = 'grabbing';
+        try { box.setPointerCapture(e.pointerId); } catch(err){}
       });
 
-      slider.addEventListener('pointerleave', () => {
-        isDown = false;
-        slider.style.cursor = 'grab';
+      box.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        const now = Date.now();
+        const dt = now - lastTime;
+        const dx = e.clientX - lastX;
+
+        if (dt > 0) {
+          velocity = -dx * (16 / dt) * 0.8; // Momentum velocity mapping
+        }
+
+        scrollX -= dx;
+        if (scrollX >= totalWidth) {
+          scrollX -= totalWidth;
+        } else if (scrollX < 0) {
+          scrollX += totalWidth;
+        }
+        inner.style.transform = `translate3d(${-scrollX}px, 0, 0)`;
+
+        lastX = e.clientX;
+        lastTime = now;
       });
 
-      slider.addEventListener('pointerup', (e) => {
-        isDown = false;
-        slider.style.cursor = 'grab';
-        try { slider.releasePointerCapture(e.pointerId); } catch(err){}
-      });
+      const endDrag = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        box.style.cursor = 'grab';
+        try { box.releasePointerCapture(e.pointerId); } catch(err){}
+      };
 
-      slider.addEventListener('pointermove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.clientX - slider.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        slider.scrollLeft = scrollLeft - walk;
-      });
+      box.addEventListener('pointerup', endDrag);
+      box.addEventListener('pointercancel', endDrag);
+
+      animationFrameId = requestAnimationFrame(step);
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-      enableContinuousDragScroll('reviewsBox');
-      enableContinuousDragScroll('casesBox');
-      enableContinuousDragScroll('pressBar');
+      initInertialMarquee('reviewsBox', 'reviewsInner', 0.6);
+      initInertialMarquee('casesBox', 'casesInner', 0.5);
 
       const observerOptions = {
         root: null,
