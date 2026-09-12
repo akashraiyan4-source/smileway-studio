@@ -152,7 +152,7 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Zero-Glitch Optimized Hero Studio Frame */
+    /* Zero-Glitch Hero Studio Frame with Anti-Glitch Poster Fallback */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -160,9 +160,22 @@
       border-radius: 20px;
       overflow: hidden;
       aspect-ratio: 9 / 14;
-      background: #000000;
+      background: #0d131f;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
       transform: translate3d(0, 0, 0);
+    }
+
+    .video-poster-fallback {
+      position: absolute;
+      inset: 0;
+      background: #0d131f url('https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+      z-index: 4;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .video-poster-fallback.hidden {
+      opacity: 0;
     }
 
     .hero-vid {
@@ -174,7 +187,7 @@
       display: block;
       transition: opacity 0.3s ease;
       will-change: opacity, transform;
-      background-color: #000000;
+      background-color: #0d131f;
     }
 
     #vidStart { z-index: 1; opacity: 1; }
@@ -920,6 +933,7 @@
 
     <!-- Zero-Glitch Hero Studio Frame -->
     <div class="hero-box" id="heroSec">
+      <div class="video-poster-fallback" id="videoPoster"></div>
       <video id="vidStart" class="hero-vid" src="./start.mp4" playsinline webkit-playsinline preload="auto" loop muted autoplay></video>
       <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="none" muted></video>
       <video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="none" loop muted></video>
@@ -1253,6 +1267,7 @@
     const soundBtn  = document.getElementById('soundBtn');
     const soundIcon = document.getElementById('soundIcon');
     const aiChatModal = document.getElementById('aiChatModal');
+    const videoPoster = document.getElementById('videoPoster');
 
     let funnelStep = 0; 
     let isDragging = false;
@@ -1296,10 +1311,22 @@
     window.addEventListener('pageshow', wakeActiveVideos);
     window.addEventListener('focus', wakeActiveVideos);
 
-    // Optimized: Only load vidStart initially to prevent startup stutter/glitch
+    // Hide poster overlay once video starts playing to prevent black screen glitch
+    vidStart.addEventListener('playing', () => {
+      if (videoPoster) videoPoster.classList.add('hidden');
+    });
+    vidStart.addEventListener('timeupdate', () => {
+      if (vidStart.currentTime > 0.05 && videoPoster) {
+        videoPoster.classList.add('hidden');
+      }
+    });
+
     const playInitialVideo = () => {
       vidStart.muted = isMuted;
-      vidStart.play().catch(() => {});
+      vidStart.play().catch(() => {
+        // Fallback if autoplay is restricted
+        if (videoPoster) videoPoster.classList.add('hidden');
+      });
     };
 
     if (document.readyState === 'loading') {
@@ -1310,9 +1337,9 @@
     
     document.addEventListener('touchstart', () => {
       if (funnelStep === 0 && vidStart.paused) vidStart.play().catch(() => {});
+      if (videoPoster) videoPoster.classList.add('hidden');
     }, { once: true });
 
-    // Lazy load transition and end videos on first user interaction (touch/pointer on hero)
     function preloadRemainingVideos() {
       if (!videosPreloaded) {
         videosPreloaded = true;
