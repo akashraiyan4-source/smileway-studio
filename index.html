@@ -152,7 +152,7 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Zero-Glitch Hero Studio Frame with titanium background */
+    /* Zero-Glitch Hero Studio Frame with Dark BG to Prevent White Flashes */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -160,9 +160,10 @@
       border-radius: 20px;
       overflow: hidden;
       aspect-ratio: 9 / 14;
-      background: var(--apple-titanium);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+      background: #000000;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
       transform: translate3d(0, 0, 0);
+      will-change: transform;
     }
 
     .hero-vid {
@@ -173,8 +174,9 @@
       object-fit: cover;
       display: block;
       transition: opacity 0.3s ease;
-      will-change: opacity;
-      background-color: var(--apple-titanium);
+      will-change: opacity, transform;
+      background-color: #000000;
+      transform: translateZ(0);
     }
 
     #vidStart { z-index: 1; opacity: 1; }
@@ -201,35 +203,31 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Crystal-Clear Glass Arrow Track matching reference image */
+    /* Completely Transparent Track - Blur Box Removed to Match Background Video Crystal Arrow */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
       left: 20px;
       right: 20px;
       height: 56px;
-      background: rgba(0, 150, 255, 0.08);
-      border: 1.5px solid rgba(130, 210, 255, 0.5);
-      border-radius: 999px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: transparent;
+      border: none;
       display: flex;
       align-items: center;
       z-index: 20;
       touch-action: none;
       overflow: visible;
-      box-shadow: 0 0 25px rgba(0, 140, 255, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.25);
       transition: opacity 0.3s ease;
     }
 
-    /* Crystal-Clear Glass Arrow Handle with Electric Glow */
+    /* Crystal-Clear Glass Arrow Handle (Direct match to background video's small arrow) */
     .swipe-arrow-handle {
       height: 44px;
-      width: 68px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(0, 150, 255, 0.2));
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      width: 60px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       border-radius: 999px;
       display: flex;
       align-items: center;
@@ -241,17 +239,17 @@
       transform: translate3d(0, -50%, 0);
       will-change: transform;
       z-index: 25;
-      box-shadow: 0 0 18px rgba(0, 160, 255, 0.7), inset 0 1px 3px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
       pointer-events: auto;
     }
 
     .swipe-arrow-handle:active { cursor: grabbing; }
 
     .swipe-arrow-handle svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: #ffffff;
-      filter: drop-shadow(0 0 6px rgba(0, 200, 255, 0.9));
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
       transition: transform 0.3s ease;
       pointer-events: none;
     }
@@ -378,14 +376,16 @@
       margin-bottom: 20px;
     }
 
+    /* Premium Apple-Style Cards with Soft Depth & Micro-Borders */
     .doctor-card {
       position: relative;
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
       margin-bottom: 22px;
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+      transform: translateZ(0);
     }
 
     .doc-img {
@@ -419,11 +419,12 @@
 
     .stat-pill {
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
-      border-radius: 14px;
-      padding: 16px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 18px;
+      padding: 18px 14px;
       text-align: center;
-      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      transform: translateZ(0);
     }
 
     .stat-num {
@@ -450,7 +451,7 @@
 
     .acc-badge {
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
+      border: 1px solid rgba(0, 0, 0, 0.06);
       color: var(--apple-dark);
       font-size: 0.74rem;
       font-weight: 600;
@@ -485,10 +486,11 @@
       width: 270px;
       flex-shrink: 0;
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+      transform: translateZ(0);
     }
 
     .rev-head {
@@ -532,15 +534,16 @@
       width: 250px;
       flex-shrink: 0;
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
-      border-radius: 16px;
-      padding: 12px;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+      padding: 14px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+      transform: translateZ(0);
     }
 
     .case-photo-slot {
       position: relative;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
       height: 135px;
       margin-bottom: 10px;
@@ -570,13 +573,14 @@
 
     .treatment-card {
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
-      border-radius: 16px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
       padding: 20px;
       display: flex;
       gap: 16px;
       margin-bottom: 14px;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+      transform: translateZ(0);
     }
 
     .treat-icon {
@@ -610,10 +614,11 @@
 
     .faq-item {
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
-      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.03);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      transform: translateZ(0);
     }
 
     .faq-question {
@@ -654,11 +659,12 @@
 
     .consult-card {
       background: var(--card-pure-white);
-      border: 1px solid var(--apple-border);
-      border-radius: 18px;
-      padding: 24px 20px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 22px;
+      padding: 26px 20px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
       margin-bottom: 26px;
+      transform: translateZ(0);
     }
 
     .slots-pill {
@@ -683,7 +689,7 @@
       gap: 7px;
       background: #f2faf4;
       border: 1px solid #d1edd8;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 12px 14px;
       margin-bottom: 16px;
       font-size: 0.76rem;
@@ -696,7 +702,7 @@
       background: var(--apple-titanium);
       border: 1px solid var(--apple-border);
       padding: 13px 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       font-size: 0.9rem;
       color: var(--apple-dark);
       margin-bottom: 12px;
@@ -711,26 +717,35 @@
       background: var(--apple-blue);
       border: none;
       padding: 14px;
-      border-radius: 12px;
+      border-radius: 14px;
       color: #ffffff;
       font-size: 0.94rem;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
+      box-shadow: 0 6px 20px rgba(0, 113, 227, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: buttonPulse 2.5s infinite ease-in-out;
     }
 
+    @keyframes buttonPulse {
+      0%, 100% { box-shadow: 0 6px 20px rgba(0, 113, 227, 0.3); }
+      50% { box-shadow: 0 6px 25px rgba(0, 113, 227, 0.6); }
+    }
+
+    /* Premium Clean Minimalist Map Card */
     .gps-map-card {
       position: relative;
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
-      border: 1px solid var(--apple-border);
+      border: 1px solid rgba(0, 0, 0, 0.06);
       margin-bottom: 40px;
       height: 220px;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
-      background: #e2e5e9;
+      box-shadow: 0 10px 32px rgba(15, 23, 42, 0.06);
+      background: #0f172a;
       text-decoration: none;
       display: block;
+      transform: translateZ(0);
     }
 
     .gps-map-img {
@@ -738,6 +753,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      opacity: 0.85;
       transition: transform 0.4s ease;
     }
     .gps-map-card:hover .gps-map-img { transform: scale(1.03); }
@@ -750,7 +766,7 @@
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(12px);
       padding: 12px 16px;
-      border-radius: 12px;
+      border-radius: 14px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       display: flex;
       align-items: center;
@@ -932,7 +948,7 @@
         </svg>
       </button>
 
-      <!-- Crystal-Clear Glass Arrow Swipe Track & Handle matching reference image -->
+      <!-- Clean Transparent Track without Blur Box - Matching Video's Native Crystal Arrow -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -1198,7 +1214,7 @@
       </div>
 
       <a href="https://maps.google.com/?q=Beverly+Hills+CA" target="_blank" class="gps-map-card">
-        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Beverly Hills Studio Map" class="gps-map-img" />
+        <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80" alt="Luxury Beverly Hills Dental Suite Interior" class="gps-map-img" />
         <div class="map-neighborhood-pill">
           <div>
             <div class="map-loc-title">SmileWay Studio Beverly Hills</div>
@@ -1299,8 +1315,11 @@
     const playInitialVideo = () => {
       vidStart.muted = isMuted;
       vidStart.play().catch(() => {});
-      vidTrans.load();
-      vidEnd.load();
+      // Lazy load transition and end videos to prevent GPU/network hanging
+      setTimeout(() => {
+        vidTrans.load();
+        vidEnd.load();
+      }, 1000);
     };
 
     if (document.readyState === 'loading') {
@@ -1676,7 +1695,7 @@
         });
       }, observerOptions);
 
-      document.querySelectorAll('.animate-on-scroll').forEach(section => {
+      document.querySelectorAll('.animate-on-scroll').section => {
         observer.observe(section);
       });
     });
