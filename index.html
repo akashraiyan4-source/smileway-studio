@@ -15,7 +15,7 @@
       --card-pure-white: #ffffff;
       --apple-dark: #111827;
       --apple-gray: #64748b;
-      --apple-border: rgba(0, 0, 0, 0.08);
+      --apple-border: rgba(0, 0, 0, 0.06);
       --apple-blue: #0071e3;
     }
 
@@ -95,7 +95,7 @@
       font-size: 0.82rem;
       font-weight: 600;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
     }
 
     .status-dot-green {
@@ -152,7 +152,7 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Zero-Glitch Hero Studio Frame with Dark BG to Prevent White Flashes */
+    /* Zero-Glitch Hero Studio Frame with pure black background to eliminate white flashes */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -161,9 +161,8 @@
       overflow: hidden;
       aspect-ratio: 9 / 14;
       background: #000000;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
       transform: translate3d(0, 0, 0);
-      will-change: transform;
     }
 
     .hero-vid {
@@ -176,7 +175,6 @@
       transition: opacity 0.3s ease;
       will-change: opacity, transform;
       background-color: #000000;
-      transform: translateZ(0);
     }
 
     #vidStart { z-index: 1; opacity: 1; }
@@ -203,15 +201,16 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Completely Transparent Track - Blur Box Removed to Match Background Video Crystal Arrow */
+    /* Completely Transparent Track (No Blur Box) */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
       left: 20px;
       right: 20px;
       height: 56px;
-      background: transparent;
-      border: none;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
       display: flex;
       align-items: center;
       z-index: 20;
@@ -220,14 +219,14 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Crystal-Clear Glass Arrow Handle (Direct match to background video's small arrow) */
+    /* Crystal-Clear Glass Arrow Handle (Matches video arrow perfectly) */
     .swipe-arrow-handle {
       height: 44px;
-      width: 60px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      width: 68px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-radius: 999px;
       display: flex;
       align-items: center;
@@ -246,10 +245,10 @@
     .swipe-arrow-handle:active { cursor: grabbing; }
 
     .swipe-arrow-handle svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       fill: #ffffff;
-      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
       transition: transform 0.3s ease;
       pointer-events: none;
     }
@@ -376,16 +375,15 @@
       margin-bottom: 20px;
     }
 
-    /* Premium Apple-Style Cards with Soft Depth & Micro-Borders */
+    /* Ultra-Premium Apple-Style Cards */
     .doctor-card {
       position: relative;
-      border-radius: 20px;
+      border-radius: 18px;
       overflow: hidden;
       margin-bottom: 22px;
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
-      transform: translateZ(0);
+      border: 1px solid var(--apple-border);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
     }
 
     .doc-img {
@@ -419,12 +417,11 @@
 
     .stat-pill {
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 18px;
-      padding: 18px 14px;
+      border: 1px solid var(--apple-border);
+      border-radius: 16px;
+      padding: 16px 14px;
       text-align: center;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
-      transform: translateZ(0);
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
     }
 
     .stat-num {
@@ -451,7 +448,7 @@
 
     .acc-badge {
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--apple-border);
       color: var(--apple-dark);
       font-size: 0.74rem;
       font-weight: 600;
@@ -486,11 +483,10 @@
       width: 270px;
       flex-shrink: 0;
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
-      transform: translateZ(0);
+      border: 1px solid var(--apple-border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
     }
 
     .rev-head {
@@ -534,11 +530,10 @@
       width: 250px;
       flex-shrink: 0;
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 20px;
-      padding: 14px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
-      transform: translateZ(0);
+      border: 1px solid var(--apple-border);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
     }
 
     .case-photo-slot {
@@ -573,20 +568,19 @@
 
     .treatment-card {
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 20px;
+      border: 1px solid var(--apple-border);
+      border-radius: 18px;
       padding: 20px;
       display: flex;
       gap: 16px;
       margin-bottom: 14px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
-      transform: translateZ(0);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.03);
     }
 
     .treat-icon {
       width: 44px;
       height: 44px;
-      border-radius: 12px;
+      border-radius: 14px;
       background: var(--apple-titanium);
       border: 1px solid var(--apple-border);
       display: flex;
@@ -614,11 +608,10 @@
 
     .faq-item {
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 18px;
+      border: 1px solid var(--apple-border);
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
-      transform: translateZ(0);
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
     }
 
     .faq-question {
@@ -659,12 +652,11 @@
 
     .consult-card {
       background: var(--card-pure-white);
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 22px;
-      padding: 26px 20px;
-      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.06);
+      border: 1px solid var(--apple-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05);
       margin-bottom: 26px;
-      transform: translateZ(0);
     }
 
     .slots-pill {
@@ -723,29 +715,20 @@
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      box-shadow: 0 6px 20px rgba(0, 113, 227, 0.3);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      animation: buttonPulse 2.5s infinite ease-in-out;
+      box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
     }
 
-    @keyframes buttonPulse {
-      0%, 100% { box-shadow: 0 6px 20px rgba(0, 113, 227, 0.3); }
-      50% { box-shadow: 0 6px 25px rgba(0, 113, 227, 0.6); }
-    }
-
-    /* Premium Clean Minimalist Map Card */
     .gps-map-card {
       position: relative;
       border-radius: 20px;
       overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--apple-border);
       margin-bottom: 40px;
       height: 220px;
-      box-shadow: 0 10px 32px rgba(15, 23, 42, 0.06);
-      background: #0f172a;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      background: #e2e5e9;
       text-decoration: none;
       display: block;
-      transform: translateZ(0);
     }
 
     .gps-map-img {
@@ -753,7 +736,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      opacity: 0.85;
       transition: transform 0.4s ease;
     }
     .gps-map-card:hover .gps-map-img { transform: scale(1.03); }
@@ -948,7 +930,7 @@
         </svg>
       </button>
 
-      <!-- Clean Transparent Track without Blur Box - Matching Video's Native Crystal Arrow -->
+      <!-- Fully Transparent Track without blur box, featuring crystal arrow handle -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -1059,7 +1041,7 @@
       </div>
     </section>
 
-    <!-- Infinite Momentum Clinical Transformation Loop with Corrected Teeth Images -->
+    <!-- Infinite Momentum Clinical Transformation Loop -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Proven Results</div>
       <h2 class="sec-heading">Clinical Transformation</h2>
@@ -1214,7 +1196,7 @@
       </div>
 
       <a href="https://maps.google.com/?q=Beverly+Hills+CA" target="_blank" class="gps-map-card">
-        <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80" alt="Luxury Beverly Hills Dental Suite Interior" class="gps-map-img" />
+        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Beverly Hills Studio Map" class="gps-map-img" />
         <div class="map-neighborhood-pill">
           <div>
             <div class="map-loc-title">SmileWay Studio Beverly Hills</div>
@@ -1287,7 +1269,8 @@
     const unmutedSvg = `<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>`;
     const mutedSvg   = `<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>`;
 
-    soundBtn.addEventListener('click', () => {
+    soundBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       triggerHaptic(20);
       isMuted = !isMuted;
       soundIcon.innerHTML = isMuted ? mutedSvg : unmutedSvg;
@@ -1315,11 +1298,8 @@
     const playInitialVideo = () => {
       vidStart.muted = isMuted;
       vidStart.play().catch(() => {});
-      // Lazy load transition and end videos to prevent GPU/network hanging
-      setTimeout(() => {
-        vidTrans.load();
-        vidEnd.load();
-      }, 1000);
+      vidTrans.load();
+      vidEnd.load();
     };
 
     if (document.readyState === 'loading') {
@@ -1448,7 +1428,6 @@
         knob.style.transition = 'none';
         knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
         
-        // Flip arrow icon to face left for reverse swipe
         knobSvg.style.transform = 'rotate(180deg)';
         track.classList.add('reverse');
       };
@@ -1475,7 +1454,6 @@
     function closeHeroDrawer() { 
       heroDrawer.classList.remove('open');
       
-      // Reset back to initial start state cleanly with knob on the left (0px)
       funnelStep = 0;
       vidEnd.pause();
       vidEnd.style.opacity = '0';
@@ -1695,7 +1673,7 @@
         });
       }, observerOptions);
 
-      document.querySelectorAll('.animate-on-scroll').section => {
+      document.querySelectorAll('.animate-on-scroll').forEach(section => {
         observer.observe(section);
       });
     });
