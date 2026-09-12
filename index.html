@@ -142,16 +142,17 @@
       text-transform: uppercase;
       color: #475569;
       animation: continuousScroll 15s linear infinite;
+      will-change: transform;
     }
     .press-trust-bar:hover .press-trust-inner { animation-play-state: paused; }
     .press-trust-inner span { opacity: 0.75; }
 
     @keyframes continuousScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Fixed Hero Box with Titanium background to eliminate any white flash */
+    /* Zero-Glitch Hero Studio Frame with titanium background */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -200,7 +201,7 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Water-Glass Swipe Track matching background arrow dimensions */
+    /* Water-Glass Swipe Track */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
@@ -220,7 +221,7 @@
       box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
     }
 
-    /* Water-Glass Arrow Handle sized to 10% representation with gentle bounce */
+    /* Small Water-Glass Arrow Handle matching 10% start zone with gentle bounce */
     .swipe-arrow-handle {
       height: 42px;
       width: 58px;
@@ -257,36 +258,37 @@
       pointer-events: none;
     }
 
-    /* Water-Glass Current Pulse matched to exact handle height size */
+    /* Ghost Arrow / Electric Flow matching exact arrow shape moving towards right tip */
     .swipe-arrow-electric-pulse {
       position: absolute;
       height: 42px;
       top: 50%;
       transform: translateY(-50%);
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.7), rgba(0,113,227,0.05));
-      box-shadow: 0 0 16px rgba(0, 113, 227, 0.8);
+      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.75), rgba(0,113,227,0.05));
+      box-shadow: 0 0 16px rgba(0, 113, 227, 0.85);
       pointer-events: none;
-      animation: waterCurrentFlow 2.2s infinite linear;
+      animation: waterCurrentFlow 2s infinite linear;
       z-index: 1;
+      will-change: left, width;
     }
 
     .swipe-interactive-zone.reverse .swipe-arrow-electric-pulse {
-      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.75), rgba(52,199,89,0.05));
-      box-shadow: 0 0 16px rgba(52, 199, 89, 0.85);
-      animation: waterCurrentFlowReverse 2.2s infinite linear;
+      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.8), rgba(52,199,89,0.05));
+      box-shadow: 0 0 16px rgba(52, 199, 89, 0.9);
+      animation: waterCurrentFlowReverse 2s infinite linear;
     }
 
     @keyframes waterCurrentFlow {
-      0% { left: 15%; width: 20px; opacity: 0.3; }
-      50% { width: 80%; opacity: 1; }
-      100% { left: 85%; width: 20px; opacity: 0.3; }
+      0% { left: 10%; width: 30px; opacity: 0.3; }
+      50% { width: 85%; opacity: 1; }
+      100% { left: 80%; width: 30px; opacity: 0.3; }
     }
 
     @keyframes waterCurrentFlowReverse {
-      0% { right: 15%; width: 20px; opacity: 0.3; left: auto; }
-      50% { width: 80%; opacity: 1; left: auto; }
-      100% { right: 85%; width: 20px; opacity: 0.3; left: auto; }
+      0% { right: 10%; width: 30px; opacity: 0.3; left: auto; }
+      50% { width: 85%; opacity: 1; left: auto; }
+      100% { right: 80%; width: 30px; opacity: 0.3; left: auto; }
     }
 
     .half-form-drawer {
@@ -495,12 +497,14 @@
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
     }
 
-    /* Infinite Continuous Marquee Loops */
+    /* Infinite Marquee Loops (Never stopping, locked full speed) */
     .infinite-marquee-box {
       width: 100%;
       overflow: hidden;
       position: relative;
       margin: 8px 0 16px 0;
+      cursor: grab;
+      touch-action: pan-x;
       mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
     }
@@ -509,13 +513,13 @@
       display: flex;
       gap: 16px;
       width: max-content;
-      animation: continuousLoopScroll 24s linear infinite;
+      animation: continuousLoopScroll 22s linear infinite;
+      will-change: transform;
     }
-    .infinite-marquee-box:hover .infinite-marquee-inner { animation-play-state: paused; }
 
     @keyframes continuousLoopScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
     }
 
     .review-bubble {
@@ -552,6 +556,8 @@
       overflow: hidden;
       position: relative;
       margin: 8px 0 16px 0;
+      cursor: grab;
+      touch-action: pan-x;
       mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
     }
@@ -560,14 +566,13 @@
       display: flex;
       gap: 16px;
       width: max-content;
-      animation: continuousLoopCases 26s linear infinite;
+      animation: continuousLoopCases 24s linear infinite;
       will-change: transform;
     }
-    .interactive-cases-box:hover .interactive-cases-inner { animation-play-state: paused; }
 
     @keyframes continuousLoopCases {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
     }
 
     .case-card-stream {
@@ -974,7 +979,7 @@
         </svg>
       </button>
 
-      <!-- Water-Glass Swipe Handle with Water-Glass Current Flow -->
+      <!-- Water-Glass Swipe Handle with Ghost Arrow Current Flow -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
@@ -1037,7 +1042,7 @@
       <div class="sec-tag">Real Experiences</div>
       <h2 class="sec-heading">Google Patient Reviews</h2>
 
-      <div class="infinite-marquee-box">
+      <div class="infinite-marquee-box" id="reviewsBox">
         <div class="infinite-marquee-inner">
           <div class="review-bubble">
             <div class="rev-head">
@@ -1060,7 +1065,7 @@
             </div>
             <p class="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
           </div>
-          <!-- Loop Clones for seamless infinite scroll -->
+          <!-- Loop Clones -->
           <div class="review-bubble">
             <div class="rev-head">
               <span class="rev-name">Elena R. <span style="color:var(--apple-blue);">✓ Verified</span></span>
@@ -1086,20 +1091,20 @@
       </div>
     </section>
 
-    <!-- Infinite Clinical Transformation Loop with Corrected Before/After Slots -->
+    <!-- Infinite Clinical Transformation Loop with Corrected Before/After Teeth Images -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Proven Results</div>
       <h2 class="sec-heading">Clinical Transformation</h2>
 
-      <div class="interactive-cases-box">
+      <div class="interactive-cases-box" id="casesBox">
         <div class="interactive-cases-inner">
           <div class="case-card-stream">
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Stained Yellow Teeth Before" />
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Yellow Discolored Teeth Before" />
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Radiant Smile After" />
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Perfect Radiant Smile After" />
               <span class="case-slot-badge badge-a">After</span>
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #481: Full Arch Veneers</p>
@@ -1111,7 +1116,7 @@
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Perfect Radiant Smile After" />
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Radiant Smile After" />
               <span class="case-slot-badge badge-a">After</span>
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #512: Bio-Enamel Seal</p>
@@ -1119,23 +1124,23 @@
 
           <div class="case-card-stream">
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Discolored Teeth Before" />
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Stained Teeth Before" />
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Laser Whitened Smile After" />
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Laser Whitening After" />
               <span class="case-slot-badge badge-a">After</span>
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #604: Laser Whitening</p>
           </div>
-          <!-- Loop Clones for seamless infinite scroll -->
+          <!-- Loop Clones -->
           <div class="case-card-stream">
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Stained Yellow Teeth Before" />
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Yellow Discolored Teeth Before" />
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Radiant Smile After" />
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Perfect Radiant Smile After" />
               <span class="case-slot-badge badge-a">After</span>
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #481: Full Arch Veneers</p>
@@ -1146,7 +1151,7 @@
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Perfect Radiant Smile After" />
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Radiant Smile After" />
               <span class="case-slot-badge badge-a">After</span>
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #512: Bio-Enamel Seal</p>
@@ -1321,6 +1326,8 @@
       vidStart.muted = isMuted;
       vidTrans.muted = isMuted;
       vidEnd.muted = isMuted;
+      if (vidStart.paused) vidStart.play().catch(() => {});
+      if (vidEnd.paused && funnelStep >= 2) vidEnd.play().catch(() => {});
     });
 
     function wakeActiveVideos() {
@@ -1338,7 +1345,7 @@
     window.addEventListener('focus', wakeActiveVideos);
 
     const playInitialVideo = () => {
-      vidStart.muted = true;
+      vidStart.muted = isMuted;
       vidStart.play().catch(() => {});
       vidTrans.load();
       vidEnd.load();
@@ -1574,7 +1581,47 @@
       }
     }
 
+    // Interactive Drag and Continuous Auto-Scrolling Scroller Helper
+    function enableContinuousDragScroll(sliderId) {
+      const slider = document.getElementById(sliderId);
+      if (!slider) return;
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      slider.addEventListener('pointerdown', (e) => {
+        isDown = true;
+        slider.style.cursor = 'grabbing';
+        startX = e.clientX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+        try { slider.setPointerCapture(e.pointerId); } catch(err){}
+      });
+
+      slider.addEventListener('pointerleave', () => {
+        isDown = false;
+        slider.style.cursor = 'grab';
+      });
+
+      slider.addEventListener('pointerup', (e) => {
+        isDown = false;
+        slider.style.cursor = 'grab';
+        try { slider.releasePointerCapture(e.pointerId); } catch(err){}
+      });
+
+      slider.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.clientX - slider.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        slider.scrollLeft = scrollLeft - walk;
+      });
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
+      enableContinuousDragScroll('reviewsBox');
+      enableContinuousDragScroll('casesBox');
+      enableContinuousDragScroll('pressBar');
+
       const observerOptions = {
         root: null,
         rootMargin: '0px 0px -50px 0px',
