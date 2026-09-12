@@ -122,7 +122,6 @@
     .g-icon { font-weight: 800; color: #4285f4; }
     .stars { color: #ff9500; letter-spacing: 2px; }
 
-    /* Fully Active Smooth Press Trust Bar */
     .press-trust-bar {
       padding: 12px 16px;
       background: rgba(255, 255, 255, 0.7);
@@ -152,7 +151,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Zero-Glitch Hero Studio Frame with Matching Titanium Background */
+    /* Fixed Hero Box with Titanium background to eliminate white flash */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -201,79 +200,96 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Clean Swipe Zone with Electric Glow Prompt */
+    /* Water-Glass Arrow Track with exact width-matched electric pulse */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
       left: 20px;
       right: 20px;
-      height: 52px;
-      background: transparent;
-      border: none;
+      height: 54px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
       align-items: center;
       z-index: 20;
       touch-action: none;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
     }
 
-    .swipe-light-trail {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 4px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(0,113,227,0.2), rgba(0, 113, 227, 0.9), rgba(0,113,227,0.2));
-      background-size: 200% 100%;
-      animation: electricPulse 1.8s infinite linear;
-      pointer-events: none;
-      box-shadow: 0 0 12px rgba(0, 113, 227, 0.6);
-    }
-
-    .swipe-interactive-zone.reverse .swipe-light-trail {
-      animation: electricPulseReverse 1.8s infinite linear;
-      background: linear-gradient(90deg, rgba(52,199,89,0.2), rgba(52, 199, 89, 0.95), rgba(52,199,89,0.2));
-      background-size: 200% 100%;
-      box-shadow: 0 0 12px rgba(52, 199, 89, 0.7);
-    }
-
-    @keyframes electricPulse {
-      0% { background-position: 200% 0; opacity: 0.6; }
-      50% { opacity: 1; }
-      100% { background-position: -200% 0; opacity: 0.6; }
-    }
-    @keyframes electricPulseReverse {
-      0% { background-position: -200% 0; opacity: 0.6; }
-      50% { opacity: 1; }
-      100% { background-position: 200% 0; opacity: 0.6; }
-    }
-
-    /* Minimalist Swipe Handle without White Box */
+    /* Water-Glass Arrow Handle sized exactly to match your requested arrow shape with bouncing effect */
     .swipe-arrow-handle {
-      width: 38px;
-      height: 38px;
-      background: transparent;
-      border: none;
+      height: 44px;
+      padding: 0 16px;
+      background: rgba(255, 255, 255, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 6px;
       cursor: grab;
       position: absolute;
-      left: 2px;
+      left: 4px;
       top: 50%;
       transform: translate3d(0, -50%, 0);
       will-change: transform;
       z-index: 2;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      animation: gentleBounce 1.6s infinite ease-in-out;
     }
 
-    .swipe-arrow-handle:active { cursor: grabbing; }
+    .swipe-arrow-handle:active { cursor: grabbing; animation: none; }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translate3d(0, -50%, 0); }
+      50% { transform: translate3d(6px, -50%, 0); }
+    }
 
     .swipe-arrow-handle svg {
-      width: 32px;
-      height: 32px;
+      width: 18px;
+      height: 18px;
       fill: #ffffff;
-      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
       transition: transform 0.3s ease;
       pointer-events: none;
+    }
+
+    .swipe-handle-text {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* Water-Glass Current Pulse matching the exact arrow handle width and vertical span */
+    .swipe-arrow-electric-pulse {
+      position: absolute;
+      height: 44px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.65), rgba(0,113,227,0.05));
+      box-shadow: 0 0 16px rgba(0, 113, 227, 0.7);
+      pointer-events: none;
+      animation: waterCurrentFlow 2.2s infinite linear;
+      z-index: 1;
+    }
+
+    .swipe-interactive-zone.reverse .swipe-arrow-electric-pulse {
+      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.7), rgba(52,199,89,0.05));
+      box-shadow: 0 0 16px rgba(52, 199, 89, 0.8);
+    }
+
+    @keyframes waterCurrentFlow {
+      0% { left: -30%; opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { left: 100%; opacity: 0.4; }
     }
 
     .half-form-drawer {
@@ -482,28 +498,28 @@
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
     }
 
-    /* Draggable & Auto-Scrolling Google Reviews Marquee */
+    /* Infinite Continuous Marquee Loops for Reviews & Cases */
     .infinite-marquee-box {
       width: 100%;
-      overflow-x: auto;
+      overflow: hidden;
       position: relative;
       margin: 8px 0 16px 0;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      cursor: grab;
-      touch-action: pan-x;
       mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
     }
-    .infinite-marquee-box::-webkit-scrollbar { display: none; }
 
     .infinite-marquee-inner {
       display: flex;
       gap: 16px;
       width: max-content;
-      animation: marqueeScroll 24s linear infinite;
+      animation: continuousLoopScroll 24s linear infinite;
     }
     .infinite-marquee-box:hover .infinite-marquee-inner { animation-play-state: paused; }
+
+    @keyframes continuousLoopScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     .review-bubble {
       width: 270px;
@@ -513,7 +529,6 @@
       border-radius: 16px;
       padding: 18px;
       box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
-      pointer-events: none;
     }
 
     .rev-head {
@@ -535,30 +550,28 @@
       color: var(--apple-gray);
     }
 
-    /* Draggable & Auto-Scrolling Clinical Cases */
     .interactive-cases-box {
       width: 100%;
-      overflow-x: auto;
+      overflow: hidden;
       position: relative;
-      cursor: grab;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
       margin: 8px 0 16px 0;
-      touch-action: pan-x;
       mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
     }
-
-    .interactive-cases-box::-webkit-scrollbar { display: none; }
 
     .interactive-cases-inner {
       display: flex;
       gap: 16px;
       width: max-content;
-      animation: marqueeCases 26s linear infinite;
+      animation: continuousLoopCases 26s linear infinite;
       will-change: transform;
     }
     .interactive-cases-box:hover .interactive-cases-inner { animation-play-state: paused; }
+
+    @keyframes continuousLoopCases {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
     .case-card-stream {
       width: 250px;
@@ -568,7 +581,6 @@
       border-radius: 16px;
       padding: 12px;
       box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
-      pointer-events: none;
     }
 
     .case-photo-slot {
@@ -753,7 +765,6 @@
       box-shadow: 0 4px 14px rgba(0, 113, 227, 0.25);
     }
 
-    /* Clean GPS Map Card with Direct Action Link */
     .gps-map-card {
       position: relative;
       border-radius: 18px;
@@ -925,11 +936,6 @@
       border-top: 1px solid var(--apple-border);
       background: var(--card-pure-white);
     }
-
-    @keyframes lightSweep { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    @keyframes lightSweepReverse { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-    @keyframes marqueeScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    @keyframes marqueeCases { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   </style>
 </head>
 <body>
@@ -950,7 +956,7 @@
       <span>4.9 Rating (380+ Verified Beverly Hills Reviews)</span>
     </div>
 
-    <!-- Active Scrolling & Draggable Press Trust Bar -->
+    <!-- Active Scrolling Press Trust Bar -->
     <div class="press-trust-bar" id="pressBar">
       <div class="press-trust-inner">
         <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
@@ -962,8 +968,8 @@
     <!-- Zero-Glitch Hero Studio Frame -->
     <div class="hero-box" id="heroSec">
       <video id="vidStart" class="hero-vid" src="./start.mp4" playsinline webkit-playsinline preload="auto" loop muted autoplay></video>
-<video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="auto" muted></video>
-<video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="auto" loop muted></video>
+      <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="auto" muted></video>
+      <video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="auto" loop muted></video>
 
       <button class="glass-sound-btn" id="soundBtn" aria-label="Toggle Sound">
         <svg id="soundIcon" viewBox="0 0 24 24">
@@ -971,11 +977,12 @@
         </svg>
       </button>
 
-      <!-- Minimalist Swipe Track with Electric Pulse Prompt -->
+      <!-- Water-Glass Swipe Handle with Water-Glass Current Flow -->
       <div class="swipe-interactive-zone" id="swipeTrack">
-        <div class="swipe-light-trail"></div>
+        <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          <span class="swipe-handle-text" id="knobText">Restore Your Smile</span>
         </div>
       </div>
 
@@ -1029,12 +1036,12 @@
       </div>
     </section>
 
-    <!-- Google Reviews Marquee (Auto + Draggable) -->
+    <!-- Infinite Google Patient Reviews Loop -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Real Experiences</div>
       <h2 class="sec-heading">Google Patient Reviews</h2>
 
-      <div class="infinite-marquee-box" id="reviewsBox">
+      <div class="infinite-marquee-box">
         <div class="infinite-marquee-inner">
           <div class="review-bubble">
             <div class="rev-head">
@@ -1057,7 +1064,7 @@
             </div>
             <p class="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
           </div>
-          <!-- Loop Clones -->
+          <!-- Loop Clones for seamless infinite scroll -->
           <div class="review-bubble">
             <div class="rev-head">
               <span class="rev-name">Elena R. <span style="color:var(--apple-blue);">✓ Verified</span></span>
@@ -1072,24 +1079,31 @@
             </div>
             <p class="rev-quote">"Dr. Vance is an absolute artist. Same-day triage and the precision mapping blew my mind."</p>
           </div>
+          <div class="review-bubble">
+            <div class="rev-head">
+              <span class="rev-name">Sophia L. <span style="color:var(--apple-blue);">✓ Verified</span></span>
+              <span style="color:#ff9500; font-size: 0.75rem;">★★★★★</span>
+            </div>
+            <p class="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Clinical Transformation (Auto + Draggable) -->
+    <!-- Infinite Clinical Transformation Loop with Corrected Before/After Slots -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Proven Results</div>
       <h2 class="sec-heading">Clinical Transformation</h2>
 
-      <div class="interactive-cases-box" id="casesBox">
+      <div class="interactive-cases-box">
         <div class="interactive-cases-inner">
           <div class="case-card-stream">
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Teeth Before Veneers" />
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Stained Yellow Teeth Before" />
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Teeth After Veneers" />
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Radiant Smile After" />
               <span class="case-slot-badge badge-a">After</span>
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #481: Full Arch Veneers</p>
@@ -1109,7 +1123,7 @@
 
           <div class="case-card-stream">
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Stained Enamel Before" />
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Discolored Teeth Before" />
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
@@ -1118,17 +1132,28 @@
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #604: Laser Whitening</p>
           </div>
-          <!-- Loop Clones -->
+          <!-- Loop Clones for seamless infinite scroll -->
           <div class="case-card-stream">
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Teeth Before Veneers" />
+              <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Stained Yellow Teeth Before" />
               <span class="case-slot-badge badge-b">Before</span>
             </div>
             <div class="case-photo-slot">
-              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Teeth After Veneers" />
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Radiant Smile After" />
               <span class="case-slot-badge badge-a">After</span>
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #481: Full Arch Veneers</p>
+          </div>
+          <div class="case-card-stream">
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Unaligned Enamel Before" />
+              <span class="case-slot-badge badge-b">Before</span>
+            </div>
+            <div class="case-photo-slot">
+              <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt="Perfect Radiant Smile After" />
+              <span class="case-slot-badge badge-a">After</span>
+            </div>
+            <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #512: Bio-Enamel Seal</p>
           </div>
         </div>
       </div>
@@ -1191,7 +1216,7 @@
       </div>
     </section>
 
-    <!-- 2nd Form: Main Bottom Consultation Form Connected to API -->
+    <!-- Main Bottom Consultation Form -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="consult-card">
         <div class="slots-pill">
@@ -1219,7 +1244,6 @@
         <button class="btn-confirm" onclick="submitMainForm()">Confirm Priority Appointment</button>
       </div>
 
-      <!-- Clean GPS Map Image with Direct Google Maps Link -->
       <a href="https://maps.google.com/?q=Beverly+Hills+CA" target="_blank" class="gps-map-card">
         <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Beverly Hills Studio Map" class="gps-map-img" />
         <div class="map-neighborhood-pill">
@@ -1274,6 +1298,7 @@
     const track     = document.getElementById('swipeTrack');
     const knob      = document.getElementById('swipeKnob');
     const knobSvg   = document.getElementById('knobSvg');
+    const knobText  = document.getElementById('knobText');
     const heroDrawer= document.getElementById('heroDrawer');
     const soundBtn  = document.getElementById('soundBtn');
     const soundIcon = document.getElementById('soundIcon');
@@ -1419,6 +1444,7 @@
         knob.style.transition = 'none';
         knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
         knobSvg.style.transform = 'rotate(180deg)';
+        knobText.innerText = "Back to Start";
         track.classList.add('reverse');
       };
     }
@@ -1554,49 +1580,7 @@
       }
     }
 
-    // Touch & Mouse Draggable Scroller Helper for Press, Reviews & Cases
-    function enableDragScroll(containerId) {
-      const slider = document.getElementById(containerId);
-      if (!slider) return;
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-
-      slider.addEventListener('pointerdown', (e) => {
-        isDown = true;
-        slider.style.cursor = 'grabbing';
-        startX = e.clientX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-        try { slider.setPointerCapture(e.pointerId); } catch(err){}
-      });
-
-      slider.addEventListener('pointerleave', () => {
-        isDown = false;
-        slider.style.cursor = 'grab';
-      });
-
-      slider.addEventListener('pointerup', (e) => {
-        isDown = false;
-        slider.style.cursor = 'grab';
-        try { slider.releasePointerCapture(e.pointerId); } catch(err){}
-      });
-
-      slider.addEventListener('pointermove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.clientX - slider.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        slider.scrollLeft = scrollLeft - walk;
-      });
-    }
-
-    // Initialize Draggable Touch Sliders
     document.addEventListener("DOMContentLoaded", function() {
-      enableDragScroll('pressBar');
-      enableDragScroll('reviewsBox');
-      enableDragScroll('casesBox');
-
-      // Scroll Fade-In Observer
       const observerOptions = {
         root: null,
         rootMargin: '0px 0px -50px 0px',
