@@ -151,7 +151,7 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* Fixed Hero Box with Titanium background to eliminate white flash */
+    /* Fixed Hero Box with Titanium background to eliminate any white flash */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -200,7 +200,7 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Water-Glass Arrow Track with exact width-matched electric pulse */
+    /* Water-Glass Swipe Track matching background arrow dimensions */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
@@ -220,17 +220,16 @@
       box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
     }
 
-    /* Water-Glass Arrow Handle sized exactly to match your requested arrow shape with bouncing effect */
+    /* Water-Glass Arrow Handle sized to 10% representation with gentle bounce */
     .swipe-arrow-handle {
-      height: 44px;
-      padding: 0 16px;
+      height: 42px;
+      width: 58px;
       background: rgba(255, 255, 255, 0.38);
       border: 1px solid rgba(255, 255, 255, 0.7);
       border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
       cursor: grab;
       position: absolute;
       left: 4px;
@@ -250,46 +249,44 @@
     }
 
     .swipe-arrow-handle svg {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       fill: #ffffff;
       filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
       transition: transform 0.3s ease;
       pointer-events: none;
     }
 
-    .swipe-handle-text {
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: #ffffff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-      white-space: nowrap;
-      pointer-events: none;
-    }
-
-    /* Water-Glass Current Pulse matching the exact arrow handle width and vertical span */
+    /* Water-Glass Current Pulse matched to exact handle height size */
     .swipe-arrow-electric-pulse {
       position: absolute;
-      height: 44px;
+      height: 42px;
       top: 50%;
       transform: translateY(-50%);
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.65), rgba(0,113,227,0.05));
-      box-shadow: 0 0 16px rgba(0, 113, 227, 0.7);
+      background: linear-gradient(90deg, rgba(0,113,227,0.05), rgba(0,113,227,0.7), rgba(0,113,227,0.05));
+      box-shadow: 0 0 16px rgba(0, 113, 227, 0.8);
       pointer-events: none;
       animation: waterCurrentFlow 2.2s infinite linear;
       z-index: 1;
     }
 
     .swipe-interactive-zone.reverse .swipe-arrow-electric-pulse {
-      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.7), rgba(52,199,89,0.05));
-      box-shadow: 0 0 16px rgba(52, 199, 89, 0.8);
+      background: linear-gradient(90deg, rgba(52,199,89,0.05), rgba(52,199,89,0.75), rgba(52,199,89,0.05));
+      box-shadow: 0 0 16px rgba(52, 199, 89, 0.85);
+      animation: waterCurrentFlowReverse 2.2s infinite linear;
     }
 
     @keyframes waterCurrentFlow {
-      0% { left: -30%; opacity: 0.4; }
-      50% { opacity: 1; }
-      100% { left: 100%; opacity: 0.4; }
+      0% { left: 15%; width: 20px; opacity: 0.3; }
+      50% { width: 80%; opacity: 1; }
+      100% { left: 85%; width: 20px; opacity: 0.3; }
+    }
+
+    @keyframes waterCurrentFlowReverse {
+      0% { right: 15%; width: 20px; opacity: 0.3; left: auto; }
+      50% { width: 80%; opacity: 1; left: auto; }
+      100% { right: 85%; width: 20px; opacity: 0.3; left: auto; }
     }
 
     .half-form-drawer {
@@ -498,7 +495,7 @@
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
     }
 
-    /* Infinite Continuous Marquee Loops for Reviews & Cases */
+    /* Infinite Continuous Marquee Loops */
     .infinite-marquee-box {
       width: 100%;
       overflow: hidden;
@@ -982,7 +979,6 @@
         <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-          <span class="swipe-handle-text" id="knobText">Restore Your Smile</span>
         </div>
       </div>
 
@@ -1298,7 +1294,6 @@
     const track     = document.getElementById('swipeTrack');
     const knob      = document.getElementById('swipeKnob');
     const knobSvg   = document.getElementById('knobSvg');
-    const knobText  = document.getElementById('knobText');
     const heroDrawer= document.getElementById('heroDrawer');
     const soundBtn  = document.getElementById('soundBtn');
     const soundIcon = document.getElementById('soundIcon');
@@ -1444,7 +1439,6 @@
         knob.style.transition = 'none';
         knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
         knobSvg.style.transform = 'rotate(180deg)';
-        knobText.innerText = "Back to Start";
         track.classList.add('reverse');
       };
     }
