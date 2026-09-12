@@ -201,7 +201,7 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Water-Glass Swipe Track matching reference image layout */
+    /* Water-Glass Swipe Track matching reference layout */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
@@ -221,7 +221,7 @@
       box-shadow: 0 8px 32px rgba(0, 113, 227, 0.2);
     }
 
-    /* Exact Arrow-Shaped Handle mimicking reference design with gentle bounce */
+    /* Exact Water-Glass Arrow Handle mimicking reference design */
     .swipe-arrow-handle {
       height: 44px;
       width: 64px;
@@ -254,10 +254,11 @@
       height: 22px;
       fill: #ffffff;
       filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
+      transition: transform 0.3s ease;
       pointer-events: none;
     }
 
-    /* Arrow-Shaped Ghost Current Stream matching reference aesthetic */
+    /* Arrow-Shaped Ghost Current Stream */
     .swipe-arrow-electric-pulse {
       position: absolute;
       height: 44px;
@@ -496,7 +497,7 @@
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
     }
 
-    /* Inertial Momentum Infinite Marquee Loops (Never stopping, supports flick momentum) */
+    /* Inertial Momentum Infinite Marquee Loops */
     .infinite-marquee-box {
       width: 100%;
       overflow: hidden;
@@ -966,7 +967,7 @@
         </svg>
       </button>
 
-      <!-- Water-Glass Swipe Handle matching reference arrow style -->
+      <!-- Water-Glass Swipe Handle matching exact arrow style -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-electric-pulse"></div>
         <div class="swipe-arrow-handle" id="swipeKnob">
@@ -1348,6 +1349,22 @@
       if (funnelStep === 0 && vidStart.paused) vidStart.play().catch(() => {});
     }, { once: true });
 
+    // Intersection Observer to auto-mute video sound when hero section scrolls out of view
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          vidStart.muted = true;
+          vidTrans.muted = true;
+          vidEnd.muted = true;
+        } else {
+          vidStart.muted = isMuted;
+          vidTrans.muted = isMuted;
+          vidEnd.muted = isMuted;
+        }
+      });
+    }, { threshold: 0.1 });
+    heroObserver.observe(heroSec);
+
     knob.addEventListener('pointerdown', (e) => {
       if (funnelStep === 1) return;
       triggerHaptic(20);
@@ -1588,7 +1605,6 @@
 
       function step() {
         if (!isDragging) {
-          // Apply velocity with smooth decay back to base automatic speed
           velocity = velocity * 0.95 + baseSpeed * 0.05;
           scrollX += velocity;
 
@@ -1618,7 +1634,7 @@
         const dx = e.clientX - lastX;
 
         if (dt > 0) {
-          velocity = -dx * (16 / dt) * 0.8; // Momentum velocity mapping
+          velocity = -dx * (16 / dt) * 0.8;
         }
 
         scrollX -= dx;
