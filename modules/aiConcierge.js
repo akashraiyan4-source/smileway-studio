@@ -2,6 +2,7 @@
 // MODULE: AI VOICE & CHAT CONCIERGE AGENT
 // ==========================================
 import express from 'express';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const router = express.Router();
 
@@ -15,38 +16,22 @@ Strict rules:
 4. Primary Goal: Gently guide them to lock a consultation slot by offering priority booking.
 `;
 
-// চ্যাট বা ভয়েস কোয়েরি হ্যান্ডেল করার জন্য এআই এন্ডপয়েন্ট
 router.post('/chat', async (req, res) => {
     try {
         const { message, userPhone } = req.body;
         console.log(`[AI Concierge] Received query from ${userPhone || 'Anonymous'}: "${message}"`);
 
-        const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Message: ${message}\nAI Concierge Reply:`;
         const apiKey = (process.env.GEMINI_API_KEY || '').trim();
-
-        // v1beta এর বদলে স্ট্যাবল এন্ডপয়েন্ট
-        const endpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-
-        const geminiResponse = await fetch(endpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: prompt }] }]
-            })
+        const genAI = new GoogleGenerativeAI(apiKey);
+        
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            systemInstruction: DENTAL_SYSTEM_PROMPT 
         });
 
-        const data = await geminiResponse.json();
-
-        if (!geminiResponse.ok) {
-            console.error('[Gemini API Error]:', data);
-            throw new Error(data.error?.message || 'Failed to communicate with Gemini API');
-        }
-
-        const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text 
-            ? data.candidates[0].content.parts[0].text.trim() 
-            : "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
+        const result = await model.generateContent(message);
+        const response = await result.response;
+        const aiResponse = response.text().trim();
 
         console.log(`[AI Concierge Reply] "${aiResponse}"`);
 
