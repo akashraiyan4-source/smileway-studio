@@ -24,14 +24,13 @@ router.post('/chat', async (req, res) => {
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Message: ${message}\nAI Concierge Reply:`;
         const apiKey = (process.env.GEMINI_API_KEY || '').trim();
 
-        // URL query parameter এবং x-goog-api-key উভয়ভাবেই কি পাস করা হয়েছে
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+        // v1beta এর বদলে স্ট্যাবল এন্ডপয়েন্ট
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${encodeURIComponent(apiKey)}`;
 
         const geminiResponse = await fetch(endpoint, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'x-goog-api-key': apiKey
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 contents: [{ parts: [{ text: prompt }] }]
