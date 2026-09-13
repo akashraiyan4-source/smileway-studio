@@ -25,7 +25,7 @@ router.post('/chat', async (req, res) => {
         const apiKey = (process.env.GEMINI_API_KEY || '').trim();
 
         // v1beta এর বদলে স্ট্যাবল এন্ডপয়েন্ট
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${encodeURIComponent(apiKey)}`;
+        const endpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
 
         const geminiResponse = await fetch(endpoint, {
             method: 'POST',
