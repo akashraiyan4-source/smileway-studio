@@ -180,32 +180,46 @@
     #vidTrans { z-index: 2; opacity: 0; pointer-events: none; }
     #vidEnd   { z-index: 3; opacity: 0; pointer-events: none; }
 
+    /* ১. আল্ট্রা-ক্লিন ওয়াটার গ্লাস মিউট বাটন (চোখে লাগবে না) */
     .glass-sound-btn {
       position: absolute;
       top: 16px;
       right: 16px;
       z-index: 30;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: rgba(29, 29, 31, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: background 0.2s ease, transform 0.2s ease;
     }
 
-    .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
+    .glass-sound-btn:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.2);
+    }
 
+    .glass-sound-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: rgba(255, 255, 255, 0.9);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+    }
+
+    /* ২. ব্যাকগ্রাউন্ড অ্যারোর ঠিক উপরের সাইডে স্লাইডার ট্র্যাক */
     .swipe-interactive-zone {
       position: absolute;
-      bottom: 26px;
-      left: 20px;
-      right: 20px;
-      height: 56px;
+      bottom: 52px; /* ব্যাকগ্রাউন্ড অ্যারো চিহ্নের ঠিক উপরে পজিশন */
+      left: 18px;
+      right: 18px;
+      height: 40px;
       background: transparent !important;
       border: none !important;
       box-shadow: none !important;
@@ -217,11 +231,12 @@
       transition: opacity 0.3s ease;
     }
 
+    /* হালকা পানির কালারের ছোট ও স্লিম ওয়াটার অ্যারো হ্যান্ডেল */
     .swipe-arrow-handle {
-      height: 44px;
-      width: 68px;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      height: 34px;
+      width: 48px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-radius: 999px;
@@ -230,22 +245,22 @@
       justify-content: center;
       cursor: grab;
       position: absolute;
-      left: 4px;
+      left: 0;
       top: 50%;
       transform: translate3d(0, -50%, 0);
       will-change: transform;
       z-index: 25;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15), inset 0 0 6px rgba(255, 255, 255, 0.35);
       pointer-events: auto;
     }
 
     .swipe-arrow-handle:active { cursor: grabbing; }
 
     .swipe-arrow-handle svg {
-      width: 20px;
-      height: 20px;
-      fill: #ffffff;
-      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+      width: 16px;
+      height: 16px;
+      fill: rgba(255, 255, 255, 0.95);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
       transition: transform 0.3s ease;
       pointer-events: none;
     }
@@ -765,25 +780,38 @@
       text-decoration: none;
     }
 
+    /* ৩. স্ক্রিনের ডানদিকের মাঝখানে অ্যাপল স্টাইল মিনিমাইজড ডকড AI ট্যাব */
     .floating-ai {
       position: fixed;
-      bottom: 20px;
-      right: 18px;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
       z-index: 999;
-      background: rgba(255, 255, 255, 0.92);
-      border: 1px solid var(--apple-border);
-      padding: 7px 14px;
-      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 113, 227, 0.25);
+      border-right: none;
+      padding: 8px 10px 8px 12px;
+      border-radius: 20px 0 0 20px;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
-      backdrop-filter: blur(16px);
+      gap: 6px;
+      box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .floating-ai:hover {
+      transform: translateY(-50%) translateX(-4px);
+    }
+
+    .floating-ai:active {
+      transform: translateY(-50%) translateX(-2px);
     }
 
     .ai-avatar { font-size: 0.95rem; line-height: 1; }
-    .ai-main { font-size: 0.76rem; font-weight: 600; color: var(--apple-dark); }
+    .ai-main { font-size: 0.74rem; font-weight: 700; color: var(--apple-dark); }
     .status-dot-tiny { width: 6px; height: 6px; border-radius: 50%; background: #34c759; box-shadow: 0 0 6px #34c759; }
 
     .ai-chat-modal {
@@ -876,7 +904,6 @@
       font-family: inherit;
     }
 
-    /* Interactive VIP Booking Card inside Chat */
     .chat-calendar-card {
       align-self: flex-start;
       width: 90%;
@@ -965,13 +992,14 @@
       <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="none" muted></video>
       <video id="vidEnd"   class="hero-vid" src="./end.mp4" playsinline webkit-playsinline preload="none" loop muted></video>
 
+      <!-- ওয়াটার গ্লাস মিউট বাটন -->
       <button class="glass-sound-btn" id="soundBtn" aria-label="Toggle Sound">
         <svg id="soundIcon" viewBox="0 0 24 24">
           <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
         </svg>
       </button>
 
-      <!-- Transparent Track -->
+      <!-- ব্যাকগ্রাউন্ড অ্যারো চিহ্নের ঠিক উপরে পানির কালারের স্লাইডার ট্র্যাক -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -1252,10 +1280,10 @@
       <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
     </footer>
 
-    <!-- Floating AI Pill -->
+    <!-- স্ক্রিনের ডানপাশের মাঝখানে ডক করা মিনিমাল অ্যাপল এআই ট্যাব -->
     <div class="floating-ai" onclick="openAiChat()">
       <span class="ai-avatar">🤖</span>
-      <span class="ai-main">AI Assistant</span>
+      <span class="ai-main">AI Concierge</span>
       <span class="status-dot-tiny"></span>
     </div>
 
@@ -1622,7 +1650,6 @@
       input.value = '';
       body.scrollTop = body.scrollHeight;
 
-      // বুকিং কি-ওয়ার্ড থাকলে ক্যালেন্ডার হ্যান্ডওভার ট্রিগার
       const bookingKeywords = ['book', 'appointment', 'consultation', 'slot', 'schedule', 'তারিখ', 'বুক'];
       const wantsBooking = bookingKeywords.some(keyword => text.toLowerCase().includes(keyword));
 
