@@ -17,33 +17,41 @@ Strict rules:
 `;
 
 router.post('/chat', async (req, res) => {
-    try {
-        const { message, userPhone } = req.body;
-        console.log(`[AI Concierge] Received query from ${userPhone || 'Anonymous'}: "${message}"`);
+    const { message, userPhone } = req.body;
+    console.log(`[AI Concierge] Received query from ${userPhone || 'WebVisitor'}: "${message}"`);
 
-        const apiKey = (process.env.GEMINI_API_KEY || '').trim();
-        const genAI = new GoogleGenerativeAI(apiKey);
-        
-        const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash",
-            systemInstruction: DENTAL_SYSTEM_PROMPT 
-        });
+    const apiKey = (process.env.GEMINI_API_KEY || '').trim();
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${message}`;
 
-        const result = await model.generateContent(message);
-        const response = await result.response;
-        const aiResponse = response.text().trim();
+    // আল্ট্রা-ফাস্ট লাইট মডেল অগ্রাধিকার
+    const modelCandidates = ["gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-flash-lite-latest"];
 
-        console.log(`[AI Concierge Reply] "${aiResponse}"`);
+    for (const modelName of modelCandidates) {
+        try {
+            const model = genAI.getGenerativeModel({ 
+                model: modelName,
+                generationConfig: {
+                    maxOutputTokens: 100,
+                    temperature: 0.6
+                }
+            });
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            const aiResponse = response.text().trim();
 
-        res.status(200).json({
-            success: true,
-            reply: aiResponse
-        });
+            console.log(`[AI Concierge Reply using ${modelName}] "${aiResponse}"`);
 
-    } catch (error) {
-        console.error('[AI Concierge Error]:', error);
-        res.status(500).json({ success: false, error: 'AI Concierge failed to process request.' });
+            return res.status(200).json({
+                success: true,
+                reply: aiResponse
+            });
+        } catch (err) {
+            console.warn(`[Failover] ${modelName} busy. Trying next...`);
+        }
     }
+
+    return res.status(500).json({ success: false, error: 'AI Concierge temporarily busy.' });
 });
 
 export default router;

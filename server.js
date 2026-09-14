@@ -1,9 +1,12 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+// বিদ্যমান সব মডিউল
 import leadsRouter from './modules/leads.js';
 import geminiRouter from './modules/geminiConcierge.js';
 import missedRouter from './modules/missedCall.js';
@@ -27,31 +30,81 @@ import vectorKnowledgeRouter from './modules/vectorKnowledge.js';
 import whatsappRouter from './modules/whatsappIntegration.js';
 import voiceAgentRouter from './modules/voiceAgentBridge.js';
 
+// পার্ট ৩: অটোমেটেড রিকল ইঞ্জিন ও অ্যাপয়েন্টমেন্ট শিডিউলার
+import { initRecallEngine, scheduleAppointment } from './modules/recallEngine.js';
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ES Modules __dirname setup (Corrected fileURLToPath casing)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// ১. Helmet সিকিউরিটি
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
+}));
 
-// Serve static frontend files from 'public' directory
+// ২. সুরক্ষিত CORS কনফিগারেশন
+const allowedOrigins = [
+  'http://localhost:5000',
+  'http://127.0.0.1:5000',
+  process.env.CLIENT_URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS Policy: Access Denied'));
+    }
+  }
+}));
+
+// ৩. ইনপুট সাইজ গার্ড (সর্বোচ্চ 10KB)
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
+// ৪. চ্যাটবট রেট লিমিটিং (১৫ মিনিটে সর্বোচ্চ ২৫ রিকোয়েস্ট)
+const chatLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 25,
+  message: { success: false, error: 'Too many chat requests. Please try again after 15 minutes.' }
+});
+
+// স্ট্যাটিক ফ্রন্টএন্ড পরিবেশন
 app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// ৫. রিয়েল-টাইম VIP বুকিং ক্রিয়েট এন্ডপয়েন্ট (404 ফিক্স)
+app.post('/api/booking/create', (req, res) => {
+  const { name, phone, niche, appointmentDate } = req.body;
+  if (!name || !phone || !appointmentDate) {
+    return res.status(400).json({ success: false, error: 'Missing required booking fields.' });
+  }
+
+  const newBooking = scheduleAppointment({ 
+    name, 
+    phone, 
+    niche: niche || 'dental', 
+    appointmentDate 
+  });
+  
+  return res.status(200).json({ success: true, booking: newBooking });
+});
 
 // API Routes
 app.use('/api/leads', leadsRouter);
 app.use('/api/twilio', geminiRouter);
 app.use('/api/voice', missedRouter);
-app.use('/api/ai', aiConciergeRouter); // ২. নতুন AI Concierge রাউট এখানে মাউন্ট করা হলো (/api/ai/chat)
+app.use('/api/ai', chatLimiter, aiConciergeRouter);
 app.use('/api/booking', bookingRouter);
 app.use('/api/followup', followUpRouter);
 app.use('/api/scoring', leadScoringRouter);
-app.use('/api/reputation', reputationRouter);// Direct root route to serve index.html frontend
+app.use('/api/reputation', reputationRouter);
 app.use('/api/estimator', costEstimatorRouter);
 app.use('/api/insurance', insuranceRouter);
 app.use('/api/onboarding', onboardingRouter);
@@ -75,6 +128,9 @@ app.get('/', (req, res) => {
 app.get('/status', (req, res) => {
   res.json({ status: 'Online', system: 'SmileWay VIP Conversion Engine v1.0' });
 });
+
+// ক্রন রিকল ব্যাকগ্রাউন্ড শিডিউলার চালু
+initRecallEngine();
 
 app.listen(PORT, () => {
   console.log(`\n==================================================`);

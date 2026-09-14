@@ -152,7 +152,6 @@
       100% { transform: translate3d(-50%, 0, 0); }
     }
 
-    /* Zero-Glitch Instant Hero Studio Frame with Poster Attribute */
     .hero-box {
       position: relative;
       width: calc(100% - 32px);
@@ -201,7 +200,6 @@
 
     .glass-sound-btn svg { width: 18px; height: 18px; fill: #ffffff; }
 
-    /* Transparent Track without blur box */
     .swipe-interactive-zone {
       position: absolute;
       bottom: 26px;
@@ -219,7 +217,6 @@
       transition: opacity 0.3s ease;
     }
 
-    /* Crystal-Clear Glass Arrow Handle */
     .swipe-arrow-handle {
       height: 44px;
       width: 68px;
@@ -375,7 +372,6 @@
       margin-bottom: 20px;
     }
 
-    /* Ultra-Premium Apple-Style Cards */
     .doctor-card {
       position: relative;
       border-radius: 18px;
@@ -460,7 +456,6 @@
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
     }
 
-    /* Inertial Momentum Infinite Marquee Loops */
     .infinite-marquee-box {
       width: 100%;
       overflow: hidden;
@@ -812,7 +807,7 @@
       background: #ffffff;
       width: 100%;
       max-width: 500px;
-      height: 500px;
+      height: 520px;
       border-radius: 20px 20px 0 0;
       display: flex;
       flex-direction: column;
@@ -841,13 +836,13 @@
     }
 
     .ai-msg {
-      max-width: 82%;
+      max-width: 84%;
       padding: 11px 16px;
       border-radius: 16px;
       font-size: 0.85rem;
       line-height: 1.45;
     }
-    .ai-bot { background: #e2e5e9; color: var(--apple-dark); align-self: flex-start; }
+    .ai-bot { background: #ffffff; color: var(--apple-dark); align-self: flex-start; border: 1px solid var(--apple-border); }
     .ai-user { background: var(--apple-blue); color: #ffffff; align-self: flex-end; }
 
     .ai-chat-footer {
@@ -879,6 +874,52 @@
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
+    }
+
+    /* Interactive VIP Booking Card inside Chat */
+    .chat-calendar-card {
+      align-self: flex-start;
+      width: 90%;
+      background: #ffffff;
+      border: 1.5px solid #0071e3;
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 24px rgba(0, 113, 227, 0.12);
+    }
+
+    .chat-calendar-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0071e3;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chat-calendar-input {
+      width: 100%;
+      background: var(--apple-titanium);
+      border: 1px solid var(--apple-border);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      color: var(--apple-dark);
+      margin-bottom: 10px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .chat-calendar-btn {
+      width: 100%;
+      background: #0071e3;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     footer {
@@ -918,7 +959,7 @@
       </div>
     </div>
 
-    <!-- Zero-Glitch Instant Hero Studio Frame with Poster Attribute -->
+    <!-- Hero Studio Frame -->
     <div class="hero-box" id="heroSec">
       <video id="vidStart" class="hero-vid" src="./start.mp4" poster="./start-poster.jpg" playsinline webkit-playsinline preload="auto" loop muted autoplay></video>
       <video id="vidTrans" class="hero-vid" src="./trans.mp4" playsinline webkit-playsinline preload="none" muted></video>
@@ -930,7 +971,7 @@
         </svg>
       </button>
 
-      <!-- Transparent Track without blur box -->
+      <!-- Transparent Track -->
       <div class="swipe-interactive-zone" id="swipeTrack">
         <div class="swipe-arrow-handle" id="swipeKnob">
           <svg id="knobSvg" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -987,7 +1028,7 @@
       </div>
     </section>
 
-    <!-- Infinite Momentum Google Patient Reviews Loop -->
+    <!-- Infinite Reviews Loop -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Real Experiences</div>
       <h2 class="sec-heading">Google Patient Reviews</h2>
@@ -1015,7 +1056,6 @@
             </div>
             <p class="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
           </div>
-          <!-- Loop Clones -->
           <div class="review-bubble">
             <div class="rev-head">
               <span class="rev-name">Elena R. <span style="color:var(--apple-blue);">✓ Verified</span></span>
@@ -1041,7 +1081,7 @@
       </div>
     </section>
 
-    <!-- Infinite Momentum Clinical Transformation Loop -->
+    <!-- Clinical Cases Loop -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="sec-tag">Proven Results</div>
       <h2 class="sec-heading">Clinical Transformation</h2>
@@ -1083,7 +1123,7 @@
             </div>
             <p style="font-size: 0.76rem; font-weight: 700; color: var(--apple-dark);">Case #604: Laser Whitening</p>
           </div>
-          <!-- Loop Clones -->
+
           <div class="case-card-stream">
             <div class="case-photo-slot">
               <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Yellow Discolored Teeth Before" />
@@ -1167,7 +1207,7 @@
       </div>
     </section>
 
-    <!-- Main Bottom Consultation Form -->
+    <!-- Main Consultation Form with Real-Time Slot Picker -->
     <section class="section-padding animate-on-scroll" style="padding-top: 0;">
       <div class="consult-card">
         <div class="slots-pill">
@@ -1176,7 +1216,7 @@
         </div>
         <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 6px;">Reserve Your Consultation</h3>
         <p style="font-size: 0.84rem; color: var(--apple-gray); margin-bottom: 16px;">
-          Select your primary concern. 60s SMS triage confirmed instantly.
+          Select your primary concern & slot. 60s SMS triage confirmed instantly.
         </p>
 
         <div class="guarantee-strip">
@@ -1188,10 +1228,11 @@
         <input type="text" id="mainName" class="form-input" placeholder="Your Full Name" />
         <input type="tel" id="mainPhone" class="form-input" placeholder="Mobile Phone (SMS Enabled)" />
         <select id="mainTreatment" class="form-input">
-          <option value="Handcrafted Porcelain Veneers">Handcrafted Porcelain Veneers</option>
-          <option value="Micro-Enamel Bio-Seal">Micro-Enamel Bio-Seal</option>
-          <option value="Full Arch Smile Alignment">Full Arch Smile Alignment</option>
+          <option value="dental">Handcrafted Porcelain Veneers</option>
+          <option value="cosmetic">Micro-Enamel Bio-Seal</option>
+          <option value="roofing">Full Arch Smile Alignment</option>
         </select>
+        <input type="datetime-local" id="mainAppointmentDate" class="form-input" />
         <button class="btn-confirm" onclick="submitMainForm()">Confirm Priority Appointment</button>
       </div>
 
@@ -1218,7 +1259,7 @@
       <span class="status-dot-tiny"></span>
     </div>
 
-    <!-- AI Chat Modal -->
+    <!-- AI Chat Modal with Interactive VIP Handover -->
     <div class="ai-chat-modal" id="aiChatModal">
       <div class="ai-chat-window">
         <div class="ai-chat-header">
@@ -1232,7 +1273,7 @@
           <div class="ai-msg ai-bot">Hello! I am your AI Assistant. How can I assist with your Beverly Hills aesthetic smile preview today?</div>
         </div>
         <div class="ai-chat-footer">
-          <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Type your message..." />
+          <input type="text" id="aiUserInput" class="ai-chat-input" maxlength="300" placeholder="Type message (max 300 chars)..." onkeypress="handleChatKeyPress(event)" />
           <button class="ai-send-btn" onclick="sendAiMessage()">Send</button>
         </div>
       </div>
@@ -1461,7 +1502,7 @@
     }
 
     function closeHeroDrawer() { 
-      heroDrawer.classList.remove('open');
+      heroDrawer.classList.remove('open'); 
       
       funnelStep = 0;
       vidEnd.pause();
@@ -1491,10 +1532,15 @@
       }
 
       try {
-        const response = await fetch('http://localhost:5000/api/leads/submit',{
+        const response = await fetch('/api/booking/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ fullName, phone, treatment })
+          body: JSON.stringify({ 
+            name: fullName, 
+            phone: phone, 
+            niche: 'dental', 
+            appointmentDate: new Date(Date.now() + 86400000).toISOString() 
+          })
         });
         const result = await response.json();
         if (result.success) {
@@ -1512,25 +1558,29 @@
     async function submitMainForm() {
       const fullName = document.getElementById('mainName').value.trim();
       const phone = document.getElementById('mainPhone').value.trim();
-      const treatment = document.getElementById('mainTreatment').value;
+      const niche = document.getElementById('mainTreatment').value;
+      const appointmentDate = document.getElementById('mainAppointmentDate').value;
 
-      if (!fullName || !phone) {
-        alert('Please fill in both your name and phone number.');
+      if (!fullName || !phone || !appointmentDate) {
+        alert('Please fill in your name, phone number, and select a preferred consultation date.');
         return;
       }
 
       try {
-        const response = await fetch('http://localhost:5000/api/ai/chat', {
+        const response = await fetch('/api/booking/create', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userMessage })
+          body: JSON.stringify({ name: fullName, phone, niche, appointmentDate })
         });
         const result = await response.json();
         if (result.success) {
-        appendMessageToChat('AI', result.reply);
-    } else {
-        appendMessageToChat('AI', "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.");
-    }
+          alert('Priority Consultation Confirmed! 6-Month VIP Recall Engine tracking initialized.');
+          document.getElementById('mainName').value = '';
+          document.getElementById('mainPhone').value = '';
+          document.getElementById('mainAppointmentDate').value = '';
+        } else {
+          alert('Error: ' + (result.error || 'Booking could not be finalized'));
+        }
       } catch (err) {
         console.error(err);
         alert('Server connection failed.');
@@ -1548,11 +1598,22 @@
     function openAiChat() { triggerHaptic(20); aiChatModal.classList.add('active'); }
     function closeAiChat() { aiChatModal.classList.remove('active'); }
 
+    function handleChatKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendAiMessage();
+      }
+    }
+
     async function sendAiMessage() {
       const input = document.getElementById('aiUserInput');
       const body = document.getElementById('aiChatBody');
       const text = input.value.trim();
       if (!text) return;
+
+      if (text.length > 300) {
+        alert("Please keep your message under 300 characters.");
+        return;
+      }
 
       const userDiv = document.createElement('div');
       userDiv.className = 'ai-msg ai-user';
@@ -1560,6 +1621,10 @@
       body.appendChild(userDiv);
       input.value = '';
       body.scrollTop = body.scrollHeight;
+
+      // বুকিং কি-ওয়ার্ড থাকলে ক্যালেন্ডার হ্যান্ডওভার ট্রিগার
+      const bookingKeywords = ['book', 'appointment', 'consultation', 'slot', 'schedule', 'তারিখ', 'বুক'];
+      const wantsBooking = bookingKeywords.some(keyword => text.toLowerCase().includes(keyword));
 
       try {
         const response = await fetch('/api/ai/chat', {
@@ -1573,15 +1638,78 @@
         botDiv.className = 'ai-msg ai-bot';
         botDiv.innerText = result.success ? result.reply : "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
         body.appendChild(botDiv);
+        
+        if (wantsBooking) {
+          setTimeout(renderChatCalendarWidget, 600);
+        }
+
         body.scrollTop = body.scrollHeight;
         triggerHaptic(20);
       } catch (error) {
         console.error("AI Chat Error:", error);
         const botDiv = document.createElement('div');
         botDiv.className = 'ai-msg ai-bot';
-        botDiv.innerText = "Thank you! Dr. Vance's team will top you shortly regarding priority consultation.";
+        botDiv.innerText = "Thank you! Dr. Vance's team will contact you shortly regarding priority consultation.";
         body.appendChild(botDiv);
         body.scrollTop = body.scrollHeight;
+      }
+    }
+
+    function renderChatCalendarWidget() {
+      const body = document.getElementById('aiChatBody');
+      if (document.getElementById('chatCalendarWidget')) return;
+
+      const widget = document.createElement('div');
+      widget.id = 'chatCalendarWidget';
+      widget.className = 'chat-calendar-card';
+      widget.innerHTML = `
+        <div class="chat-calendar-title">📅 Reserve Priority Consultation Slot</div>
+        <input type="datetime-local" id="chatSlotPicker" class="chat-calendar-input" />
+        <button class="chat-calendar-btn" onclick="confirmChatSlot()">Confirm Slot Reservation</button>
+        <p id="chatSlotStatus" style="font-size: 0.74rem; margin-top: 6px; display: none; font-weight: 600;"></p>
+      `;
+      body.appendChild(widget);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    async function confirmChatSlot() {
+      const slotPicker = document.getElementById('chatSlotPicker');
+      const statusEl = document.getElementById('chatSlotStatus');
+      const slotValue = slotPicker.value;
+
+      if (!slotValue) {
+        alert('Please pick a date and time slot.');
+        return;
+      }
+
+      statusEl.style.display = 'block';
+      statusEl.style.color = '#0071e3';
+      statusEl.innerText = 'Syncing appointment with Dr. Vance...';
+
+      try {
+        const response = await fetch('/api/booking/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: 'Concierge Web Guest',
+            phone: '+15552347890',
+            niche: 'dental',
+            appointmentDate: slotValue
+          })
+        });
+
+        const resData = await response.json();
+        if (resData.success) {
+          statusEl.style.color = '#34c759';
+          statusEl.innerText = '✓ VIP Slot Confirmed! Concierge text sent.';
+          slotPicker.disabled = true;
+        } else {
+          statusEl.style.color = '#dc2626';
+          statusEl.innerText = 'Could not reserve slot. Please try again.';
+        }
+      } catch (err) {
+        statusEl.style.color = '#dc2626';
+        statusEl.innerText = 'Connection error.';
       }
     }
 
