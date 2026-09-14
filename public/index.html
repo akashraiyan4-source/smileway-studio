@@ -180,7 +180,7 @@
     #vidTrans { z-index: 2; opacity: 0; pointer-events: none; }
     #vidEnd   { z-index: 3; opacity: 0; pointer-events: none; }
 
-    /* ১. আল্ট্রা-ক্লিন ওয়াটার গ্লাস মিউট বাটন (চোখে লাগবে না) */
+    /* আল্ট্রা-লাইট ওয়াটার গ্লাস মিউট বাটন */
     .glass-sound-btn {
       position: absolute;
       top: 16px;
@@ -213,10 +213,10 @@
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
     }
 
-    /* ২. ব্যাকগ্রাউন্ড অ্যারোর ঠিক উপরের সাইডে স্লাইডার ট্র্যাক */
+    /* স্লাইডার ট্র্যাক - ব্যাকগ্রাউন্ডের বড় অ্যারো থেকে সম্পূর্ণ উপরে ভাসবে */
     .swipe-interactive-zone {
       position: absolute;
-      bottom: 52px; /* ব্যাকগ্রাউন্ড অ্যারো চিহ্নের ঠিক উপরে পজিশন */
+      bottom: 108px;
       left: 18px;
       right: 18px;
       height: 40px;
@@ -780,39 +780,46 @@
       text-decoration: none;
     }
 
-    /* ৩. স্ক্রিনের ডানদিকের মাঝখানে অ্যাপল স্টাইল মিনিমাইজড ডকড AI ট্যাব */
+    /* অ্যাপল স্টাইল মিনিমাল রোবট ফেস ট্যাব (চোখে লাগবে না) */
     .floating-ai {
       position: fixed;
       top: 50%;
-      right: 0;
+      right: -6px;
       transform: translateY(-50%);
       z-index: 999;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(0, 113, 227, 0.25);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1.5px solid rgba(0, 113, 227, 0.3);
       border-right: none;
-      padding: 8px 10px 8px 12px;
-      border-radius: 20px 0 0 20px;
+      padding: 8px 10px 8px 10px;
+      border-radius: 24px 0 0 24px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.12);
+      gap: 4px;
+      box-shadow: -4px 6px 18px rgba(0, 0, 0, 0.15);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       cursor: pointer;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), right 0.2s ease;
     }
 
-    .floating-ai:hover {
+    .floating-ai:hover,
+    .floating-ai:active {
+      right: 0px;
       transform: translateY(-50%) translateX(-4px);
     }
 
-    .floating-ai:active {
-      transform: translateY(-50%) translateX(-2px);
+    .floating-ai .ai-avatar {
+      font-size: 1.45rem;
+      line-height: 1;
     }
 
-    .ai-avatar { font-size: 0.95rem; line-height: 1; }
-    .ai-main { font-size: 0.74rem; font-weight: 700; color: var(--apple-dark); }
-    .status-dot-tiny { width: 6px; height: 6px; border-radius: 50%; background: #34c759; box-shadow: 0 0 6px #34c759; }
+    .status-dot-tiny {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34c759;
+      box-shadow: 0 0 6px #34c759;
+    }
 
     .ai-chat-modal {
       position: fixed;
@@ -1280,10 +1287,9 @@
       <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
     </footer>
 
-    <!-- স্ক্রিনের ডানপাশের মাঝখানে ডক করা মিনিমাল অ্যাপল এআই ট্যাব -->
-    <div class="floating-ai" onclick="openAiChat()">
+    <!-- শুধু কিউট রোবট ফেস ডকড ট্যাব -->
+    <div class="floating-ai" onclick="openAiChat()" aria-label="Open AI Assistant">
       <span class="ai-avatar">🤖</span>
-      <span class="ai-main">AI Concierge</span>
       <span class="status-dot-tiny"></span>
     </div>
 
