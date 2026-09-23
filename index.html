@@ -877,10 +877,10 @@
 
     /* Floating Minimalist AI Trigger (Bottom-Right Docked) */
     .floating-ai {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
+      position: fixed !important;
+      bottom: 20px !important;
+      right: 20px !important;
+      z-index: 999999 !important;
       background: rgba(255, 255, 255, 0.95);
       border: 1.5px solid rgba(0, 113, 227, 0.35);
       width: 48px;
@@ -919,14 +919,15 @@
       box-shadow: 0 0 6px #34c759;
     }
 
-    /* AI Chat Window Docked Directly Above the Floating Trigger */
+    /* AI Chat Window Docked Directly Above the Floating Trigger (Strict Viewport Fixed) */
     .ai-chat-modal {
       position: fixed !important;
       bottom: 78px !important;
       right: 20px !important;
       left: auto !important;
       top: auto !important;
-      inset: auto !important;
+      inset: auto 20px 78px auto !important;
+      margin: 0 !important;
       width: 380px !important;
       max-width: calc(100vw - 32px) !important;
       height: 520px !important;
@@ -934,9 +935,9 @@
       background: transparent !important;
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
+      z-index: 999998 !important;
+      display: flex !important;
+      flex-direction: column !important;
       opacity: 0;
       pointer-events: none;
       transform: translateY(14px) scale(0.96);
@@ -944,9 +945,9 @@
     }
 
     .ai-chat-modal.active {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0) scale(1);
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: translateY(0) scale(1) !important;
     }
 
     .ai-chat-window {
@@ -1173,6 +1174,7 @@
         bottom: 68px !important;
         right: 12px !important;
         left: 12px !important;
+        inset: auto 12px 68px 12px !important;
         width: calc(100vw - 24px) !important;
         max-width: calc(100vw - 24px) !important;
         height: min(520px, 75vh) !important;
@@ -1559,7 +1561,7 @@
     </footer>
 
     <!-- Minimalist Robot Face Tab (Docked Bottom-Right) -->
-    <div class="floating-ai" onclick="openAiChat()" aria-label="Open AI Assistant">
+    <div class="floating-ai" onclick="toggleAiChat()" aria-label="Toggle AI Assistant">
       <span class="ai-avatar">🤖</span>
       <span class="status-dot-tiny"></span>
     </div>
@@ -1572,7 +1574,7 @@
             <div style="width:8px; height:8px; border-radius:50%; background:#34c759;"></div>
             <strong>SmileWay AI Assistant</strong>
           </div>
-          <button onclick="closeAiChat()" style="background:none; border:none; color:var(--apple-gray); font-size:1.4rem; cursor:pointer;">×</button>
+          <button onclick="closeAiChat()" style="background:none; border:none; color:var(--apple-gray); font-size:1.4rem; cursor:pointer; line-height:1; padding:2px 6px;">×</button>
         </div>
         <div class="ai-chat-body" id="aiChatBody">
           <div class="ai-msg ai-bot">Hello! I am your AI Assistant. How can I assist with your Beverly Hills aesthetic smile preview today?</div>
@@ -1900,8 +1902,27 @@
       if (!isActive) item.classList.add('active');
     }
 
-    function openAiChat() { triggerHaptic(20); aiChatModal.classList.add('active'); }
-    function closeAiChat() { aiChatModal.classList.remove('active'); }
+    /* Toggle Chat Modal via Floating Trigger */
+    function toggleAiChat() {
+      triggerHaptic(20);
+      aiChatModal.classList.toggle('active');
+      if (aiChatModal.classList.contains('active')) {
+        setTimeout(() => {
+          const input = document.getElementById('aiUserInput');
+          if (input) input.focus();
+        }, 150);
+      }
+    }
+
+    function openAiChat() { 
+      triggerHaptic(20); 
+      aiChatModal.classList.add('active'); 
+    }
+
+    function closeAiChat() { 
+      triggerHaptic(15);
+      aiChatModal.classList.remove('active'); 
+    }
 
     function handleChatKeyPress(event) {
       if (event.key === 'Enter') {
