@@ -880,29 +880,27 @@
     /* Floating Minimalist AI Tab */
     .floating-ai {
       position: fixed;
-      top: 50%;
-      right: -6px;
-      transform: translateY(-50%);
+      bottom: 30px;
+      right: 20px;
       z-index: 999;
-      background: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.92);
       border: 1.5px solid rgba(0, 113, 227, 0.3);
-      border-right: none;
-      padding: 8px 10px;
-      border-radius: 24px 0 0 24px;
+      padding: 10px 14px;
+      border-radius: 999px;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      box-shadow: -4px 6px 18px rgba(0, 0, 0, 0.15);
+      gap: 6px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), right 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
     }
 
     .floating-ai:hover,
     .floating-ai:active {
-      right: 0px;
-      transform: translateY(-50%) translateX(-4px);
+      transform: scale(1.05);
+      box-shadow: 0 12px 28px rgba(0, 113, 227, 0.25);
     }
 
     .floating-ai .ai-avatar {
@@ -918,32 +916,45 @@
       box-shadow: 0 0 6px #34c759;
     }
 
+    /* FIXED: Non-blocking, Bottom-Right Docked AI Assistant Widget */
     .ai-chat-modal {
       position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      z-index: 1000;
+      bottom: 24px;
+      right: 24px;
+      left: auto;
+      top: auto;
+      inset: auto;
+      width: 380px;
+      max-width: calc(100vw - 32px);
+      height: 540px;
+      max-height: calc(100vh - 100px);
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      z-index: 10000;
       display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      flex-direction: column;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s ease;
+      transform: translateY(20px) scale(0.96);
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .ai-chat-modal.active { opacity: 1; pointer-events: auto; }
+    .ai-chat-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
 
     .ai-chat-window {
       background: #ffffff;
       width: 100%;
-      max-width: 500px;
-      height: 520px;
-      border-radius: 20px 20px 0 0;
+      height: 100%;
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 16px 48px -8px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--apple-border);
       overflow: hidden;
     }
 
@@ -1149,6 +1160,15 @@
       .stats-row { grid-template-columns: 1fr 1fr; gap: 10px; }
       .stat-pill { padding: 14px 10px; }
       .stat-num { font-size: 1.4rem; }
+
+      /* Mobile Chat Window Adjustment */
+      .ai-chat-modal {
+        bottom: 12px;
+        right: 12px;
+        width: calc(100vw - 24px);
+        max-width: 100%;
+        height: 80vh;
+      }
     }
   </style>
 </head>
@@ -1541,7 +1561,7 @@
       <span class="status-dot-tiny"></span>
     </div>
 
-    <!-- AI Chat Modal with Interactive VIP Handover -->
+    <!-- AI Chat Window (Bottom-Right Docked, No Screen Blur) -->
     <div class="ai-chat-modal" id="aiChatModal">
       <div class="ai-chat-window">
         <div class="ai-chat-header">
