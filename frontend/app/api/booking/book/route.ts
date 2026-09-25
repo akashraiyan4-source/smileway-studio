@@ -4,7 +4,7 @@ declare global {
     var globalAppointments: any[] | undefined;
 }
 
-export const appointmentsDatabase = global.globalAppointments || [];
+const appointmentsDatabase = global.globalAppointments || [];
 if (!global.globalAppointments) {
     global.globalAppointments = appointmentsDatabase;
 }
