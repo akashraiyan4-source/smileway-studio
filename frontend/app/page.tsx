@@ -143,7 +143,7 @@ export default function Page() {
       }
 
       if (funnelStep === 0) {
-        if (currentTranslateX >= maxMove * 0.4) {
+        if (currentTranslateX >= maxMove * 0.35) {
           executeForwardTransition(maxMove);
         } else {
           knob.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -151,7 +151,7 @@ export default function Page() {
         }
       } else if (funnelStep === 2) {
         let pulledBackDistance = maxMove - currentTranslateX;
-        if (pulledBackDistance >= maxMove * 0.4) {
+        if (pulledBackDistance >= maxMove * 0.35) {
           executeReverseCompletion();
         } else {
           knob.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -439,7 +439,6 @@ export default function Page() {
         .press-trust-bar { padding: 12px 16px; background: rgba(255, 255, 255, 0.7); border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; position: relative; cursor: grab; touch-action: pan-x; }
         .press-trust-inner { display: inline-flex; align-items: center; gap: 32px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; will-change: transform; }
         
-        /* Live Celebrity Endorsement Badge Ticker */
         .celebrity-ticker-bar { padding: 10px 16px; background: #ffffff; border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; display: flex; align-items: center; }
         .celebrity-ticker-inner { display: inline-flex; align-items: center; gap: 28px; font-size: 0.72rem; font-weight: 700; color: #0071e3; animation: celebrityScroll 20s linear infinite; }
         @keyframes celebrityScroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
@@ -461,7 +460,6 @@ export default function Page() {
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
         
-        /* Clean Slider without background text overlay or boxes */
         .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 48px; background: transparent !important; border: none !important; backdrop-filter: none !important; display: flex; align-items: center; padding: 0; z-index: 20; touch-action: none; }
         .swipe-arrow-handle { height: 40px; width: 50px; background: rgba(255, 255, 255, 0.95); border: 1px solid #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; animation: pulseArrow 2s infinite ease-in-out; }
         @keyframes pulseArrow { 0%, 100% { transform: translate3d(0, -50%, 0); } 50% { transform: translate3d(12px, -50%, 0); } }
@@ -485,7 +483,6 @@ export default function Page() {
         .sec-tag { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 8px; }
         .sec-heading { font-size: 1.85rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 22px; }
         
-        /* Doctor Card Fixed Spacing & Proportional Framing */
         .doctor-card { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); will-change: transform; }
         .doc-img { width: 100%; height: 480px; object-fit: cover; object-position: center 18%; display: block; padding-top: 10px; }
         .doc-tag { position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); padding: 7px 16px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--apple-blue); }
@@ -533,13 +530,13 @@ export default function Page() {
         .map-icon-btn { width: 32px; height: 32px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 0.9rem; transition: background 0.2s; will-change: transform; }
         .map-icon-btn:hover { background: #e2ecfc; }
 
-        /* AI Assistant Button Always Fixed Bottom-Right Across All Viewports */
+        /* AI Assistant Button Fixed Bottom-Right */
         .floating-ai { position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 52px; height: 52px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); backdrop-filter: blur(14px); cursor: pointer; transform-origin: bottom right; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
         .ai-avatar { font-size: 1.5rem; line-height: 1; }
         .status-dot-tiny { width: 9px; height: 9px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; }
         
-        /* Apple-style popup originating precisely from the floating robot face trigger */
-        .ai-chat-modal { position: fixed !important; bottom: 86px !important; right: 24px !important; width: 380px !important; max-width: calc(100vw - 32px) !important; height: 520px !important; max-height: calc(100vh - 110px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.08) translateY(50px); transform-origin: bottom right; transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
+        /* Apple-style genie/lamp animation originating precisely from the floating robot face */
+        .ai-chat-modal { position: fixed !important; bottom: 86px !important; right: 24px !important; width: 380px !important; max-width: calc(100vw - 32px) !important; height: 520px !important; max-height: calc(100vh - 110px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 20px; display: flex; flex-direction: column; box-shadow: 0 16px 44px -8px rgba(0, 0, 0, 0.24); border: 1px solid var(--apple-border); overflow: hidden; will-change: transform; }
         .ai-chat-header { padding: 16px 20px; background: #ffffff; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; }
@@ -590,7 +587,6 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Live Celebrity & Patient Endorsement Badge Ticker */}
       <div className="celebrity-ticker-bar">
         <div className="celebrity-ticker-inner">
           <span>🌟 Featured in Hollywood Reporter</span> • 
@@ -790,6 +786,7 @@ export default function Page() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
+      {/* AI Assistant Always Fixed Bottom-Right with Apple Genie Origin Animation */}
       <div className="floating-ai" onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
