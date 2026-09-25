@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিশ্চিত করার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalFollowUpDatabase: any[] | undefined;
-}
-
-export const followUpDatabase = global.globalFollowUpDatabase || [];
-if (!global.globalFollowUpDatabase) {
-    global.globalFollowUpDatabase = followUpDatabase;
-}
+import { followUpDatabase } from '../../../db';
 
 interface FollowUpRequestBody {
     fullName?: string;
@@ -31,7 +22,7 @@ export async function POST(request: Request) {
 
         const { fullName, phone, email, sequenceStep } = body;
 
-        // ইনপুট ভ্যালিডেশন
+        // Input validation
         if (!fullName || typeof fullName !== 'string' || fullName.trim() === '' || (!phone && !email)) {
             return NextResponse.json(
                 { success: false, error: 'Full name and at least one contact method (phone or email) are required.' },
