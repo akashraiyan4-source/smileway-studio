@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import { appointmentsDatabase } from '../db';
-
+import { appointmentsDatabase } from '../../db';
 export async function POST(request: Request) {
     try {
         const body = await request.json();
