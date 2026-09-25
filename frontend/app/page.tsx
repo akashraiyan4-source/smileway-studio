@@ -664,17 +664,17 @@ export default function Page() {
           <div className="interactive-cases-box" id="casesBox">
             <div className="interactive-cases-inner" ref={casesInnerRef}>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/images (3).jfif" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #481: Micro-Thin Veneers</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
               </div>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/images (2).jfif" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #512: Full Arch Symmetry</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
               </div>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/images (1).jfif" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #604: Precision Bio-Implant</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
               </div>
