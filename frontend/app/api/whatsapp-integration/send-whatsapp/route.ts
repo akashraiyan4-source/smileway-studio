@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিরাপদ রাখার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalWhatsappLogs: any[] | undefined;
-}
-
-export const whatsappLogs = global.globalWhatsappLogs || [];
-if (!global.globalWhatsappLogs) {
-    global.globalWhatsappLogs = whatsappLogs;
-}
+import { whatsappLogs } from '@/app/api/db';
 
 interface WhatsappRequestBody {
     recipientPhone?: string;

@@ -122,3 +122,6 @@ if (!global.globalVoiceAgentBridgeDatabase) { global.globalVoiceAgentBridgeDatab
 
 export const whatsappDatabase = global.globalWhatsappDatabase || [];
 if (!global.globalWhatsappDatabase) { global.globalWhatsappDatabase = whatsappDatabase; }
+
+// হোয়াটসঅ্যাপ ইন্টিগ্রেশন রাউটের জন্য এক্সট্রা অ্যালাইয়াস
+export const whatsappLogs = whatsappDatabase;
