@@ -1,74 +1,106 @@
 declare global {
     var globalAppointments: any[] | undefined;
+    var globalAiDatabase: any[] | undefined;
+    var globalAnalyticsDatabase: any[] | undefined;
     var globalBroadcastDatabase: any[] | undefined;
-    var globalEstimateDatabase: any[] | undefined;
+    var globalCostEstimatorDatabase: any[] | undefined;
     var globalFollowUpDatabase: any[] | undefined;
+    var globalGeminiConciergeDatabase: any[] | undefined;
     var globalInsuranceDatabase: any[] | undefined;
-    var globalScoreDatabase: any[] | undefined;
-    var globalScoredLeadsDatabase: any[] | undefined;
+    var globalLeadScoringDatabase: any[] | undefined;
     var globalLeadsDatabase: any[] | undefined;
     var globalLoyaltyDatabase: any[] | undefined;
+    var globalMissedCallDatabase: any[] | undefined;
+    var globalNoShowDatabase: any[] | undefined;
+    var globalOnboardingDatabase: any[] | undefined;
+    var globalPostTreatmentDatabase: any[] | undefined;
+    var globalPrepReminderDatabase: any[] | undefined;
+    var globalRecallEngineDatabase: any[] | undefined;
+    var globalReferralDatabase: any[] | undefined;
     var globalReviewsDatabase: any[] | undefined;
     var globalReviewRequestsDatabase: any[] | undefined;
-    var globalNoShowDatabase: any[] | undefined;
+    var globalSmartFaqDatabase: any[] | undefined;
+    var globalSmileSimulatorDatabase: any[] | undefined;
+    var globalUtilsDatabase: any[] | undefined;
+    var globalVectorKnowledgeDatabase: any[] | undefined;
+    var globalVoiceAgentBridgeDatabase: any[] | undefined;
+    var globalWhatsappDatabase: any[] | undefined;
 }
 
 export const appointmentsDatabase = global.globalAppointments || [];
-if (!global.globalAppointments) {
-    global.globalAppointments = appointmentsDatabase;
-}
+if (!global.globalAppointments) { global.globalAppointments = appointmentsDatabase; }
+
+export const aiDatabase = global.globalAiDatabase || [];
+if (!global.globalAiDatabase) { global.globalAiDatabase = aiDatabase; }
+
+export const analyticsDatabase = global.globalAnalyticsDatabase || [];
+if (!global.globalAnalyticsDatabase) { global.globalAnalyticsDatabase = analyticsDatabase; }
 
 export const broadcastDatabase = global.globalBroadcastDatabase || [];
-if (!global.globalBroadcastDatabase) {
-    global.globalBroadcastDatabase = broadcastDatabase;
-}
+if (!global.globalBroadcastDatabase) { global.globalBroadcastDatabase = broadcastDatabase; }
 
-export const estimateDatabase = global.globalEstimateDatabase || [];
-if (!global.globalEstimateDatabase) {
-    global.globalEstimateDatabase = estimateDatabase;
-}
+export const costEstimatorDatabase = global.globalCostEstimatorDatabase || [];
+if (!global.globalCostEstimatorDatabase) { global.globalCostEstimatorDatabase = costEstimatorDatabase; }
 
 export const followUpDatabase = global.globalFollowUpDatabase || [];
-if (!global.globalFollowUpDatabase) {
-    global.globalFollowUpDatabase = followUpDatabase;
-}
+if (!global.globalFollowUpDatabase) { global.globalFollowUpDatabase = followUpDatabase; }
+
+export const geminiConciergeDatabase = global.globalGeminiConciergeDatabase || [];
+if (!global.globalGeminiConciergeDatabase) { global.globalGeminiConciergeDatabase = geminiConciergeDatabase; }
 
 export const insuranceDatabase = global.globalInsuranceDatabase || [];
-if (!global.globalInsuranceDatabase) {
-    global.globalInsuranceDatabase = insuranceDatabase;
-}
+if (!global.globalInsuranceDatabase) { global.globalInsuranceDatabase = insuranceDatabase; }
 
-export const scoreDatabase = global.globalScoreDatabase || [];
-if (!global.globalScoreDatabase) {
-    global.globalScoreDatabase = scoreDatabase;
-}
-
-export const scoredLeadsDatabase = global.globalScoredLeadsDatabase || [];
-if (!global.globalScoredLeadsDatabase) {
-    global.globalScoredLeadsDatabase = scoredLeadsDatabase;
-}
+export const leadScoringDatabase = global.globalLeadScoringDatabase || [];
+if (!global.globalLeadScoringDatabase) { global.globalLeadScoringDatabase = leadScoringDatabase; }
 
 export const leadsDatabase = global.globalLeadsDatabase || [];
-if (!global.globalLeadsDatabase) {
-    global.globalLeadsDatabase = leadsDatabase;
-}
+if (!global.globalLeadsDatabase) { global.globalLeadsDatabase = leadsDatabase; }
 
 export const loyaltyDatabase = global.globalLoyaltyDatabase || [];
-if (!global.globalLoyaltyDatabase) {
-    global.globalLoyaltyDatabase = loyaltyDatabase;
-}
+if (!global.globalLoyaltyDatabase) { global.globalLoyaltyDatabase = loyaltyDatabase; }
 
-export const reviewsDatabase = global.globalReviewsDatabase || [];
-if (!global.globalReviewsDatabase) {
-    global.globalReviewsDatabase = reviewsDatabase;
-}
-
-export const reviewRequestsDatabase = global.globalReviewRequestsDatabase || [];
-if (!global.globalReviewRequestsDatabase) {
-    global.globalReviewRequestsDatabase = reviewRequestsDatabase;
-}
+export const missedCallDatabase = global.globalMissedCallDatabase || [];
+if (!global.globalMissedCallDatabase) { global.globalMissedCallDatabase = missedCallDatabase; }
 
 export const noShowDatabase = global.globalNoShowDatabase || [];
-if (!global.globalNoShowDatabase) {
-    global.globalNoShowDatabase = noShowDatabase;
-}
+if (!global.globalNoShowDatabase) { global.globalNoShowDatabase = noShowDatabase; }
+
+export const onboardingDatabase = global.globalOnboardingDatabase || [];
+if (!global.globalOnboardingDatabase) { global.globalOnboardingDatabase = onboardingDatabase; }
+
+export const postTreatmentDatabase = global.globalPostTreatmentDatabase || [];
+if (!global.globalPostTreatmentDatabase) { global.globalPostTreatmentDatabase = postTreatmentDatabase; }
+
+export const prepReminderDatabase = global.globalPrepReminderDatabase || [];
+if (!global.globalPrepReminderDatabase) { global.globalPrepReminderDatabase = prepReminderDatabase; }
+
+export const recallEngineDatabase = global.globalRecallEngineDatabase || [];
+if (!global.globalRecallEngineDatabase) { global.globalRecallEngineDatabase = recallEngineDatabase; }
+
+export const referralDatabase = global.globalReferralDatabase || [];
+if (!global.globalReferralDatabase) { global.globalReferralDatabase = referralDatabase; }
+
+export const reviewsDatabase = global.globalReviewsDatabase || [];
+if (!global.globalReviewsDatabase) { global.globalReviewsDatabase = reviewsDatabase; }
+
+export const reviewRequestsDatabase = global.globalReviewRequestsDatabase || [];
+if (!global.globalReviewRequestsDatabase) { global.globalReviewRequestsDatabase = reviewRequestsDatabase; }
+
+export const smartFaqDatabase = global.globalSmartFaqDatabase || [];
+if (!global.globalSmartFaqDatabase) { global.globalSmartFaqDatabase = smartFaqDatabase; }
+
+export const smileSimulatorDatabase = global.globalSmileSimulatorDatabase || [];
+if (!global.globalSmileSimulatorDatabase) { global.globalSmileSimulatorDatabase = smileSimulatorDatabase; }
+
+export const utilsDatabase = global.globalUtilsDatabase || [];
+if (!global.globalUtilsDatabase) { global.globalUtilsDatabase = utilsDatabase; }
+
+export const vectorKnowledgeDatabase = global.globalVectorKnowledgeDatabase || [];
+if (!global.globalVectorKnowledgeDatabase) { global.globalVectorKnowledgeDatabase = vectorKnowledgeDatabase; }
+
+export const voiceAgentBridgeDatabase = global.globalVoiceAgentBridgeDatabase || [];
+if (!global.globalVoiceAgentBridgeDatabase) { global.globalVoiceAgentBridgeDatabase = voiceAgentBridgeDatabase; }
+
+export const whatsappDatabase = global.globalWhatsappDatabase || [];
+if (!global.globalWhatsappDatabase) { global.globalWhatsappDatabase = whatsappDatabase; }
