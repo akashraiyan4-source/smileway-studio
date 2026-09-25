@@ -1,25 +1,9 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিরাপদ রাখার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalOnboardingDatabase: any[] | undefined;
-}
-
-export const onboardingDatabase = global.globalOnboardingDatabase || [];
-if (!global.globalOnboardingDatabase) {
-    global.globalOnboardingDatabase = onboardingDatabase;
-}
-
-interface OnboardingRequestBody {
-    fullName?: string;
-    phone?: string;
-    medicalHistory?: string;
-    agreedToTerms?: boolean;
-}
+import { onboardingDatabase } from '@/app/api/db';
 
 export async function POST(request: Request) {
     try {
-        let body: OnboardingRequestBody;
+        let body;
         try {
             body = await request.json();
         } catch {
@@ -29,54 +13,32 @@ export async function POST(request: Request) {
             );
         }
 
-        const { fullName, phone, medicalHistory, agreedToTerms } = body;
-
-        // ইনপুট ভ্যালিডেশন
-        if (!fullName || typeof fullName !== 'string' || fullName.trim() === '' ||
-            !phone || typeof phone !== 'string' || phone.trim() === '') {
-            return NextResponse.json(
-                { success: false, error: 'Full name and phone are required fields.' },
-                { status: 400 }
-            );
-        }
-
-        if (!agreedToTerms) {
-            return NextResponse.json(
-                { success: false, error: 'Digital consent agreement is required.' },
-                { status: 400 }
-            );
-        }
-
-        const onboardingRecord = {
+        const record = {
             id: `onboard_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-            fullName: fullName.trim(),
-            phone: phone.trim(),
-            medicalHistory: medicalHistory ? medicalHistory.trim() : 'None reported',
-            agreedToTerms: true,
-            status: 'Onboarding Completed & Verified',
+            ...body,
             submittedAt: new Date().toISOString()
         };
 
-        onboardingDatabase.push(onboardingRecord);
+        onboardingDatabase.push(record);
 
-        console.log(`[Onboarding Engine] Digital consent & history received for ${onboardingRecord.fullName} (${onboardingRecord.phone})`);
+        console.log(`[Onboarding API] New submission recorded.`);
 
         return NextResponse.json(
             {
                 success: true,
-                message: 'Digital onboarding and consent form successfully submitted!',
-                data: onboardingRecord
+                message: 'Onboarding data successfully submitted!',
+                data: record
             },
             { status: 200 }
         );
 
     } catch (error) {
-        console.error('[Onboarding Engine Critical Error]:', error);
+        console.error('[Onboarding API Critical Error]:', error);
         
         return NextResponse.json(
             { 
                 success: false, 
-                error: 'Failed to process patient onboarding. Please try again later.' 
+                error: 'Failed to process onboarding. Please try again later.' 
             },
             { status: 500 }
         );
