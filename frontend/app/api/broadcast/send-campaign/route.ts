@@ -5,7 +5,7 @@ declare global {
     var globalBroadcastDatabase: any[] | undefined;
 }
 
-export const broadcastDatabase = global.globalBroadcastDatabase || [];
+const broadcastDatabase = global.globalBroadcastDatabase || [];
 if (!global.globalBroadcastDatabase) {
     global.globalBroadcastDatabase = broadcastDatabase;
 }
