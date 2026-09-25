@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিশ্চিত করার জন্য টাইপ সেফটিসহ (অন্যান্য ফাইল থেকে ইমপোর্ট করার সময় ডেটা সুরক্ষিত থাকবে)
-declare global {
-    var globalLeadsDatabase: any[] | undefined;
-}
-
-export const leadsDatabase = global.globalLeadsDatabase || [];
-if (!global.globalLeadsDatabase) {
-    global.globalLeadsDatabase = leadsDatabase;
-}
+import { leadsDatabase } from '../../db';
 
 interface LeadRequestBody {
     fullName?: string;
