@@ -102,6 +102,9 @@ if (!global.globalReviewRequestsDatabase) { global.globalReviewRequestsDatabase 
 export const smartFaqDatabase = global.globalSmartFaqDatabase || [];
 if (!global.globalSmartFaqDatabase) { global.globalSmartFaqDatabase = smartFaqDatabase; }
 
+// স্মার্ট এফএকিউ রাউটের জন্য এক্সট্রা অ্যালাইয়াস
+export const faqDatabase = smartFaqDatabase;
+
 export const smileSimulatorDatabase = global.globalSmileSimulatorDatabase || [];
 if (!global.globalSmileSimulatorDatabase) { global.globalSmileSimulatorDatabase = smileSimulatorDatabase; }
 

@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিরাপদ রাখার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalFaqDatabase: any[] | undefined;
-}
-
-export const faqDatabase = global.globalFaqDatabase || [];
-if (!global.globalFaqDatabase) {
-    global.globalFaqDatabase = faqDatabase;
-}
+import { faqDatabase } from '@/app/api/db';
 
 interface FaqRequestBody {
     question?: string;
