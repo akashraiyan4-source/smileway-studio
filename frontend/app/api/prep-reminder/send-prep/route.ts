@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিরাপদ রাখার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalPrepReminderDatabase: any[] | undefined;
-}
-
-export const prepReminderDatabase = global.globalPrepReminderDatabase || [];
-if (!global.globalPrepReminderDatabase) {
-    global.globalPrepReminderDatabase = prepReminderDatabase;
-}
+import { prepReminderDatabase } from '@/app/api/db';
 
 interface PrepReminderRequestBody {
     fullName?: string;
