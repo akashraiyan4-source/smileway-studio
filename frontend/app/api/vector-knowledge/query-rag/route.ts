@@ -1,19 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// Global memory database to maintain vector knowledge persistence
-declare global {
-    var globalVectorKnowledgeBase: any[] | undefined;
-}
-
-export const vectorKnowledgeBase = global.globalVectorKnowledgeBase || [
-    { topic: 'dental implants', protocol: 'Involves titanium fixture placement, 3-6 months osseointegration period, followed by custom crown mounting.' },
-    { topic: 'root canal', protocol: 'Painless procedure under local anesthesia removing infected pulp, disinfecting, and sealing with biocompatible gutta-percha.' },
-    { topic: 'teeth whitening', protocol: 'Advanced laser-activated peroxide gel session taking approximately 45 minutes for up to 5 shades improvement.' }
-];
-
-if (!global.globalVectorKnowledgeBase) {
-    global.globalVectorKnowledgeBase = vectorKnowledgeBase;
-}
+import { vectorKnowledgeDatabase } from '@/app/api/db';
 
 interface RagRequestBody {
     clinicalQuery?: string;
@@ -44,8 +30,19 @@ export async function POST(request: Request) {
         const queryLower = clinicalQuery.toLowerCase().trim();
         let matchedProtocol = 'Standard VIP dental care protocol applies. Consult our lead surgeon for specialized cases.';
 
-        for (const item of vectorKnowledgeBase) {
-            if (queryLower.includes(item.topic)) {
+        // যদি সেন্ট্রাল ডেটাবেজে আইটেম না থাকে, তবে ফলব্যাক ডিফল্ট প্রোটোকল ব্যবহার করা হবে
+        const defaultKnowledge = [
+            { topic: 'dental implants', protocol: 'Involves titanium fixture placement, 3-6 months osseointegration period, followed by custom crown mounting.' },
+            { topic: 'root canal', protocol: 'Painless procedure under local anesthesia removing infected pulp, disinfecting, and sealing with biocompatible gutta-percha.' },
+            { topic: 'teeth whitening', protocol: 'Advanced laser-activated peroxide gel session taking approximately 45 minutes for up to 5 shades improvement.' }
+        ];
+
+        const activeKnowledge = (vectorKnowledgeDatabase && vectorKnowledgeDatabase.length > 0) 
+            ? vectorKnowledgeDatabase 
+            : defaultKnowledge;
+
+        for (const item of activeKnowledge) {
+            if (item.topic && queryLower.includes(item.topic.toLowerCase())) {
                 matchedProtocol = item.protocol;
                 break;
             }
@@ -58,6 +55,11 @@ export async function POST(request: Request) {
             aiEnhancedAnswer: `Based on SmileWay Clinic's certified clinical guidelines: ${matchedProtocol}`,
             timestamp: new Date().toISOString()
         };
+
+        // সেন্ট্রাল ডেটাবেজে রিকোয়েস্টটি লগ বা পুশ করে রাখা
+        if (vectorKnowledgeDatabase) {
+            vectorKnowledgeDatabase.push(ragResponse);
+        }
 
         console.log(`[Advanced RAG] Retrieved vector knowledge for query: "${clinicalQuery}"`);
 

@@ -114,6 +114,9 @@ if (!global.globalUtilsDatabase) { global.globalUtilsDatabase = utilsDatabase; }
 export const vectorKnowledgeDatabase = global.globalVectorKnowledgeDatabase || [];
 if (!global.globalVectorKnowledgeDatabase) { global.globalVectorKnowledgeDatabase = vectorKnowledgeDatabase; }
 
+// ভেক্টর নলেজ রাউটের জন্য এক্সট্রা অ্যালাইয়াস
+export const vectorDatabase = vectorKnowledgeDatabase;
+
 export const voiceAgentBridgeDatabase = global.globalVoiceAgentBridgeDatabase || [];
 if (!global.globalVoiceAgentBridgeDatabase) { global.globalVoiceAgentBridgeDatabase = voiceAgentBridgeDatabase; }
 
