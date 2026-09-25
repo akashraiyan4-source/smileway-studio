@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { followUpDatabase } from '../../../db';
+import { followUpDatabase } from '../../db';
 
 interface FollowUpRequestBody {
     fullName?: string;
