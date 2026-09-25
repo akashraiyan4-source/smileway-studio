@@ -24,6 +24,7 @@ export default function Page() {
   const reviewsInnerRef = useRef<HTMLDivElement>(null);
   const casesInnerRef = useRef<HTMLDivElement>(null);
   const chatBodyRef = useRef<HTMLDivElement>(null);
+  const heroBoxRef = useRef<HTMLDivElement>(null);
 
   const [drawerName, setDrawerName] = useState('');
   const [drawerPhone, setDrawerPhone] = useState('');
@@ -53,6 +54,22 @@ export default function Page() {
     initInertialMarquee('reviewsBox', reviewsInnerRef, 0.6);
     initInertialMarquee('casesBox', casesInnerRef, 0.5);
 
+    // Auto pause/mute video when scrolled out of viewport
+    const heroEl = heroBoxRef.current;
+    if (heroEl) {
+      const vidObserver = new IntersectionObserver(([entry]) => {
+        const activeVid = funnelStep === 2 ? vidEndRef.current : vidStartRef.current;
+        if (activeVid) {
+          if (entry.isIntersecting) {
+            activeVid.play().catch(() => {});
+          } else {
+            activeVid.pause();
+          }
+        }
+      }, { threshold: 0.1 });
+      vidObserver.observe(heroEl);
+    }
+
     const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.15 };
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -66,7 +83,7 @@ export default function Page() {
     document.querySelectorAll('.animate-on-scroll').forEach(section => {
       observer.observe(section);
     });
-  }, []);
+  }, [funnelStep]);
 
   const toggleSound = () => {
     triggerHaptic(20);
@@ -207,14 +224,28 @@ export default function Page() {
 
   const closeHeroDrawer = () => {
     setIsDrawerOpen(false);
-    setFunnelStep(2); // Happy loop continues running in background
+    setFunnelStep(0); // Reset to sad start loop when drawer is explicitly closed
+    if (vidEndRef.current) {
+      vidEndRef.current.pause();
+      vidEndRef.current.style.opacity = '0';
+    }
+    if (vidStartRef.current) {
+      vidStartRef.current.style.opacity = '1';
+      vidStartRef.current.currentTime = 0;
+      vidStartRef.current.muted = isMuted;
+      vidStartRef.current.play().catch(() => {});
+    }
+    if (trackRef.current) {
+      trackRef.current.style.opacity = '1';
+      trackRef.current.style.pointerEvents = 'auto';
+      trackRef.current.classList.remove('reverse');
+    }
     const knob = knobRef.current;
     if (knob) {
-      knob.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
-      const track = trackRef.current;
-      const maxMove = track ? track.clientWidth - knob.clientWidth - 8 : 280;
-      knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
+      knob.style.transition = 'none';
+      knob.style.transform = 'translate3d(0, -50%, 0)';
     }
+    if (knobSvgRef.current) knobSvgRef.current.style.transform = 'rotate(0deg)';
   };
 
   const submitDrawerForm = async () => {
@@ -425,12 +456,13 @@ export default function Page() {
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
         
-        /* Clean Water Arrow Slider (No Blur Box) */
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: transparent !important; border: 2px solid rgba(255, 255, 255, 0.35) !important; backdrop-filter: blur(8px); border-radius: 999px; display: flex; align-items: center; padding: 0 4px; z-index: 20; touch-action: none; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-        .swipe-interactive-zone::after { content: "Restore Your Smile ➔"; position: absolute; width: 100%; text-align: center; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; color: rgba(255, 255, 255, 0.95); pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
+        /* Pure Water Arrow Slider without any bottom blur container box */
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 48px; background: transparent !important; border: 1.5px solid rgba(255, 255, 255, 0.4) !important; backdrop-filter: none !important; border-radius: 999px; display: flex; align-items: center; padding: 0 4px; z-index: 20; touch-action: none; overflow: hidden; }
+        .swipe-interactive-zone::after { content: "Restore Your Smile ➔"; position: absolute; width: 100%; text-align: center; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.95); pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
         .swipe-interactive-zone.reverse::after { content: "⬅ PULL TO RESET PREVIEW"; }
-        .swipe-arrow-handle { height: 46px; width: 56px; background: rgba(255, 255, 255, 0.95); border: 1px solid #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; }
-        .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+        .swipe-arrow-handle { height: 40px; width: 50px; background: rgba(255, 255, 255, 0.95); border: 1px solid #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; animation: pulseArrow 2s infinite ease-in-out; }
+        @keyframes pulseArrow { 0%, 100% { transform: translate3d(0, -50%, 0); } 50% { transform: translate3d(6px, -50%, 0); } }
+        .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); pointer-events: none; }
 
         .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 24px 20px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
@@ -449,7 +481,7 @@ export default function Page() {
         .sec-tag { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 8px; }
         .sec-heading { font-size: 1.85rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 22px; }
         .doctor-card { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); will-change: transform; }
-        .doc-img { width: 100%; height: 420px; object-fit: cover; object-position: center top; display: block; }
+        .doc-img { width: 100%; height: 480px; object-fit: cover; object-position: center 25%; display: block; }
         .doc-tag { position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); padding: 7px 16px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--apple-blue); }
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
         .stat-pill { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; padding: 18px 14px; text-align: center; box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03); transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
@@ -520,10 +552,10 @@ export default function Page() {
           .brand-title { font-size: 1.15rem; text-align: center; }
           .phone-badge { display: none; }
           .rating-strip { font-size: 0.75rem; padding: 10px 14px; text-align: center; }
-          .hero-split-grid { grid-template-columns: 1fr; padding: 0 0 34px 0 !important; gap: 22px; text-align: center; }
-          .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 75vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 0 10px 10px !important; }
-          .hero-text-col { padding: 0 20px !important; align-items: center; text-align: center; gap: 14px; }
-          .hero-main-title { font-size: 2.2rem !important; line-height: 1.12 !important; }
+          .hero-split-grid { grid-template-columns: 1fr; padding: 0 0 20px 0 !important; gap: 16px; text-align: center; }
+          .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 82vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 !important; }
+          .hero-text-col { padding: 0 20px !important; align-items: center; text-align: center; gap: 12px; }
+          .hero-main-title { font-size: 2rem !important; line-height: 1.1 !important; }
           .ai-chat-modal { bottom: 68px !important; right: 12px !important; left: 12px !important; width: calc(100vw - 24px) !important; height: min(520px, 75vh) !important; }
         }
       `}</style>
@@ -566,7 +598,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="hero-box" id="heroSec" ref={trackRef}>
+        <div className="hero-box" id="heroSec" ref={heroBoxRef}>
           <video ref={vidStartRef} className="hero-vid" src="/start.mp4" poster="/start-poster.jpg" playsInline preload="auto" loop muted autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
           <video ref={vidTransRef} className="hero-vid" src="/trans.mp4" playsInline preload="none" muted style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
           <video ref={vidEndRef} className="hero-vid" src="/end.mp4" playsInline preload="none" loop muted style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
@@ -575,7 +607,7 @@ export default function Page() {
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
           </button>
 
-          <div className="swipe-interactive-zone" id="swipeTrack">
+          <div className="swipe-interactive-zone" id="swipeTrack" ref={trackRef}>
             <div className="swipe-arrow-handle" id="swipeKnob" ref={knobRef} onPointerDown={handlePointerDownKnob}>
               <svg ref={knobSvgRef} viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
             </div>
@@ -584,7 +616,7 @@ export default function Page() {
           <div className={`half-form-drawer ${isDrawerOpen ? 'open' : ''}`} id="heroDrawer">
             <button className="drawer-dismiss" onClick={closeHeroDrawer}>×</button>
             <div className="drawer-header">
-              <h3 className="drawer-title">Claim Your Radiance</h3>
+              <h3 className="drawer-title">Claim Your Confidence</h3>
               <p className="drawer-sub">Direct senior cosmetic triage confirmed via backend.</p>
             </div>
             <input type="text" value={drawerName} onChange={e => setDrawerName(e.target.value)} className="drawer-input" placeholder="Your Full Name" />
