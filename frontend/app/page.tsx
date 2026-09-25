@@ -207,28 +207,14 @@ export default function Page() {
 
   const closeHeroDrawer = () => {
     setIsDrawerOpen(false);
-    setFunnelStep(0);
-    if (vidEndRef.current) {
-      vidEndRef.current.pause();
-      vidEndRef.current.style.opacity = '0';
-    }
-    if (vidStartRef.current) {
-      vidStartRef.current.style.opacity = '1';
-      vidStartRef.current.currentTime = 0;
-      vidStartRef.current.muted = isMuted;
-      vidStartRef.current.play().catch(() => {});
-    }
-    if (trackRef.current) {
-      trackRef.current.style.opacity = '1';
-      trackRef.current.style.pointerEvents = 'auto';
-      trackRef.current.classList.remove('reverse');
-    }
+    setFunnelStep(2); // Happy loop continues running in background
     const knob = knobRef.current;
     if (knob) {
-      knob.style.transition = 'none';
-      knob.style.transform = 'translate3d(0, -50%, 0)';
+      knob.style.transition = 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)';
+      const track = trackRef.current;
+      const maxMove = track ? track.clientWidth - knob.clientWidth - 8 : 280;
+      knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
     }
-    if (knobSvgRef.current) knobSvgRef.current.style.transform = 'rotate(0deg)';
   };
 
   const submitDrawerForm = async () => {
@@ -438,9 +424,14 @@ export default function Page() {
         .glass-sound-btn { position: absolute; top: 16px; right: 16px; z-index: 30; width: 38px; height: 38px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); transition: transform 0.2s; will-change: transform; }
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 48px; background: rgba(0, 0, 0, 0.25) !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; backdrop-filter: blur(12px); border-radius: 6px; display: flex; align-items: center; padding: 0 4px; z-index: 20; touch-action: none; transition: opacity 0.3s ease; will-change: transform; }
-        .swipe-arrow-handle { height: 40px; width: 52px; background: rgba(255, 255, 255, 0.92); border: 1px solid #ffffff; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); will-change: transform; }
+        
+        /* Clean Water Arrow Slider (No Blur Box) */
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: transparent !important; border: 2px solid rgba(255, 255, 255, 0.35) !important; backdrop-filter: blur(8px); border-radius: 999px; display: flex; align-items: center; padding: 0 4px; z-index: 20; touch-action: none; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        .swipe-interactive-zone::after { content: "Restore Your Smile ➔"; position: absolute; width: 100%; text-align: center; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; color: rgba(255, 255, 255, 0.95); pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
+        .swipe-interactive-zone.reverse::after { content: "⬅ PULL TO RESET PREVIEW"; }
+        .swipe-arrow-handle { height: 46px; width: 56px; background: rgba(255, 255, 255, 0.95); border: 1px solid #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; }
         .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; }
+
         .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 24px 20px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
         .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
@@ -458,7 +449,7 @@ export default function Page() {
         .sec-tag { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 8px; }
         .sec-heading { font-size: 1.85rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 22px; }
         .doctor-card { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); will-change: transform; }
-        .doc-img { width: 100%; height: 380px; object-fit: cover; object-position: top center; display: block; }
+        .doc-img { width: 100%; height: 420px; object-fit: cover; object-position: center top; display: block; }
         .doc-tag { position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); padding: 7px 16px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--apple-blue); }
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
         .stat-pill { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; padding: 18px 14px; text-align: center; box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03); transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
