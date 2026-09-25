@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিরাপদ রাখার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalRecoveryDatabase: any[] | undefined;
-}
-
-export const recoveryDatabase = global.globalRecoveryDatabase || [];
-if (!global.globalRecoveryDatabase) {
-    global.globalRecoveryDatabase = recoveryDatabase;
-}
+import { recoveryDatabase } from '@/app/api/db';
 
 interface RecoveryRequestBody {
     fullName?: string;

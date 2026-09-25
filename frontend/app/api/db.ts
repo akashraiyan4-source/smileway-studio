@@ -42,7 +42,7 @@ if (!global.globalBroadcastDatabase) { global.globalBroadcastDatabase = broadcas
 export const costEstimatorDatabase = global.globalCostEstimatorDatabase || [];
 if (!global.globalCostEstimatorDatabase) { global.globalCostEstimatorDatabase = costEstimatorDatabase; }
 
-// এক্সট্রা অ্যালাইয়াস যাতে কোনো রাউট ফাইলে নাম নিয়ে সমস্যা না হয়
+// এক্সট্রা অ্যালাইয়াস যাতে কোনো রাউট ফাইলে নাম নিয়ে সমস্যা না হয়
 export const estimatedDatabase = costEstimatorDatabase;
 
 export const followUpDatabase = global.globalFollowUpDatabase || [];
@@ -77,6 +77,9 @@ if (!global.globalOnboardingDatabase) { global.globalOnboardingDatabase = onboar
 
 export const postTreatmentDatabase = global.globalPostTreatmentDatabase || [];
 if (!global.globalPostTreatmentDatabase) { global.globalPostTreatmentDatabase = postTreatmentDatabase; }
+
+// পোস্ট-ট্রিটমেন্ট রিকভারির জন্য এক্সট্রা অ্যালাইয়াস
+export const recoveryDatabase = postTreatmentDatabase;
 
 export const prepReminderDatabase = global.globalPrepReminderDatabase || [];
 if (!global.globalPrepReminderDatabase) { global.globalPrepReminderDatabase = prepReminderDatabase; }
