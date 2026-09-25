@@ -505,13 +505,15 @@ export default function Page() {
         .case-card-stream { width: 260px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; padding: 14px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04); will-change: transform; }
         .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 190px; margin-bottom: 10px; background: #e2e5e9; }
         .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        
         .faq-list { display: flex; flex-direction: column; gap: 12px; }
         .faq-item { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; overflow: hidden; box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03); will-change: transform; }
         .faq-question { width: 100%; padding: 18px 20px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 0.92rem; font-weight: 600; color: var(--apple-dark); text-align: left; cursor: pointer; font-family: inherit; }
         .faq-chevron { font-size: 1.2rem; color: var(--apple-gray); transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1), padding 0.3s ease; padding: 0 20px; font-size: 0.85rem; color: var(--apple-gray); line-height: 1.55; }
-        .faq-item.active .faq-answer { max-height: 160px; padding-bottom: 18px; }
+        .faq-item.active .faq-answer { max-height: 180px; padding-bottom: 18px; }
         .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
+
         .consult-card { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 10px; padding: 28px 24px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05); margin-bottom: 26px; will-change: transform; }
         .slots-pill { display: inline-flex; align-items: center; gap: 7px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: #b25e00; margin-bottom: 16px; }
         .slots-dot { width: 6px; height: 6px; border-radius: 50%; background: #ff9500; }
@@ -535,7 +537,7 @@ export default function Page() {
         .ai-avatar { font-size: 1.5rem; line-height: 1; }
         .status-dot-tiny { width: 9px; height: 9px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; }
         
-        /* Apple-style genie/lamp animation originating precisely from the floating robot face */
+        /* Apple-style Genie/Lamp popup originating precisely from the floating robot face */
         .ai-chat-modal { position: fixed !important; bottom: 86px !important; right: 24px !important; width: 380px !important; max-width: calc(100vw - 32px) !important; height: 520px !important; max-height: calc(100vh - 110px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 20px; display: flex; flex-direction: column; box-shadow: 0 16px 44px -8px rgba(0, 0, 0, 0.24); border: 1px solid var(--apple-border); overflow: hidden; will-change: transform; }
@@ -729,12 +731,40 @@ export default function Page() {
           <h2 className="sec-heading">Frequently Asked Questions</h2>
           <div className="faq-list">
             <div className="faq-item">
-              <button className="faq-question" onClick={toggleFaq}><span>Is the porcelain veneer procedure painful?</span><span className="faq-chevron">+</span></button>
-              <div className="faq-answer"><p>Zero discomfort. We utilize gentle micro-sedation and localized numbing protocols.</p></div>
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>Are zero-prep micro veneers truly reversible, and do they require shaving teeth?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>Our bio-enamel micro-veneers require zero aggressive drilling or dentin reduction, preserving 100% of your natural tooth structure while ensuring a seamless, lifelong bond.</p>
+              </div>
             </div>
             <div className="faq-item">
-              <button className="faq-question" onClick={toggleFaq}><span>How long do bespoke veneers last?</span><span className="faq-chevron">+</span></button>
-              <div className="faq-answer"><p>Our handcrafted veneers typically endure 15 to 20+ years with routine oral hygiene.</p></div>
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>How does the 48-hour digital smile preview work?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>We utilize high-resolution 3D facial scanning and bite mapping to design your bespoke smile digitally, allowing you to preview and approve your exact aesthetic result before treatment starts.</p>
+              </div>
+            </div>
+            <div className="faq-item">
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>What makes SmileWay Studio's private VIP suites different?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>We offer absolute privacy with zero waiting rooms, dedicated rear valet access, personalized luxury sedation protocols, and individual attention from Chief Cosmetic Dentist Dr. Julian Vance.</p>
+              </div>
+            </div>
+            <div className="faq-item">
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>What kind of structural warranty is provided?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>Every full-arch restoration and handcrafted porcelain set is backed by our comprehensive 10-Year Structural Warranty, covering any chipping, fracture, or bite alignment adjustments.</p>
+              </div>
             </div>
           </div>
         </section>
