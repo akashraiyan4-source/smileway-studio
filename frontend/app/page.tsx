@@ -54,21 +54,6 @@ export default function Page() {
     initInertialMarquee('reviewsBox', reviewsInnerRef, 0.6);
     initInertialMarquee('casesBox', casesInnerRef, 0.5);
 
-    const heroEl = heroBoxRef.current;
-    if (heroEl) {
-      const vidObserver = new IntersectionObserver(([entry]) => {
-        const activeVid = funnelStep === 2 ? vidEndRef.current : vidStartRef.current;
-        if (activeVid) {
-          if (entry.isIntersecting) {
-            activeVid.play().catch(() => {});
-          } else {
-            activeVid.pause();
-          }
-        }
-      }, { threshold: 0.1 });
-      vidObserver.observe(heroEl);
-    }
-
     const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.15 };
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -82,7 +67,7 @@ export default function Page() {
     document.querySelectorAll('.animate-on-scroll').forEach(section => {
       observer.observe(section);
     });
-  }, [funnelStep]);
+  }, []);
 
   const toggleSound = () => {
     triggerHaptic(20);
@@ -103,9 +88,6 @@ export default function Page() {
 
   const handlePointerDownKnob = (e: React.PointerEvent<HTMLDivElement>) => {
     if (funnelStep === 1) return;
-    if (vidTransRef.current) vidTransRef.current.load();
-    if (vidEndRef.current) vidEndRef.current.load();
-
     triggerHaptic(25);
     const knob = knobRef.current;
     const track = trackRef.current;
@@ -176,6 +158,7 @@ export default function Page() {
 
     if (vidStartRef.current) {
       vidStartRef.current.pause();
+      vidStartRef.current.muted = true;
       vidStartRef.current.style.opacity = '0';
     }
 
@@ -186,7 +169,11 @@ export default function Page() {
       vidTransRef.current.play().catch(() => {});
 
       vidTransRef.current.onended = () => {
-        if (vidTransRef.current) vidTransRef.current.style.opacity = '0';
+        if (vidTransRef.current) {
+          vidTransRef.current.pause();
+          vidTransRef.current.muted = true;
+          vidTransRef.current.style.opacity = '0';
+        }
         if (vidEndRef.current) {
           vidEndRef.current.style.opacity = '1';
           vidEndRef.current.currentTime = 0;
@@ -226,7 +213,13 @@ export default function Page() {
     setFunnelStep(0);
     if (vidEndRef.current) {
       vidEndRef.current.pause();
+      vidEndRef.current.muted = true;
       vidEndRef.current.style.opacity = '0';
+    }
+    if (vidTransRef.current) {
+      vidTransRef.current.pause();
+      vidTransRef.current.muted = true;
+      vidTransRef.current.style.opacity = '0';
     }
     if (vidStartRef.current) {
       vidStartRef.current.style.opacity = '1';
@@ -455,7 +448,7 @@ export default function Page() {
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 16px 32px; border-radius: 6px; font-size: 0.94rem; font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.35); width: fit-content; transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .hero-cta-btn:hover { transform: scale(1.02); }
         .hero-box { position: relative; width: 100%; max-width: 380px; margin: 0 auto; border-radius: 12px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 24px 60px -10px rgba(0, 0, 0, 0.25); border: 1px solid var(--apple-border); will-change: transform; }
-        .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; will-change: opacity, transform; background-color: #0d131f; }
+        .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; will-change: opacity, transform; background-color: #0d131f; transform: translateZ(0); backface-visibility: hidden; }
         .glass-sound-btn { position: absolute; top: 16px; right: 16px; z-index: 30; width: 38px; height: 38px; border-radius: 50%; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); transition: transform 0.2s; will-change: transform; }
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
@@ -465,15 +458,16 @@ export default function Page() {
         .swipe-arrow-handle { height: 38px; width: 46px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; }
         .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); pointer-events: none; }
 
-        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 24px 20px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; overflow-y: auto; }
+        /* Strict Form Drawer height boundary inside hero box */
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 52%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 20px 18px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
-        .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
-        .drawer-title { color: var(--apple-dark); font-size: 1.15rem; font-weight: 800; }
-        .drawer-sub { color: var(--apple-gray); font-size: 0.76rem; margin-top: 3px; }
-        .drawer-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 12px 14px; border-radius: 6px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 10px; outline: none; font-family: inherit; will-change: transform; }
-        .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 13px; border-radius: 6px; color: #ffffff; font-size: 0.92rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: transform 0.2s; will-change: transform; }
+        .drawer-header { text-align: center; margin-bottom: 10px; padding-right: 20px; }
+        .drawer-title { color: var(--apple-dark); font-size: 1.05rem; font-weight: 800; }
+        .drawer-sub { color: var(--apple-gray); font-size: 0.72rem; margin-top: 2px; }
+        .drawer-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 10px 12px; border-radius: 6px; font-size: 0.84rem; color: var(--apple-dark); margin-bottom: 8px; outline: none; font-family: inherit; will-change: transform; }
+        .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 11px; border-radius: 6px; color: #ffffff; font-size: 0.88rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: transform 0.2s; will-change: transform; }
         .drawer-btn:hover { transform: scale(1.01); }
-        .drawer-dismiss { position: absolute; top: 16px; right: 16px; background: var(--apple-titanium); border: none; width: 28px; height: 28px; border-radius: 50%; color: var(--apple-gray); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .drawer-dismiss { position: absolute; top: 14px; right: 14px; background: var(--apple-titanium); border: none; width: 26px; height: 26px; border-radius: 50%; color: var(--apple-gray); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         
         .animate-on-scroll { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); will-change: opacity, transform; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
@@ -623,9 +617,9 @@ export default function Page() {
         </div>
 
         <div className="hero-box" id="heroSec" ref={heroBoxRef}>
-          <video ref={vidStartRef} className="hero-vid" src="/start.mp4" poster="/start-poster.jpg" playsInline preload="auto" loop muted autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
-          <video ref={vidTransRef} className="hero-vid" src="/trans.mp4" playsInline preload="none" muted style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
-          <video ref={vidEndRef} className="hero-vid" src="/end.mp4" playsInline preload="none" loop muted style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidStartRef} className="hero-vid" src="/start.mp4" poster="/start-poster.jpg" playsInline preload="auto" loop muted={isMuted} autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
+          <video ref={vidTransRef} className="hero-vid" src="/trans.mp4" playsInline preload="auto" muted={isMuted} style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidEndRef} className="hero-vid" src="/end.mp4" playsInline preload="auto" loop muted={isMuted} style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
 
           <button className="glass-sound-btn" onClick={toggleSound} aria-label="Toggle Sound">
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
