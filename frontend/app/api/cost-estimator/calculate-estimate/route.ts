@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিশ্চিত করার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalEstimateDatabase: any[] | undefined;
-}
-
-export const estimateDatabase = global.globalEstimateDatabase || [];
-if (!global.globalEstimateDatabase) {
-    global.globalEstimateDatabase = estimateDatabase;
-}
+import { estimateDatabase } from '../../db';
 
 interface CostEstimateRequestBody {
     fullName?: string;
@@ -43,7 +34,7 @@ export async function POST(request: Request) {
         let estimatedCost = '$100 - $300';
         let description = 'General consultation and basic procedure.';
 
-        // চিকিৎসার ধরন অনুযায়ী ডায়নামিক খরচ নির্ধারণ
+        // চিকিৎসার ধরন অনুযায়ী ডায়নামিক খরচ নির্ধারণ
         switch (cleanTreatment) {
             case 'dental implants':
                 estimatedCost = '$1,500 - $3,000 per tooth';
