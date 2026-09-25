@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিরাপদ রাখার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalReferralDatabase: any[] | undefined;
-}
-
-export const referralDatabase = global.globalReferralDatabase || [];
-if (!global.globalReferralDatabase) {
-    global.globalReferralDatabase = referralDatabase;
-}
+import { referralDatabase } from '@/app/api/db';
 
 interface ReferralRequestBody {
     fullName?: string;
