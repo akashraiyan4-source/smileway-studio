@@ -438,6 +438,12 @@ export default function Page() {
         .stars { color: #ff9500; letter-spacing: 2px; }
         .press-trust-bar { padding: 12px 16px; background: rgba(255, 255, 255, 0.7); border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; position: relative; cursor: grab; touch-action: pan-x; }
         .press-trust-inner { display: inline-flex; align-items: center; gap: 32px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; will-change: transform; }
+        
+        /* Live Celebrity Endorsement Badge Ticker */
+        .celebrity-ticker-bar { padding: 10px 16px; background: #ffffff; border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; display: flex; align-items: center; }
+        .celebrity-ticker-inner { display: inline-flex; align-items: center; gap: 28px; font-size: 0.72rem; font-weight: 700; color: #0071e3; animation: celebrityScroll 20s linear infinite; }
+        @keyframes celebrityScroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
+
         .hero-split-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; padding: 48px 32px 64px 32px; max-width: 1240px; margin: 0 auto; width: 100%; }
         .hero-text-col { display: flex; flex-direction: column; gap: 18px; text-align: left; }
         .hero-tagline { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--apple-blue); }
@@ -478,9 +484,12 @@ export default function Page() {
         .section-top-tight { padding-top: 10px; }
         .sec-tag { font-size: 0.76rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 8px; }
         .sec-heading { font-size: 1.85rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 22px; }
-        .doctor-card { position: relative; border-radius: 8px; overflow: hidden; margin-bottom: 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); will-change: transform; }
-        .doc-img { width: 100%; height: 480px; object-fit: cover; object-position: center 25%; display: block; }
+        
+        /* Doctor Card Fixed Spacing & Proportional Framing */
+        .doctor-card { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); will-change: transform; }
+        .doc-img { width: 100%; height: 480px; object-fit: cover; object-position: center 18%; display: block; padding-top: 10px; }
         .doc-tag { position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); padding: 7px 16px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--apple-blue); }
+        
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
         .stat-pill { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; padding: 18px 14px; text-align: center; box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03); transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .stat-pill:hover { transform: translateY(-3px); }
@@ -578,6 +587,20 @@ export default function Page() {
         <div className="press-trust-inner">
           <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
           <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span>
+        </div>
+      </div>
+
+      {/* Live Celebrity & Patient Endorsement Badge Ticker */}
+      <div className="celebrity-ticker-bar">
+        <div className="celebrity-ticker-inner">
+          <span>🌟 Featured in Hollywood Reporter</span> • 
+          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
+          <span>⭐ Trusted by A-List LA Celebrities</span> • 
+          <span>✨ 48-Hour Digital Smile Triage</span> •
+          <span>🌟 Featured in Hollywood Reporter</span> • 
+          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
+          <span>⭐ Trusted by A-List LA Celebrities</span> • 
+          <span>✨ 48-Hour Digital Smile Triage</span>
         </div>
       </div>
 
