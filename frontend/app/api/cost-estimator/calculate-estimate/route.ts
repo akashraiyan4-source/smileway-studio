@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { estimateDatabase } from '../../db';
+import { costEstimatorDatabase } from '@/app/api/db';
 
 interface CostEstimateRequestBody {
     fullName?: string;
@@ -64,7 +64,7 @@ export async function POST(request: Request) {
             calculatedAt: new Date().toISOString()
         };
 
-        estimateDatabase.push(estimateRecord);
+        costEstimatorDatabase.push(estimateRecord);
 
         console.log(`[Cost Estimator] Estimate calculated for ${treatmentType} -> ${estimatedCost}`);
 
