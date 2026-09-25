@@ -1,14 +1,5 @@
 import { NextResponse } from 'next/server';
-
-// গ্লোবাল ডাটাবেস মেমোরি নিরাপদ রাখার জন্য টাইপ সেফটিসহ
-declare global {
-    var globalNoShowDatabase: any[] | undefined;
-}
-
-export const noShowDatabase = global.globalNoShowDatabase || [];
-if (!global.globalNoShowDatabase) {
-    global.globalNoShowDatabase = noShowDatabase;
-}
+import { noShowDatabase } from '@/app/api/db';
 
 interface NoShowRequestBody {
     fullName?: string;
