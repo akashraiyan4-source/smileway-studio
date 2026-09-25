@@ -460,9 +460,9 @@ export default function Page() {
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 48px; background: transparent !important; border: none !important; backdrop-filter: none !important; display: flex; align-items: center; padding: 0; z-index: 20; touch-action: none; }
-        .swipe-arrow-handle { height: 40px; width: 50px; background: rgba(255, 255, 255, 0.95); border: 1px solid #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; animation: pulseArrow 2s infinite ease-in-out; }
-        @keyframes pulseArrow { 0%, 100% { transform: translate3d(0, -50%, 0); } 50% { transform: translate3d(12px, -50%, 0); } }
+        /* Fixed Slider Zone directly matching background visual arrow */
+        .swipe-interactive-zone { position: absolute; bottom: 20px; left: 16px; right: 16px; height: 50px; background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.2) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
+        .swipe-arrow-handle { height: 38px; width: 46px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; }
         .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); pointer-events: none; }
 
         .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 24px 20px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; overflow-y: auto; }
@@ -522,7 +522,7 @@ export default function Page() {
         .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 15px; border-radius: 6px; color: #ffffff; font-size: 0.96rem; font-weight: 600; cursor: pointer; font-family: inherit; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3); transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .btn-confirm:hover { transform: scale(1.01); }
         
-        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--apple-border); margin-bottom: 40px; box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08); background: #ffffff; display: flex; flex-direction: column; will-change: transform; }
+        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--apple-border); margin-bottom: 24px; box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08); background: #ffffff; display: flex; flex-direction: column; will-change: transform; }
         .map-preview-iframe-container { position: relative; width: 100%; height: 340px; background: #e5e3df; }
         .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
         .map-floating-badge { position: absolute; top: 16px; left: 16px; background: #ffffff; border-radius: 6px; padding: 12px 16px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 320px; width: calc(100% - 32px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); will-change: transform; }
@@ -554,7 +554,10 @@ export default function Page() {
         .chat-calendar-title { font-size: 0.85rem; font-weight: 700; color: #0071e3; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
         .chat-calendar-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 9px 12px; border-radius: 10px; font-size: 0.82rem; color: var(--apple-dark); margin-bottom: 10px; outline: none; }
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
-        footer { padding: 30px 20px 90px 20px; text-align: center; font-size: 0.76rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); }
+        
+        /* Cleaned footer padding to eliminate excessive space below map */
+        footer { padding: 20px 20px 40px 20px; text-align: center; font-size: 0.76rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); }
+        
         @media (max-width: 768px) {
           header { padding: 14px 18px; justify-content: center !important; }
           .brand-title { font-size: 1.15rem; text-align: center; }
@@ -635,7 +638,7 @@ export default function Page() {
           </div>
 
           <div className={`half-form-drawer ${isDrawerOpen ? 'open' : ''}`} id="heroDrawer">
-            <button className="drawer-dismiss" onClick={closeHeroDrawer}>×</button>
+            <button className="drawer-dismiss" onclick="closeHeroDrawer" onClick={closeHeroDrawer}>×</button>
             <div className="drawer-header">
               <h3 className="drawer-title">Claim Your Confidence</h3>
               <p className="drawer-sub">Direct senior cosmetic triage confirmed via backend.</p>
