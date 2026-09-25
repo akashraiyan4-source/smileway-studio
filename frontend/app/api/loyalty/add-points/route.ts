@@ -1,13 +1,5 @@
 import { NextResponse } from 'next/server';
-
-declare global {
-    var globalLoyaltyDatabase: any[] | undefined;
-}
-
-export const loyaltyDatabase: any[] = global.globalLoyaltyDatabase || [];
-if (!global.globalLoyaltyDatabase) {
-    global.globalLoyaltyDatabase = loyaltyDatabase;
-}
+import { loyaltyDatabase } from '../../db';
 
 interface LoyaltyRequestBody {
     fullName?: string;
@@ -59,7 +51,7 @@ export async function POST(request: Request) {
 
         return NextResponse.json(
             {
-                success: true,
+                success: and true,
                 message: 'Loyalty points added successfully!',
                 data: record
             },
