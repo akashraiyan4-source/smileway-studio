@@ -54,7 +54,6 @@ export default function Page() {
     initInertialMarquee('reviewsBox', reviewsInnerRef, 0.6);
     initInertialMarquee('casesBox', casesInnerRef, 0.5);
 
-    // Auto pause/mute video when scrolled out of viewport
     const heroEl = heroBoxRef.current;
     if (heroEl) {
       const vidObserver = new IntersectionObserver(([entry]) => {
@@ -144,7 +143,7 @@ export default function Page() {
       }
 
       if (funnelStep === 0) {
-        if (currentTranslateX >= maxMove * 0.5) {
+        if (currentTranslateX >= maxMove * 0.4) {
           executeForwardTransition(maxMove);
         } else {
           knob.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -152,7 +151,7 @@ export default function Page() {
         }
       } else if (funnelStep === 2) {
         let pulledBackDistance = maxMove - currentTranslateX;
-        if (pulledBackDistance >= maxMove * 0.5) {
+        if (pulledBackDistance >= maxMove * 0.4) {
           executeReverseCompletion();
         } else {
           knob.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -224,7 +223,7 @@ export default function Page() {
 
   const closeHeroDrawer = () => {
     setIsDrawerOpen(false);
-    setFunnelStep(0); // Reset to sad start loop when drawer is explicitly closed
+    setFunnelStep(0);
     if (vidEndRef.current) {
       vidEndRef.current.pause();
       vidEndRef.current.style.opacity = '0';
@@ -456,15 +455,13 @@ export default function Page() {
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
         
-        /* Pure Water Arrow Slider without any bottom blur container box */
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 48px; background: transparent !important; border: 1.5px solid rgba(255, 255, 255, 0.4) !important; backdrop-filter: none !important; border-radius: 999px; display: flex; align-items: center; padding: 0 4px; z-index: 20; touch-action: none; overflow: hidden; }
-        .swipe-interactive-zone::after { content: "Restore Your Smile ➔"; position: absolute; width: 100%; text-align: center; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; color: rgba(255, 255, 255, 0.95); pointer-events: none; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
-        .swipe-interactive-zone.reverse::after { content: "⬅ PULL TO RESET PREVIEW"; }
-        .swipe-arrow-handle { height: 40px; width: 50px; background: rgba(255, 255, 255, 0.95); border: 1px solid #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; animation: pulseArrow 2s infinite ease-in-out; }
-        @keyframes pulseArrow { 0%, 100% { transform: translate3d(0, -50%, 0); } 50% { transform: translate3d(6px, -50%, 0); } }
+        /* Clean Slider without background text overlay or boxes */
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 48px; background: transparent !important; border: none !important; backdrop-filter: none !important; display: flex; align-items: center; padding: 0; z-index: 20; touch-action: none; }
+        .swipe-arrow-handle { height: 42px; width: 48px; background: rgba(255, 255, 255, 0.95); border: 1px solid #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 4px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; animation: pulseArrow 2s infinite ease-in-out; }
+        @keyframes pulseArrow { 0%, 100% { transform: translate3d(0, -50%, 0); } 50% { transform: translate3d(12px, -50%, 0); } }
         .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); pointer-events: none; }
 
-        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 24px 20px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; }
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 24px 20px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
         .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
         .drawer-title { color: var(--apple-dark); font-size: 1.15rem; font-weight: 800; }
@@ -473,6 +470,7 @@ export default function Page() {
         .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 13px; border-radius: 6px; color: #ffffff; font-size: 0.92rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: transform 0.2s; will-change: transform; }
         .drawer-btn:hover { transform: scale(1.01); }
         .drawer-dismiss { position: absolute; top: 16px; right: 16px; background: var(--apple-titanium); border: none; width: 28px; height: 28px; border-radius: 50%; color: var(--apple-gray); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        
         .animate-on-scroll { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); will-change: opacity, transform; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         .content-container { max-width: 860px; margin: 0 auto; width: 100%; will-change: transform; }
@@ -526,11 +524,12 @@ export default function Page() {
         .map-icon-btn { width: 32px; height: 32px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 0.9rem; transition: background 0.2s; will-change: transform; }
         .map-icon-btn:hover { background: #e2ecfc; }
 
-        .floating-ai { position: fixed !important; bottom: 20px !important; right: 20px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 22px rgba(0, 0, 0, 0.16); backdrop-filter: blur(14px); cursor: pointer; transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
-        .floating-ai:hover { transform: scale(1.1); }
-        .ai-avatar { font-size: 1.45rem; line-height: 1; }
-        .status-dot-tiny { width: 9px; height: 9px; border-radius: 50%; background: #34c759; position: absolute; top: 3px; right: 3px; border: 2px solid #ffffff; }
-        .ai-chat-modal { position: fixed !important; bottom: 78px !important; right: 20px !important; width: 380px !important; max-width: calc(100vw - 32px) !important; height: 520px !important; max-height: calc(100vh - 100px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: translateY(14px) scale(0.96); transition: opacity 0.22s ease, transform 0.22s ease; will-change: transform, opacity; }
+        /* AI Assistant Button Always Fixed Bottom-Right Across All Viewports */
+        .floating-ai { position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 52px; height: 52px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); backdrop-filter: blur(14px); cursor: pointer; }
+        .ai-avatar { font-size: 1.5rem; line-height: 1; }
+        .status-dot-tiny { width: 9px; height: 9px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; }
+        
+        .ai-chat-modal { position: fixed !important; bottom: 86px !important; right: 24px !important; width: 380px !important; max-width: calc(100vw - 32px) !important; height: 520px !important; max-height: calc(100vh - 110px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: translateY(14px) scale(0.96); transition: opacity 0.22s ease, transform 0.22s ease; will-change: transform, opacity; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: translateY(0) scale(1) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 10px; display: flex; flex-direction: column; box-shadow: 0 16px 44px -8px rgba(0, 0, 0, 0.24); border: 1px solid var(--apple-border); overflow: hidden; will-change: transform; }
         .ai-chat-header { padding: 16px 20px; background: #ffffff; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; }
@@ -556,7 +555,7 @@ export default function Page() {
           .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 82vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 !important; }
           .hero-text-col { padding: 0 20px !important; align-items: center; text-align: center; gap: 12px; }
           .hero-main-title { font-size: 2rem !important; line-height: 1.1 !important; }
-          .ai-chat-modal { bottom: 68px !important; right: 12px !important; left: 12px !important; width: calc(100vw - 24px) !important; height: min(520px, 75vh) !important; }
+          .ai-chat-modal { bottom: 84px !important; right: 12px !important; left: 12px !important; width: calc(100vw - 24px) !important; height: min(520px, 75vh) !important; }
         }
       `}</style>
 
