@@ -511,12 +511,15 @@ export default function Page() {
         .consult-card { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 10px; padding: 28px 24px; box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05); margin-bottom: 26px; will-change: transform; }
         .slots-pill { display: inline-flex; align-items: center; gap: 7px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: #b25e00; margin-bottom: 16px; }
         .slots-dot { width: 6px; height: 6px; border-radius: 50%; background: #ff9500; }
-        .guarantee-strip { display: flex; flex-direction: column; gap: 7px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 14px 16px; margin-bottom: 18px; font-size: 0.78rem; font-weight: 600; color: #248a3d; }
+        
+        /* Fixed Guarantee Strip left-aligned to eliminate right-side gap */
+        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 7px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 14px 16px; margin-bottom: 18px; font-size: 0.78rem; font-weight: 600; color: #248a3d; width: 100%; }
+        
         .form-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 14px 16px; border-radius: 6px; font-size: 0.92rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; font-family: inherit; will-change: transform; }
         .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 15px; border-radius: 6px; color: #ffffff; font-size: 0.96rem; font-weight: 600; cursor: pointer; font-family: inherit; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3); transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .btn-confirm:hover { transform: scale(1.01); }
         
-        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--apple-border); margin-bottom: 24px; box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08); background: #ffffff; display: flex; flex-direction: column; will-change: transform; }
+        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--apple-border); margin-bottom: 0px !important; box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08); background: #ffffff; display: flex; flex-direction: column; will-change: transform; }
         .map-preview-iframe-container { position: relative; width: 100%; height: 340px; background: #e5e3df; }
         .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
         .map-floating-badge { position: absolute; top: 16px; left: 16px; background: #ffffff; border-radius: 6px; padding: 12px 16px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 320px; width: calc(100% - 32px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); will-change: transform; }
@@ -526,7 +529,7 @@ export default function Page() {
         .map-icon-btn { width: 32px; height: 32px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 0.9rem; transition: background 0.2s; will-change: transform; }
         .map-icon-btn:hover { background: #e2ecfc; }
 
-        /* AI Assistant Button Fixed Bottom-Right */
+        /* AI Assistant Button Fixed strictly Bottom-Right */
         .floating-ai { position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 52px; height: 52px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); backdrop-filter: blur(14px); cursor: pointer; transform-origin: bottom right; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
         .ai-avatar { font-size: 1.5rem; line-height: 1; }
         .status-dot-tiny { width: 9px; height: 9px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; }
@@ -549,8 +552,8 @@ export default function Page() {
         .chat-calendar-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 9px 12px; border-radius: 10px; font-size: 0.82rem; color: var(--apple-dark); margin-bottom: 10px; outline: none; }
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
         
-        /* Cleaned footer padding to eliminate excessive space below map */
-        footer { padding: 20px 20px 40px 20px; text-align: center; font-size: 0.76rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); }
+        /* Cleaned footer padding to completely eliminate excessive space below map */
+        footer { padding: 16px 20px 24px 20px; text-align: center; font-size: 0.76rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); margin-top: 0px !important; }
         
         @media (max-width: 768px) {
           header { padding: 14px 18px; justify-content: center !important; }
