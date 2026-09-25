@@ -3,6 +3,7 @@ declare global {
     var globalBroadcastDatabase: any[] | undefined;
     var globalEstimateDatabase: any[] | undefined;
     var globalFollowUpDatabase: any[] | undefined;
+    var globalInsuranceDatabase: any[] | undefined;
 }
 
 export const appointmentsDatabase = global.globalAppointments || [];
@@ -23,4 +24,9 @@ if (!global.globalEstimateDatabase) {
 export const followUpDatabase = global.globalFollowUpDatabase || [];
 if (!global.globalFollowUpDatabase) {
     global.globalFollowUpDatabase = followUpDatabase;
+}
+
+export const insuranceDatabase = global.globalInsuranceDatabase || [];
+if (!global.globalInsuranceDatabase) {
+    global.globalInsuranceDatabase = insuranceDatabase;
 }
