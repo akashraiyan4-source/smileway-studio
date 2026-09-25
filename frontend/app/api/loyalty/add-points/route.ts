@@ -51,7 +51,7 @@ export async function POST(request: Request) {
 
         return NextResponse.json(
             {
-                success: and true,
+                success: true,
                 message: 'Loyalty points added successfully!',
                 data: record
             },
