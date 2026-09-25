@@ -87,6 +87,9 @@ if (!global.globalPrepReminderDatabase) { global.globalPrepReminderDatabase = pr
 export const recallEngineDatabase = global.globalRecallEngineDatabase || [];
 if (!global.globalRecallEngineDatabase) { global.globalRecallEngineDatabase = recallEngineDatabase; }
 
+// রিকল ইঞ্জিন রাউটের জন্য এক্সট্রা অ্যালাইয়াস
+export const recallDatabase = recallEngineDatabase;
+
 export const referralDatabase = global.globalReferralDatabase || [];
 if (!global.globalReferralDatabase) { global.globalReferralDatabase = referralDatabase; }
 
