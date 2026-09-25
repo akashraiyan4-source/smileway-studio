@@ -9,6 +9,7 @@ declare global {
     var globalLeadsDatabase: any[] | undefined;
     var globalLoyaltyDatabase: any[] | undefined;
     var globalReviewsDatabase: any[] | undefined;
+    var globalReviewRequestsDatabase: any[] | undefined;
 }
 
 export const appointmentsDatabase = global.globalAppointments || [];
@@ -59,4 +60,9 @@ if (!global.globalLoyaltyDatabase) {
 export const reviewsDatabase = global.globalReviewsDatabase || [];
 if (!global.globalReviewsDatabase) {
     global.globalReviewsDatabase = reviewsDatabase;
+}
+
+export const reviewRequestsDatabase = global.globalReviewRequestsDatabase || [];
+if (!global.globalReviewRequestsDatabase) {
+    global.globalReviewRequestsDatabase = reviewRequestsDatabase;
 }
