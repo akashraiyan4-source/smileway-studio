@@ -638,7 +638,7 @@ export default function Page() {
           </div>
 
           <div className={`half-form-drawer ${isDrawerOpen ? 'open' : ''}`} id="heroDrawer">
-            <button className="drawer-dismiss" onclick="closeHeroDrawer" onClick={closeHeroDrawer}>×</button>
+            <button className="drawer-dismiss" onClick={closeHeroDrawer}>×</button>
             <div className="drawer-header">
               <h3 className="drawer-title">Claim Your Confidence</h3>
               <p className="drawer-sub">Direct senior cosmetic triage confirmed via backend.</p>
