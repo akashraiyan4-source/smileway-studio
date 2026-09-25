@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { reviewRequestsDatabase } from '../../../db';
+import { reviewRequestsDatabase } from '@/app/api/db';
 
 interface ReviewRequestBody {
     fullName?: string;
