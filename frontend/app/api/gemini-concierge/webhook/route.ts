@@ -15,7 +15,7 @@ Strict rules:
 
 export async function POST(request: Request) {
     try {
-        // Twilio সাধারণত x-www-form-urlencoded ফরম্যাটে ডাটা পাঠায়
+        // Twilio সাধারণত x-www-form-urlencoded ফরম্যাটে ডাটা পাঠায়
         const contentType = request.headers.get('content-type') || '';
         let fromPhone = '';
         let userMessage = '';
@@ -53,8 +53,8 @@ export async function POST(request: Request) {
         const genAI = new GoogleGenerativeAI(apiKey);
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient incoming SMS: "${userMessage}"\nGenerate the next SMS reply:`;
 
-        // এন্টারপ্রাইজ লেভেল মডেল ফেইলওভার ক্যান্ডিডেটস
-        const modelCandidates = ["gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-1.5-flash"];
+        // Shothik O Stable Gemini Model Candidates
+        const modelCandidates = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"];
         let aiReply = "Thank you. Dr. Vance's team is reserving your private triage slot now.";
 
         for (const modelName of modelCandidates) {
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
             console.warn('[Twilio Warning] Credentials missing, SMS could not be dispatched via API.');
         }
 
-        // Twilio এর নিয়ম অনুযায়ী TwiXML রেসপন্স পাঠানো
+        // Twilio এর নিয়ম অনুযায়ী TwiXML রেসপন্স পাঠানো
         return new NextResponse('<Response></Response>', {
             status: 200,
             headers: { 'Content-Type': 'text/xml' }
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
 
     } catch (error) {
         console.error('[Twilio Gemini Webhook Critical Error]:', error);
-        // ক্র্যাশ রোধ করতে সবসময় খালি TwiXML রেসপন্স রিটার্ন করা হয়
+        // ক্র্যাশ রোধ করতে সবসময় খালি TwiXML রেসপন্স রিটার্ন করা হয়
         return new NextResponse('<Response></Response>', {
             status: 200,
             headers: { 'Content-Type': 'text/xml' }

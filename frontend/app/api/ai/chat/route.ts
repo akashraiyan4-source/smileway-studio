@@ -55,8 +55,8 @@ export async function POST(request: Request) {
         const genAI = new GoogleGenerativeAI(apiKey);
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${sanitizedMessage}`;
 
-        // Enterprise-level failover model candidates for high availability and speed
-        const modelCandidates = ["gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-flash-lite-latest"];
+        // Shothik O Stable Gemini Model Candidates
+        const modelCandidates = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-pro"];
 
         for (const modelName of modelCandidates) {
             try {
