@@ -25,6 +25,10 @@ declare global {
     var globalVectorKnowledgeDatabase: any[] | undefined;
     var globalVoiceAgentBridgeDatabase: any[] | undefined;
     var globalWhatsappDatabase: any[] | undefined;
+    // নতুন ৩টি ফিচারের জন্য গ্লোবাল ভেরিয়েবল ডিক্লেয়ারেশন
+    var globalInvoiceDatabase: any[] | undefined;
+    var globalMultilanguageDatabase: any[] | undefined;
+    var globalSentimentDatabase: any[] | undefined;
 }
 
 export const appointmentsDatabase = global.globalAppointments || [];
@@ -102,7 +106,7 @@ if (!global.globalReviewRequestsDatabase) { global.globalReviewRequestsDatabase 
 export const smartFaqDatabase = global.globalSmartFaqDatabase || [];
 if (!global.globalSmartFaqDatabase) { global.globalSmartFaqDatabase = smartFaqDatabase; }
 
-// স্মার্ট এফএকিউ রাউটের জন্য এক্সট্রা অ্যালাইয়াস
+// স্মার্ট এফএকিউ রা우টের জন্য এক্সট্রা অ্যালাইয়াস
 export const faqDatabase = smartFaqDatabase;
 
 export const smileSimulatorDatabase = global.globalSmileSimulatorDatabase || [];
@@ -125,3 +129,13 @@ if (!global.globalWhatsappDatabase) { global.globalWhatsappDatabase = whatsappDa
 
 // হোয়াটসঅ্যাপ ইন্টিগ্রেশন রাউটের জন্য এক্সট্রা অ্যালাইয়াস
 export const whatsappLogs = whatsappDatabase;
+
+// --- নতুন ৩টি ফিচারের ডেটাবেজ ও লগ অ্যারে ---
+export const invoiceDatabase = global.globalInvoiceDatabase || [];
+if (!global.globalInvoiceDatabase) { global.globalInvoiceDatabase = invoiceDatabase; }
+
+export const multilanguageLogs = global.globalMultilanguageDatabase || [];
+if (!global.globalMultilanguageDatabase) { global.globalMultilanguageDatabase = multilanguageLogs; }
+
+export const sentimentLogs = global.globalSentimentDatabase || [];
+if (!global.globalSentimentDatabase) { global.globalSentimentDatabase = sentimentLogs; }

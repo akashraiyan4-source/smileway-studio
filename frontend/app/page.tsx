@@ -54,6 +54,23 @@ export default function Page() {
     initInertialMarquee('reviewsBox', reviewsInnerRef, 0.6);
     initInertialMarquee('casesBox', casesInnerRef, 0.5);
 
+    // Scroll listener to mute hero video when 2/3 out of viewport
+    const handleScrollMute = () => {
+      const heroBox = heroBoxRef.current;
+      if (!heroBox) return;
+      const rect = heroBox.getBoundingClientRect();
+      const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      const isMostlyOutOfView = visibleHeight < rect.height * 0.33;
+
+      if (isMostlyOutOfView && !isMuted) {
+        setIsMuted(true);
+        if (vidStartRef.current) vidStartRef.current.muted = true;
+        if (vidTransRef.current) vidTransRef.current.muted = true;
+        if (vidEndRef.current) vidEndRef.current.muted = true;
+      }
+    };
+    window.addEventListener('scroll', handleScrollMute, { passive: true });
+
     const observerOptions = { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.15 };
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -67,7 +84,11 @@ export default function Page() {
     document.querySelectorAll('.animate-on-scroll').forEach(section => {
       observer.observe(section);
     });
-  }, []);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollMute);
+    };
+  }, [isMuted]);
 
   const toggleSound = () => {
     triggerHaptic(20);
@@ -342,6 +363,7 @@ export default function Page() {
     }
   };
 
+  // Inertial Marquee supporting touch-drag, momentum, and vertical page scroll release
   function initInertialMarquee(boxId: string, innerRef: React.RefObject<HTMLDivElement | null>, baseSpeed = 0.6) {
     const box = document.getElementById(boxId);
     const inner = innerRef.current;
@@ -351,8 +373,10 @@ export default function Page() {
     let velocity = baseSpeed;
     let isDragging = false;
     let startX = 0;
+    let startY = 0;
     let lastX = 0;
     let lastTime = Date.now();
+    let isVerticalIntent = false;
 
     if (inner.children.length <= 6) {
       inner.innerHTML += inner.innerHTML;
@@ -372,7 +396,9 @@ export default function Page() {
 
     box.addEventListener('pointerdown', (e) => {
       isDragging = true;
+      isVerticalIntent = false;
       startX = e.clientX;
+      startY = e.clientY;
       lastX = e.clientX;
       lastTime = Date.now();
       box.style.cursor = 'grabbing';
@@ -381,9 +407,22 @@ export default function Page() {
 
     box.addEventListener('pointermove', (e) => {
       if (!isDragging) return;
+
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - startY;
+
+      // Allow vertical scrolling if user moves finger up/down more than sideways initially
+      if (!isVerticalIntent && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 6) {
+        isVerticalIntent = true;
+        isDragging = false;
+        box.style.cursor = 'grab';
+        return;
+      }
+
+      if (isVerticalIntent) return;
+
       const now = Date.now();
       const dt = now - lastTime;
-      const dx = e.clientX - lastX;
       if (dt > 0) velocity = -dx * (16 / dt) * 0.8;
       scrollX -= dx;
       if (scrollX >= totalWidth) scrollX -= totalWidth;
@@ -413,7 +452,7 @@ export default function Page() {
           --card-pure-white: #ffffff;
           --apple-dark: #111827;
           --apple-gray: #64748b;
-          --apple-border: rgba(0, 0, 0, 0.06);
+          --apple-border: rgba(0, 0, 0, 0.08);
           --apple-blue: #0071e3;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
@@ -453,18 +492,16 @@ export default function Page() {
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
         
-        /* Fixed Slider Zone directly matching background visual arrow */
-        .swipe-interactive-zone { position: absolute; bottom: 20px; left: 16px; right: 16px; height: 50px; background: rgba(255, 255, 255, 0.08) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.2) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
+        .swipe-interactive-zone { position: absolute; bottom: 20px; left: 16px; right: 16px; height: 50px; background: rgba(255, 255, 255, 0.12) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.3) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
         .swipe-arrow-handle { height: 38px; width: 46px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; }
         .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); pointer-events: none; }
 
-        /* Strict Form Drawer height boundary inside hero box */
-        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 52%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(24px); border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 20px 18px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; overflow-y: auto; }
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 52%; background: rgba(255, 255, 255, 0.98); backdrop-filter: none !important; border-radius: 12px 12px 0 0; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.18); z-index: 40; display: flex; flex-direction: column; padding: 20px 18px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); will-change: transform; overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
         .drawer-header { text-align: center; margin-bottom: 10px; padding-right: 20px; }
         .drawer-title { color: var(--apple-dark); font-size: 1.05rem; font-weight: 800; }
         .drawer-sub { color: var(--apple-gray); font-size: 0.72rem; margin-top: 2px; }
-        .drawer-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 10px 12px; border-radius: 6px; font-size: 0.84rem; color: var(--apple-dark); margin-bottom: 8px; outline: none; font-family: inherit; will-change: transform; }
+        .drawer-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 12px; border-radius: 6px; font-size: 0.84rem; color: var(--apple-dark); margin-bottom: 8px; outline: none; font-family: inherit; will-change: transform; }
         .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 11px; border-radius: 6px; color: #ffffff; font-size: 0.88rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: transform 0.2s; will-change: transform; }
         .drawer-btn:hover { transform: scale(1.01); }
         .drawer-dismiss { position: absolute; top: 14px; right: 14px; background: var(--apple-titanium); border: none; width: 26px; height: 26px; border-radius: 50%; color: var(--apple-gray); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -479,7 +516,7 @@ export default function Page() {
         
         .doctor-card { position: relative; border-radius: 12px; overflow: hidden; margin-bottom: 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); will-change: transform; }
         .doc-img { width: 100%; height: 480px; object-fit: cover; object-position: center 18%; display: block; padding-top: 10px; }
-        .doc-tag { position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); padding: 7px 16px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--apple-blue); }
+        .doc-tag { position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.95); backdrop-filter: none !important; padding: 7px 16px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); }
         
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
         .stat-pill { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; padding: 18px 14px; text-align: center; box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03); transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
@@ -487,14 +524,14 @@ export default function Page() {
         .stat-num { font-size: 1.6rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 3px; }
         .stat-label { font-size: 0.78rem; font-weight: 500; color: var(--apple-gray); }
         .accreditation-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; justify-content: center; }
-        .acc-badge { background: var(--card-pure-white); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.76rem; font-weight: 600; padding: 8px 18px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; will-change: transform; }
-        .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 8px 0 16px 0; cursor: grab; touch-action: pan-x; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); will-change: transform; }
+        .acc-badge { background: var(--card-pure-white); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.76rem; font-weight: 600; padding: 8px 18px; border-radius: 6px; display: inline-flex; align-items: center; gap: 6px; will-change: transform; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 8px 0 16px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); will-change: transform; }
         .infinite-marquee-inner { display: flex; gap: 18px; width: max-content; will-change: transform; }
         .review-bubble { width: 290px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; padding: 20px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04); will-change: transform; }
         .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .rev-name { font-size: 0.88rem; font-weight: 700; color: var(--apple-dark); }
         .rev-quote { font-size: 0.84rem; line-height: 1.55; color: var(--apple-gray); }
-        .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 8px 0 16px 0; cursor: grab; touch-action: pan-x; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); will-change: transform; }
+        .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 8px 0 16px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); will-change: transform; }
         .interactive-cases-inner { display: flex; gap: 18px; width: max-content; will-change: transform; }
         .case-card-stream { width: 260px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; padding: 14px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04); will-change: transform; }
         .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 190px; margin-bottom: 10px; background: #e2e5e9; }
@@ -512,10 +549,9 @@ export default function Page() {
         .slots-pill { display: inline-flex; align-items: center; gap: 7px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 6px 14px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: #b25e00; margin-bottom: 16px; }
         .slots-dot { width: 6px; height: 6px; border-radius: 50%; background: #ff9500; }
         
-        /* Fixed Guarantee Strip left-aligned to eliminate right-side gap */
         .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 7px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 14px 16px; margin-bottom: 18px; font-size: 0.78rem; font-weight: 600; color: #248a3d; width: 100%; }
         
-        .form-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 14px 16px; border-radius: 6px; font-size: 0.92rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; font-family: inherit; will-change: transform; }
+        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 14px 16px; border-radius: 6px; font-size: 0.92rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; font-family: inherit; will-change: transform; }
         .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 15px; border-radius: 6px; color: #ffffff; font-size: 0.96rem; font-weight: 600; cursor: pointer; font-family: inherit; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3); transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
         .btn-confirm:hover { transform: scale(1.01); }
         
@@ -530,11 +566,10 @@ export default function Page() {
         .map-icon-btn:hover { background: #e2ecfc; }
 
         /* AI Assistant Button Fixed strictly Bottom-Right */
-        .floating-ai { position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 52px; height: 52px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); backdrop-filter: blur(14px); cursor: pointer; transform-origin: bottom right; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
+        .floating-ai { position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 52px; height: 52px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); backdrop-filter: none !important; cursor: pointer; transform-origin: bottom right; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
         .ai-avatar { font-size: 1.5rem; line-height: 1; }
         .status-dot-tiny { width: 9px; height: 9px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; }
         
-        /* Apple-style Genie/Lamp popup originating precisely from the floating robot face */
         .ai-chat-modal { position: fixed !important; bottom: 86px !important; right: 24px !important; width: 380px !important; max-width: calc(100vw - 32px) !important; height: 520px !important; max-height: calc(100vh - 110px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 20px; display: flex; flex-direction: column; box-shadow: 0 16px 44px -8px rgba(0, 0, 0, 0.24); border: 1px solid var(--apple-border); overflow: hidden; will-change: transform; }
@@ -544,15 +579,14 @@ export default function Page() {
         .ai-bot { background: #ffffff; color: var(--apple-dark); align-self: flex-start; border: 1px solid var(--apple-border); }
         .ai-user { background: var(--apple-blue); color: #ffffff; align-self: flex-end; }
         .ai-chat-footer { padding: 12px 18px; border-top: 1px solid var(--apple-border); display: flex; gap: 10px; background: #ffffff; }
-        .ai-chat-input { flex: 1; border: 1px solid var(--apple-border); background: var(--apple-titanium); border-radius: 999px; padding: 10px 16px; font-size: 0.86rem; outline: none; font-family: inherit; will-change: transform; }
+        .ai-chat-input { flex: 1; border: 1px solid var(--apple-border); background: var(--card-pure-white); border-radius: 999px; padding: 10px 16px; font-size: 0.86rem; outline: none; font-family: inherit; will-change: transform; }
         .ai-send-btn { background: var(--apple-blue); color: #ffffff; border: none; padding: 8px 18px; border-radius: 999px; font-size: 0.84rem; font-weight: 600; cursor: pointer; transition: transform 0.2s; will-change: transform; }
         .ai-send-btn:hover { transform: scale(1.02); }
         .chat-calendar-card { align-self: flex-start; width: 90%; background: #ffffff; border: 1.5px solid #0071e3; border-radius: 16px; padding: 14px; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.12); will-change: transform; }
         .chat-calendar-title { font-size: 0.85rem; font-weight: 700; color: #0071e3; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-        .chat-calendar-input { width: 100%; background: var(--apple-titanium); border: 1px solid var(--apple-border); padding: 9px 12px; border-radius: 10px; font-size: 0.82rem; color: var(--apple-dark); margin-bottom: 10px; outline: none; }
+        .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 9px 12px; border-radius: 10px; font-size: 0.82rem; color: var(--apple-dark); margin-bottom: 10px; outline: none; }
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
         
-        /* Cleaned footer padding to completely eliminate excessive space below map */
         footer { padding: 16px 20px 24px 20px; text-align: center; font-size: 0.76rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); margin-top: 0px !important; }
         
         @media (max-width: 768px) {
