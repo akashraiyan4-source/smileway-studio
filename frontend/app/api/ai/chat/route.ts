@@ -10,9 +10,10 @@ Strict rules:
 `;
 
 export async function POST(request: Request) {
+    let message = '';
     try {
         const body = await request.json().catch(() => ({}));
-        const message = body?.message?.trim();
+        message = body?.message?.trim();
 
         if (!message) {
             return NextResponse.json({ success: false, error: 'Message is required.' }, { status: 400 });
@@ -27,8 +28,8 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Using the officially supported model
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+        // Google-এর নির্দেশ অনুযায়ী সঠিক লেটেস্ট মডেল: gemini-3.8-flash
+        const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${message}`;
         const result = await model.generateContent(prompt);
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
         const lowerMsg = message?.toLowerCase() || "";
         let dynamicFallback = "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?";
         
-        if (lowerMsg.includes('how are you') || lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+        if (lowerMsg.includes('how are you') || lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hy')) {
             dynamicFallback = "I am doing wonderfully, thank you! Welcome to SmileWay Studio. How can I assist with your dental care today?";
         } else if (lowerMsg.includes('pain') || lowerMsg.includes('toothache') || lowerMsg.includes('hurt')) {
             dynamicFallback = "We completely understand and offer a zero-discomfort micro-sedation protocol. Would you like to book an emergency consultation with Dr. Vance?";
