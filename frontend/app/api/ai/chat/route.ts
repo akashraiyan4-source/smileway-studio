@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Updated to the exact recommended active model: gemini-3.8-flash
+        // Using the officially supported latest model identifier
         const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${message}`;
