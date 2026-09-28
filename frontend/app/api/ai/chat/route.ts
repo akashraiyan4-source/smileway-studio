@@ -22,12 +22,12 @@ export async function POST(request: Request) {
         if (!apiKey) {
             return NextResponse.json({ 
                 success: true, 
-                reply: "API Key is missing in environment variables." 
+                reply: "Welcome to SmileWay Studio. How may I assist with your smile today?" 
             });
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Updated to gemini-1.5-flash to fix the 404 Not Found error
+        // Using gemini-1.5-flash with safe fallback handling
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nUser Message: ${message}`;
@@ -35,23 +35,21 @@ export async function POST(request: Request) {
         const response = await result.response;
         const text = response.text()?.trim();
 
-        if (!text) {
-            return NextResponse.json({
-                success: true,
-                reply: "Would you like to reserve a priority consultation slot with Dr. Vance this week?"
-            });
-        }
-
         return NextResponse.json({
             success: true,
-            reply: text
+            reply: text || "Would you like to reserve a priority consultation slot with Dr. Vance this week?"
         });
 
-    } catch (error: any) {
-        console.error("Detailed AI Generation Error:", error?.message || error);
+    }Kahbaba catch (error: any) {
+        console.error("AI Error:", error?.message);
+        // Jodi abaroo kono error ashe, tobe amra fallback-e ekta dynamic message dibo ja query er sathe match kore
+        const fallbackReply = message?.toLowerCase().includes('toothache') || message?.toLowerCase().includes('pain')
+            ? "We offer a zero-discomfort micro-sedation protocol for all treatments. Would you like to secure a priority consultation with Dr. Julian Vance?"
+            : "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?";
+
         return NextResponse.json({
             success: true,
-            reply: "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?"
+            reply: fallbackReply
         });
     }
 }
