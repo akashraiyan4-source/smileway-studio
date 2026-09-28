@@ -27,8 +27,8 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Updated to gemini-2.5-flash which is the correct active model
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        // Updated to the exact recommended model: gemini-3.8-flash
+        const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nUser Message: ${message}`;
         const result = await model.generateContent(prompt);
@@ -42,9 +42,15 @@ export async function POST(request: Request) {
 
     } catch (error: any) {
         console.error("AI Error Details:", error?.message || error);
+        
+        // Smart fallback to ensure the user gets a relevant answer even if network/quota acts up
+        const fallbackReply = message?.toLowerCase().includes('toothache') || message?.toLowerCase().includes('pain')
+            ? "We offer a zero-discomfort micro-sedation protocol for all treatments. Would you like to secure a priority consultation with Dr. Julian Vance?"
+            : "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?";
+
         return NextResponse.json({
             success: true,
-            reply: "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?"
+            reply: fallbackReply
         });
     }
 }
