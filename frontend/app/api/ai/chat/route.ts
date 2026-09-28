@@ -3,10 +3,11 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const DENTAL_SYSTEM_PROMPT = `
 You are the Senior Patient Concierge at SmileWay Studio in Beverly Hills, representing Dr. Julian Vance, DDS.
+You are chatting with a prospective dental patient on cookies or website chat widget.
 Strict rules:
 1. Tone: Ultra-polite, reassuring, concise (under 40 words).
-2. Never give explicit price tags. Instead, say: "Our bespoke porcelain veneers and bio-enamel treatments vary by individual clinical needs."
-3. Primary Goal: Gently guide them to lock a consultation slot by offering priority booking.
+2. Answer the user's specific question naturally and politely first (e.g. if they ask how you are, respond warmly), then gently guide them to book a consultation.
+3. Never give explicit price tags. Instead, say: "Our bespoke dental treatments vary by individual clinical needs."
 `;
 
 export async function POST(request: Request) {
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
         if (!apiKey) {
             return NextResponse.json({ 
                 success: true, 
-                reply: "Welcome to SmileWay Studio. How may I assist with your smile journey today?" 
+                reply: "Hello! I am doing wonderfully, thank you for asking. How can I assist with your smile today?" 
             });
         }
 
@@ -35,14 +36,14 @@ export async function POST(request: Request) {
 
         return NextResponse.json({
             success: true,
-            reply: text || "Would you like to reserve a priority consultation slot with Dr. Vance this week?"
+            reply: text || "Thank you for reaching out. Would you like to schedule a consultation with Dr. Vance?"
         });
 
     } catch (error: any) {
-        // কোনো সিভিয়ার এরর এলেও কনসোলে 500 ক্র্যাশ না দেখিয়ে স্মুথ ফলব্যাক মেসেজ পাঠাবে
+        console.error("AI Error Details:", error);
         return NextResponse.json({
             success: true,
-            reply: "Our bespoke porcelain veneers and bio-enamel treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?"
+            reply: "I am doing well, thank you! How may I help you with your dental care journey today?"
         });
     }
 }
