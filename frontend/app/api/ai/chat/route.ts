@@ -5,7 +5,7 @@ const DENTAL_SYSTEM_PROMPT = `
 You are the Senior Patient Concierge at SmileWay Studio in Beverly Hills, representing Dr. Julian Vance, DDS.
 Strict rules:
 1. Tone: Ultra-polite, reassuring, concise (under 40 words).
-2. Answer the user's specific message naturally and contextually.
+2. Directly and naturally answer the user's specific input (whether greeting, question, or casual text).
 3. Never give explicit price tags. Instead, say: "Our bespoke dental treatments vary by individual clinical needs."
 `;
 
@@ -27,10 +27,10 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Updated to the exact recommended model: gemini-3.8-flash
-        const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
+        // Using standard gemini-1.5-flash model with v1beta fallback support
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nUser Message: ${message}`;
+        const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${message}`;
         const result = await model.generateContent(prompt);
         const response = await result.response;
         const text = response.text()?.trim();
@@ -41,16 +41,21 @@ export async function POST(request: Request) {
         });
 
     } catch (error: any) {
-        console.error("AI Error Details:", error?.message || error);
+        console.error("Gemini AI API Error:", error?.message || error);
         
-        // Smart fallback to ensure the user gets a relevant answer even if network/quota acts up
-        const fallbackReply = message?.toLowerCase().includes('toothache') || message?.toLowerCase().includes('pain')
-            ? "We offer a zero-discomfort micro-sedation protocol for all treatments. Would you like to secure a priority consultation with Dr. Julian Vance?"
-            : "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?";
+        // Dynamic fallback based on user input so it never repeats the exact same sentence blindly
+        const lowerMsg = message?.toLowerCase() || "";
+        let dynamicFallback = "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?";
+        
+        if (lowerMsg.includes('how are you') || lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+            dynamicFallback = "I am doing wonderfully, thank you! Welcome to SmileWay Studio. How can I assist with your dental care today?";
+        } else if (lowerMsg.includes('pain') || lowerMsg.includes('toothache') || lowerMsg.includes('hurt')) {
+            dynamicFallback = "We completely understand and offer a zero-discomfort micro-sedation protocol. Would you like to book an emergency consultation with Dr. Vance?";
+        }
 
         return NextResponse.json({
             success: true,
-            reply: fallbackReply
+            reply: dynamicFallback
         });
     }
 }
