@@ -27,8 +27,8 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Using gemini-1.5-flash with safe fallback handling
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        // Updated to gemini-2.5-flash which is the correct active model
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nUser Message: ${message}`;
         const result = await model.generateContent(prompt);
@@ -40,16 +40,11 @@ export async function POST(request: Request) {
             reply: text || "Would you like to reserve a priority consultation slot with Dr. Vance this week?"
         });
 
-    }Kahbaba catch (error: any) {
-        console.error("AI Error:", error?.message);
-        // Jodi abaroo kono error ashe, tobe amra fallback-e ekta dynamic message dibo ja query er sathe match kore
-        const fallbackReply = message?.toLowerCase().includes('toothache') || message?.toLowerCase().includes('pain')
-            ? "We offer a zero-discomfort micro-sedation protocol for all treatments. Would you like to secure a priority consultation with Dr. Julian Vance?"
-            : "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?";
-
+    } catch (error: any) {
+        console.error("AI Error Details:", error?.message || error);
         return NextResponse.json({
             success: true,
-            reply: fallbackReply
+            reply: "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?"
         });
     }
 }
