@@ -27,8 +27,8 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Using standard gemini-1.5-flash model with v1beta fallback support
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        // Updated to the exact recommended active model: gemini-3.8-flash
+        const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${message}`;
         const result = await model.generateContent(prompt);
@@ -43,7 +43,6 @@ export async function POST(request: Request) {
     } catch (error: any) {
         console.error("Gemini AI API Error:", error?.message || error);
         
-        // Dynamic fallback based on user input so it never repeats the exact same sentence blindly
         const lowerMsg = message?.toLowerCase() || "";
         let dynamicFallback = "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?";
         
