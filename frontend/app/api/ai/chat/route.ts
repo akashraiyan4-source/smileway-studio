@@ -28,8 +28,7 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Google-এর নির্দেশ অনুযায়ী সঠিক লেটেস্ট মডেল: gemini-3.8-flash
-        const model = genAI.getGenerativeModel({ model: "gemini-3.8-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${message}`;
         const result = await model.generateContent(prompt);
