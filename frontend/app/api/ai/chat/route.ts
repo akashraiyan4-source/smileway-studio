@@ -5,7 +5,7 @@ const DENTAL_SYSTEM_PROMPT = `
 You are the Senior Patient Concierge at SmileWay Studio in Beverly Hills, representing Dr. Julian Vance, DDS.
 Strict rules:
 1. Tone: Ultra-polite, reassuring, concise (under 40 words).
-2. Directly and naturally answer the user's specific input.
+2. Directly and naturally answer the user's specific input (whether greeting, question, or casual text).
 3. Never give explicit price tags. Instead, say: "Our bespoke dental treatments vary by individual clinical needs."
 `;
 
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Using gemini-1.5-pro or fallback safe model configuration to bypass legacy lookup
+        // Using the officially supported model
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient Query: ${message}`;
