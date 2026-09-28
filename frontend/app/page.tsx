@@ -54,7 +54,6 @@ export default function Page() {
     initInertialMarquee('reviewsBox', reviewsInnerRef, 0.6);
     initInertialMarquee('casesBox', casesInnerRef, 0.5);
 
-    // Scroll listener to mute hero video when 2/3 out of viewport
     const handleScrollMute = () => {
       const heroBox = heroBoxRef.current;
       if (!heroBox) return;
@@ -363,7 +362,6 @@ export default function Page() {
     }
   };
 
-  // Inertial Marquee supporting touch-drag, momentum, and vertical page scroll release
   function initInertialMarquee(boxId: string, innerRef: React.RefObject<HTMLDivElement | null>, baseSpeed = 0.6) {
     const box = document.getElementById(boxId);
     const inner = innerRef.current;
@@ -411,7 +409,6 @@ export default function Page() {
       const dx = e.clientX - lastX;
       const dy = e.clientY - startY;
 
-      // Allow vertical scrolling if user moves finger up/down more than sideways initially
       if (!isVerticalIntent && Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 6) {
         isVerticalIntent = true;
         isDragging = false;
@@ -492,7 +489,8 @@ export default function Page() {
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 20px; left: 16px; right: 16px; height: 50px; background: rgba(255, 255, 255, 0.12) !important; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.3) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
+        /* Video slider updated: No blur, positioned above background arrow, subtle water/cyan colored border */
+        .swipe-interactive-zone { position: absolute; bottom: 20px; left: 16px; right: 16px; height: 50px; background: transparent !important; backdrop-filter: none !important; border: 1px solid rgba(56, 189, 248, 0.5) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
         .swipe-arrow-handle { height: 38px; width: 46px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; }
         .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); pointer-events: none; }
 
@@ -565,9 +563,11 @@ export default function Page() {
         .map-icon-btn { width: 32px; height: 32px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 0.9rem; transition: background 0.2s; will-change: transform; }
         .map-icon-btn:hover { background: #e2ecfc; }
 
-        /* AI Assistant Button Fixed strictly Bottom-Right */
-        .floating-ai { position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 52px; height: 52px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); backdrop-filter: none !important; cursor: pointer; transform-origin: bottom right; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1); }
-        .ai-avatar { font-size: 1.5rem; line-height: 1; }
+        /* AI Assistant Fixed Bottom-Right with Robot Rotation Animation */
+        .floating-ai { position: fixed !important; bottom: 24px !important; right: 24px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.95); border: 1.5px solid rgba(0, 113, 227, 0.35); width: 52px; height: 52px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); backdrop-filter: none !important; cursor: pointer; transform-origin: center; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
+        .ai-avatar { font-size: 1.5rem; line-height: 1; display: inline-block; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .floating-ai.rotated .ai-avatar { transform: rotate(-360deg); }
         .status-dot-tiny { width: 9px; height: 9px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; }
         
         .ai-chat-modal { position: fixed !important; bottom: 86px !important; right: 24px !important; width: 380px !important; max-width: calc(100vw - 32px) !important; height: 520px !important; max-height: calc(100vh - 110px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
@@ -850,8 +850,8 @@ export default function Page() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
-      {/* AI Assistant Always Fixed Bottom-Right with Apple Genie Origin Animation */}
-      <div className="floating-ai" onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
+      {/* AI Assistant Always Fixed Bottom-Right with Robot Rotation Animation */}
+      <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
       </div>
