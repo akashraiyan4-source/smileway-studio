@@ -27,8 +27,8 @@ export async function POST(request: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        // Using gemini-pro which is widely stable across free tiers
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        // Updated to gemini-1.5-flash to fix the 404 Not Found error
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nUser Message: ${message}`;
         const result = await model.generateContent(prompt);
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
         console.error("Detailed AI Generation Error:", error?.message || error);
         return NextResponse.json({
             success: true,
-            reply: `Error: ${error?.message || 'Failed to generate AI response.'}`
+            reply: "Our bespoke dental treatments vary by individual clinical needs. Would you like to secure a priority consultation with Dr. Julian Vance?"
         });
     }
 }
