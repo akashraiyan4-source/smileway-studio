@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 
 export default function CosmeticPage() {
   useEffect(() => {
-    /* 1. HERO 9:16 VIDEO SLIDER LOGIC */
     const wrapper = document.getElementById('sliderWrapper');
     const knob = document.getElementById('sliderKnob');
     const divider = document.getElementById('dividerLine');
@@ -171,17 +170,16 @@ export default function CosmeticPage() {
 
         if (soundIcon && soundText) {
           if (!isMuted) {
-            soundIcon.innerText = "🔊";
-            soundText.innerText = "Sound On";
+            soundIcon.textContent = "🔊";
+            soundText.textContent = "Sound On";
           } else {
-            soundIcon.innerText = "🔇";
-            soundText.innerText = "Sound Off";
+            soundIcon.textContent = "🔇";
+            soundText.textContent = "Sound Off";
           }
         }
       });
     }
 
-    /* 2. INFINITE INERTIAL MOMENTUM DRAG MARQUEE ENGINE */
     function initInertialMarquee(boxId: string, innerId: string, baseSpeed = 0.55) {
       const box = document.getElementById(boxId);
       const inner = document.getElementById(innerId);
@@ -256,7 +254,6 @@ export default function CosmeticPage() {
     initInertialMarquee('casesScrollBox', 'casesScrollInner', 0.55);
     initInertialMarquee('reviewsScrollBox', 'reviewsScrollInner', 0.5);
 
-    /* 3. SIDE-DOCKED AUTO-DISMISSIVE PEEKING TAB SYSTEM */
     const sideDock = document.getElementById('sideDock');
     const peekingHandle = document.getElementById('peekingHandle');
     const dockAdaBtn = document.getElementById('dockAdaBtn');
@@ -339,7 +336,6 @@ export default function CosmeticPage() {
     if (adaCloseBtn) adaCloseBtn.addEventListener('click', closeAllSideModals);
     if (aiCloseBtn) aiCloseBtn.addEventListener('click', closeAllSideModals);
 
-    /* 4. ADA ACCESSIBILITY ENGINE */
     const adaTileCursor = document.getElementById('adaTileCursor');
     const adaTileContrast = document.getElementById('adaTileContrast');
     const adaTileText = document.getElementById('adaTileText');
@@ -379,7 +375,6 @@ export default function CosmeticPage() {
       });
     }
 
-    /* 5. REAL-TIME AI CONCIERGE CHAT ENGINE */
     const aiChatInput = document.getElementById('aiChatInput') as HTMLInputElement;
     const aiChatSend = document.getElementById('aiChatSend');
     const aiChatBox = document.getElementById('aiChatBox');
@@ -391,14 +386,14 @@ export default function CosmeticPage() {
 
       const userDiv = document.createElement('div');
       userDiv.className = 'chat-msg user';
-      userDiv.innerText = txt;
+      userDiv.textContent = txt;
       aiChatBox.appendChild(userDiv);
       aiChatInput.value = '';
       aiChatBox.scrollTop = aiChatBox.scrollHeight;
 
       const botDiv = document.createElement('div');
       botDiv.className = 'chat-msg bot';
-      botDiv.innerText = "Analyzing inquiry with VIP AI...";
+      botDiv.textContent = "Analyzing inquiry with VIP AI...";
       aiChatBox.appendChild(botDiv);
       aiChatBox.scrollTop = aiChatBox.scrollHeight;
 
@@ -409,9 +404,9 @@ export default function CosmeticPage() {
           body: JSON.stringify({ message: txt, userPhone: 'WebVisitor' })
         });
         const data = await res.json();
-        botDiv.innerText = data.reply || data.response || data.message || "Consultation priority noted.";
+        botDiv.textContent = data.reply || data.response || data.message || "Consultation priority noted.";
       } catch (err) {
-        botDiv.innerText = "Inquiry logged under VIP protocol. Our staff is notified.";
+        botDiv.textContent = "Inquiry logged under VIP protocol. Our staff is notified.";
       }
       aiChatBox.scrollTop = aiChatBox.scrollHeight;
     }
