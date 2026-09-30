@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import twilio from 'twilio';
+import { checkRateLimit } from '../../utils/rate-limit'; // সরাসরি রিলেটিভ পাথ
 
 const DENTAL_SYSTEM_PROMPT = `
 You are the Senior Patient Concierge at SmileWay Studio in Beverly Hills, representing Dr. Julian Vance, DDS.
@@ -14,7 +15,17 @@ Strict rules:
 `;
 
 export async function POST(request: Request) {
+    const traceId = request.headers.get('x-trace-id') || `tr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+
     try {
+        if (!checkRateLimit(request)) {
+            console.warn(JSON.stringify({ trace_id: traceId, event: 'Rate limit exceeded on Gemini Concierge' }));
+            return new NextResponse('<Response><Message>Too many requests. Please try again shortly.</Message></Response>', {
+                status: 200,
+                headers: { 'Content-Type': 'text/xml' }
+            });
+        }
+
         const contentType = request.headers.get('content-type') || '';
         let fromPhone = '';
         let userMessage = '';
@@ -30,18 +41,23 @@ export async function POST(request: Request) {
         }
 
         if (!fromPhone || !userMessage) {
-            console.warn('[SMS Webhook Warning] Missing From or Body in incoming request.');
+            console.warn(`[Trace: ${traceId}] [SMS Webhook Warning] Missing From or Body in incoming request.`);
             return new NextResponse('<Response></Response>', {
                 status: 200,
                 headers: { 'Content-Type': 'text/xml' }
             });
         }
 
-        console.log(`[SMS Received] From ${fromPhone}: "${userMessage}"`);
+        console.log(JSON.stringify({
+            trace_id: traceId,
+            event: 'SMS Received',
+            from: fromPhone,
+            message: userMessage
+        }));
 
         const apiKey = (process.env.GEMINI_API_KEY || '').trim();
         if (!apiKey) {
-            console.error('[SMS Webhook Error] GEMINI_API_KEY is missing.');
+            console.error(`[Trace: ${traceId}] [SMS Webhook Error] GEMINI_API_KEY is missing.`);
             return new NextResponse('<Response></Response>', {
                 status: 200,
                 headers: { 'Content-Type': 'text/xml' }
@@ -51,7 +67,6 @@ export async function POST(request: Request) {
         const genAI = new GoogleGenerativeAI(apiKey);
         const prompt = `${DENTAL_SYSTEM_PROMPT}\n\nPatient incoming SMS: "${userMessage}"\nGenerate the next SMS reply:`;
 
-        // সচল এবং লেটেস্ট মডেল ক্যান্ডিডেট (এখানে পুরনো মডেল বাদ দেওয়া হয়েছে)
         const modelCandidates = ["gemini-1.5-pro", "gemini-pro"];
         let aiReply = "Thank you. Dr. Vance's team is reserving your private triage slot now.";
 
@@ -71,11 +86,16 @@ export async function POST(request: Request) {
 
                 if (text) {
                     aiReply = text;
-                    console.log(`[Gemini Reply using ${modelName}] "${aiReply}"`);
+                    console.log(JSON.stringify({
+                        trace_id: traceId,
+                        event: 'AI Response Generated',
+                        model: modelName,
+                        reply: aiReply
+                    }));
                     break;
                 }
-            } catch (err) {
-                console.warn(`[Failover Warning] Model ${modelName} failed. Trying next...`, err);
+            } catch (err: any) {
+                console.warn(`[Trace: ${traceId}] [Failover Warning] Model ${modelName} failed. Trying next...`, err.message);
             }
         }
 
@@ -90,9 +110,13 @@ export async function POST(request: Request) {
                 from: twilioPhone,
                 to: fromPhone
             });
-            console.log(`[Twilio Success] Message dispatched to ${fromPhone}`);
+            console.log(JSON.stringify({
+                trace_id: traceId,
+                event: 'Twilio SMS Dispatched',
+                to: fromPhone
+            }));
         } else {
-            console.warn('[Twilio Warning] Credentials missing, SMS could not be dispatched via API.');
+            console.warn(`[Trace: ${traceId}] [Twilio Warning] Credentials missing, SMS could not be dispatched.`);
         }
 
         return new NextResponse('<Response></Response>', {
@@ -100,8 +124,8 @@ export async function POST(request: Request) {
             headers: { 'Content-Type': 'text/xml' }
         });
 
-    } catch (error) {
-        console.error('[Twilio Gemini Webhook Critical Error]:', error);
+    } catch (error: any) {
+        console.error(`[Trace: ${traceId}] [Twilio Gemini Webhook Critical Error]:`, error);
         return new NextResponse('<Response></Response>', {
             status: 200,
             headers: { 'Content-Type': 'text/xml' }
