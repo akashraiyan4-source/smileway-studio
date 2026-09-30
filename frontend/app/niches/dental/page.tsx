@@ -489,7 +489,6 @@ export default function Page() {
         .glass-sound-btn:hover { transform: scale(1.1); }
         .glass-sound-btn svg { width: 17px; height: 17px; fill: rgba(255, 255, 255, 0.95); }
         
-        /* Video slider updated: No blur, positioned above background arrow, subtle water/cyan colored border */
         .swipe-interactive-zone { position: absolute; bottom: 20px; left: 16px; right: 16px; height: 50px; background: transparent !important; backdrop-filter: none !important; border: 1px solid rgba(56, 189, 248, 0.5) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
         .swipe-arrow-handle { height: 38px; width: 46px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); will-change: transform; }
         .swipe-arrow-handle svg { width: 18px; height: 18px; fill: var(--apple-blue); pointer-events: none; }
@@ -654,9 +653,9 @@ export default function Page() {
         </div>
 
         <div className="hero-box" id="heroSec" ref={heroBoxRef}>
-          <video ref={vidStartRef} className="hero-vid" src="/start.mp4" poster="/start-poster.jpg" playsInline preload="auto" loop muted={isMuted} autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
-          <video ref={vidTransRef} className="hero-vid" src="/trans.mp4" playsInline preload="auto" muted={isMuted} style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
-          <video ref={vidEndRef} className="hero-vid" src="/end.mp4" playsInline preload="auto" loop muted={isMuted} style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidStartRef} className="hero-vid" src="/niches/Dental/start.mp4" poster="/niches/Dental/start-poster.jpg" playsInline preload="auto" loop muted={isMuted} autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
+          <video ref={vidTransRef} className="hero-vid" src="/niches/Dental/trans.mp4" playsInline preload="auto" muted={isMuted} style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidEndRef} className="hero-vid" src="/niches/Dental/end.mp4" playsInline preload="auto" loop muted={isMuted} style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
 
           <button className="glass-sound-btn" onClick={toggleSound} aria-label="Toggle Sound">
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
@@ -689,7 +688,7 @@ export default function Page() {
       <div className="content-container">
         <section className="section-padding section-top-tight animate-on-scroll">
           <div className="doctor-card">
-            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80" alt="Dr Julian Vance" className="doc-img" />
+            <img src="/niches/Dental/c23912ad3f2178f8b81d65f4ed59834.jpg" alt="Dr Julian Vance" className="doc-img" />
             <div className="doc-tag">★ Chief Cosmetic Dentist</div>
           </div>
           <div className="sec-tag">Oral Restoration Authority</div>
@@ -742,17 +741,17 @@ export default function Page() {
           <div className="interactive-cases-box" id="casesBox">
             <div className="interactive-cases-inner" ref={casesInnerRef}>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/Dental/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #481: Micro-Thin Veneers</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
               </div>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/Dental/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #512: Full Arch Symmetry</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
               </div>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/Dental/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #604: Precision Bio-Implant</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
               </div>
@@ -850,7 +849,6 @@ export default function Page() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
-      {/* AI Assistant Always Fixed Bottom-Right with Robot Rotation Animation */}
       <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
