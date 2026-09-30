@@ -653,9 +653,9 @@ export default function Page() {
         </div>
 
         <div className="hero-box" id="heroSec" ref={heroBoxRef}>
-          <video ref={vidStartRef} className="hero-vid" src="/niches/Dental/start.mp4" poster="/niches/Dental/start-poster.jpg" playsInline preload="auto" loop muted={isMuted} autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
-          <video ref={vidTransRef} className="hero-vid" src="/niches/Dental/trans.mp4" playsInline preload="auto" muted={isMuted} style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
-          <video ref={vidEndRef} className="hero-vid" src="/niches/Dental/end.mp4" playsInline preload="auto" loop muted={isMuted} style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidStartRef} className="hero-vid" src="/niches/dental/start.mp4" poster="/niches/dental/start-poster.jpg" playsInline preload="auto" loop muted={isMuted} autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
+          <video ref={vidTransRef} className="hero-vid" src="/niches/dental/trans.mp4" playsInline preload="auto" muted={isMuted} style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidEndRef} className="hero-vid" src="/niches/dental/end.mp4" playsInline preload="auto" loop muted={isMuted} style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
 
           <button className="glass-sound-btn" onClick={toggleSound} aria-label="Toggle Sound">
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
@@ -688,7 +688,7 @@ export default function Page() {
       <div className="content-container">
         <section className="section-padding section-top-tight animate-on-scroll">
           <div className="doctor-card">
-            <img src="/niches/Dental/c23912ad3f2178f8b81d65f4ed59834.jpg" alt="Dr Julian Vance" className="doc-img" />
+            <img src="/niches/dental/c23912ad3f2178f8b81d65f4ed59834.jpg" alt="Dr Julian Vance" className="doc-img" />
             <div className="doc-tag">★ Chief Cosmetic Dentist</div>
           </div>
           <div className="sec-tag">Oral Restoration Authority</div>
@@ -741,17 +741,17 @@ export default function Page() {
           <div className="interactive-cases-box" id="casesBox">
             <div className="interactive-cases-inner" ref={casesInnerRef}>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/niches/Dental/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/dental/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #481: Micro-Thin Veneers</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
               </div>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/niches/Dental/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/dental/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #512: Full Arch Symmetry</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
               </div>
               <div className="case-card-stream">
-                <div className="case-photo-slot"><img src="/niches/Dental/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/dental/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.8rem', fontWeight: 700 }}>Case #604: Precision Bio-Implant</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
               </div>
