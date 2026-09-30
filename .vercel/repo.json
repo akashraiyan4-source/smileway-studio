@@ -1,0 +1,11 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_a9dOef4GMY9LRaFeULgylhM1Gr7x",
+      "name": "smileway-studio",
+      "directory": "frontend",
+      "orgId": "team_MkAWlaB0rtLtfVTJ3iPXiBAF"
+    }
+  ]
+}
