@@ -6,42 +6,38 @@ interface ScoreLeadRequestBody {
     phone?: string;
     treatment?: string;
     budget?: string;
-    tenantId?: string; // Multi-tenant support er jonno
 }
 
 export async function POST(request: Request) {
-    // Phase 9: Structured Trace-ID generation for tracking every request
-    const traceId = request.headers.get('x-trace-id') || `tr_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
-    
     try {
         let body: ScoreLeadRequestBody;
         try {
             body = await request.json();
         } catch {
             return NextResponse.json(
-                { success: false, error: 'Invalid JSON payload provided.', trace_id: traceId },
+                { success: false, error: 'Invalid JSON payload provided.' },
                 { status: 400 }
             );
         }
 
-        const { fullName, phone, treatment, budget, tenantId = 'default_tenant' } = body;
+        const { fullName, phone, treatment, budget } = body;
 
-        // Input validation
+        // ইনপুট ভ্যালিডেশন
         if (!fullName || typeof fullName !== 'string' || fullName.trim() === '' ||
             !phone || typeof phone !== 'string' || phone.trim() === '') {
             return NextResponse.json(
-                { success: false, error: 'Full name and phone are required for scoring.', trace_id: traceId },
+                { success: false, error: 'Full name and phone are required for scoring.' },
                 { status: 400 }
             );
         }
 
-        let score = 50; // Base score
+        let score = 50; // বেস বা প্রাথমিক স্কোর
         let tier = 'Standard Lead';
 
         const cleanTreatment = treatment ? treatment.trim() : 'General Consultation';
         const cleanBudget = budget ? budget.trim() : 'Standard';
 
-        // Treatment ba budget er upor ভিত্তি kore VIP score calculation
+        // ট্রিটমেন্ট বা বাজেটের ওপর ভিত্তি করে ভিআইপি স্কোর ক্যালকুলেশন
         const highValueTreatments = ['Porcelain Veneers', 'Dental Implants', 'Full Smile Makeover'];
         if (highValueTreatments.some(t => t.toLowerCase() === cleanTreatment.toLowerCase())) {
             score += 30;
@@ -59,7 +55,6 @@ export async function POST(request: Request) {
 
         const scoredLead = {
             id: `score_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-            tenantId: tenantId, // Tenant isolation ensure korar jonno
             fullName: fullName.trim(),
             phone: phone.trim(),
             treatment: cleanTreatment,
@@ -71,35 +66,24 @@ export async function POST(request: Request) {
 
         scoredLeadsDatabase.push(scoredLead);
 
-        // Phase 9: Structured Trace-ID Logging
-        console.log(JSON.stringify({
-            trace_id: traceId,
-            event: 'Lead Scored and Segmented',
-            tenant_id: tenantId,
-            lead_id: scoredLead.id,
-            score: score,
-            tier: tier,
-            timestamp: scoredLead.scoredAt
-        }));
+        console.log(`[Lead Scoring Engine] ${scoredLead.fullName} scored ${score} -> Classified as: ${tier}`);
 
         return NextResponse.json(
             {
                 success: true,
                 message: 'Lead successfully scored and segmented!',
-                leadData: scoredLead,
-                trace_id: traceId
+                leadData: scoredLead
             },
             { status: 200 }
         );
 
-    } catch (error: any) {
-        console.error(`[Trace: ${traceId}] [Lead Scoring Critical Error]:`, error);
+    } catch (error) {
+        console.error('[Lead Scoring Critical Error]:', error);
         
         return NextResponse.json(
             { 
                 success: false, 
-                error: error.message || 'Failed to score and segment lead. Please try again later.',
-                trace_id: traceId
+                error: 'Failed to score and segment lead. Please try again later.' 
             },
             { status: 500 }
         );

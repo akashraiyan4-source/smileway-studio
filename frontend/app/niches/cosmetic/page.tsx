@@ -199,7 +199,7 @@ export default function CosmeticPage() {
       const totalWidth = inner.scrollWidth / 2;
 
       function step() {
-        if (!isDraggingTrack && inner) {
+        if (!isDraggingTrack) {
           velocity = velocity * 0.96 + baseSpeed * 0.04;
           scrollX += velocity;
 
@@ -220,7 +220,7 @@ export default function CosmeticPage() {
       });
 
       box.addEventListener('pointermove', (e: PointerEvent) => {
-        if (!isDraggingTrack || !inner) return;
+        if (!isDraggingTrack) return;
         const now = Date.now();
         const dt = now - lastTime;
         const dx = e.clientX - lastX;
