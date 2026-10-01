@@ -23,7 +23,6 @@ export default function Page() {
   const knobSvgRef = useRef<SVGSVGElement>(null);
   const reviewsInnerRef = useRef<HTMLDivElement>(null);
   const casesInnerRef = useRef<HTMLDivElement>(null);
-  const chatBodyRef = useRef<HTMLDivElement>(null);
   const heroBoxRef = useRef<HTMLDivElement>(null);
 
   const [drawerName, setDrawerName] = useState('');
@@ -48,7 +47,12 @@ export default function Page() {
     const vidStart = vidStartRef.current;
     if (vidStart) {
       vidStart.muted = isMuted;
-      vidStart.play().catch(() => {});
+      vidStart.play().catch(() => {
+        // Fallback for strict browser autoplay policies
+        vidStart.muted = true;
+        setIsMuted(true);
+        vidStart.play().catch(() => {});
+      });
     }
 
     initInertialMarquee('reviewsBox', reviewsInnerRef, 0.6);
@@ -653,9 +657,9 @@ export default function Page() {
         </div>
 
         <div className="hero-box" id="heroSec" ref={heroBoxRef}>
-          <video ref={vidStartRef} className="hero-vid" src="/niches/dental/start.mp4" poster="/niches/dental/start-poster.jpg" playsInline preload="auto" loop muted={isMuted} autoPlay style={{ zIndex: 1, opacity: 1 }}></video>
-          <video ref={vidTransRef} className="hero-vid" src="/niches/dental/trans.mp4" playsInline preload="auto" muted={isMuted} style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
-          <video ref={vidEndRef} className="hero-vid" src="/niches/dental/end.mp4" playsInline preload="auto" loop muted={isMuted} style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidStartRef} className="hero-vid" src="/niches/dental/start.mp4" playsInline autoPlay muted loop preload="auto" style={{ zIndex: 1, opacity: 1 }}></video>
+          <video ref={vidTransRef} className="hero-vid" src="/niches/dental/trans.mp4" playsInline muted preload="auto" style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidEndRef} className="hero-vid" src="/niches/dental/end.mp4" playsInline muted loop preload="auto" style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
 
           <button className="glass-sound-btn" onClick={toggleSound} aria-label="Toggle Sound">
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
