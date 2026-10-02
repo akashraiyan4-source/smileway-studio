@@ -1689,10 +1689,10 @@ export default function CosmeticPage() {
 
             <div className="pane-video pane-left">
               <video id="beforeLoop" autoPlay muted loop playsInline preload="auto" poster="/niches/cosmetics/before-poster.jpg">
-                <source src="/niches/cosmetics/cosmetic befor loop.mp4" type="video/mp4" />
+                <source src="/niches/cosmetics/cosmetic-befor-loop.mp4" type="video/mp4" />
               </video>
               <video id="beforeAction" className="pane-video action-layer" muted loop playsInline preload="auto" poster="/niches/cosmetics/before-poster.jpg">
-                <source src="/niches/cosmetics/cosmetic before swap.mp4" type="video/mp4" />
+                <source src="/niches/cosmetics/cosmetic-before-swap.mp4" type="video/mp4" />
               </video>
             </div>
 
@@ -1701,7 +1701,7 @@ export default function CosmeticPage() {
                 <source src="/niches/cosmetics/cosmetic after loop.mp4" type="video/mp4" />
               </video>
               <video id="afterAction" className="pane-video action-layer" muted loop playsInline preload="auto" poster="/niches/cosmetics/after-poster.jpg">
-                <source src="/niches/cosmetics/cosmetic after swap.mp4" type="video/mp4" />
+                <source src="/niches/cosmetics/cosmetic-after-swap.mp4" type="video/mp4" />
               </video>
             </div>
 
