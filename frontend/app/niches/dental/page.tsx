@@ -473,151 +473,156 @@ export default function DentalPage() {
     <div className="app-shell">
       <style jsx global>{`
         :root {
-          --apple-titanium: #eaedf2;
+          --apple-titanium: #FAF8F5;
           --card-pure-white: #ffffff;
-          --apple-dark: #111827;
-          --apple-gray: #64748b;
-          --apple-border: rgba(0, 0, 0, 0.08);
+          --apple-dark: #141316;
+          --apple-gray: #5C5854;
+          --apple-border: rgba(0, 113, 227, 0.18);
           --apple-blue: #0071e3;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
         html, body { width: 100%; min-height: 100%; background: var(--apple-titanium); color: var(--apple-dark); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; overflow-x: hidden; touch-action: pan-y; -webkit-font-smoothing: antialiased; letter-spacing: -0.015em; }
         .app-shell { width: 100%; max-width: 1400px; margin: 0 auto; background: var(--apple-titanium); min-height: 100vh; position: relative; z-index: 1; display: flex; flex-direction: column; will-change: transform; }
-        header { position: sticky; top: 0; z-index: 100; background: rgba(234, 237, 242, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 20px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
-        .brand-title { font-size: 1.4rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; }
+        
+        header { position: sticky; top: 0; z-index: 100; background: rgba(250, 248, 245, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
+        .brand-title { font-size: 1.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; }
         .brand-title span { color: var(--apple-blue); }
-        .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 18px; border-radius: 8px; color: var(--apple-blue); font-size: 0.88rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03); }
-        .status-dot-green { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 6px rgba(52, 199, 89, 0.6); }
-        .rating-strip { padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.85rem; font-weight: 700; color: var(--apple-gray); background: var(--card-pure-white); border-bottom: 1px solid var(--apple-border); }
+        .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.08); }
+        .status-dot-green { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 8px rgba(52, 199, 89, 0.8); }
+        
+        .rating-strip { padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.88rem; font-weight: 700; color: var(--apple-gray); background: #ffffff; border-bottom: 1px solid var(--apple-border); }
         .g-icon { font-weight: 800; color: #4285f4; }
         .stars { color: #ff9500; letter-spacing: 2px; }
-        .press-trust-bar { padding: 14px 20px; background: rgba(255, 255, 255, 0.8); border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; position: relative; cursor: grab; }
-        .press-trust-inner { display: inline-flex; align-items: center; gap: 36px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; }
-        .celebrity-ticker-bar { padding: 12px 20px; background: #ffffff; border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; display: flex; align-items: center; }
-        .celebrity-ticker-inner { display: inline-flex; align-items: center; gap: 32px; font-size: 0.76rem; font-weight: 700; color: #0071e3; animation: celebrityScroll 20s linear infinite; }
+        
+        .press-trust-bar { padding: 16px 20px; background: rgba(255, 255, 255, 0.9); border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; position: relative; cursor: grab; }
+        .press-trust-inner { display: inline-flex; align-items: center; gap: 40px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; }
+        
+        .celebrity-ticker-bar { padding: 14px 20px; background: #ffffff; border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; display: flex; align-items: center; }
+        .celebrity-ticker-inner { display: inline-flex; align-items: center; gap: 36px; font-size: 0.78rem; font-weight: 700; color: #0071e3; animation: celebrityScroll 20s linear infinite; }
         @keyframes celebrityScroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
-        .hero-split-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; padding: 60px 40px 80px 40px; max-width: 1320px; margin: 0 auto; width: 100%; }
-        .hero-text-col { display: flex; flex-direction: column; gap: 22px; text-align: left; }
-        .hero-tagline { font-size: 0.82rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--apple-blue); }
-        .hero-main-title { font-size: 3.8rem; font-weight: 900; line-height: 1.06; letter-spacing: -0.04em; color: var(--apple-dark); }
-        .hero-sub-copy { font-size: 1.08rem; color: var(--apple-gray); line-height: 1.7; max-width: 560px; }
-        .hero-pill-cluster { display: flex; flex-wrap: wrap; gap: 12px; margin: 8px 0; }
-        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 8px; font-size: 0.8rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03); }
+        .hero-split-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; padding: 70px 40px 90px 40px; max-width: 1360px; margin: 0 auto; width: 100%; }
+        .hero-text-col { display: flex; flex-direction: column; gap: 24px; text-align: left; }
+        .hero-tagline { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--apple-blue); }
+        .hero-main-title { font-size: 4rem; font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; color: var(--apple-dark); }
+        .hero-sub-copy { font-size: 1.12rem; color: var(--apple-gray); line-height: 1.75; max-width: 580px; }
+        .hero-pill-cluster { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; }
+        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); }
         .h-pill span { color: var(--apple-blue); }
-        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 18px 36px; border-radius: 8px; font-size: 1rem; font-weight: 700; text-decoration: none; box-shadow: 0 10px 28px rgba(0, 113, 227, 0.38); width: fit-content; cursor: pointer; transition: transform 0.3s ease; }
-        .hero-cta-btn:hover { transform: translateY(-2px); }
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 999px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4); width: fit-content; cursor: pointer; transition: transform 0.3s ease; }
+        .hero-cta-btn:hover { transform: translateY(-3px); }
         
-        .hero-box { position: relative; width: 100%; max-width: 420px; margin: 0 auto; border-radius: 16px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 30px 70px -12px rgba(0, 0, 0, 0.3); border: 1px solid var(--apple-border); }
+        .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 20px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.35); border: 1px solid var(--apple-border); }
         .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background-color: #0d131f; }
-        .glass-sound-btn { position: absolute; top: 18px; right: 18px; z-index: 30; width: 42px; height: 42px; border-radius: 50%; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.45); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
-        .glass-sound-btn svg { width: 18px; height: 18px; fill: rgba(255, 255, 255, 0.98); }
+        .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
+        .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 22px; left: 18px; right: 18px; height: 54px; background: transparent !important; border: 1px solid rgba(56, 189, 248, 0.6) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
-        .swipe-arrow-handle { height: 42px; width: 50px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); }
-        .swipe-arrow-handle svg { width: 20px; height: 20px; fill: var(--apple-blue); pointer-events: none; }
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: transparent !important; border: 1px solid rgba(56, 189, 248, 0.7) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
+        .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
+        .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
 
-        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 54%; background: rgba(255, 255, 255, 0.99); border-radius: 16px 16px 0 0; box-shadow: 0 -16px 45px rgba(0, 0, 0, 0.2); z-index: 40; display: flex; flex-direction: column; padding: 24px 20px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); overflow-y: auto; }
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: rgba(255, 255, 255, 0.99); border-radius: 20px 20px 0 0; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.25); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
-        .drawer-header { text-align: center; margin-bottom: 12px; padding-right: 20px; }
-        .drawer-title { color: var(--apple-dark); font-size: 1.15rem; font-weight: 800; }
-        .drawer-sub { color: var(--apple-gray); font-size: 0.76rem; margin-top: 3px; }
-        .drawer-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 12px 14px; border-radius: 8px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 10px; outline: none; }
-        .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 13px; border-radius: 8px; color: #ffffff; font-size: 0.92rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 14px rgba(0,113,227,0.3); }
-        .drawer-dismiss { position: absolute; top: 16px; right: 16px; background: var(--apple-titanium); border: none; width: 28px; height: 28px; border-radius: 50%; color: var(--apple-gray); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
+        .drawer-title { color: var(--apple-dark); font-size: 1.25rem; font-weight: 800; }
+        .drawer-sub { color: var(--apple-gray); font-size: 0.78rem; margin-top: 4px; }
+        .drawer-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 13px 16px; border-radius: 10px; font-size: 0.9rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
+        .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 14px; border-radius: 10px; color: #ffffff; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(0,113,227,0.35); }
+        .drawer-dismiss { position: absolute; top: 18px; right: 18px; background: var(--apple-titanium); border: none; width: 30px; height: 30px; border-radius: 50%; color: var(--apple-gray); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         
-        .animate-on-scroll { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-        .content-container { max-width: 960px; margin: 0 auto; width: 100%; padding: 0 24px; }
-        .section-padding { padding: 60px 0; }
-        .section-top-tight { padding-top: 16px; }
-        .sec-tag { font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 10px; }
-        .sec-heading { font-size: 2.2rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 26px; }
+        .content-container { max-width: 1000px; margin: 0 auto; width: 100%; padding: 0 28px; }
+        .section-padding { padding: 70px 0; }
+        .section-top-tight { padding-top: 20px; }
+        .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
+        .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
         
-        .doctor-card { position: relative; border-radius: 16px; overflow: hidden; margin-bottom: 28px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06); }
-        .doc-img { width: 100%; height: 520px; object-fit: cover; object-position: center 18%; display: block; }
-        .doc-tag { position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.96); padding: 8px 18px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .doctor-card { position: relative; border-radius: 20px; overflow: hidden; margin-bottom: 32px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); }
+        .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
+        .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
         
-        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
-        .stat-pill { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 12px; padding: 22px 18px; text-align: center; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04); }
-        .stat-num { font-size: 1.9rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 4px; }
-        .stat-label { font-size: 0.82rem; font-weight: 600; color: var(--apple-gray); }
-        .accreditation-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; justify-content: center; }
-        .acc-badge { background: var(--card-pure-white); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.8rem; font-weight: 700; padding: 10px 20px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(0,0,0,0.03); }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .stat-pill { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 14px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); }
+        .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 6px; }
+        .stat-label { font-size: 0.86rem; font-weight: 600; color: var(--apple-gray); }
+        .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
+        .acc-badge { background: var(--card-pure-white); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
         
-        .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 12px 0 20px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); }
-        .infinite-marquee-inner { display: flex; gap: 20px; width: max-content; }
-        .review-bubble { width: 320px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 12px; padding: 24px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); }
-        .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .rev-name { font-size: 0.92rem; font-weight: 800; color: var(--apple-dark); }
-        .rev-quote { font-size: 0.88rem; line-height: 1.6; color: var(--apple-gray); }
+        .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+        .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
+        .review-bubble { width: 340px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); }
+        .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
+        .rev-quote { font-size: 0.92rem; line-height: 1.65; color: var(--apple-gray); }
         
-        .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 12px 0 20px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent); }
-        .interactive-cases-inner { display: flex; gap: 20px; width: max-content; }
-        .case-card-stream { width: 280px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 12px; padding: 16px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); }
-        .case-photo-slot { position: relative; border-radius: 8px; overflow: hidden; height: 210px; margin-bottom: 12px; background: #e2e5e9; }
+        .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+        .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
+        .case-card-stream { width: 300px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 18px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); }
+        .case-photo-slot { position: relative; border-radius: 12px; overflow: hidden; height: 230px; margin-bottom: 14px; background: #e2e5e9; }
         .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
         
-        .faq-list { display: flex; flex-direction: column; gap: 14px; }
-        .faq-item { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04); }
-        .faq-question { width: 100%; padding: 20px 24px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 0.96rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
-        .faq-chevron { font-size: 1.3rem; color: var(--apple-gray); transition: transform 0.25s ease; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 24px; font-size: 0.88rem; color: var(--apple-gray); line-height: 1.65; }
-        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 20px; }
+        .faq-list { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 14px; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); }
+        .faq-question { width: 100%; padding: 22px 26px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
+        .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.25s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 26px; font-size: 0.92rem; color: var(--apple-gray); line-height: 1.7; }
+        .faq-item.active .faq-answer { max-height: 220px; padding-bottom: 22px; }
         .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
 
-        .consult-card { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 36px 30px; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06); margin-bottom: 30px; }
-        .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 8px 16px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; color: #b25e00; margin-bottom: 18px; }
-        .slots-dot { width: 7px; height: 7px; border-radius: 50%; background: #ff9500; }
-        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 8px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 8px; padding: 16px 18px; margin-bottom: 20px; font-size: 0.82rem; font-weight: 700; color: #248a3d; width: 100%; }
+        .consult-card { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 20px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); margin-bottom: 34px; }
+        .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
+        .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff9500; }
+        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
         
-        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 15px 18px; border-radius: 8px; font-size: 0.95rem; color: var(--apple-dark); margin-bottom: 14px; outline: none; }
-        .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 16px; border-radius: 8px; color: #ffffff; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 20px rgba(0, 113, 227, 0.35); }
+        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 10px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; }
+        .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 18px; border-radius: 10px; color: #ffffff; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.4); }
         
-        .map-preview-card { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05); }
-        .map-preview-iframe-container { position: relative; width: 100%; height: 380px; background: #e5e3df; }
+        .map-preview-card { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06); }
+        .map-preview-iframe-container { position: relative; width: 100%; height: 400px; background: #e5e3df; }
         .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
-        .map-floating-badge { position: absolute; top: 18px; left: 18px; background: #ffffff; border-radius: 8px; padding: 14px 18px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); display: flex; align-items: center; justify-content: space-between; gap: 18px; max-width: 340px; width: calc(100% - 36px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); }
-        .map-badge-title { font-size: 0.9rem; font-weight: 800; color: var(--apple-dark); line-height: 1.2; }
-        .map-badge-sub { font-size: 0.75rem; color: var(--apple-gray); margin-top: 3px; }
-        .map-badge-icons { display: flex; gap: 8px; align-items: center; }
-        .map-icon-btn { width: 34px; height: 34px; border-radius: 8px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 0.95rem; }
+        .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); }
+        .map-badge-title { font-size: 0.95rem; font-weight: 800; color: var(--apple-dark); line-height: 1.2; }
+        .map-badge-sub { font-size: 0.78rem; color: var(--apple-gray); margin-top: 3px; }
+        .map-badge-icons { display: flex; gap: 10px; align-items: center; }
+        .map-icon-btn { width: 36px; height: 36px; border-radius: 10px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; }
 
-        .floating-ai { position: fixed !important; bottom: 28px !important; right: 28px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.96); border: 1.5px solid rgba(0, 113, 227, 0.4); width: 56px; height: 56px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22); cursor: pointer; transition: transform 0.4s ease; }
+        /* Floating AI strictly locked to bottom right */
+        .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
         .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
-        .ai-avatar { font-size: 1.6rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
-        .status-dot-tiny { width: 10px; height: 10px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; }
+        .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
+        .status-dot-tiny { width: 11px; height: 11px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; box-shadow: 0 0 6px rgba(52, 199, 89, 0.8); }
         
-        .ai-chat-modal { position: fixed !important; bottom: 96px !important; right: 28px !important; width: 400px !important; max-width: calc(100vw - 32px) !important; height: 550px !important; max-height: calc(100vh - 120px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
+        .ai-chat-modal { position: fixed !important; bottom: 104px !important; right: 32px !important; width: 420px !important; max-width: calc(100vw - 32px) !important; height: 580px !important; max-height: calc(100vh - 130px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
-        .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 20px; display: flex; flex-direction: column; box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.25); border: 1px solid var(--apple-border); overflow: hidden; }
-        .ai-chat-header { padding: 18px 22px; background: #ffffff; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; }
-        .ai-chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; background: var(--apple-titanium); }
-        .ai-msg { max-width: 84%; padding: 12px 16px; border-radius: 14px; font-size: 0.88rem; line-height: 1.5; }
+        .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 22px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
+        .ai-chat-header { padding: 20px 24px; background: #ffffff; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; }
+        .ai-chat-body { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--apple-titanium); }
+        .ai-msg { max-width: 85%; padding: 13px 18px; border-radius: 16px; font-size: 0.9rem; line-height: 1.55; }
         .ai-bot { background: #ffffff; color: var(--apple-dark); align-self: flex-start; border: 1px solid var(--apple-border); }
         .ai-user { background: var(--apple-blue); color: #ffffff; align-self: flex-end; }
-        .ai-chat-footer { padding: 14px 20px; border-top: 1px solid var(--apple-border); display: flex; gap: 10px; background: #ffffff; }
-        .ai-chat-input { flex: 1; border: 1px solid var(--apple-border); background: var(--card-pure-white); border-radius: 999px; padding: 11px 18px; font-size: 0.88rem; outline: none; }
-        .ai-send-btn { background: var(--apple-blue); color: #ffffff; border: none; padding: 9px 20px; border-radius: 999px; font-size: 0.86rem; font-weight: 700; cursor: pointer; }
+        .ai-chat-footer { padding: 16px 22px; border-top: 1px solid var(--apple-border); display: flex; gap: 12px; background: #ffffff; }
+        .ai-chat-input { flex: 1; border: 1px solid var(--apple-border); background: var(--card-pure-white); border-radius: 999px; padding: 12px 20px; font-size: 0.9rem; outline: none; }
+        .ai-send-btn { background: var(--apple-blue); color: #ffffff; border: none; padding: 10px 22px; border-radius: 999px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
-        .chat-calendar-card { align-self: flex-start; width: 90%; background: #ffffff; border: 1.5px solid #0071e3; border-radius: 16px; padding: 16px; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.12); }
-        .chat-calendar-title { font-size: 0.88rem; font-weight: 700; color: #0071e3; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
-        .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 11px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+        .chat-calendar-card { align-self: flex-start; width: 90%; background: #ffffff; border: 1.5px solid #0071e3; border-radius: 18px; padding: 18px; box-shadow: 0 10px 28px rgba(0, 113, 227, 0.15); }
+        .chat-calendar-title { font-size: 0.9rem; font-weight: 700; color: #0071e3; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 11px 14px; border-radius: 12px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
+        .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 12px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
-        footer { padding: 20px 24px 30px 24px; text-align: center; font-size: 0.8rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); }
+        footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); }
         
         @media (max-width: 768px) {
           header { padding: 16px 20px; justify-content: center !important; }
-          .brand-title { font-size: 1.2rem; text-align: center; }
+          .brand-title { font-size: 1.25rem; text-align: center; }
           .phone-badge { display: none; }
-          .rating-strip { font-size: 0.78rem; padding: 12px 16px; text-align: center; }
+          .rating-strip { font-size: 0.8rem; padding: 12px 16px; text-align: center; }
           .hero-split-grid { grid-template-columns: 1fr; padding: 0 0 40px 0 !important; gap: 24px; text-align: center; }
-          .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 78vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 0 28px 28px !important; }
+          .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 80vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 0 30px 30px !important; }
           .hero-text-col { padding: 0 24px !important; align-items: center; text-align: center; gap: 16px; }
-          .hero-main-title { font-size: 2.4rem !important; line-height: 1.14 !important; }
-          .ai-chat-modal { bottom: 92px !important; right: 14px !important; left: 14px !important; width: calc(100vw - 28px) !important; height: min(550px, 78vh) !important; }
+          .hero-main-title { font-size: 2.6rem !important; line-height: 1.12 !important; }
+          .ai-chat-modal { bottom: 98px !important; right: 14px !important; left: 14px !important; width: calc(100vw - 28px) !important; height: min(580px, 80vh) !important; }
         }
       `}</style>
 
@@ -664,10 +669,10 @@ export default function DentalPage() {
           </p>
           <div className="hero-pill-cluster">
             <div className="h-pill service-trigger-btn" data-topic="Zero-Prep Micro Veneers" style={{cursor: 'pointer'}}><span>✨</span> Zero-Prep Micro Veneers</div>
-            <div className="h-pill service-trigger-btn" data-topic="10-Year Structural Warranty" style={{cursor: 'pointer'}}><span>🛡️️</span> 10-Year Structural Warranty</div>
+            <div className="h-pill service-trigger-btn" data-topic="10-Year Structural Warranty" style={{cursor: 'pointer'}}><span>🛡</span> 10-Year Structural Warranty</div>
             <div className="h-pill service-trigger-btn" data-topic="48-Hour Digital Smile Preview" style={{cursor: 'pointer'}}><span>⏱️</span> 48-Hour Digital Smile Preview</div>
           </div>
-          <div style={{ marginTop: '14px', width: '100%', display: 'flex' }}>
+          <div style={{ marginTop: '16px', width: '100%', display: 'flex' }}>
             <a href="#consultation-area" className="hero-cta-btn service-trigger-btn" data-topic="Priority Smile Triage">Reserve Priority Smile Triage →</a>
           </div>
         </div>
@@ -708,12 +713,12 @@ export default function DentalPage() {
       <div className="content-container">
         <section className="section-padding section-top-tight animate-on-scroll">
           <div className="doctor-card">
-            <img src="/niches/dental/c23912ad3f2178f8b81d65f4ed59834.jpg" alt="Dr Julian Vance" className="doc-img" />
+            <img src="/niches/dental/c23912ad3f2178f8b81d65f4ed59834.jpg" alt="Dr Julian Vance" className="doc-img" onError={(e)=>{(e.target as HTMLElement).style.display='none'}} />
             <div className="doc-tag">★ Chief Cosmetic Dentist</div>
           </div>
           <div className="sec-tag">Oral Restoration Authority</div>
           <h2 className="sec-heading">Dr. Julian Vance, DDS</h2>
-          <p style={{ fontSize: '1.02rem', color: 'var(--apple-gray)', lineHeight: '1.7' }}>
+          <p style={{ fontSize: '1.08rem', color: 'var(--apple-gray)', lineHeight: '1.75' }}>
             Specializing in zero-pain bio-enamel restoration and handcrafted porcelain veneers. Delivering transformative bite alignment and natural aesthetic radiance for high-profile smiles.
           </p>
           <div className="stats-row">
@@ -740,15 +745,15 @@ export default function DentalPage() {
           <div className="infinite-marquee-box" id="reviewsBox">
             <div className="infinite-marquee-inner" ref={reviewsInnerRef}>
               <div className="review-bubble">
-                <div className="rev-head"><span className="rev-name">Elena R. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.8rem'}}>★★★★★</span></div>
+                <div className="rev-head"><span className="rev-name">Elena R. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
                 <p className="rev-quote">"Got my veneers done here. 100% pain-free and natural white. Transformed my self-confidence completely!"</p>
               </div>
               <div className="review-bubble">
-                <div className="rev-head"><span className="rev-name">Marcus T. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.8rem'}}>★★★★★</span></div>
+                <div className="rev-head"><span className="rev-name">Marcus T. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
                 <p className="rev-quote">"Dr. Vance is an absolute artist. Same-day triage and the precision mapping blew my mind."</p>
               </div>
               <div className="review-bubble">
-                <div className="rev-head"><span className="rev-name">Sophia L. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.8rem'}}>★★★★★</span></div>
+                <div className="rev-head"><span className="rev-name">Sophia L. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
                 <p className="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
               </div>
             </div>
@@ -762,18 +767,18 @@ export default function DentalPage() {
             <div className="interactive-cases-inner" ref={casesInnerRef}>
               <div className="case-card-stream">
                 <div className="case-photo-slot"><img src="/niches/dental/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
-                <p style={{ fontSize: '0.85rem', fontWeight: 800 }}>Case #481: Micro-Thin Veneers</p>
-                <p style={{ fontSize: '0.76rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #481: Micro-Thin Veneers</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
               </div>
               <div className="case-card-stream">
                 <div className="case-photo-slot"><img src="/niches/dental/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
-                <p style={{ fontSize: '0.85rem', fontWeight: 800 }}>Case #512: Full Arch Symmetry</p>
-                <p style={{ fontSize: '0.76rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #512: Full Arch Symmetry</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
               </div>
               <div className="case-card-stream">
                 <div className="case-photo-slot"><img src="/niches/dental/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
-                <p style={{ fontSize: '0.85rem', fontWeight: 800 }}>Case #604: Precision Bio-Implant</p>
-                <p style={{ fontSize: '0.76rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #604: Precision Bio-Implant</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
               </div>
             </div>
           </div>
@@ -825,7 +830,7 @@ export default function DentalPage() {
         <section className="section-padding animate-on-scroll" id="consultation-area" style={{ paddingTop: 0 }}>
           <div className="consult-card">
             <div className="slots-pill"><span className="slots-dot"></span><span>Only 3 Priority Triage Slots Left This Week</span></div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '8px' }}>Reserve Your Consultation</h3>
+            <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '10px' }}>Reserve Your Consultation</h3>
             <div className="guarantee-strip">
               <div>🛡️ 10-Year Comprehensive Structural Warranty</div>
               <div>🔒 100% Private VIP Suite & Rear Valet Access</div>
@@ -839,7 +844,7 @@ export default function DentalPage() {
               <option value="roofing">Full Arch Smile Alignment</option>
             </select>
             <input type="datetime-local" value={mainAppointmentDate} onChange={e => setMainAppointmentDate(e.target.value)} className="form-input" />
-            <button className="btn-confirm" onClick={submitMainForm}>Confirm Priority Appointment</button>
+            <button className="btn-confirm service-trigger-btn" data-topic="Priority Appointment Confirmation">Confirm Priority Appointment</button>
           </div>
 
           <div className="map-preview-card">
@@ -869,6 +874,7 @@ export default function DentalPage() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
+      {/* Floating AI correctly locked to bottom right */}
       <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
@@ -878,10 +884,10 @@ export default function DentalPage() {
         <div className="ai-chat-window">
           <div className="ai-chat-header">
             <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
-              <div style={{width:'8px', height:'8px', borderRadius:'50%', background:'#34c759'}}></div>
+              <div style={{width:'9px', height:'9px', borderRadius:'50%', background:'#34c759'}}></div>
               <strong>SmileWay AI Assistant</strong>
             </div>
-            <button onClick={() => setIsChatOpen(false)} style={{background:'none', border:'none', fontSize:'1.4rem', cursor:'pointer'}}>×</button>
+            <button onClick={() => setIsChatOpen(false)} style={{background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer'}}>×</button>
           </div>
           <div className="ai-chat-body" ref={chatBodyRef}>
             {chatMessages.map((msg, idx) => (
@@ -894,7 +900,7 @@ export default function DentalPage() {
                 <div className="chat-calendar-title">📅 Reserve Priority Consultation Slot</div>
                 <input type="datetime-local" value={chatSlot} onChange={e => setChatSlot(e.target.value)} className="chat-calendar-input" />
                 <button className="chat-calendar-btn" onClick={confirmChatSlot}>Confirm Slot Reservation</button>
-                {chatSlotStatus.text && <p style={{ fontSize: '0.74rem', marginTop: '6px', fontWeight: 600, color: chatSlotStatus.color }}>{chatSlotStatus.text}</p>}
+                {chatSlotStatus.text && <p style={{ fontSize: '0.78rem', marginTop: '6px', fontWeight: 600, color: chatSlotStatus.color }}>{chatSlotStatus.text}</p>}
               </div>
             )}
           </div>
