@@ -321,7 +321,7 @@ export default function CosmeticPage() {
     triggerButtons.forEach(btn => {
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
-        e.stopPropagation();
+        e.stopImmediatePropagation();
         const topic = (e.currentTarget as HTMLElement).getAttribute('data-topic') || 'consultation';
 
         if (adaModal) adaModal.classList.remove('show');
@@ -338,13 +338,13 @@ export default function CosmeticPage() {
           aiChatBox.appendChild(proactiveDiv);
           aiChatBox.scrollTop = aiChatBox.scrollHeight;
         }
-      });
+      }, { capture: true });
     });
 
     if (aiCandidacyTriggerBtn) {
       aiCandidacyTriggerBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation();
+        e.stopImmediatePropagation();
         if (adaModal) adaModal.classList.remove('show');
         if (aiModal) aiModal.classList.add('show');
         if (sideDock) sideDock.classList.remove('expanded');
@@ -354,7 +354,7 @@ export default function CosmeticPage() {
           const input = document.getElementById('aiChatInput') as HTMLInputElement;
           if (input) input.focus();
         }, 150);
-      });
+      }, { capture: true });
     }
 
     if (adaCloseBtn) adaCloseBtn.addEventListener('click', closeAllSideModals);
