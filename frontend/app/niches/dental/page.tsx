@@ -472,7 +472,7 @@ export default function DentalPage() {
     <div className="app-shell">
       {/* AMBIENT BLURRED BACKGROUND VIDEO OVER ENTIRE PAGE */}
       <div className="ambient-bg-container">
-        <video className="ambient-bg-video" src="/niches/dental/start.mp4" autoPlay muted loop playsInline></video>
+        <video className="ambient-bg-video" src="/niches/dental/start.mp4" autoPlay muted loop playsInline preload="auto"></video>
         <div className="ambient-bg-overlay"></div>
       </div>
 
@@ -484,14 +484,15 @@ export default function DentalPage() {
           --apple-gray: #5C5854;
           --apple-border: rgba(0, 113, 227, 0.18);
           --apple-blue: #0071e3;
-          --water-blue-cream-mix: linear-gradient(135deg, rgba(250, 248, 245, 0.92) 0%, rgba(56, 189, 248, 0.16) 50%, rgba(0, 113, 227, 0.22) 100%);
+          /* POWERFUL HERO-MATCHED GLOW FOR ALL CARDS: Cream left transitioning to deep vibrant water-blue right */
+          --hero-powerful-glow: linear-gradient(135deg, rgba(250, 248, 245, 0.95) 25%, rgba(56, 189, 248, 0.32) 65%, rgba(0, 113, 227, 0.48) 100%);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
         html, body { width: 100%; min-height: 100%; background: var(--page-cream); color: var(--apple-dark); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; overflow-x: hidden; touch-action: pan-y; -webkit-font-smoothing: antialiased; letter-spacing: -0.015em; }
         
-        .ambient-bg-container { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; pointer-events: none; }
-        .ambient-bg-video { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(1.08); transform: scale(1.1); opacity: 0.35; }
+        .ambient-bg-container { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; pointer-events: none; background-color: var(--page-cream); transform: translate3d(0,0,0); backface-visibility: hidden; }
+        .ambient-bg-video { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(1.08); transform: scale(1.1); opacity: 0.35; will-change: transform; }
         .ambient-bg-overlay { position: absolute; inset: 0; background: rgba(250, 248, 245, 0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 
         .app-shell { width: 100%; max-width: 1400px; margin: 0 auto; min-height: 100vh; position: relative; z-index: 1; display: flex; flex-direction: column; will-change: transform; }
@@ -521,8 +522,8 @@ export default function DentalPage() {
         .hero-sub-copy { font-size: 1.12rem; color: var(--apple-gray); line-height: 1.75; max-width: 580px; }
         
         .hero-pill-cluster { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; }
-        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--water-blue-cream-mix); backdrop-filter: blur(10px); border: 1px solid var(--apple-border); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
-        .h-pill:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0, 113, 227, 0.18); }
+        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 6px 20px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .h-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0, 113, 227, 0.3); }
         .h-pill span { color: var(--apple-blue); }
         
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4); width: fit-content; cursor: pointer; transition: transform 0.25s ease; }
@@ -534,7 +535,7 @@ export default function DentalPage() {
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: var(--water-blue-cream-mix) !important; border: 1px solid rgba(56, 189, 248, 0.7) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; backdrop-filter: blur(10px); }
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: var(--hero-powerful-glow) !important; border: 1.5px solid rgba(0, 113, 227, 0.5) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; backdrop-filter: blur(14px); box-shadow: 0 10px 30px rgba(0, 113, 227, 0.25); }
         .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
         .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
 
@@ -556,25 +557,26 @@ export default function DentalPage() {
         .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
         .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
         
-        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
-        .doctor-card:hover { transform: translateY(-3px); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
+        /* ALL CARDS INFUSED WITH THE POWERFUL HERO VIDEO GLOW */
+        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.2); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .doctor-card:hover { transform: translateY(-3px); box-shadow: 0 30px 70px rgba(0, 113, 227, 0.32); }
         .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
         .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
         
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .stat-pill { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; cursor: pointer; }
+        .stat-pill { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.25s ease; cursor: pointer; }
         .stat-pill:hover { transform: translateY(-3px); }
         .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 6px; }
         .stat-label { font-size: 0.86rem; font-weight: 600; color: var(--apple-gray); }
         
         .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
-        .acc-badge { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: transform 0.25s ease; cursor: pointer; }
+        .acc-badge { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 113, 227, 0.12); transition: transform 0.25s ease; cursor: pointer; }
         .acc-badge:hover { transform: translateY(-2px); }
         
         .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
         
-        .review-bubble { width: 340px; flex-shrink: 0; background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
+        .review-bubble { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease; cursor: pointer; }
         .review-bubble:hover { transform: translateY(-3px); }
         .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
@@ -582,13 +584,13 @@ export default function DentalPage() {
         
         .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
-        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; padding: 20px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
+        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 20px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease; cursor: pointer; }
         .case-card-stream:hover { transform: translateY(-3px); }
         .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
         .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(1.02); }
         
         .faq-list { display: flex; flex-direction: column; gap: 16px; }
-        .faq-item { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; }
+        .faq-item { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; overflow: hidden; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.25s ease; }
         .faq-item:hover { transform: translateY(-2px); }
         .faq-question { width: 100%; padding: 22px 26px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
         .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.25s ease; }
@@ -596,7 +598,7 @@ export default function DentalPage() {
         .faq-item.active .faq-answer { max-height: 220px; padding-bottom: 22px; }
         .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
 
-        .consult-card { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 10px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); margin-bottom: 34px; }
+        .consult-card { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.45); border-radius: 10px; padding: 42px 36px; box-shadow: 0 25px 60px rgba(0, 113, 227, 0.22); margin-bottom: 34px; }
         .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
         .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff9500; }
         .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
@@ -605,7 +607,7 @@ export default function DentalPage() {
         .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 18px; border-radius: 6px; color: #ffffff; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.4); transition: transform 0.25s ease; }
         .btn-confirm:hover { transform: translateY(-3px); }
         
-        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06); }
+        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1.5px solid rgba(0, 113, 227, 0.4); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0, 113, 227, 0.18); }
         .map-preview-iframe-container { position: relative; width: 100%; height: 400px; background: #e5e3df; }
         .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
         .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 6px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); }
@@ -615,12 +617,13 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
-        .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
+        /* PERMANENTLY LOCKED BOTTOM-RIGHT FLOATING AI ASSISTANT */
+        .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 2147483647 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
         .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
         .status-dot-tiny { width: 11px; height: 11px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; box-shadow: 0 0 6px rgba(52, 199, 89, 0.8); }
         
-        .ai-chat-modal { position: fixed !important; bottom: 104px !important; right: 32px !important; width: 420px !important; max-width: calc(100vw - 32px) !important; height: 580px !important; max-height: calc(100vh - 130px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
+        .ai-chat-modal { position: fixed !important; bottom: 104px !important; right: 32px !important; width: 420px !important; max-width: calc(100vw - 32px) !important; height: 580px !important; max-height: calc(100vh - 130px) !important; z-index: 2147483646 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
@@ -643,8 +646,8 @@ export default function DentalPage() {
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
         .extra-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0; }
-        .extra-feature-card { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 10px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
-        .extra-feature-card:hover { transform: translateY(-3px); box-shadow: 0 18px 45px rgba(0, 113, 227, 0.15); }
+        .extra-feature-card { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 10px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .extra-feature-card:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(0, 113, 227, 0.3); }
         .extra-feature-icon { font-size: 2rem; margin-bottom: 12px; }
         .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
         .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
@@ -783,7 +786,7 @@ export default function DentalPage() {
           <h2 className="sec-heading">Exclusive Beverly Hills Protocol</h2>
           <div className="extra-features-grid">
             <div className="extra-feature-card service-trigger-btn" data-topic="In-House Master Atelier Lab">
-              <div className="extra-feature-icon">🏛️️</div>
+              <div className="extra-feature-icon">🏛</div>
               <h3 className="extra-feature-title">In-House Master Atelier Lab</h3>
               <p className="extra-feature-desc">All porcelain art and micro-veneers are handcrafted on-site by our master ceramists, ensuring absolute shade matching and zero outsourcing delays.</p>
             </div>
@@ -903,7 +906,7 @@ export default function DentalPage() {
               <div>💳 0% APR Flexible Monthly Installments Available</div>
             </div>
             <input type="text" value={mainName} onChange={e => setMainName(e.target.value)} className="form-input" placeholder="Your Full Name" />
-            <input type="tel" value={mainPhone} onChange={e => setMainPhone(e.target.value)} className="form-input" placeholder="Mobile Phone (SMS Enabled)" />
+            <input type="tel" value={mainPhone} onChange={e => setMainPhone(e.target.value)} className="form-input" placeholder="Direct Phone (SMS Enabled)" />
             <select value={mainTreatment} onChange={e => setMainTreatment(e.target.value)} className="form-input">
               <option value="dental">Handcrafted Porcelain Veneers</option>
               <option value="cosmetic">Micro-Enamel Bio-Seal</option>
@@ -940,7 +943,7 @@ export default function DentalPage() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
-      {/* FLOATING AI CHAT ICON PERMANENTLY LOCKED TO BOTTOM RIGHT */}
+      {/* PERMANENTLY LOCKED BOTTOM-RIGHT FLOATING AI ASSISTANT */}
       <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
