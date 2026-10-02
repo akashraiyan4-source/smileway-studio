@@ -482,14 +482,14 @@ export default function DentalPage() {
           --card-pure-white: #ffffff;
           --apple-dark: #141316;
           --apple-gray: #5C5854;
-          --apple-border: rgba(0, 113, 227, 0.18);
+          --apple-border: rgba(0, 113, 227, 0.12);
           --apple-blue: #0071e3;
-          --hero-powerful-glow: linear-gradient(135deg, rgba(247, 244, 239, 0.98) 20%, rgba(56, 189, 248, 0.45) 60%, rgba(0, 113, 227, 0.72) 100%);
+          --card-bg: #ffffff;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
         
-        /* PREMIUM LUXURY TYPOGRAPHY (MATCHING COSMETICS PAGE) */
+        /* PREMIUM APPLE UI TYPOGRAPHY & CLEAN MINIMALIST THEME */
         html, body {
           width: 100%;
           min-height: 100%;
@@ -509,15 +509,15 @@ export default function DentalPage() {
         }
         
         .ambient-bg-container { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; pointer-events: none; background-color: var(--page-cream); transform: translate3d(0,0,0); backface-visibility: hidden; }
-        .ambient-bg-video { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(1.08); transform: scale(1.1); opacity: 0.35; will-change: transform; }
-        .ambient-bg-overlay { position: absolute; inset: 0; background: rgba(247, 244, 239, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .ambient-bg-video { width: 100%; height: 100%; object-fit: cover; filter: blur(32px) brightness(1.05); transform: scale(1.1); opacity: 0.20; will-change: transform; }
+        .ambient-bg-overlay { position: absolute; inset: 0; background: rgba(247, 244, 239, 0.90); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 
         .app-shell { width: 100%; max-width: 1400px; margin: 0 auto; min-height: 100vh; position: relative; z-index: 1; display: flex; flex-direction: column; will-change: transform; }
         
         header { position: sticky; top: 0; z-index: 100; background: rgba(247, 244, 239, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
         .brand-title { font-size: 1.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; }
         .brand-title span { color: var(--apple-blue); }
-        .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.08); transition: transform 0.2s ease; cursor: pointer; }
+        .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); transition: transform 0.2s ease; cursor: pointer; }
         .phone-badge:hover { transform: translateY(-2px); }
         .status-dot-green { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 8px rgba(52, 199, 89, 0.8); }
         
@@ -536,17 +536,18 @@ export default function DentalPage() {
         .hero-text-col { display: flex; flex-direction: column; gap: 24px; text-align: left; }
         .hero-tagline { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--apple-blue); }
         .hero-main-title { font-size: 4rem; font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; color: var(--apple-dark); }
+        .hero-main-title span, .highlight-text { color: var(--apple-blue); }
         .hero-sub-copy { font-size: 1.12rem; color: var(--apple-gray); line-height: 1.75; max-width: 580px; }
         
         .hero-pill-cluster { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; }
-        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 6px 20px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
-        .h-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0, 113, 227, 0.3); }
+        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--card-bg); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid var(--apple-border); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04); transition: all 0.3s ease; cursor: pointer; }
+        .h-pill:hover { transform: translateY(-3px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.03); box-shadow: 0 10px 24px rgba(0, 113, 227, 0.12); }
         .h-pill span { color: var(--apple-blue); }
         
-        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); color: var(--apple-dark); padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.25); width: fit-content; cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; }
-        .hero-cta-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35); }
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 10px 25px rgba(0, 113, 227, 0.25); width: fit-content; cursor: pointer; transition: all 0.3s ease; }
+        .hero-cta-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0, 113, 227, 0.35); background: #0077ed; }
         
-        .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 12px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.35); border: 1px solid var(--apple-border); }
+        .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 12px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.25); border: 1px solid var(--apple-border); }
         .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background-color: #0d131f; }
         
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
@@ -556,7 +557,7 @@ export default function DentalPage() {
         .swipe-arrow-handle { height: 84px; width: 96px; background: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; }
         .swipe-arrow-handle svg { width: 80px; height: 80px; fill: #ffffff !important; filter: drop-shadow(0 3px 10px rgba(0,0,0,0.8)); pointer-events: none; }
 
-        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: var(--hero-powerful-glow); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 50px rgba(0, 113, 227, 0.2); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1.5px solid rgba(0, 113, 227, 0.4); overflow-y: auto; }
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.15); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1.5px solid var(--apple-border); overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
         .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
         .drawer-title { color: var(--apple-dark); font-size: 1.25rem; font-weight: 800; }
@@ -574,60 +575,62 @@ export default function DentalPage() {
         .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
         .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
         
-        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.2); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; cursor: pointer; }
-        .doctor-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 35px 80px rgba(0, 113, 227, 0.35); }
+        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .doctor-card:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
         .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
-        .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+        .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
         
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .stat-pill { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
-        .stat-pill:hover { transform: translateY(-4px); }
+        .stat-pill { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .stat-pill:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 20px 45px rgba(0, 113, 227, 0.15); }
         .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 6px; }
         .stat-label { font-size: 0.86rem; font-weight: 600; color: var(--apple-gray); }
         
         .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
-        .acc-badge { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 113, 227, 0.12); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
-        .acc-badge:hover { transform: translateY(-3px); }
+        .acc-badge { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .acc-badge:hover { transform: translateY(-3px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 12px 30px rgba(0, 113, 227, 0.12); }
         
         .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
         
-        .review-bubble { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
-        .review-bubble:hover { transform: translateY(-4px); }
+        .review-bubble { width: 340px; flex-shrink: 0; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; padding: 28px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .review-bubble:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 22px 50px rgba(0, 113, 227, 0.15); }
         .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
         .rev-quote { font-size: 0.92rem; line-height: 1.65; color: var(--apple-gray); }
         
         .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
-        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 20px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
-        .case-card-stream:hover { transform: translateY(-4px); }
+        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; padding: 20px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .case-card-stream:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 22px 50px rgba(0, 113, 227, 0.15); }
         .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
         .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(1.02); }
         
         .faq-list { display: flex; flex-direction: column; gap: 16px; }
-        .faq-item { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; overflow: hidden; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .faq-item:hover { transform: translateY(-2px); }
+        .faq-item { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .faq-item:hover { border-color: rgba(0, 113, 227, 0.3); background: rgba(0, 113, 227, 0.01); }
         .faq-question { width: 100%; padding: 22px 26px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
         .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.3s ease; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s ease; padding: 0 26px; font-size: 0.92rem; color: var(--apple-gray); line-height: 1.7; }
         .faq-item.active .faq-answer { max-height: 220px; padding-bottom: 22px; }
         .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
 
-        .consult-card { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.45); border-radius: 10px; padding: 42px 36px; box-shadow: 0 25px 60px rgba(0, 113, 227, 0.22); margin-bottom: 34px; }
+        .consult-card { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 10px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06); margin-bottom: 34px; transition: all 0.4s ease; }
+        .consult-card:hover { border-color: rgba(0, 113, 227, 0.4); box-shadow: 0 28px 70px rgba(0, 113, 227, 0.12); }
         .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
         .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff9500; }
         .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
         
-        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 6px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; }
+        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 6px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; transition: border-color 0.2s ease; }
+        .form-input:focus { border-color: var(--apple-blue); }
         
-        .btn-confirm { width: 100%; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); color: var(--apple-dark); padding: 18px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.25); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease; }
-        .btn-confirm:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35); }
+        .btn-confirm { width: 100%; background: var(--apple-blue); color: #ffffff; padding: 18px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(0, 113, 227, 0.25); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .btn-confirm:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(0, 113, 227, 0.35); background: #0077ed; }
         
-        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1.5px solid rgba(0, 113, 227, 0.4); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0, 113, 227, 0.18); }
+        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); }
         .map-preview-iframe-container { position: relative; width: 100%; height: 400px; background: #e5e3df; }
         .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
-        .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 6px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); }
+        .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 6px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid var(--apple-border); }
         .map-badge-title { font-size: 0.95rem; font-weight: 800; color: var(--apple-dark); line-height: 1.2; }
         .map-badge-sub { font-size: 0.78rem; color: var(--apple-gray); margin-top: 3px; }
         .map-badge-icons { display: flex; gap: 10px; align-items: center; }
@@ -644,14 +647,14 @@ export default function DentalPage() {
           transform: none !important; 
           z-index: 2147483647 !important; 
           background: rgba(255, 255, 255, 0.98); 
-          border: 1.5px solid rgba(0, 113, 227, 0.45); 
+          border: 1.5px solid var(--apple-border); 
           width: 60px; 
           height: 60px; 
           border-radius: 50%; 
           display: flex !important; 
           align-items: center; 
           justify-content: center; 
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); 
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15); 
           cursor: pointer; 
           transition: transform 0.4s ease; 
           isolation: isolate;
@@ -687,7 +690,7 @@ export default function DentalPage() {
           pointer-events: auto !important; 
           transform: none !important; 
         }
-        .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
+        .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); border: 1px solid var(--apple-border); overflow: hidden; }
         
         .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; height: 64px; padding-left: 20px; padding-right: 20px; }
         .ai-header-left { display: flex; align-items: center; gap: 8px; color: var(--apple-dark); }
@@ -708,8 +711,8 @@ export default function DentalPage() {
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
         .extra-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0; }
-        .extra-feature-card { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 10px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; cursor: pointer; }
-        .extra-feature-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.32); }
+        .extra-feature-card { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 10px; padding: 28px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .extra-feature-card:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
         .extra-feature-icon { font-size: 2rem; margin-bottom: 12px; }
         .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
         .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
@@ -751,9 +754,9 @@ export default function DentalPage() {
       <section className="hero-split-grid">
         <div className="hero-text-col">
           <div className="hero-tagline">• BEVERLY HILLS AESTHETIC DENTISTRY</div>
-          <h1 className="hero-main-title">Architectural Smile Design & Porcelain Art</h1>
+          <h1 className="hero-main-title">Architectural <span className="highlight-text">Smile Design</span> & Porcelain Art</h1>
           <p className="hero-sub-copy">
-            Zero-pain bio-enamel restoration and bespoke ultra-thin veneers designed for natural radiance. Zero invasive grinding, 100% harmonious bite alignment, and private VIP treatment suites.
+            Zero-pain bio-enamel restoration and <span className="highlight-text">bespoke ultra-thin veneers</span> designed for natural radiance. Zero invasive grinding, 100% harmonious bite alignment, and private VIP treatment suites.
           </p>
           <div className="hero-pill-cluster">
             <div className="h-pill service-trigger-btn" data-topic="Zero-Prep Micro Veneers" style={{cursor: 'pointer'}}><span>✨</span> Zero-Prep Micro Veneers</div>
