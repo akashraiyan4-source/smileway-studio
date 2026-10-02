@@ -535,10 +535,10 @@ export default function DentalPage() {
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        /* SWIPE INTERACTIVE ZONE MOVED TO TOP OF VIDEO BOX (ABOVE RESTORE YOUR SMILE) */
-        .swipe-interactive-zone { position: absolute; top: 24px; left: 20px; right: 20px; height: 56px; background: var(--hero-powerful-glow) !important; border: 1.5px solid rgba(0, 113, 227, 0.5) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 25; touch-action: none; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.35); }
-        .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
-        .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
+        /* ZERO BLUR, CLEAN TRANSPARENT SWIPE ZONE AT THE BOTTOM OF THE VIDEO BOX (RED LINE SPOT) */
+        .swipe-interactive-zone { position: absolute; bottom: 20px; left: 20px; right: 20px; height: 50px; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; padding: 0 6px; z-index: 25; touch-action: none; }
+        .swipe-arrow-handle { height: 48px; width: 56px; background: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; }
+        .swipe-arrow-handle svg { width: 32px; height: 32px; fill: #ffffff !important; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6)); pointer-events: none; }
 
         .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: var(--hero-powerful-glow); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 50px rgba(0, 113, 227, 0.2); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1.5px solid rgba(0, 113, 227, 0.4); overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
@@ -714,7 +714,7 @@ export default function DentalPage() {
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
           </button>
 
-          {/* SWIPE BAR MOVED TO TOP OF VIDEO BOX */}
+          {/* SWIPE BAR AT THE BOTTOM OF VIDEO BOX WITH ZERO BLUR AND LARGE CLEAN ARROW */}
           <div className="swipe-interactive-zone" id="swipeTrack" ref={trackRef}>
             <div className="swipe-arrow-handle" id="swipeKnob" ref={knobRef} onPointerDown={handlePointerDownKnob}>
               <svg ref={knobSvgRef} viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -739,7 +739,7 @@ export default function DentalPage() {
         </div>
       </section>
 
-      {/* PRESS TRUST AND CELEBRITY TICKER BARS MOVED TO BELOW HERO SECTION */}
+      {/* PRESS TRUST AND CELEBRITY TICKER BARS BELOW HERO SECTION */}
       <div className="press-trust-bar">
         <div className="press-trust-inner">
           <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
