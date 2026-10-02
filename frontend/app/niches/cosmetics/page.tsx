@@ -321,8 +321,9 @@ export default function CosmeticPage() {
     triggerButtons.forEach(btn => {
       btn.addEventListener('click', async (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const topic = (e.currentTarget as HTMLElement).getAttribute('data-topic') || 'consultation';
-        
+
         if (adaModal) adaModal.classList.remove('show');
         if (aiModal) aiModal.classList.add('show');
         if (sideDock) sideDock.classList.remove('expanded');
@@ -372,7 +373,7 @@ export default function CosmeticPage() {
     if (adaTileText) adaTileText.addEventListener('click', () => { document.body.classList.toggle('large-text'); adaTileText.classList.toggle('active'); });
     if (adaTileDesaturate) adaTileDesaturate.addEventListener('click', () => { document.body.classList.toggle('desaturate'); adaTileDesaturate.classList.toggle('active'); });
     if (adaTileLinks) adaTileLinks.addEventListener('click', () => { document.body.classList.toggle('highlight-links'); adaTileLinks.classList.toggle('active'); });
-    
+
     if (adaTileAudio) {
       adaTileAudio.addEventListener('click', () => {
         if ('speechSynthesis' in window) {
