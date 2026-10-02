@@ -517,12 +517,17 @@ export default function DentalPage() {
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4); width: fit-content; cursor: pointer; transition: transform 0.25s ease; }
         .hero-cta-btn:hover { transform: translateY(-3px); }
         
+        /* HERO BOX WITH SPLIT GRADIENT OVERLAY AT BOTTOM */
         .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 12px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.35); border: 1px solid var(--apple-border); }
         .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background-color: #0d131f; }
+        
+        /* BOTTOM SPLIT GRADIENT OVERLAY (Cream to Blue match) */
+        .hero-box::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 140px; background: linear-gradient(to top, rgba(0, 113, 227, 0.25) 0%, rgba(250, 248, 245, 0.15) 50%, transparent 100%); pointer-events: none; z-index: 15; }
+
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: transparent !important; border: 1px solid rgba(56, 189, 248, 0.7) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: var(--split-gradient) !important; border: 1px solid rgba(0, 113, 227, 0.4) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; backdrop-filter: blur(10px); }
         .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
         .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
 
@@ -615,7 +620,7 @@ export default function DentalPage() {
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
-        /* EXACT SPLIT HEADER: Left pure white, Right dental blue gradient */
+        /* EXACT SPLIT HEADER: Left white, Right dental blue gradient */
         .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: stretch; height: 64px; }
         .ai-header-left { flex: 1; background: #ffffff; padding: 0 20px; display: flex; align-items: center; gap: 8px; }
         .ai-header-right { width: 140px; background: linear-gradient(135deg, rgba(0, 113, 227, 0.25) 0%, #0071e3 100%); padding: 0 16px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; border-top-right-radius: 12px; }
@@ -963,7 +968,7 @@ export default function DentalPage() {
                 <div className="chat-calendar-title">📅 Reserve Priority Consultation Slot</div>
                 <input type="datetime-local" value={chatSlot} onChange={e => setChatSlot(e.target.value)} className="chat-calendar-input" />
                 <button className="chat-calendar-btn" onClick={confirmChatSlot}>Confirm Slot Reservation</button>
-                {chatSlotStatus.text && <p style={{ fontSize: '0.78rem', marginTop: '6px', fontWeight: 600, color: chatSlotStatus.color }}>{chatSlotStatus.text}</p>}
+                {chatSlotStatus.text && <p style={{ fontSize: '0.78rem', marginTop: '6px', fontWeight: 600, color: chatSlotStatus.color }}>{chatSlotStatus.text['text'] || chatSlotStatus.text}</p>}
               </div>
             )}
           </div>
