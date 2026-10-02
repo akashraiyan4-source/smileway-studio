@@ -478,6 +478,7 @@ export default function DentalPage() {
           --apple-gray: #5C5854;
           --apple-border: rgba(0, 113, 227, 0.18);
           --apple-blue: #0071e3;
+          --split-gradient: linear-gradient(135deg, #FAF8F5 0%, rgba(0, 113, 227, 0.18) 100%);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
@@ -487,7 +488,8 @@ export default function DentalPage() {
         header { position: sticky; top: 0; z-index: 100; background: rgba(250, 248, 245, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
         .brand-title { font-size: 1.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; }
         .brand-title span { color: var(--apple-blue); }
-        .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.08); }
+        .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.08); transition: transform 0.2s ease; cursor: pointer; }
+        .phone-badge:hover { transform: translateY(-2px); }
         .status-dot-green { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 8px rgba(52, 199, 89, 0.8); }
         
         .rating-strip { padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.88rem; font-weight: 700; color: var(--apple-gray); background: #ffffff; border-bottom: 1px solid var(--apple-border); }
@@ -506,28 +508,32 @@ export default function DentalPage() {
         .hero-tagline { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--apple-blue); }
         .hero-main-title { font-size: 4rem; font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; color: var(--apple-dark); }
         .hero-sub-copy { font-size: 1.12rem; color: var(--apple-gray); line-height: 1.75; max-width: 580px; }
+        
         .hero-pill-cluster { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; }
-        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); }
+        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .h-pill:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0, 113, 227, 0.18); }
         .h-pill span { color: var(--apple-blue); }
-        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 999px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4); width: fit-content; cursor: pointer; transition: transform 0.3s ease; }
+        
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4); width: fit-content; cursor: pointer; transition: transform 0.25s ease; }
         .hero-cta-btn:hover { transform: translateY(-3px); }
         
-        .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 20px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.35); border: 1px solid var(--apple-border); }
+        .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 12px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.35); border: 1px solid var(--apple-border); }
         .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background-color: #0d131f; }
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: transparent !important; border: 1px solid rgba(56, 189, 248, 0.7) !important; border-radius: 999px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
-        .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 999px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: transparent !important; border: 1px solid rgba(56, 189, 248, 0.7) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; }
+        .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
         .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
 
-        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: rgba(255, 255, 255, 0.99); border-radius: 20px 20px 0 0; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.25); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); overflow-y: auto; }
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: rgba(255, 255, 255, 0.99); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.25); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
         .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
         .drawer-title { color: var(--apple-dark); font-size: 1.25rem; font-weight: 800; }
         .drawer-sub { color: var(--apple-gray); font-size: 0.78rem; margin-top: 4px; }
-        .drawer-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 13px 16px; border-radius: 10px; font-size: 0.9rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
-        .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 14px; border-radius: 10px; color: #ffffff; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(0,113,227,0.35); }
+        .drawer-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 13px 16px; border-radius: 6px; font-size: 0.9rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
+        .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 14px; border-radius: 6px; color: #ffffff; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(0,113,227,0.35); transition: transform 0.2s ease; }
+        .drawer-btn:hover { transform: translateY(-2px); }
         .drawer-dismiss { position: absolute; top: 18px; right: 18px; background: var(--apple-titanium); border: none; width: 30px; height: 30px; border-radius: 50%; color: var(--apple-gray); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -538,57 +544,68 @@ export default function DentalPage() {
         .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
         .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
         
-        .doctor-card { position: relative; border-radius: 20px; overflow: hidden; margin-bottom: 32px; background: var(--card-pure-white); border: 1px solid var(--apple-border); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); }
+        /* DOCTOR CARD WITH SPLIT GRADIENT & SHARP CORNERS */
+        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--split-gradient); border: 1px solid var(--apple-border); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .doctor-card:hover { transform: translateY(-3px); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
         .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
-        .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+        .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
         
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .stat-pill { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 14px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); }
+        .stat-pill { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; cursor: pointer; }
+        .stat-pill:hover { transform: translateY(-3px); }
         .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 6px; }
         .stat-label { font-size: 0.86rem; font-weight: 600; color: var(--apple-gray); }
+        
         .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
-        .acc-badge { background: var(--card-pure-white); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+        .acc-badge { background: var(--split-gradient); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: transform 0.25s ease; cursor: pointer; }
+        .acc-badge:hover { transform: translateY(-2px); }
         
         .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
-        .review-bubble { width: 340px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); }
+        
+        .review-bubble { width: 340px; flex-shrink: 0; background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
+        .review-bubble:hover { transform: translateY(-3px); }
         .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
         .rev-quote { font-size: 0.92rem; line-height: 1.65; color: var(--apple-gray); }
         
-        /* SHARP, CLEAN CLINICAL TRANSFORMATIONS (No Blurry Cutouts) */
+        /* SHARP, CLEAN CLINICAL TRANSFORMATIONS WITH LIFT */
         .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
-        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 20px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); }
-        .case-photo-slot { position: relative; border-radius: 12px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
+        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; padding: 20px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
+        .case-card-stream:hover { transform: translateY(-3px); }
+        .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
         .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(1.02); }
         
         .faq-list { display: flex; flex-direction: column; gap: 16px; }
-        .faq-item { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 14px; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); }
+        .faq-item { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; }
+        .faq-item:hover { transform: translateY(-2px); }
         .faq-question { width: 100%; padding: 22px 26px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
         .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.25s ease; }
         .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 26px; font-size: 0.92rem; color: var(--apple-gray); line-height: 1.7; }
         .faq-item.active .faq-answer { max-height: 220px; padding-bottom: 22px; }
         .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
 
-        .consult-card { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 20px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); margin-bottom: 34px; }
-        .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
+        .consult-card { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 10px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); margin-bottom: 34px; }
+        .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
         .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff9500; }
-        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 12px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
+        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
         
-        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 10px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; }
-        .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 18px; border-radius: 10px; color: #ffffff; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.4); }
+        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 6px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; }
+        .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 18px; border-radius: 6px; color: #ffffff; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.4); transition: transform 0.25s ease; }
+        .btn-confirm:hover { transform: translateY(-3px); }
         
-        .map-preview-card { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06); }
+        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06); }
         .map-preview-iframe-container { position: relative; width: 100%; height: 400px; background: #e5e3df; }
         .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
-        .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 12px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); }
+        .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 6px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid rgba(0,0,0,0.06); }
         .map-badge-title { font-size: 0.95rem; font-weight: 800; color: var(--apple-dark); line-height: 1.2; }
         .map-badge-sub { font-size: 0.78rem; color: var(--apple-gray); margin-top: 3px; }
         .map-badge-icons { display: flex; gap: 10px; align-items: center; }
-        .map-icon-btn { width: 36px; height: 36px; border-radius: 10px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; }
+        .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
+        .map-icon-btn:hover { transform: translateY(-2px); }
 
-        /* FLOATING AI STRICTLY LOCKED TO BOTTOM RIGHT CORNER FOREVER */
+        /* FLOATING AI CHAT ICON PERMANENTLY LOCKED TO BOTTOM RIGHT */
         .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
         .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
@@ -596,29 +613,31 @@ export default function DentalPage() {
         
         .ai-chat-modal { position: fixed !important; bottom: 104px !important; right: 32px !important; width: 420px !important; max-width: calc(100vw - 32px) !important; height: 580px !important; max-height: calc(100vh - 130px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
-        .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 22px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
+        .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
-        /* SPLIT HEADER: Left white, Right dental accent color */
+        /* EXACT SPLIT HEADER: Left pure white, Right dental blue gradient */
         .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: stretch; height: 64px; }
         .ai-header-left { flex: 1; background: #ffffff; padding: 0 20px; display: flex; align-items: center; gap: 8px; }
-        .ai-header-right { width: 140px; background: linear-gradient(135deg, #0071e3 0%, #38bdf8 100%); padding: 0 16px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; border-top-right-radius: 22px; }
+        .ai-header-right { width: 140px; background: linear-gradient(135deg, rgba(0, 113, 227, 0.25) 0%, #0071e3 100%); padding: 0 16px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; border-top-right-radius: 12px; }
 
         .ai-chat-body { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--apple-titanium); }
-        .ai-msg { max-width: 85%; padding: 13px 18px; border-radius: 16px; font-size: 0.9rem; line-height: 1.55; }
+        .ai-msg { max-width: 85%; padding: 13px 18px; border-radius: 8px; font-size: 0.9rem; line-height: 1.55; }
         .ai-bot { background: #ffffff; color: var(--apple-dark); align-self: flex-start; border: 1px solid var(--apple-border); }
         .ai-user { background: var(--apple-blue); color: #ffffff; align-self: flex-end; }
         .ai-chat-footer { padding: 16px 22px; border-top: 1px solid var(--apple-border); display: flex; gap: 12px; background: #ffffff; }
-        .ai-chat-input { flex: 1; border: 1px solid var(--apple-border); background: var(--card-pure-white); border-radius: 999px; padding: 12px 20px; font-size: 0.9rem; outline: none; }
-        .ai-send-btn { background: var(--apple-blue); color: #ffffff; border: none; padding: 10px 22px; border-radius: 999px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+        .ai-chat-input { flex: 1; border: 1px solid var(--apple-border); background: var(--card-pure-white); border-radius: 6px; padding: 12px 20px; font-size: 0.9rem; outline: none; }
+        .ai-send-btn { background: var(--apple-blue); color: #ffffff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: transform 0.2s ease; }
+        .ai-send-btn:hover { transform: translateY(-2px); }
         
-        .chat-calendar-card { align-self: flex-start; width: 90%; background: #ffffff; border: 1.5px solid #0071e3; border-radius: 18px; padding: 18px; box-shadow: 0 10px 28px rgba(0, 113, 227, 0.15); }
+        .chat-calendar-card { align-self: flex-start; width: 90%; background: #ffffff; border: 1.5px solid #0071e3; border-radius: 8px; padding: 18px; box-shadow: 0 10px 28px rgba(0, 113, 227, 0.15); }
         .chat-calendar-title { font-size: 0.9rem; font-weight: 700; color: #0071e3; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 11px 14px; border-radius: 12px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
-        .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 12px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+        .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 11px 14px; border-radius: 6px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
+        .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
-        /* 4 ELITE LUXURY SECTIONS GRID */
+        /* 4 ELITE LUXURY SECTIONS GRID WITH SPLIT GRADIENT & LIFT */
         .extra-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0; }
-        .extra-feature-card { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 18px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05); }
+        .extra-feature-card { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 10px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .extra-feature-card:hover { transform: translateY(-3px); box-shadow: 0 18px 45px rgba(0, 113, 227, 0.15); }
         .extra-feature-icon { font-size: 2rem; margin-bottom: 12px; }
         .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
         .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
@@ -631,7 +650,7 @@ export default function DentalPage() {
           .phone-badge { display: none; }
           .rating-strip { font-size: 0.8rem; padding: 12px 16px; text-align: center; }
           .hero-split-grid { grid-template-columns: 1fr; padding: 0 0 40px 0 !important; gap: 24px; text-align: center; }
-          .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 80vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 0 30px 30px !important; }
+          .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 80vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 0 20px 20px !important; }
           .hero-text-col { padding: 0 24px !important; align-items: center; text-align: center; gap: 16px; }
           .hero-main-title { font-size: 2.6rem !important; line-height: 1.12 !important; }
           .extra-features-grid { grid-template-columns: 1fr; }
@@ -725,7 +744,7 @@ export default function DentalPage() {
 
       <div className="content-container">
         <section className="section-padding section-top-tight animate-on-scroll">
-          <div className="doctor-card">
+          <div className="doctor-card service-trigger-btn" data-topic="Dr. Julian Vance Consultation">
             <img src="/niches/dental/c23912ad3f2178f8b81d65f4ed59834.jpg" alt="Dr Julian Vance" className="doc-img" onError={(e)=>{(e.target as HTMLElement).style.display='none'}} />
             <div className="doc-tag">★ Chief Cosmetic Dentist</div>
           </div>
@@ -735,44 +754,44 @@ export default function DentalPage() {
             Specializing in zero-pain bio-enamel restoration and handcrafted porcelain veneers. Delivering transformative bite alignment and natural aesthetic radiance for high-profile smiles.
           </p>
           <div className="stats-row">
-            <div className="stat-pill">
+            <div className="stat-pill service-trigger-btn" data-topic="12,400+ Success Track Record">
               <div className="stat-num">12,400+</div>
               <div className="stat-label">Cases Handled</div>
             </div>
-            <div className="stat-pill">
+            <div className="stat-pill service-trigger-btn" data-topic="99.8% Success Rate Assurance">
               <div className="stat-num">99.8%</div>
               <div className="stat-label">Success Rate</div>
             </div>
           </div>
           <div className="accreditation-row">
-            <span className="acc-badge">✓ AACD Accredited</span>
-            <span className="acc-badge">✓ ADA Member</span>
-            <span className="acc-badge">★ Top Doctor 2026</span>
-            <span className="acc-badge">✦ Invisalign Diamond</span>
+            <span className="acc-badge service-trigger-btn" data-topic="AACD Accreditation">✓ AACD Accredited</span>
+            <span className="acc-badge service-trigger-btn" data-topic="ADA Membership">✓ ADA Member</span>
+            <span className="acc-badge service-trigger-btn" data-topic="Top Doctor Recognition">★ Top Doctor 2026</span>
+            <span className="acc-badge service-trigger-btn" data-topic="Invisalign Diamond Provider">✦ Invisalign Diamond</span>
           </div>
         </section>
 
-        {/* 4 ELITE LUXURY SECTIONS FROM TOP US SITES */}
+        {/* 4 ELITE LUXURY SECTIONS WITH SPLIT GRADIENT */}
         <section className="section-padding animate-on-scroll" style={{ paddingTop: 0 }}>
           <div className="sec-tag">Elite Standards</div>
           <h2 className="sec-heading">Exclusive Beverly Hills Protocol</h2>
           <div className="extra-features-grid">
-            <div className="extra-feature-card">
+            <div className="extra-feature-card service-trigger-btn" data-topic="In-House Master Atelier Lab">
               <div className="extra-feature-icon">🏛️</div>
               <h3 className="extra-feature-title">In-House Master Atelier Lab</h3>
               <p className="extra-feature-desc">All porcelain art and micro-veneers are handcrafted on-site by our master ceramists, ensuring absolute shade matching and zero outsourcing delays.</p>
             </div>
-            <div className="extra-feature-card">
+            <div className="extra-feature-card service-trigger-btn" data-topic="VIP Sedation & Comfort Protocol">
               <div className="extra-feature-icon">🌿</div>
               <h3 className="extra-feature-title">VIP Sedation & Comfort Protocol</h3>
               <p className="extra-feature-desc">Engineered for high-profile and anxiety-free visits with bespoke IV sedation, NuCalm relaxation, and complete privacy suites.</p>
             </div>
-            <div className="extra-feature-card">
+            <div className="extra-feature-card service-trigger-btn" data-topic="Bespoke Financing & Investment">
               <div className="extra-feature-icon">💳</div>
               <h3 className="extra-feature-title">Bespoke Financing & Investment</h3>
               <p className="extra-feature-desc">Transparent 0% APR monthly installments and concierge insurance advocacy tailored for high-ticket architectural smile investments.</p>
             </div>
-            <div className="extra-feature-card">
+            <div className="extra-feature-card service-trigger-btn" data-topic="Step-by-Step 3D Smile Triage">
               <div className="extra-feature-icon">✨</div>
               <h3 className="extra-feature-title">Step-by-Step 3D Smile Triage</h3>
               <p className="extra-feature-desc">A precise 4-stage digital workflow from 3D facial scan to virtual mockup preview, guaranteeing your exact aesthetic outcome before work starts.</p>
@@ -785,15 +804,15 @@ export default function DentalPage() {
           <h2 className="sec-heading">Google Patient Reviews</h2>
           <div className="infinite-marquee-box" id="reviewsBox">
             <div className="infinite-marquee-inner" ref={reviewsInnerRef}>
-              <div className="review-bubble">
+              <div className="review-bubble service-trigger-btn" data-topic="Veneers Patient Review">
                 <div className="rev-head"><span className="rev-name">Elena R. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
                 <p className="rev-quote">"Got my veneers done here. 100% pain-free and natural white. Transformed my self-confidence completely!"</p>
               </div>
-              <div className="review-bubble">
+              <div className="review-bubble service-trigger-btn" data-topic="Same-Day Triage Review">
                 <div className="rev-head"><span className="rev-name">Marcus T. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
                 <p className="rev-quote">"Dr. Vance is an absolute artist. Same-day triage and the precision mapping blew my mind."</p>
               </div>
-              <div className="review-bubble">
+              <div className="review-bubble service-trigger-btn" data-topic="Private Clinic Experience Review">
                 <div className="rev-head"><span className="rev-name">Sophia L. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
                 <p className="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
               </div>
@@ -806,17 +825,17 @@ export default function DentalPage() {
           <h2 className="sec-heading">Clinical Transformations</h2>
           <div className="interactive-cases-box" id="casesBox">
             <div className="interactive-cases-inner" ref={casesInnerRef}>
-              <div className="case-card-stream">
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #481: Micro-Thin Veneers">
                 <div className="case-photo-slot"><img src="/niches/dental/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #481: Micro-Thin Veneers</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
               </div>
-              <div className="case-card-stream">
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #512: Full Arch Symmetry">
                 <div className="case-photo-slot"><img src="/niches/dental/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #512: Full Arch Symmetry</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
               </div>
-              <div className="case-card-stream">
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #604: Precision Bio-Implant">
                 <div className="case-photo-slot"><img src="/niches/dental/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #604: Precision Bio-Implant</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
@@ -915,7 +934,7 @@ export default function DentalPage() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
-      {/* FLOATING AI PERMANENTLY LOCKED TO BOTTOM RIGHT CORNER */}
+      {/* FLOATING AI CHAT ICON PERMANENTLY LOCKED TO BOTTOM RIGHT */}
       <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
@@ -923,7 +942,7 @@ export default function DentalPage() {
 
       <div className={`ai-chat-modal ${isChatOpen ? 'active' : ''}`}>
         <div className="ai-chat-window">
-          {/* SPLIT HEADER: Left white, Right dental accent color */}
+          {/* EXACT SPLIT HEADER: Left white, Right dental blue gradient */}
           <div className="ai-chat-header">
             <div className="ai-header-left">
               <div style={{width:'9px', height:'9px', borderRadius:'50%', background:'#34c759'}}></div>
