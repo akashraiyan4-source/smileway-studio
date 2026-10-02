@@ -425,7 +425,13 @@ export default function CosmeticPage() {
         const res = await fetch('/api/ai/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: txt, userPhone: 'WebVisitor', niche: 'cosmetics' })
+          body: JSON.stringify({ 
+            message: txt, 
+            userPhone: 'WebVisitor', 
+            niche: 'cosmetics',
+            brandName: 'Aura Beverly Hills',
+            expertName: 'Dr. Sarah Alvi'
+          })
         });
         const data = await res.json();
         botDiv.textContent = data.reply || data.response || data.message || "Consultation priority noted.";
