@@ -618,14 +618,57 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
-        /* PERMANENTLY LOCKED BOTTOM-RIGHT FLOATING AI ASSISTANT */
-        .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 2147483647 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
-        .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
+        /* PERMANENTLY LOCKED FIXED BOTTOM-RIGHT CORNER AI ASSISTANT */
+        .floating-ai { 
+          position: fixed !important; 
+          bottom: 32px !important; 
+          right: 32px !important; 
+          top: auto !important; 
+          left: auto !important; 
+          transform: none !important; 
+          z-index: 2147483647 !important; 
+          background: rgba(255, 255, 255, 0.98); 
+          border: 1.5px solid rgba(0, 113, 227, 0.45); 
+          width: 60px; 
+          height: 60px; 
+          border-radius: 50%; 
+          display: flex !important; 
+          align-items: center; 
+          justify-content: center; 
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); 
+          cursor: pointer; 
+          transition: transform 0.4s ease; 
+        }
+        .floating-ai.rotated { 
+          transform: rotate(360deg) scale(1.05) !important; 
+        }
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
         .status-dot-tiny { width: 11px; height: 11px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; box-shadow: 0 0 6px rgba(52, 199, 89, 0.8); }
         
-        .ai-chat-modal { position: fixed !important; bottom: 104px !important; right: 32px !important; width: 420px !important; max-width: calc(100vw - 32px) !important; height: 580px !important; max-height: calc(100vh - 130px) !important; z-index: 2147483646 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
-        .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
+        .ai-chat-modal { 
+          position: fixed !important; 
+          bottom: 104px !important; 
+          right: 32px !important; 
+          top: auto !important; 
+          left: auto !important; 
+          transform: none !important; 
+          width: 420px !important; 
+          max-width: calc(100vw - 32px) !important; 
+          height: 580px !important; 
+          max-height: calc(100vh - 130px) !important; 
+          z-index: 2147483646 !important; 
+          display: flex !important; 
+          flex-direction: column !important; 
+          opacity: 0; 
+          pointer-events: none; 
+          transform-origin: bottom right; 
+          transition: all 0.3s ease; 
+        }
+        .ai-chat-modal.active { 
+          opacity: 1 !important; 
+          pointer-events: auto !important; 
+          transform: none !important; 
+        }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
         /* CLEAN UNIFORM AI CHAT HEADER (NO ODD SPLIT GRADIENT) */
