@@ -206,7 +206,7 @@ export default function CosmeticPage() {
           if (scrollX >= totalWidth) scrollX -= totalWidth;
           else if (scrollX < 0) scrollX += totalWidth;
 
-          inner.style.transform = `translate3d(${-scrollX}px, 0, 0)`;
+          inner!.style.transform = `translate3d(${-scrollX}px, 0, 0)`;
         }
         animId = requestAnimationFrame(step);
       }
@@ -233,7 +233,7 @@ export default function CosmeticPage() {
         if (scrollX >= totalWidth) scrollX -= totalWidth;
         else if (scrollX < 0) scrollX += totalWidth;
 
-        inner.style.transform = `translate3d(${-scrollX}px, 0, 0)`;
+        inner!.style.transform = `translate3d(${-scrollX}px, 0, 0)`;
         lastX = e.clientX;
         lastTime = now;
       });
