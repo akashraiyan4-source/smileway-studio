@@ -13,38 +13,45 @@ export async function POST(request: Request) {
             return NextResponse.json({ success: false, error: 'Message is required.' }, { status: 400 });
         }
 
-        const apiKey = process.env.GEMINI_API_KEY_1 || process.env.GEMINI_API_KEY;
-        if (!apiKey) {
-            return NextResponse.json({ 
-                success: true, 
-                reply: `Thanks for reaching out to ${brandName}! Would you like to schedule a quick consultation with ${expertName}?` 
-            });
+        const apiKeys = [
+            process.env.GEMINI_API_KEY_1,
+            process.env.GEMINI_API_KEY_2,
+            process.env.GEMINI_API_KEY_3,
+            process.env.GEMINI_API_KEY
+        ].filter(Boolean) as string[];
+
+        if (apiKeys.length === 0) {
+            return NextResponse.json({ success: false, error: 'API key not configured.' }, { status: 500 });
         }
 
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
+        let text = '';
         const prompt = `You are a helpful, professional human receptionist at "${brandName}", specializing in "${niche}". You work closely with ${expertName}. 
 The customer says: "${message}".
 Reply directly as a real human in 1-2 short, conversational sentences. Guide them toward booking a consultation. Never mention you are an AI.`;
 
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text()?.trim();
+        for (const key of apiKeys) {
+            try {
+                const genAI = new GoogleGenerativeAI(key);
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                text = response.text()?.trim() || '';
+
+                if (text) {
+                    break;
+                }
+            } catch (err) {
+                continue;
+            }
+        }
 
         if (!text) {
-            return NextResponse.json({ 
-                success: true, 
-                reply: `Thanks for reaching out to ${brandName}! Would you like to schedule a quick consultation with ${expertName}?` 
-            });
+            return NextResponse.json({ success: false, error: 'Failed to generate AI response.' }, { status: 500 });
         }
 
         return NextResponse.json({ success: true, reply: text });
 
     } catch (error: any) {
-        return NextResponse.json({ 
-            success: true, 
-            reply: `Thanks for reaching out! Would you like to schedule a quick chat with our team?` 
-        });
+        return NextResponse.json({ success: false, error: error.message || 'Internal server error.' }, { status: 500 });
     }
 }
