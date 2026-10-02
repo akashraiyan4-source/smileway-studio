@@ -469,7 +469,7 @@ export default function DentalPage() {
   }
 
   return (
-    <div className="app-shell">
+    <div className="app-shell" style={{ position: 'relative', overflowX: 'hidden' }}>
       {/* AMBIENT BLURRED BACKGROUND VIDEO OVER ENTIRE PAGE */}
       <div className="ambient-bg-container">
         <video className="ambient-bg-video" src="/niches/dental/start.mp4" autoPlay muted loop playsInline preload="auto"></video>
@@ -489,7 +489,6 @@ export default function DentalPage() {
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
         
-        /* PREMIUM APPLE UI TYPOGRAPHY & CLEAN MINIMALIST THEME */
         html, body {
           width: 100%;
           min-height: 100%;
@@ -619,7 +618,7 @@ export default function DentalPage() {
         .consult-card:hover { border-color: rgba(0, 113, 227, 0.4); box-shadow: 0 28px 70px rgba(0, 113, 227, 0.12); }
         .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
         .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff9500; }
-        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
+        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-top: 14px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
         
         .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 6px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; transition: border-color 0.2s ease; }
         .form-input:focus { border-color: var(--apple-blue); }
@@ -637,7 +636,7 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
-        /* PERMANENTLY LOCKED FIXED BOTTOM-RIGHT CORNER AI ASSISTANT */
+        /* FIXED FLOATING AI ASSISTANT POSITIONED RELATIVE TO VIEWPORT */
         .floating-ai { 
           position: fixed !important; 
           bottom: 32px !important; 
@@ -657,7 +656,6 @@ export default function DentalPage() {
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15); 
           cursor: pointer; 
           transition: transform 0.4s ease; 
-          isolation: isolate;
         }
         .floating-ai.rotated { 
           transform: rotate(360deg) scale(1.05) !important; 
@@ -683,7 +681,6 @@ export default function DentalPage() {
           pointer-events: none; 
           transform-origin: bottom right; 
           transition: all 0.3s ease; 
-          isolation: isolate;
         }
         .ai-chat-modal.active { 
           opacity: 1 !important; 
@@ -824,7 +821,7 @@ export default function DentalPage() {
       <div className="content-container">
         <section className="section-padding section-top-tight animate-on-scroll">
           <div className="doctor-card service-trigger-btn" data-topic="Dr. Julian Vance Consultation">
-            <img src="/niches/dental/c23912ad3f2178f8b81d65f4ed59834.jpg" alt="Dr Julian Vance" className="doc-img" onError={(e)=>{(e.target as HTMLElement).style.display='none'}} />
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop" alt="Dr Julian Vance" className="doc-img" onError={(e)=>{(e.target as HTMLElement).style.display='none'}} />
             <div className="doc-tag">★ Chief Cosmetic Dentist</div>
           </div>
           <div className="sec-tag">Oral Restoration Authority</div>
@@ -904,17 +901,17 @@ export default function DentalPage() {
           <div className="interactive-cases-box" id="casesBox">
             <div className="interactive-cases-inner" ref={casesInnerRef}>
               <div className="case-card-stream service-trigger-btn" data-topic="Case #481: Micro-Thin Veneers">
-                <div className="case-photo-slot"><img src="/niches/dental/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce6395?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #481: Micro-Thin Veneers</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
               </div>
               <div className="case-card-stream service-trigger-btn" data-topic="Case #512: Full Arch Symmetry">
-                <div className="case-photo-slot"><img src="/niches/dental/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #512: Full Arch Symmetry</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
               </div>
               <div className="case-card-stream service-trigger-btn" data-topic="Case #604: Precision Bio-Implant">
-                <div className="case-photo-slot"><img src="/niches/dental/Dental-Veneers-Before-And-After-Gappy-Smile-Corrected-With-Porcelain-Veneers-jpg.webp" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #604: Precision Bio-Implant</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
               </div>
@@ -968,7 +965,7 @@ export default function DentalPage() {
         <section className="section-padding animate-on-scroll" id="consultation-area" style={{ paddingTop: 0 }}>
           <div className="consult-card">
             <div className="slots-pill"><span className="slots-dot"></span><span>Only 3 Priority Triage Slots Left This Week</span></div>
-            <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '10px' }}>Reserve Your Consultation</h3>
+            <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '6px' }}>Reserve Your Consultation</h3>
             <div className="guarantee-strip">
               <div>🛡️ 10-Year Comprehensive Structural Warranty</div>
               <div>🔒 100% Private VIP Suite & Rear Valet Access</div>
