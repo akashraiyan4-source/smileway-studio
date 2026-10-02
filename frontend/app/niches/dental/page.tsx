@@ -484,12 +484,29 @@ export default function DentalPage() {
           --apple-gray: #5C5854;
           --apple-border: rgba(0, 113, 227, 0.18);
           --apple-blue: #0071e3;
-          /* RICH PREMIUM SIDE-BY-SIDE GLOW: Cream left transitioning to deep vibrant water-blue right */
           --hero-powerful-glow: linear-gradient(135deg, rgba(247, 244, 239, 0.98) 20%, rgba(56, 189, 248, 0.45) 60%, rgba(0, 113, 227, 0.72) 100%);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
-        html, body { width: 100%; min-height: 100%; background: var(--page-cream); color: var(--apple-dark); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; overflow-x: hidden; touch-action: pan-y; -webkit-font-smoothing: antialiased; letter-spacing: -0.015em; }
+        
+        /* PREMIUM LUXURY TYPOGRAPHY (MATCHING COSMETICS PAGE) */
+        html, body {
+          width: 100%;
+          min-height: 100%;
+          background: var(--page-cream);
+          color: var(--apple-dark);
+          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+          overflow-x: hidden;
+          touch-action: pan-y;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          letter-spacing: -0.02em;
+        }
+
+        h1, h2, h3, h4, h5, h6, .brand-title, .hero-main-title, .sec-heading {
+          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+          letter-spacing: -0.035em;
+        }
         
         .ambient-bg-container { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; pointer-events: none; background-color: var(--page-cream); transform: translate3d(0,0,0); backface-visibility: hidden; }
         .ambient-bg-video { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(1.08); transform: scale(1.1); opacity: 0.35; will-change: transform; }
@@ -535,7 +552,6 @@ export default function DentalPage() {
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        /* ZERO BLUR, CLEAN TRANSPARENT SWIPE ZONE POSITIONED AT TOOTH LEGS LEVEL, 3X LARGER */
         .swipe-interactive-zone { position: absolute; bottom: 155px; left: 20px; right: 20px; height: 90px; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; padding: 0 6px; z-index: 25; touch-action: none; }
         .swipe-arrow-handle { height: 84px; width: 96px; background: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; }
         .swipe-arrow-handle svg { width: 80px; height: 80px; fill: #ffffff !important; filter: drop-shadow(0 3px 10px rgba(0,0,0,0.8)); pointer-events: none; }
@@ -638,6 +654,7 @@ export default function DentalPage() {
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); 
           cursor: pointer; 
           transition: transform 0.4s ease; 
+          isolation: isolate;
         }
         .floating-ai.rotated { 
           transform: rotate(360deg) scale(1.05) !important; 
@@ -663,6 +680,7 @@ export default function DentalPage() {
           pointer-events: none; 
           transform-origin: bottom right; 
           transition: all 0.3s ease; 
+          isolation: isolate;
         }
         .ai-chat-modal.active { 
           opacity: 1 !important; 
@@ -671,7 +689,6 @@ export default function DentalPage() {
         }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
-        /* CLEAN UNIFORM AI CHAT HEADER (NO ODD SPLIT GRADIENT) */
         .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; height: 64px; padding-left: 20px; padding-right: 20px; }
         .ai-header-left { display: flex; align-items: center; gap: 8px; color: var(--apple-dark); }
         .ai-header-right { display: flex; align-items: center; }
@@ -757,7 +774,6 @@ export default function DentalPage() {
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
           </button>
 
-          {/* SWIPE BAR POSITIONED AT TOOTH LEGS LEVEL, 3X LARGER, ZERO BLUR */}
           <div className="swipe-interactive-zone" id="swipeTrack" ref={trackRef}>
             <div className="swipe-arrow-handle" id="swipeKnob" ref={knobRef} onPointerDown={handlePointerDownKnob}>
               <svg ref={knobSvgRef} viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -782,7 +798,6 @@ export default function DentalPage() {
         </div>
       </section>
 
-      {/* PRESS TRUST AND CELEBRITY TICKER BARS BELOW HERO SECTION */}
       <div className="press-trust-bar">
         <div className="press-trust-inner">
           <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
@@ -964,7 +979,7 @@ export default function DentalPage() {
               <option value="roofing">Full Arch Smile Alignment</option>
             </select>
             <input type="datetime-local" value={mainAppointmentDate} onChange={e => setMainAppointmentDate(e.target.value)} className="form-input" />
-            <button className="btn-confirm service-trigger-btn" data-topic="Priority Appointment Confirmation">Confirm Priority Appointment</button>
+            <button className="btn-confirm service-trigger-btn" data-topic="Priority Appointment Confirmation" onClick={submitMainForm}>Confirm Priority Appointment</button>
           </div>
 
           <div className="map-preview-card">
@@ -994,7 +1009,6 @@ export default function DentalPage() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
-      {/* PERMANENTLY LOCKED BOTTOM-RIGHT FLOATING AI ASSISTANT */}
       <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
