@@ -470,36 +470,47 @@ export default function DentalPage() {
 
   return (
     <div className="app-shell">
+      {/* AMBIENT BLURRED BACKGROUND VIDEO OVER ENTIRE PAGE */}
+      <div className="ambient-bg-container">
+        <video className="ambient-bg-video" src="/niches/dental/start.mp4" autoPlay muted loop playsInline></video>
+        <div className="ambient-bg-overlay"></div>
+      </div>
+
       <style jsx global>{`
         :root {
-          --apple-titanium: #FAF8F5;
+          --page-cream: #FAF8F5;
           --card-pure-white: #ffffff;
           --apple-dark: #141316;
           --apple-gray: #5C5854;
           --apple-border: rgba(0, 113, 227, 0.18);
           --apple-blue: #0071e3;
-          --split-gradient: linear-gradient(135deg, #FAF8F5 0%, rgba(0, 113, 227, 0.18) 100%);
+          --water-blue-cream-mix: linear-gradient(135deg, rgba(250, 248, 245, 0.92) 0%, rgba(56, 189, 248, 0.16) 50%, rgba(0, 113, 227, 0.22) 100%);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
-        html, body { width: 100%; min-height: 100%; background: var(--apple-titanium); color: var(--apple-dark); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; overflow-x: hidden; touch-action: pan-y; -webkit-font-smoothing: antialiased; letter-spacing: -0.015em; }
-        .app-shell { width: 100%; max-width: 1400px; margin: 0 auto; background: var(--apple-titanium); min-height: 100vh; position: relative; z-index: 1; display: flex; flex-direction: column; will-change: transform; }
+        html, body { width: 100%; min-height: 100%; background: var(--page-cream); color: var(--apple-dark); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; overflow-x: hidden; touch-action: pan-y; -webkit-font-smoothing: antialiased; letter-spacing: -0.015em; }
         
-        header { position: sticky; top: 0; z-index: 100; background: rgba(250, 248, 245, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
+        .ambient-bg-container { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; pointer-events: none; }
+        .ambient-bg-video { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(1.08); transform: scale(1.1); opacity: 0.35; }
+        .ambient-bg-overlay { position: absolute; inset: 0; background: rgba(250, 248, 245, 0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+        .app-shell { width: 100%; max-width: 1400px; margin: 0 auto; min-height: 100vh; position: relative; z-index: 1; display: flex; flex-direction: column; will-change: transform; }
+        
+        header { position: sticky; top: 0; z-index: 100; background: rgba(250, 248, 245, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
         .brand-title { font-size: 1.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; }
         .brand-title span { color: var(--apple-blue); }
         .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.08); transition: transform 0.2s ease; cursor: pointer; }
         .phone-badge:hover { transform: translateY(-2px); }
         .status-dot-green { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 8px rgba(52, 199, 89, 0.8); }
         
-        .rating-strip { padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.88rem; font-weight: 700; color: var(--apple-gray); background: #ffffff; border-bottom: 1px solid var(--apple-border); }
+        .rating-strip { padding: 14px 20px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.88rem; font-weight: 700; color: var(--apple-gray); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--apple-border); }
         .g-icon { font-weight: 800; color: #4285f4; }
         .stars { color: #ff9500; letter-spacing: 2px; }
         
-        .press-trust-bar { padding: 16px 20px; background: rgba(255, 255, 255, 0.9); border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; position: relative; cursor: grab; }
+        .press-trust-bar { padding: 16px 20px; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(10px); border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; position: relative; cursor: grab; }
         .press-trust-inner { display: inline-flex; align-items: center; gap: 40px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; }
         
-        .celebrity-ticker-bar { padding: 14px 20px; background: #ffffff; border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; display: flex; align-items: center; }
+        .celebrity-ticker-bar { padding: 14px 20px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--apple-border); overflow: hidden; white-space: nowrap; display: flex; align-items: center; }
         .celebrity-ticker-inner { display: inline-flex; align-items: center; gap: 36px; font-size: 0.78rem; font-weight: 700; color: #0071e3; animation: celebrityScroll 20s linear infinite; }
         @keyframes celebrityScroll { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
@@ -510,24 +521,20 @@ export default function DentalPage() {
         .hero-sub-copy { font-size: 1.12rem; color: var(--apple-gray); line-height: 1.75; max-width: 580px; }
         
         .hero-pill-cluster { display: flex; flex-wrap: wrap; gap: 12px; margin: 10px 0; }
-        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .h-pill { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; background: var(--water-blue-cream-mix); backdrop-filter: blur(10px); border: 1px solid var(--apple-border); border-radius: 8px; font-size: 0.82rem; font-weight: 700; color: var(--apple-dark); box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
         .h-pill:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0, 113, 227, 0.18); }
         .h-pill span { color: var(--apple-blue); }
         
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4); width: fit-content; cursor: pointer; transition: transform 0.25s ease; }
         .hero-cta-btn:hover { transform: translateY(-3px); }
         
-        /* HERO BOX WITH SPLIT GRADIENT OVERLAY AT BOTTOM */
         .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 12px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.35); border: 1px solid var(--apple-border); }
         .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background-color: #0d131f; }
         
-        /* BOTTOM SPLIT GRADIENT OVERLAY (Cream to Blue match) */
-        .hero-box::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 140px; background: linear-gradient(to top, rgba(0, 113, 227, 0.25) 0%, rgba(250, 248, 245, 0.15) 50%, transparent 100%); pointer-events: none; z-index: 15; }
-
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: var(--split-gradient) !important; border: 1px solid rgba(0, 113, 227, 0.4) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; backdrop-filter: blur(10px); }
+        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: var(--water-blue-cream-mix) !important; border: 1px solid rgba(56, 189, 248, 0.7) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; backdrop-filter: blur(10px); }
         .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
         .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
 
@@ -539,7 +546,7 @@ export default function DentalPage() {
         .drawer-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 13px 16px; border-radius: 6px; font-size: 0.9rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
         .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 14px; border-radius: 6px; color: #ffffff; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(0,113,227,0.35); transition: transform 0.2s ease; }
         .drawer-btn:hover { transform: translateY(-2px); }
-        .drawer-dismiss { position: absolute; top: 18px; right: 18px; background: var(--apple-titanium); border: none; width: 30px; height: 30px; border-radius: 50%; color: var(--apple-gray); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .drawer-dismiss { position: absolute; top: 18px; right: 18px; background: var(--page-cream); border: none; width: 30px; height: 30px; border-radius: 50%; color: var(--apple-gray); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         
         .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
@@ -549,41 +556,39 @@ export default function DentalPage() {
         .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
         .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
         
-        /* DOCTOR CARD WITH SPLIT GRADIENT & SHARP CORNERS */
-        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--split-gradient); border: 1px solid var(--apple-border); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
         .doctor-card:hover { transform: translateY(-3px); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
         .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
         .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
         
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .stat-pill { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; cursor: pointer; }
+        .stat-pill { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; cursor: pointer; }
         .stat-pill:hover { transform: translateY(-3px); }
         .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 6px; }
         .stat-label { font-size: 0.86rem; font-weight: 600; color: var(--apple-gray); }
         
         .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
-        .acc-badge { background: var(--split-gradient); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: transform 0.25s ease; cursor: pointer; }
+        .acc-badge { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); transition: transform 0.25s ease; cursor: pointer; }
         .acc-badge:hover { transform: translateY(-2px); }
         
         .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
         
-        .review-bubble { width: 340px; flex-shrink: 0; background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
+        .review-bubble { width: 340px; flex-shrink: 0; background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
         .review-bubble:hover { transform: translateY(-3px); }
         .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
         .rev-quote { font-size: 0.92rem; line-height: 1.65; color: var(--apple-gray); }
         
-        /* SHARP, CLEAN CLINICAL TRANSFORMATIONS WITH LIFT */
         .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
-        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; padding: 20px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
+        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; padding: 20px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); transition: transform 0.25s ease; cursor: pointer; }
         .case-card-stream:hover { transform: translateY(-3px); }
         .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
         .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(1.02); }
         
         .faq-list { display: flex; flex-direction: column; gap: 16px; }
-        .faq-item { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; }
+        .faq-item { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease; }
         .faq-item:hover { transform: translateY(-2px); }
         .faq-question { width: 100%; padding: 22px 26px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
         .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.25s ease; }
@@ -591,7 +596,7 @@ export default function DentalPage() {
         .faq-item.active .faq-answer { max-height: 220px; padding-bottom: 22px; }
         .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
 
-        .consult-card { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 10px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); margin-bottom: 34px; }
+        .consult-card { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 10px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08); margin-bottom: 34px; }
         .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
         .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff9500; }
         .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
@@ -610,7 +615,6 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
-        /* FLOATING AI CHAT ICON PERMANENTLY LOCKED TO BOTTOM RIGHT */
         .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
         .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
@@ -620,12 +624,11 @@ export default function DentalPage() {
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
-        /* EXACT SPLIT HEADER: Left white, Right dental blue gradient */
         .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: stretch; height: 64px; }
         .ai-header-left { flex: 1; background: #ffffff; padding: 0 20px; display: flex; align-items: center; gap: 8px; }
         .ai-header-right { width: 140px; background: linear-gradient(135deg, rgba(0, 113, 227, 0.25) 0%, #0071e3 100%); padding: 0 16px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; border-top-right-radius: 12px; }
 
-        .ai-chat-body { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--apple-titanium); }
+        .ai-chat-body { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--page-cream); }
         .ai-msg { max-width: 85%; padding: 13px 18px; border-radius: 8px; font-size: 0.9rem; line-height: 1.55; }
         .ai-bot { background: #ffffff; color: var(--apple-dark); align-self: flex-start; border: 1px solid var(--apple-border); }
         .ai-user { background: var(--apple-blue); color: #ffffff; align-self: flex-end; }
@@ -639,15 +642,14 @@ export default function DentalPage() {
         .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 11px 14px; border-radius: 6px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
-        /* 4 ELITE LUXURY SECTIONS GRID WITH SPLIT GRADIENT & LIFT */
         .extra-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0; }
-        .extra-feature-card { background: var(--split-gradient); border: 1px solid var(--apple-border); border-radius: 10px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
+        .extra-feature-card { background: var(--water-blue-cream-mix); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--apple-border); border-radius: 10px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
         .extra-feature-card:hover { transform: translateY(-3px); box-shadow: 0 18px 45px rgba(0, 113, 227, 0.15); }
         .extra-feature-icon { font-size: 2rem; margin-bottom: 12px; }
         .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
         .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
 
-        footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); }
+        footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
         
         @media (max-width: 768px) {
           header { padding: 16px 20px; justify-content: center !important; }
@@ -776,13 +778,12 @@ export default function DentalPage() {
           </div>
         </section>
 
-        {/* 4 ELITE LUXURY SECTIONS WITH SPLIT GRADIENT */}
         <section className="section-padding animate-on-scroll" style={{ paddingTop: 0 }}>
           <div className="sec-tag">Elite Standards</div>
           <h2 className="sec-heading">Exclusive Beverly Hills Protocol</h2>
           <div className="extra-features-grid">
             <div className="extra-feature-card service-trigger-btn" data-topic="In-House Master Atelier Lab">
-              <div className="extra-feature-icon">🏛️</div>
+              <div className="extra-feature-icon">🏛️️</div>
               <h3 className="extra-feature-title">In-House Master Atelier Lab</h3>
               <p className="extra-feature-desc">All porcelain art and micro-veneers are handcrafted on-site by our master ceramists, ensuring absolute shade matching and zero outsourcing delays.</p>
             </div>
@@ -947,7 +948,6 @@ export default function DentalPage() {
 
       <div className={`ai-chat-modal ${isChatOpen ? 'active' : ''}`}>
         <div className="ai-chat-window">
-          {/* EXACT SPLIT HEADER: Left white, Right dental blue gradient */}
           <div className="ai-chat-header">
             <div className="ai-header-left">
               <div style={{width:'9px', height:'9px', borderRadius:'50%', background:'#34c759'}}></div>
@@ -968,7 +968,7 @@ export default function DentalPage() {
                 <div className="chat-calendar-title">📅 Reserve Priority Consultation Slot</div>
                 <input type="datetime-local" value={chatSlot} onChange={e => setChatSlot(e.target.value)} className="chat-calendar-input" />
                 <button className="chat-calendar-btn" onClick={confirmChatSlot}>Confirm Slot Reservation</button>
-                {chatSlotStatus.text && <p style={{ fontSize: '0.78rem', marginTop: '6px', fontWeight: 600, color: chatSlotStatus.color }}>{chatSlotStatus.text['text'] || chatSlotStatus.text}</p>}
+                {chatSlotStatus.text && <p style={{ fontSize: '0.78rem', marginTop: '6px', fontWeight: 600, color: chatSlotStatus.color }}>{chatSlotStatus.text}</p>}
               </div>
             )}
           </div>
