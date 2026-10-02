@@ -2,53 +2,49 @@ import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export async function POST(request: Request) {
-    let message = '';
-    let niche = 'business';
-    let brandName = 'Our Professional Studio';
-    let expertName = 'our Specialist';
-
     try {
         const body = await request.json().catch(() => ({}));
-        message = body?.message?.trim();
-        niche = body?.niche?.trim() || 'business';
-        brandName = body?.brandName?.trim() || 'Our Studio';
-        expertName = body?.expertName?.trim() || 'our Lead Specialist';
+        const message = body?.message?.trim() || '';
+        const niche = body?.niche?.trim() || 'dental';
+        const brandName = body?.brandName?.trim() || 'SmileWay Studio';
+        const expertName = body?.expertName?.trim() || 'Dr. Julian Vance';
 
         if (!message) {
             return NextResponse.json({ success: false, error: 'Message is required.' }, { status: 400 });
         }
 
         const apiKey = (process.env.GEMINI_API_KEY || '').trim();
+        
+        // যদি এপিআই কি না থাকে, তবুও জেনেরিক ফলব্যাক না দিয়ে ইনপুট অনুযায়ী রিয়েল হিউম্যানের মতো স্মার্ট ফলব্যাক দিব
         if (!apiKey) {
             return NextResponse.json({ 
                 success: true, 
-                reply: `Hi there! Welcome to ${brandName}. How can I help you today?` 
+                reply: getSmartHumanFallback(message, brandName, niche)
             });
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        // ১০০% রিয়েল হিউম্যান পারসোনা প্রম্পট (কোনো এআই বা রোবট টোন থাকবে না)
         const humanStealthPrompt = `
-You are a real, live human receptionist, front-desk coordinator, and client relationship manager working directly at "${brandName}" (${niche} industry). You assist ${expertName}.
+You are a real, live human receptionist and front-desk coordinator at "${brandName}" specializing in ${niche}. You work directly with ${expertName}.
+The user just sent you a message. Reply to them directly as a real human chatting on a live website widget.
 
-ABSOLUTE LAWS TO SOUND 100% HUMAN:
-1. Zero AI Traits: NEVER use robotic phrases like "As an AI...", "How may I assist you today?", "Here is the information", or any overly formal, stiff corporate jargon. Speak like a real person typing casually yet professionally on a chat widget.
-2. Natural Flow & Short Replies: Keep your replies very short, conversational, and natural (1 to 2 sentences max, under 30 words). Real humans on web chats don't write long essays.
-3. Contextual Empathy: If they say hi, greet them back warmly and casually (e.g., "Hey there! Welcome to ${brandName}. What can I help you with?"). If they ask a question, answer it directly like an expert sitting right at the desk.
-4. Pricing/Cost Handling: Never give rigid price tags. Casually mention, "Pricing or packages usually depend on what you need specifically. Want me to check a quick time slot for a chat with ${expertName}?"
-5. Language Match: Reply strictly in the exact same language and script the user uses (if they type in Bengali, reply in natural conversational Bengali; if English, reply in natural American English).
+RULES:
+1. Never sound like an AI, robot, or automated bot. No corporate jargon.
+2. Keep it extremely short, natural, and conversational (1-2 sentences, under 30 words).
+3. Directly answer or react to what the user actually said. If they ask about the process, briefly explain it. If they say hi, greet them back warmly.
+4. Language Match: Reply strictly in the exact same language/script the user used.
 `;
 
-        const fullPrompt = `${humanStealthPrompt}\n\nCustomer's Message: "${message}"\nReply as a real human receptionist (short, natural, friendly):`;
+        const fullPrompt = `${humanStealthPrompt}\n\nUser's Message: "${message}"\nReply naturally:`;
         
         const result = await model.generateContent(fullPrompt);
         const response = await result.response;
         const text = response.text()?.trim();
 
         if (!text) {
-            throw new Error("Empty response");
+            return NextResponse.json({ success: true, reply: getSmartHumanFallback(message, brandName, niche) });
         }
 
         return NextResponse.json({
@@ -57,18 +53,40 @@ ABSOLUTE LAWS TO SOUND 100% HUMAN:
         });
 
     } catch (error: any) {
-        console.error("Chat Error:", error?.message || error);
+        console.error("AI Chat API Error:", error?.message || error);
         
-        const lowerMsg = message?.toLowerCase() || "";
-        let fallback = `Hey! Thanks for reaching out to ${brandName}. Would you like to schedule a quick chat with our team?`;
-        
-        if (lowerMsg.includes('hi') || lowerMsg.includes('hello') || lowerMsg.includes('hey') || lowerMsg.includes('হ্যালো') || lowerMsg.includes('হাই')) {
-            fallback = `Hi there! Welcome to ${brandName}. How can I help you out today?`;
-        }
+        const body = await request.clone().json().catch(() => ({}));
+        const message = body?.message || '';
+        const brandName = body?.brandName || 'Our Studio';
+        const niche = body?.niche || 'dental';
 
         return NextResponse.json({
             success: true,
-            reply: fallback
+            reply: getSmartHumanFallback(message, brandName, niche)
         });
     }
+}
+
+// জেমিনি এপিআই কি না থাকলে বা কোনো কারণে এরর খেলে ইউজার ইনপুট অনুযায়ী ১০০% হিউম্যান-লাইক স্মার্ট ডাইনামিক উত্তর জেনারেট করবে
+function getUserInputText(msg: string) {
+    return msg.toLowerCase();
+}
+
+function getSmartHumanFallback(message: string, brandName: string, niche: string): string {
+    const text = getUserInputText(message);
+
+    if (text.includes('how') || text.includes('process') || text.includes('work') || text.includes('কেমন')) {
+        return `We start with a quick digital preview so you can see your exact results before anything begins. Want me to check an available time slot for a chat?`;
+    }
+    if (text.includes('price') || text.includes('cost') || text.includes('how much') || text.includes('দাম')) {
+        return `Pricing usually depends on your specific requirements. Would you like me to grab a quick slot for you to discuss it with our specialist?`;
+    }
+    if (text.includes('book') || text.includes('appointment') || text.includes('slot') || text.includes('schedule') || text.includes('বুক')) {
+        return `I can definitely help set that up for you! Let me pull up the schedule so you can pick your preferred time.`;
+    }
+    if (text.includes('hi') || text.includes('hello') || text.includes('hey') || text.includes('হ্যালো') || text.includes('হাই')) {
+        return `Hey there! Welcome to ${brandName}. What can I help you out with today?`;
+    }
+    
+    return `Thanks for reaching out to ${brandName}. Would you like to schedule a quick chat or consultation with our team?`;
 }
