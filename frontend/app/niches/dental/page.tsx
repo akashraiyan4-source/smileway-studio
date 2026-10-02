@@ -484,7 +484,7 @@ export default function DentalPage() {
           --apple-gray: #5C5854;
           --apple-border: rgba(0, 113, 227, 0.18);
           --apple-blue: #0071e3;
-          /* POWERFUL HERO-MATCHED GLOW FOR ALL CARDS: Cream left transitioning to deep vibrant water-blue right */
+          /* SIDE-BY-SIDE POWERFUL GLOW: Cream left transitioning to deep vibrant water-blue right */
           --hero-powerful-glow: linear-gradient(135deg, rgba(250, 248, 245, 0.95) 25%, rgba(56, 189, 248, 0.32) 65%, rgba(0, 113, 227, 0.48) 100%);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
@@ -526,8 +526,9 @@ export default function DentalPage() {
         .h-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0, 113, 227, 0.3); }
         .h-pill span { color: var(--apple-blue); }
         
-        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--apple-blue); color: #ffffff; padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.4); width: fit-content; cursor: pointer; transition: transform 0.25s ease; }
-        .hero-cta-btn:hover { transform: translateY(-3px); }
+        /* UNIFORM POWERFUL GLOW FOR HERO CTA BUTTON */
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); color: var(--apple-dark); padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.25); width: fit-content; cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .hero-cta-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35); }
         
         .hero-box { position: relative; width: 100%; max-width: 440px; margin: 0 auto; border-radius: 12px; overflow: hidden; aspect-ratio: 9 / 16; background: #0d131f; box-shadow: 0 35px 80px -15px rgba(0, 0, 0, 0.35); border: 1px solid var(--apple-border); }
         .hero-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; background-color: #0d131f; }
@@ -539,7 +540,8 @@ export default function DentalPage() {
         .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
         .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
 
-        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: rgba(255, 255, 255, 0.99); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.25); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1px solid var(--apple-border); overflow-y: auto; }
+        /* HALF FORM DRAWER WITH MATCHING POWERFUL GLOW */
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: var(--hero-powerful-glow); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 50px rgba(0, 113, 227, 0.2); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1.5px solid rgba(0, 113, 227, 0.4); overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
         .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
         .drawer-title { color: var(--apple-dark); font-size: 1.25rem; font-weight: 800; }
@@ -549,7 +551,7 @@ export default function DentalPage() {
         .drawer-btn:hover { transform: translateY(-2px); }
         .drawer-dismiss { position: absolute; top: 18px; right: 18px; background: var(--page-cream); border: none; width: 30px; height: 30px; border-radius: 50%; color: var(--apple-gray); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         
-        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform, opacity; }
         .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         .content-container { max-width: 1000px; margin: 0 auto; width: 100%; padding: 0 28px; }
         .section-padding { padding: 70px 0; }
@@ -557,44 +559,44 @@ export default function DentalPage() {
         .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
         .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
         
-        /* ALL CARDS INFUSED WITH THE POWERFUL HERO VIDEO GLOW */
-        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.2); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
-        .doctor-card:hover { transform: translateY(-3px); box-shadow: 0 30px 70px rgba(0, 113, 227, 0.32); }
+        /* ALL CARDS INFUSED WITH THE POWERFUL HERO VIDEO GLOW & SPRING HOVER */
+        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.2); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; cursor: pointer; }
+        .doctor-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 35px 80px rgba(0, 113, 227, 0.35); }
         .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
         .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
         
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-        .stat-pill { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.25s ease; cursor: pointer; }
-        .stat-pill:hover { transform: translateY(-3px); }
+        .stat-pill { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .stat-pill:hover { transform: translateY(-4px); }
         .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 6px; }
         .stat-label { font-size: 0.86rem; font-weight: 600; color: var(--apple-gray); }
         
         .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
-        .acc-badge { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 113, 227, 0.12); transition: transform 0.25s ease; cursor: pointer; }
-        .acc-badge:hover { transform: translateY(-2px); }
+        .acc-badge { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 113, 227, 0.12); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .acc-badge:hover { transform: translateY(-3px); }
         
         .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
         
-        .review-bubble { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease; cursor: pointer; }
-        .review-bubble:hover { transform: translateY(-3px); }
+        .review-bubble { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .review-bubble:hover { transform: translateY(-4px); }
         .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
         .rev-quote { font-size: 0.92rem; line-height: 1.65; color: var(--apple-gray); }
         
         .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
-        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 20px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease; cursor: pointer; }
-        .case-card-stream:hover { transform: translateY(-3px); }
+        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; padding: 20px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .case-card-stream:hover { transform: translateY(-4px); }
         .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
         .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(1.02); }
         
         .faq-list { display: flex; flex-direction: column; gap: 16px; }
-        .faq-item { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; overflow: hidden; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.25s ease; }
+        .faq-item { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 8px; overflow: hidden; box-shadow: 0 12px 35px rgba(0, 113, 227, 0.15); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .faq-item:hover { transform: translateY(-2px); }
         .faq-question { width: 100%; padding: 22px 26px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
-        .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.25s ease; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; padding: 0 26px; font-size: 0.92rem; color: var(--apple-gray); line-height: 1.7; }
+        .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.3s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s ease; padding: 0 26px; font-size: 0.92rem; color: var(--apple-gray); line-height: 1.7; }
         .faq-item.active .faq-answer { max-height: 220px; padding-bottom: 22px; }
         .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
 
@@ -604,8 +606,10 @@ export default function DentalPage() {
         .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
         
         .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 6px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; }
-        .btn-confirm { width: 100%; background: var(--apple-blue); border: none; padding: 18px; border-radius: 6px; color: #ffffff; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 24px rgba(0, 113, 227, 0.4); transition: transform 0.25s ease; }
-        .btn-confirm:hover { transform: translateY(-3px); }
+        
+        /* UNIFORM POWERFUL GLOW FOR CONFIRM APPOINTMENT BUTTON */
+        .btn-confirm { width: 100%; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); color: var(--apple-dark); padding: 18px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.25); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease; }
+        .btn-confirm:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35); }
         
         .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1.5px solid rgba(0, 113, 227, 0.4); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 20px 50px rgba(0, 113, 227, 0.18); }
         .map-preview-iframe-container { position: relative; width: 100%; height: 400px; background: #e5e3df; }
@@ -627,9 +631,10 @@ export default function DentalPage() {
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
-        .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: stretch; height: 64px; }
-        .ai-header-left { flex: 1; background: #ffffff; padding: 0 20px; display: flex; align-items: center; gap: 8px; }
-        .ai-header-right { width: 140px; background: linear-gradient(135deg, rgba(0, 113, 227, 0.25) 0%, #0071e3 100%); padding: 0 16px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; border-top-right-radius: 12px; }
+        /* CLEAN UNIFORM AI CHAT HEADER (NO ODD SPLIT GRADIENT) */
+        .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; height: 64px; padding-left: 20px; padding-right: 20px; }
+        .ai-header-left { display: flex; align-items: center; gap: 8px; color: var(--apple-dark); }
+        .ai-header-right { display: flex; align-items: center; }
 
         .ai-chat-body { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--page-cream); }
         .ai-msg { max-width: 85%; padding: 13px 18px; border-radius: 8px; font-size: 0.9rem; line-height: 1.55; }
@@ -646,24 +651,29 @@ export default function DentalPage() {
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
         .extra-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0; }
-        .extra-feature-card { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 10px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.25s ease, box-shadow 0.25s ease; cursor: pointer; }
-        .extra-feature-card:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(0, 113, 227, 0.3); }
+        .extra-feature-card { background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); border-radius: 10px; padding: 28px; box-shadow: 0 15px 40px rgba(0, 113, 227, 0.18); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; cursor: pointer; }
+        .extra-feature-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.32); }
         .extra-feature-icon { font-size: 2rem; margin-bottom: 12px; }
         .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
         .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
 
         footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
         
+        /* FULL RESPONSIVE FIX FOR MOBILE, TABLET & PC */
         @media (max-width: 768px) {
           header { padding: 16px 20px; justify-content: center !important; }
           .brand-title { font-size: 1.25rem; text-align: center; }
           .phone-badge { display: none; }
           .rating-strip { font-size: 0.8rem; padding: 12px 16px; text-align: center; }
-          .hero-split-grid { grid-template-columns: 1fr; padding: 0 0 40px 0 !important; gap: 24px; text-align: center; }
-          .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 80vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 0 20px 20px !important; }
-          .hero-text-col { padding: 0 24px !important; align-items: center; text-align: center; gap: 16px; }
-          .hero-main-title { font-size: 2.6rem !important; line-height: 1.12 !important; }
+          .hero-split-grid { grid-template-columns: 1fr; padding: 0 20px 40px 20px !important; gap: 24px; text-align: center; justify-items: center; }
+          .hero-text-col { align-items: center; text-align: center; gap: 16px; width: 100%; }
+          .hero-sub-copy { max-width: 100%; text-align: center; }
+          .hero-pill-cluster { justify-content: center; }
+          .hero-box { order: -1; width: 100% !important; max-width: 100% !important; height: 75vh !important; aspect-ratio: auto !important; margin: 0 auto !important; border-radius: 12px !important; }
+          .hero-main-title { font-size: 2.5rem !important; line-height: 1.12 !important; text-align: center; }
           .extra-features-grid { grid-template-columns: 1fr; }
+          .stats-row { grid-template-columns: 1fr; }
+          .content-container { padding: 0 16px; }
           .ai-chat-modal { bottom: 98px !important; right: 14px !important; left: 14px !important; width: calc(100vw - 28px) !important; height: min(580px, 80vh) !important; }
         }
       `}</style>
@@ -906,7 +916,7 @@ export default function DentalPage() {
               <div>💳 0% APR Flexible Monthly Installments Available</div>
             </div>
             <input type="text" value={mainName} onChange={e => setMainName(e.target.value)} className="form-input" placeholder="Your Full Name" />
-            <input type="tel" value={mainPhone} onChange={e => setMainPhone(e.target.value)} className="form-input" placeholder="Direct Phone (SMS Enabled)" />
+            <input type="tel" value={mainPhone} onChange={e => setMainPhone(e.target.value)} className="form-input" placeholder="Mobile Phone (SMS Enabled)" />
             <select value={mainTreatment} onChange={e => setMainTreatment(e.target.value)} className="form-input">
               <option value="dental">Handcrafted Porcelain Veneers</option>
               <option value="cosmetic">Micro-Enamel Bio-Seal</option>
@@ -957,7 +967,7 @@ export default function DentalPage() {
               <strong>SmileWay AI Assistant</strong>
             </div>
             <div className="ai-header-right">
-              <button onClick={() => setIsChatOpen(false)} style={{background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer', color:'#ffffff'}}>×</button>
+              <button onClick={() => setIsChatOpen(false)} style={{background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer', color:'var(--apple-dark)'}}>×</button>
             </div>
           </div>
           <div className="ai-chat-body" ref={chatBodyRef}>
