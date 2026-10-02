@@ -317,6 +317,29 @@ export default function CosmeticPage() {
       }
     });
 
+    const triggerButtons = document.querySelectorAll('.service-trigger-btn');
+    triggerButtons.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const topic = (e.currentTarget as HTMLElement).getAttribute('data-topic') || 'consultation';
+        
+        if (adaModal) adaModal.classList.remove('show');
+        if (aiModal) aiModal.classList.add('show');
+        if (sideDock) sideDock.classList.remove('expanded');
+        document.body.classList.remove('ada-active');
+        document.body.classList.add('ai-active');
+
+        const aiChatBox = document.getElementById('aiChatBox');
+        if (aiChatBox) {
+          const proactiveDiv = document.createElement('div');
+          proactiveDiv.className = 'chat-msg bot';
+          proactiveDiv.textContent = `Welcome to Aura Beverly Hills. I noticed you're exploring our ${topic}. Would you like me to guide you through the details or secure a confidential consultation?`;
+          aiChatBox.appendChild(proactiveDiv);
+          aiChatBox.scrollTop = aiChatBox.scrollHeight;
+        }
+      });
+    });
+
     if (aiCandidacyTriggerBtn) {
       aiCandidacyTriggerBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -401,7 +424,7 @@ export default function CosmeticPage() {
         const res = await fetch('/api/ai/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: txt, userPhone: 'WebVisitor' })
+          body: JSON.stringify({ message: txt, userPhone: 'WebVisitor', niche: 'cosmetics' })
         });
         const data = await res.json();
         botDiv.textContent = data.reply || data.response || data.message || "Consultation priority noted.";
@@ -1674,7 +1697,7 @@ export default function CosmeticPage() {
           </div>
 
           <div style={{ marginTop: '10px', width: '100%' }}>
-            <a href="#candidate-section" className="gold-btn">Reserve VIP Consultation →</a>
+            <a href="#candidate-section" className="gold-btn service-trigger-btn" data-topic="VIP Consultation">Reserve VIP Consultation →</a>
           </div>
         </div>
 
@@ -1911,7 +1934,7 @@ export default function CosmeticPage() {
               <li>Zero bruising protocol with blunt-tip micro-cannulas</li>
             </ul>
 
-            <a href="#candidate-section" className="gold-btn" style={{ width: '100%' }}>Explore Liquid Pathway →</a>
+            <a href="#candidate-section" className="gold-btn service-trigger-btn" data-topic="Liquid Biostimulatory Lift" style={{ width: '100%' }}>Explore Liquid Pathway →</a>
           </div>
 
           <div className="white-card">
@@ -1925,7 +1948,7 @@ export default function CosmeticPage() {
               <li>Computerized depth control ensures uniform dermal protection</li>
             </ul>
 
-            <a href="#candidate-section" className="gold-btn" style={{ width: '100%' }}>Explore Laser Pathway →</a>
+            <a href="#candidate-section" className="gold-btn service-trigger-btn" data-topic="Precision Micro-Laser Architecture" style={{ width: '100%' }}>Explore Laser Pathway →</a>
           </div>
         </div>
       </section>
@@ -1987,7 +2010,7 @@ export default function CosmeticPage() {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '30px' }}>
-          <a href="#candidate-section" className="gold-btn">Inquire for Body Architecture Suite →</a>
+          <a href="#candidate-section" className="gold-btn service-trigger-btn" data-topic="Body Architecture Suite">Inquire for Body Architecture Suite →</a>
         </div>
       </section>
 
