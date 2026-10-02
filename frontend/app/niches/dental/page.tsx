@@ -58,7 +58,6 @@ export default function DentalPage() {
     initInertialMarquee('reviewsBox', reviewsInnerRef, 0.6);
     initInertialMarquee('casesBox', casesInnerRef, 0.5);
 
-    // AI Service Button Proactive Triggers
     const triggerButtons = document.querySelectorAll('.service-trigger-btn');
     triggerButtons.forEach(btn => {
       const handleClick = async (e: Event) => {
@@ -550,18 +549,19 @@ export default function DentalPage() {
         .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
         .acc-badge { background: var(--card-pure-white); border: 1px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
         
-        .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+        .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
         .review-bubble { width: 340px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); }
         .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
         .rev-quote { font-size: 0.92rem; line-height: 1.65; color: var(--apple-gray); }
         
-        .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+        /* SHARP, CLEAN CLINICAL TRANSFORMATIONS (No Blurry Cutouts) */
+        .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
         .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
-        .case-card-stream { width: 300px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 18px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); }
-        .case-photo-slot { position: relative; border-radius: 12px; overflow: hidden; height: 230px; margin-bottom: 14px; background: #e2e5e9; }
-        .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 16px; padding: 20px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06); }
+        .case-photo-slot { position: relative; border-radius: 12px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
+        .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(1.02); }
         
         .faq-list { display: flex; flex-direction: column; gap: 16px; }
         .faq-item { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 14px; overflow: hidden; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05); }
@@ -588,7 +588,7 @@ export default function DentalPage() {
         .map-badge-icons { display: flex; gap: 10px; align-items: center; }
         .map-icon-btn { width: 36px; height: 36px; border-radius: 10px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; }
 
-        /* Floating AI strictly locked to bottom right */
+        /* FLOATING AI STRICTLY LOCKED TO BOTTOM RIGHT CORNER FOREVER */
         .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 999999 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
         .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
@@ -597,7 +597,12 @@ export default function DentalPage() {
         .ai-chat-modal { position: fixed !important; bottom: 104px !important; right: 32px !important; width: 420px !important; max-width: calc(100vw - 32px) !important; height: 580px !important; max-height: calc(100vh - 130px) !important; z-index: 999998 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
         .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 22px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
-        .ai-chat-header { padding: 20px 24px; background: #ffffff; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; }
+        
+        /* SPLIT HEADER: Left white, Right dental accent color */
+        .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: stretch; height: 64px; }
+        .ai-header-left { flex: 1; background: #ffffff; padding: 0 20px; display: flex; align-items: center; gap: 8px; }
+        .ai-header-right { width: 140px; background: linear-gradient(135deg, #0071e3 0%, #38bdf8 100%); padding: 0 16px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; border-top-right-radius: 22px; }
+
         .ai-chat-body { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--apple-titanium); }
         .ai-msg { max-width: 85%; padding: 13px 18px; border-radius: 16px; font-size: 0.9rem; line-height: 1.55; }
         .ai-bot { background: #ffffff; color: var(--apple-dark); align-self: flex-start; border: 1px solid var(--apple-border); }
@@ -611,6 +616,13 @@ export default function DentalPage() {
         .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 11px 14px; border-radius: 12px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
         .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 12px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
         
+        /* 4 ELITE LUXURY SECTIONS GRID */
+        .extra-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0; }
+        .extra-feature-card { background: var(--card-pure-white); border: 1px solid var(--apple-border); border-radius: 18px; padding: 28px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.05); }
+        .extra-feature-icon { font-size: 2rem; margin-bottom: 12px; }
+        .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
+        .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
+
         footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: var(--card-pure-white); }
         
         @media (max-width: 768px) {
@@ -622,6 +634,7 @@ export default function DentalPage() {
           .hero-box { order: -1; width: 100vw !important; max-width: 100% !important; height: 80vh !important; aspect-ratio: auto !important; margin: 0 !important; border-radius: 0 0 30px 30px !important; }
           .hero-text-col { padding: 0 24px !important; align-items: center; text-align: center; gap: 16px; }
           .hero-main-title { font-size: 2.6rem !important; line-height: 1.12 !important; }
+          .extra-features-grid { grid-template-columns: 1fr; }
           .ai-chat-modal { bottom: 98px !important; right: 14px !important; left: 14px !important; width: calc(100vw - 28px) !important; height: min(580px, 80vh) !important; }
         }
       `}</style>
@@ -736,6 +749,34 @@ export default function DentalPage() {
             <span className="acc-badge">✓ ADA Member</span>
             <span className="acc-badge">★ Top Doctor 2026</span>
             <span className="acc-badge">✦ Invisalign Diamond</span>
+          </div>
+        </section>
+
+        {/* 4 ELITE LUXURY SECTIONS FROM TOP US SITES */}
+        <section className="section-padding animate-on-scroll" style={{ paddingTop: 0 }}>
+          <div className="sec-tag">Elite Standards</div>
+          <h2 className="sec-heading">Exclusive Beverly Hills Protocol</h2>
+          <div className="extra-features-grid">
+            <div className="extra-feature-card">
+              <div className="extra-feature-icon">🏛️</div>
+              <h3 className="extra-feature-title">In-House Master Atelier Lab</h3>
+              <p className="extra-feature-desc">All porcelain art and micro-veneers are handcrafted on-site by our master ceramists, ensuring absolute shade matching and zero outsourcing delays.</p>
+            </div>
+            <div className="extra-feature-card">
+              <div className="extra-feature-icon">🌿</div>
+              <h3 className="extra-feature-title">VIP Sedation & Comfort Protocol</h3>
+              <p className="extra-feature-desc">Engineered for high-profile and anxiety-free visits with bespoke IV sedation, NuCalm relaxation, and complete privacy suites.</p>
+            </div>
+            <div className="extra-feature-card">
+              <div className="extra-feature-icon">💳</div>
+              <h3 className="extra-feature-title">Bespoke Financing & Investment</h3>
+              <p className="extra-feature-desc">Transparent 0% APR monthly installments and concierge insurance advocacy tailored for high-ticket architectural smile investments.</p>
+            </div>
+            <div className="extra-feature-card">
+              <div className="extra-feature-icon">✨</div>
+              <h3 className="extra-feature-title">Step-by-Step 3D Smile Triage</h3>
+              <p className="extra-feature-desc">A precise 4-stage digital workflow from 3D facial scan to virtual mockup preview, guaranteeing your exact aesthetic outcome before work starts.</p>
+            </div>
           </div>
         </section>
 
@@ -874,7 +915,7 @@ export default function DentalPage() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
-      {/* Floating AI correctly locked to bottom right */}
+      {/* FLOATING AI PERMANENTLY LOCKED TO BOTTOM RIGHT CORNER */}
       <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
@@ -882,12 +923,15 @@ export default function DentalPage() {
 
       <div className={`ai-chat-modal ${isChatOpen ? 'active' : ''}`}>
         <div className="ai-chat-window">
+          {/* SPLIT HEADER: Left white, Right dental accent color */}
           <div className="ai-chat-header">
-            <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
+            <div className="ai-header-left">
               <div style={{width:'9px', height:'9px', borderRadius:'50%', background:'#34c759'}}></div>
               <strong>SmileWay AI Assistant</strong>
             </div>
-            <button onClick={() => setIsChatOpen(false)} style={{background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer'}}>×</button>
+            <div className="ai-header-right">
+              <button onClick={() => setIsChatOpen(false)} style={{background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer', color:'#ffffff'}}>×</button>
+            </div>
           </div>
           <div className="ai-chat-body" ref={chatBodyRef}>
             {chatMessages.map((msg, idx) => (
