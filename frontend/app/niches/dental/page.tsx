@@ -535,10 +535,10 @@ export default function DentalPage() {
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        /* ZERO BLUR, CLEAN TRANSPARENT SWIPE ZONE AT THE BOTTOM OF THE VIDEO BOX */
-        .swipe-interactive-zone { position: absolute; bottom: 20px; left: 20px; right: 20px; height: 50px; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; padding: 0 6px; z-index: 25; touch-action: none; }
-        .swipe-arrow-handle { height: 48px; width: 56px; background: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; }
-        .swipe-arrow-handle svg { width: 32px; height: 32px; fill: #ffffff !important; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6)); pointer-events: none; }
+        /* ZERO BLUR, CLEAN TRANSPARENT SWIPE ZONE POSITIONED AT TOOTH LEGS LEVEL, 3X LARGER */
+        .swipe-interactive-zone { position: absolute; bottom: 155px; left: 20px; right: 20px; height: 90px; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; padding: 0 6px; z-index: 25; touch-action: none; }
+        .swipe-arrow-handle { height: 84px; width: 96px; background: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; }
+        .swipe-arrow-handle svg { width: 80px; height: 80px; fill: #ffffff !important; filter: drop-shadow(0 3px 10px rgba(0,0,0,0.8)); pointer-events: none; }
 
         .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: var(--hero-powerful-glow); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 50px rgba(0, 113, 227, 0.2); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1.5px solid rgba(0, 113, 227, 0.4); overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
@@ -618,14 +618,14 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
-        /* FIXED RIGHT-SIDE FLOATING AI ASSISTANT (MIDDLE-RIGHT POSITION, AWAY FROM BOTTOM) */
-        .floating-ai { position: fixed !important; top: 50% !important; transform: translateY(-50%) !important; right: 24px !important; z-index: 2147483647 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
-        .floating-ai.rotated { transform: translateY(-50%) rotate(360deg) scale(1.05); }
+        /* PERMANENTLY LOCKED BOTTOM-RIGHT FLOATING AI ASSISTANT */
+        .floating-ai { position: fixed !important; bottom: 32px !important; right: 32px !important; z-index: 2147483647 !important; background: rgba(255, 255, 255, 0.98); border: 1.5px solid rgba(0, 113, 227, 0.45); width: 60px; height: 60px; border-radius: 50%; display: flex !important; align-items: center; justify-content: center; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); cursor: pointer; transition: transform 0.4s ease; }
+        .floating-ai.rotated { transform: rotate(360deg) scale(1.05); }
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
         .status-dot-tiny { width: 11px; height: 11px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; box-shadow: 0 0 6px rgba(52, 199, 89, 0.8); }
         
-        .ai-chat-modal { position: fixed !important; top: 50% !important; transform: translateY(-50%) !important; right: 96px !important; width: 420px !important; max-width: calc(100vw - 48px) !important; height: 580px !important; max-height: calc(100vh - 100px) !important; z-index: 2147483646 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform-origin: right center; transition: all 0.3s ease; }
-        .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: translateY(-50%) scale(1) !important; }
+        .ai-chat-modal { position: fixed !important; bottom: 104px !important; right: 32px !important; width: 420px !important; max-width: calc(100vw - 32px) !important; height: 580px !important; max-height: calc(100vh - 130px) !important; z-index: 2147483646 !important; display: flex !important; flex-direction: column !important; opacity: 0; pointer-events: none; transform: scale(0.05) translateY(60px); transform-origin: bottom right; transition: all 0.3s ease; }
+        .ai-chat-modal.active { opacity: 1 !important; pointer-events: auto !important; transform: scale(1) translateY(0) !important; }
         .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.28); border: 1px solid var(--apple-border); overflow: hidden; }
         
         /* CLEAN UNIFORM AI CHAT HEADER (NO ODD SPLIT GRADIENT) */
@@ -670,8 +670,7 @@ export default function DentalPage() {
           .extra-features-grid { grid-template-columns: 1fr; }
           .stats-row { grid-template-columns: 1fr; }
           .content-container { padding: 0 16px; }
-          .ai-chat-modal { top: auto !important; bottom: 80px !important; right: 14px !important; left: 14px !important; transform: none !important; width: calc(100vw - 28px) !important; height: min(580px, 80vh) !important; }
-          .ai-chat-modal.active { transform: none !important; }
+          .ai-chat-modal { bottom: 98px !important; right: 14px !important; left: 14px !important; width: calc(100vw - 28px) !important; height: min(580px, 80vh) !important; }
         }
       `}</style>
 
@@ -715,7 +714,7 @@ export default function DentalPage() {
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
           </button>
 
-          {/* SWIPE BAR AT THE BOTTOM OF VIDEO BOX */}
+          {/* SWIPE BAR POSITIONED AT TOOTH LEGS LEVEL, 3X LARGER, ZERO BLUR */}
           <div className="swipe-interactive-zone" id="swipeTrack" ref={trackRef}>
             <div className="swipe-arrow-handle" id="swipeKnob" ref={knobRef} onPointerDown={handlePointerDownKnob}>
               <svg ref={knobSvgRef} viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -952,7 +951,7 @@ export default function DentalPage() {
         <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
       </footer>
 
-      {/* FIXED RIGHT-SIDE FLOATING AI ASSISTANT (MIDDLE-RIGHT POSITION) */}
+      {/* PERMANENTLY LOCKED BOTTOM-RIGHT FLOATING AI ASSISTANT */}
       <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
         <span className="ai-avatar">🤖</span>
         <span className="status-dot-tiny"></span>
