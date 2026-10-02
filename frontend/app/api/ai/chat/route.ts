@@ -3,16 +3,16 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 export async function POST(request: Request) {
     let message = '';
-    let brandName = 'Elite Business';
-    let niche = 'general';
-    let expertName = 'Our Specialist';
+    let brandName = 'Aura Beverly Hills';
+    let niche = 'cosmetics';
+    let expertName = 'Dr. Sarah Alvi';
 
     try {
         const body = await request.json().catch(() => ({}));
         message = body?.message?.trim() || '';
-        niche = body?.niche?.trim() || 'general business';
-        brandName = body?.brandName?.trim() || 'Elite Practice';
-        expertName = body?.expertName?.trim() || 'Our Expert Specialist';
+        niche = body?.niche?.trim() || 'cosmetics';
+        brandName = body?.brandName?.trim() || 'Aura Beverly Hills';
+        expertName = body?.expertName?.trim() || 'Dr. Sarah Alvi';
 
         if (!message) {
             return NextResponse.json({ success: false, error: 'Message is required.' }, { status: 400 });
@@ -28,29 +28,34 @@ export async function POST(request: Request) {
         let text = '';
         let successGemini = false;
 
-        // সম্পূর্ণ ডাইনামিক এবং ইউনিভার্সাল প্রম্পট - যেকোনো নিশের জন্য প্রযোজ্য
-        const systemPrompt = `You are a friendly, professional human receptionist and sales assistant at a brand named "${brandName}", specializing in the "${niche}" industry. You work closely with ${expertName}. 
+        const systemPrompt = `You are a helpful, professional human receptionist and sales assistant at "${brandName}", specializing in "${niche}". You work closely with ${expertName}. 
         The customer just sent this message: "${message}".
         Reply directly as a real human in 1-2 short, conversational sentences. Be helpful, relevant to ${niche}, and guide them naturally toward booking a quick consultation or time slot. Never sound like a robot or mention that you are an AI.`;
 
+        // একাধিক কি এবং একাধিক মডেল ট্রাই করার লজিক
         for (const key of apiKeys) {
-            try {
-                const genAI = new GoogleGenerativeAI(key);
-                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-                const result = await model.generateContent(systemPrompt);
-                const response = await result.response;
-                text = response.text()?.trim() || '';
-                
-                if (text) {
-                    successGemini = true;
-                    break;
+            const modelsToTry = ["gemini-1.5-flash", "gemini-pro"];
+            
+            for (const modelName of modelsToTry) {
+                try {
+                    const genAI = new GoogleGenerativeAI(key);
+                    const model = genAI.getGenerativeModel({ model: modelName });
+                    const result = await model.generateContent(systemPrompt);
+                    const response = await result.response;
+                    text = response.text()?.trim() || '';
+                    
+                    if (text) {
+                        successGemini = true;
+                        break;
+                    }
+                } catch (err: any) {
+                    continue;
                 }
-            } catch (err: any) {
-                continue;
             }
+            if (successGemini) break;
         }
 
-        // যদি জেমিনি থেকে না আসে, তবে যেকোনো নিশের জন্য জেনেরিক স্মার্ট ফলব্যাক
+        // যদি সব ট্রাই করার পরও না আসে, তবেই কেবল ফলব্যাক
         if (!successGemini || !text) {
             text = `Thanks for reaching out to ${brandName}! We specialize in professional ${niche} services with ${expertName}. Would you like to schedule a quick consultation slot?`;
         }
@@ -60,7 +65,7 @@ export async function POST(request: Request) {
     } catch (error: any) {
         return NextResponse.json({ 
             success: true, 
-            reply: `Thanks for reaching out to ${brandName || 'our team'}! Would you like to schedule a quick chat?` 
+            reply: `Thanks for reaching out to ${brandName}! Would you like to schedule a quick chat?` 
         });
     }
 }
