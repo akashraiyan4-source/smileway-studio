@@ -353,17 +353,23 @@ export default function DentalPage() {
       const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, userPhone: "WebVisitor", niche: "dental" })
+        body: JSON.stringify({ 
+          message: text, 
+          userPhone: "WebVisitor", 
+          niche: "dental", 
+          brandName: "SmileWay Studio", 
+          expertName: "Dr. Julian Vance" 
+        })
       });
       const result = await response.json();
-      const replyText = result.success ? result.reply : "Thank you! Dr. Vance's team will contact you shortly.";
+      const replyText = (result && result.reply) ? result.reply : "Hey there! Welcome to SmileWay Studio. How can I help you out today?";
       
       setChatMessages(prev => [...prev, { sender: 'bot', text: replyText }]);
       if (wantsBooking) {
         setTimeout(() => setShowCalendarWidget(true), 600);
       }
     } catch (error) {
-      setChatMessages(prev => [...prev, { sender: 'bot', text: "Thank you! Dr. Vance's team will contact you shortly." }]);
+      setChatMessages(prev => [...prev, { sender: 'bot', text: "Hey! Thanks for reaching out. Would you like me to grab a quick time slot for a chat?" }]);
     }
   };
 
@@ -470,7 +476,6 @@ export default function DentalPage() {
 
   return (
     <div className="app-shell" style={{ position: 'relative', overflowX: 'hidden' }}>
-      {/* AMBIENT BLURRED BACKGROUND VIDEO OVER ENTIRE PAGE */}
       <div className="ambient-bg-container">
         <video className="ambient-bg-video" src="/niches/dental/start.mp4" autoPlay muted loop playsInline preload="auto"></video>
         <div className="ambient-bg-overlay"></div>
@@ -636,7 +641,6 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
-        /* FIXED FLOATING AI ASSISTANT POSITIONED RELATIVE TO VIEWPORT */
         .floating-ai { 
           position: fixed !important; 
           bottom: 32px !important; 
