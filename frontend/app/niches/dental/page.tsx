@@ -478,14 +478,14 @@ export default function DentalPage() {
 
       <style jsx global>{`
         :root {
-          --page-cream: #FAF8F5;
+          --page-cream: #F7F4EF;
           --card-pure-white: #ffffff;
           --apple-dark: #141316;
           --apple-gray: #5C5854;
           --apple-border: rgba(0, 113, 227, 0.18);
           --apple-blue: #0071e3;
-          /* SIDE-BY-SIDE POWERFUL GLOW: Cream left transitioning to deep vibrant water-blue right */
-          --hero-powerful-glow: linear-gradient(135deg, rgba(250, 248, 245, 0.95) 25%, rgba(56, 189, 248, 0.32) 65%, rgba(0, 113, 227, 0.48) 100%);
+          /* RICH PREMIUM SIDE-BY-SIDE GLOW: Cream left transitioning to deep vibrant water-blue right */
+          --hero-powerful-glow: linear-gradient(135deg, rgba(247, 244, 239, 0.98) 20%, rgba(56, 189, 248, 0.45) 60%, rgba(0, 113, 227, 0.72) 100%);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent !important; user-select: none !important; }
         input, select, textarea, button { user-select: auto !important; }
@@ -493,11 +493,11 @@ export default function DentalPage() {
         
         .ambient-bg-container { position: fixed; inset: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; pointer-events: none; background-color: var(--page-cream); transform: translate3d(0,0,0); backface-visibility: hidden; }
         .ambient-bg-video { width: 100%; height: 100%; object-fit: cover; filter: blur(28px) brightness(1.08); transform: scale(1.1); opacity: 0.35; will-change: transform; }
-        .ambient-bg-overlay { position: absolute; inset: 0; background: rgba(250, 248, 245, 0.78); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .ambient-bg-overlay { position: absolute; inset: 0; background: rgba(247, 244, 239, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 
         .app-shell { width: 100%; max-width: 1400px; margin: 0 auto; min-height: 100vh; position: relative; z-index: 1; display: flex; flex-direction: column; will-change: transform; }
         
-        header { position: sticky; top: 0; z-index: 100; background: rgba(250, 248, 245, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
+        header { position: sticky; top: 0; z-index: 100; background: rgba(247, 244, 239, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
         .brand-title { font-size: 1.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; }
         .brand-title span { color: var(--apple-blue); }
         .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.08); transition: transform 0.2s ease; cursor: pointer; }
@@ -526,7 +526,6 @@ export default function DentalPage() {
         .h-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0, 113, 227, 0.3); }
         .h-pill span { color: var(--apple-blue); }
         
-        /* UNIFORM POWERFUL GLOW FOR HERO CTA BUTTON */
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); color: var(--apple-dark); padding: 19px 38px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; text-decoration: none; box-shadow: 0 12px 32px rgba(0, 113, 227, 0.25); width: fit-content; cursor: pointer; transition: transform 0.25s ease, box-shadow 0.25s ease; }
         .hero-cta-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35); }
         
@@ -536,11 +535,11 @@ export default function DentalPage() {
         .glass-sound-btn { position: absolute; top: 20px; right: 20px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
-        .swipe-interactive-zone { position: absolute; bottom: 24px; left: 20px; right: 20px; height: 56px; background: var(--hero-powerful-glow) !important; border: 1.5px solid rgba(0, 113, 227, 0.5) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 20; touch-action: none; backdrop-filter: blur(14px); box-shadow: 0 10px 30px rgba(0, 113, 227, 0.25); }
-        .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 25; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
+        /* SWIPE INTERACTIVE ZONE MOVED TO TOP OF VIDEO BOX (ABOVE RESTORE YOUR SMILE) */
+        .swipe-interactive-zone { position: absolute; top: 24px; left: 20px; right: 20px; height: 56px; background: var(--hero-powerful-glow) !important; border: 1.5px solid rgba(0, 113, 227, 0.5) !important; border-radius: 8px; display: flex; align-items: center; padding: 0 6px; z-index: 25; touch-action: none; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.35); }
+        .swipe-arrow-handle { height: 44px; width: 52px; background: #ffffff; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35); }
         .swipe-arrow-handle svg { width: 21px; height: 21px; fill: var(--apple-blue); pointer-events: none; }
 
-        /* HALF FORM DRAWER WITH MATCHING POWERFUL GLOW */
         .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: var(--hero-powerful-glow); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 50px rgba(0, 113, 227, 0.2); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1.5px solid rgba(0, 113, 227, 0.4); overflow-y: auto; }
         .half-form-drawer.open { transform: translate3d(0, 0, 0); }
         .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
@@ -559,7 +558,6 @@ export default function DentalPage() {
         .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
         .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
         
-        /* ALL CARDS INFUSED WITH THE POWERFUL HERO VIDEO GLOW & SPRING HOVER */
         .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--hero-powerful-glow); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid rgba(0, 113, 227, 0.4); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.2); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; cursor: pointer; }
         .doctor-card:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 35px 80px rgba(0, 113, 227, 0.35); }
         .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
@@ -607,7 +605,6 @@ export default function DentalPage() {
         
         .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 6px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; }
         
-        /* UNIFORM POWERFUL GLOW FOR CONFIRM APPOINTMENT BUTTON */
         .btn-confirm { width: 100%; background: var(--hero-powerful-glow); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(0, 113, 227, 0.45); color: var(--apple-dark); padding: 18px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.25); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease; }
         .btn-confirm:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0, 113, 227, 0.35); }
         
@@ -659,7 +656,6 @@ export default function DentalPage() {
 
         footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
         
-        /* FULL RESPONSIVE FIX FOR MOBILE, TABLET & PC */
         @media (max-width: 768px) {
           header { padding: 16px 20px; justify-content: center !important; }
           .brand-title { font-size: 1.25rem; text-align: center; }
@@ -692,26 +688,6 @@ export default function DentalPage() {
         <span>4.9 Rating (380+ Verified Beverly Hills Reviews)</span>
       </div>
 
-      <div className="press-trust-bar">
-        <div className="press-trust-inner">
-          <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
-          <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span>
-        </div>
-      </div>
-
-      <div className="celebrity-ticker-bar">
-        <div className="celebrity-ticker-inner">
-          <span>🌟 Featured in Hollywood Reporter</span> • 
-          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
-          <span>⭐ Trusted by A-List LA Celebrities</span> • 
-          <span>✨ 48-Hour Digital Smile Triage</span> •
-          <span>🌟 Featured in Hollywood Reporter</span> • 
-          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
-          <span>⭐ Trusted by A-List LA Celebrities</span> • 
-          <span>✨ 48-Hour Digital Smile Triage</span>
-        </div>
-      </div>
-
       <section className="hero-split-grid">
         <div className="hero-text-col">
           <div className="hero-tagline">• BEVERLY HILLS AESTHETIC DENTISTRY</div>
@@ -738,6 +714,7 @@ export default function DentalPage() {
             <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
           </button>
 
+          {/* SWIPE BAR MOVED TO TOP OF VIDEO BOX */}
           <div className="swipe-interactive-zone" id="swipeTrack" ref={trackRef}>
             <div className="swipe-arrow-handle" id="swipeKnob" ref={knobRef} onPointerDown={handlePointerDownKnob}>
               <svg ref={knobSvgRef} viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
@@ -761,6 +738,27 @@ export default function DentalPage() {
           </div>
         </div>
       </section>
+
+      {/* PRESS TRUST AND CELEBRITY TICKER BARS MOVED TO BELOW HERO SECTION */}
+      <div className="press-trust-bar">
+        <div className="press-trust-inner">
+          <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
+          <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span>
+        </div>
+      </div>
+
+      <div className="celebrity-ticker-bar">
+        <div className="celebrity-ticker-inner">
+          <span>🌟 Featured in Hollywood Reporter</span> • 
+          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
+          <span>⭐ Trusted by A-List LA Celebrities</span> • 
+          <span>✨ 48-Hour Digital Smile Triage</span> •
+          <span>🌟 Featured in Hollywood Reporter</span> • 
+          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
+          <span>⭐ Trusted by A-List LA Celebrities</span> • 
+          <span>✨ 48-Hour Digital Smile Triage</span>
+        </div>
+      </div>
 
       <div className="content-container">
         <section className="section-padding section-top-tight animate-on-scroll">
