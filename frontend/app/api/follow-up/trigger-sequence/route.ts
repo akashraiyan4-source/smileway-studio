@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
 import { followUpDatabase } from '../../db';
 
+// Enterprise-grade TypeScript Interface for Universal Follow-Up Payload
 interface FollowUpRequestBody {
     fullName?: string;
     phone?: string;
     email?: string;
     sequenceStep?: string;
+    step?: string; // Universal fallback
+    niche?: string;
 }
 
 export async function POST(request: Request) {
@@ -20,9 +23,9 @@ export async function POST(request: Request) {
             );
         }
 
-        const { fullName, phone, email, sequenceStep } = body;
+        const { fullName, phone, email, sequenceStep, step, niche } = body;
 
-        // Input validation
+        // ১. কঠোর ইনপুট ভ্যালিডেশন চেক
         if (!fullName || typeof fullName !== 'string' || fullName.trim() === '' || (!phone && !email)) {
             return NextResponse.json(
                 { success: false, error: 'Full name and at least one contact method (phone or email) are required.' },
@@ -30,37 +33,48 @@ export async function POST(request: Request) {
             );
         }
 
+        const cleanName = fullName.trim();
+        const cleanPhone = phone && typeof phone === 'string' ? phone.trim() : 'N/A';
+        const cleanEmail = email && typeof email === 'string' ? email.trim() : 'N/A';
+        const targetStep = sequenceStep || step || 'Step 1 (24h Nurture Reminder)';
+        const cleanNiche = niche && typeof niche === 'string' ? niche.trim().toLowerCase() : 'enterprise / general';
+
+        // ২. ইউনিক ফলো-আপ রেকর্ড তৈরি করা
         const followUpTask = {
             id: `fol_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-            fullName: fullName.trim(),
-            phone: phone ? phone.trim() : 'N/A',
-            email: email ? email.trim() : 'N/A',
-            step: sequenceStep ? sequenceStep.trim() : 'Step 1 (24h Reminder)',
+            fullName: cleanName,
+            phone: cleanPhone,
+            email: cleanEmail,
+            step: targetStep.trim(),
+            niche: cleanNiche,
             status: 'Scheduled/Dispatched',
             timestamp: new Date().toISOString()
         };
 
-        followUpDatabase.push(followUpTask);
+        // Ensure database array exists before pushing
+        if (Array.isArray(followUpDatabase)) {
+            followUpDatabase.push(followUpTask);
+        }
 
-        console.log(`[Follow-Up Engine] Sequence triggered for ${followUpTask.fullName} -> Step: ${followUpTask.step}`);
+        console.log(`[Ultimate Universal Follow-Up Engine] Sequence triggered for ${cleanName} -> Step: ${targetStep} in niche: ${cleanNiche}`);
 
         return NextResponse.json(
             {
                 success: true,
-                message: 'Automated follow-up sequence successfully initiated!',
+                message: 'Universal automated follow-up sequence successfully initiated!',
                 task: followUpTask
             },
             { status: 200 }
         );
 
-    } catch (error) {
-        console.error('[Follow-Up Engine Critical Error]:', error);
+    } catch (error: any) {
+        console.error('[Ultimate Universal Follow-Up Engine Critical Error]:', error?.message || error);
         
         return NextResponse.json(
             { 
                 success: false, 
-                error: 'Failed to trigger follow-up sequence. Please try again later.' 
-            },
+                error: error?.message || 'Failed to trigger follow-up sequence. Please try again later.' 
+            }, 
             { status: 500 }
         );
     }

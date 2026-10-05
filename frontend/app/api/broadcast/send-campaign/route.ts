@@ -10,10 +10,12 @@ if (!global.globalBroadcastDatabase) {
     global.globalBroadcastDatabase = broadcastDatabase;
 }
 
+// Enterprise-grade TypeScript Interface for Campaign Payload
 interface CampaignRequestBody {
     campaignTitle?: string;
     messageBody?: string;
     targetAudience?: string;
+    niche?: string;
 }
 
 export async function POST(request: Request) {
@@ -28,22 +30,30 @@ export async function POST(request: Request) {
             );
         }
 
-        const { campaignTitle, messageBody, targetAudience } = body;
+        const { campaignTitle, messageBody, targetAudience, niche } = body;
 
-        // ইনপুট ভ্যালিডেশন
-        if (!campaignTitle || typeof campaignTitle !== 'string' || campaignTitle.trim() === '' ||
-            !messageBody || typeof messageBody !== 'string' || messageBody.trim() === '') {
+        // ইনপুট ভ্যালিডেশন চেক
+        if (
+            !campaignTitle || typeof campaignTitle !== 'string' || campaignTitle.trim() === '' ||
+            !messageBody || typeof messageBody !== 'string' || messageBody.trim() === ''
+        ) {
             return NextResponse.json(
                 { success: false, error: 'Campaign title and message body are required fields.' },
                 { status: 400 }
             );
         }
 
+        const cleanTitle = campaignTitle.trim();
+        const cleanMessage = messageBody.trim();
+        const cleanAudience = targetAudience && typeof targetAudience === 'string' ? targetAudience.trim() : 'All Valued Clients';
+        const cleanNiche = niche && typeof niche === 'string' ? niche.trim().toLowerCase() : 'general business';
+
         const broadcastRecord = {
             id: `camp_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-            campaignTitle: campaignTitle.trim(),
-            messageBody: messageBody.trim(),
-            targetAudience: targetAudience ? targetAudience.trim() : 'All VIP Patients',
+            campaignTitle: cleanTitle,
+            messageBody: cleanMessage,
+            targetAudience: cleanAudience,
+            niche: cleanNiche,
             totalRecipientsReached: 1250,
             status: 'Campaign Broadcasted Successfully',
             dispatchedAt: new Date().toISOString()
@@ -51,7 +61,7 @@ export async function POST(request: Request) {
 
         broadcastDatabase.push(broadcastRecord);
 
-        console.log(`[Broadcast Engine] Campaign "${broadcastRecord.campaignTitle}" successfully sent to ${broadcastRecord.targetAudience}`);
+        console.log(`[Ultimate Universal Broadcast Engine] Campaign "${cleanTitle}" successfully sent to ${cleanAudience} for niche: ${cleanNiche}`);
 
         return NextResponse.json(
             {
@@ -62,13 +72,13 @@ export async function POST(request: Request) {
             { status: 200 }
         );
 
-    } catch (error) {
-        console.error('[Broadcast Engine Critical Error]:', error);
+    } catch (error: any) {
+        console.error('[Ultimate Universal Broadcast Engine Critical Error]:', error);
         
         return NextResponse.json(
             { 
                 success: false, 
-                error: 'Failed to broadcast campaign. Please try again later.' 
+                error: error?.message || 'Failed to broadcast campaign. Please try again later.' 
             },
             { status: 500 }
         );
