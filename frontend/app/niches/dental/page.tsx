@@ -672,6 +672,7 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
+        /* FIXED FLOATING AI (Guaranteed Sticky at Bottom Right without overlapping map/footer) */
         .floating-ai { 
           position: fixed !important; 
           bottom: 32px !important; 
@@ -688,7 +689,7 @@ export default function DentalPage() {
           display: flex !important; 
           align-items: center; 
           justify-content: center; 
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15); 
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); 
           cursor: pointer; 
           transition: transform 0.4s ease; 
         }
@@ -698,6 +699,7 @@ export default function DentalPage() {
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
         .status-dot-tiny { width: 11px; height: 11px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; box-shadow: 0 0 6px rgba(52, 199, 89, 0.8); }
         
+        /* FIXED AI CHAT MODAL (Anchored safely above the floating trigger) */
         .ai-chat-modal { 
           position: fixed !important; 
           bottom: 104px !important; 
