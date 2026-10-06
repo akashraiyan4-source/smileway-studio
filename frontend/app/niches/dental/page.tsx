@@ -550,10 +550,10 @@ export default function DentalPage() {
 
         .app-shell { width: 100%; max-width: 1400px; margin: 0 auto; min-height: 100vh; position: relative; z-index: 1; display: flex; flex-direction: column; will-change: transform; }
         
-        header { position: sticky; top: 0; z-index: 100; background: rgba(247, 244, 239, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--apple-border); }
-        .brand-title { font-size: 1.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; }
+        header { position: sticky; top: 0; z-index: 100; background: rgba(247, 244, 239, 0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 22px 36px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--apple-border); }
+        .brand-title { font-size: 1.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; text-align: center; width: 100%; }
         .brand-title span { color: var(--apple-blue); }
-        .phone-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); transition: transform 0.2s ease; cursor: pointer; }
+        .phone-badge { position: absolute; right: 36px; display: inline-flex; align-items: center; gap: 8px; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 10px 20px; border-radius: 999px; color: var(--apple-blue); font-size: 0.9rem; font-weight: 700; text-decoration: none; box-shadow: 0 4px 16px rgba(0, 113, 227, 0.05); transition: transform 0.2s ease; cursor: pointer; }
         .phone-badge:hover { transform: translateY(-2px); }
         .status-dot-green { width: 8px; height: 8px; border-radius: 50%; background: #34c759; box-shadow: 0 0 8px rgba(52, 199, 89, 0.8); }
         
@@ -613,7 +613,7 @@ export default function DentalPage() {
         
         .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
         .doctor-card:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
-        .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
+        .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 15%; padding-top: 10px; display: block; background: #f1f5f9; }
         .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
         
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
@@ -663,7 +663,7 @@ export default function DentalPage() {
         .btn-confirm { width: 100%; background: var(--apple-blue); color: #ffffff; padding: 18px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(0, 113, 227, 0.25); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .btn-confirm:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(0, 113, 227, 0.35); background: #0077ed; }
         
-        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); }
+        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); margin-bottom: 0 !important; }
         .map-preview-iframe-container { position: relative; width: 100%; height: 400px; background: #e5e3df; }
         .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
         .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 6px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid var(--apple-border); }
@@ -752,7 +752,7 @@ export default function DentalPage() {
         .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
         .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
 
-        footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
+        footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); margin-top: 0 !important; }
         
         @media (max-width: 768px) {
           header { padding: 16px 20px; justify-content: center !important; }
@@ -939,19 +939,29 @@ export default function DentalPage() {
           <div className="interactive-cases-box" id="casesBox">
             <div className="interactive-cases-inner" ref={casesInnerRef}>
               <div className="case-card-stream service-trigger-btn" data-topic="Case #481: Micro-Thin Veneers">
-                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce6395?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/dental/Before-After-Smile-Gallery-Best-Dentistry-in-Seattle-2.jpg" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #481: Micro-Thin Veneers</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
               </div>
               <div className="case-card-stream service-trigger-btn" data-topic="Case #512: Full Arch Symmetry">
-                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/dental/dental-veneers-before-and-after-gappy-smile-corrected-with-porcelain-veneers-jpg.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #512: Full Arch Symmetry</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
               </div>
               <div className="case-card-stream service-trigger-btn" data-topic="Case #604: Precision Bio-Implant">
-                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
+                <div className="case-photo-slot"><img src="/niches/dental/dental-implants-before-and-after-single-tooth.webp" alt="Transform" /></div>
                 <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #604: Precision Bio-Implant</p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
+              </div>
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #710: Ceramic Artistry">
+                <div className="case-photo-slot"><img src="/niches/dental/67e449ad9d5be.jpeg" alt="Transform" /></div>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #710: Ceramic Artistry</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Custom Shade • Bio-Enamel Seal</p>
+              </div>
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #825: Smile Harmony">
+                <div className="case-photo-slot"><img src="/niches/dental/istockphoto-871478792-612x612.jpg" alt="Transform" /></div>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #825: Smile Harmony</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Aesthetic Alignment • Natural Finish</p>
               </div>
             </div>
           </div>
