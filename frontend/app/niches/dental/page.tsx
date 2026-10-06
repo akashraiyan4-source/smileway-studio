@@ -49,6 +49,7 @@ export default function DentalPage() {
   const unmutedSvg = `<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>`;
   const mutedSvg = `<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>`;
 
+  // ভিডিও ও অডিও আইসোলেশন হ্যান্ডলিং (Start, Transition, End আলাদা সাউন্ড লজিক)
   useEffect(() => {
     if (!mounted) return;
 
@@ -126,13 +127,16 @@ export default function DentalPage() {
 
   if (!mounted) return null;
 
+  // সাউন্ড টগল (প্রতিটি ভিডিওর সাউন্ড আলাদা ও নিখুঁতভাবে কন্ট্রোল করার জন্য)
   const toggleSound = () => {
     triggerHaptic(20);
     const nextMuted = !isMuted;
     setIsMuted(nextMuted);
-    if (vidStartRef.current) vidStartRef.current.muted = nextMuted;
-    if (vidTransRef.current) vidTransRef.current.muted = nextMuted;
-    if (vidEndRef.current) vidEndRef.current.muted = nextMuted;
+    
+    // ফানেল স্টেপ অনুযায়ী শুধুমাত্র রানিং ভিডিওটির সাউন্ড অ্যাপ্লাই হবে, অন্যগুলো মিউটেড থাকবে
+    if (vidStartRef.current) vidStartRef.current.muted = funnelStep === 0 ? nextMuted : true;
+    if (vidTransRef.current) vidTransRef.current.muted = funnelStep === 1 ? nextMuted : true;
+    if (vidEndRef.current) vidEndRef.current.muted = funnelStep >= 2 ? nextMuted : true;
   };
 
   const toggleFaq = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -213,16 +217,18 @@ export default function DentalPage() {
       knob.style.transform = `translate3d(${maxMove}px, -50%, 0)`;
     }
 
+    // স্যাড লুপ সম্পূর্ণ বন্ধ ও মিউট করা
     if (vidStartRef.current) {
       vidStartRef.current.pause();
       vidStartRef.current.muted = true;
       vidStartRef.current.style.opacity = '0';
     }
 
+    // ট্রানজিশন লুপ চালু ও সাউন্ড আইসোলেশন মেইনটেইন করা
     if (vidTransRef.current) {
       vidTransRef.current.style.opacity = '1';
       vidTransRef.current.currentTime = 0;
-      vidTransRef.current.muted = isMuted;
+      vidTransRef.current.muted = isMuted; // শুধু ট্রানজিশন চলাকালীন সাউন্ড পাবে
       vidTransRef.current.play().catch(() => {});
 
       vidTransRef.current.onended = () => {
@@ -231,10 +237,12 @@ export default function DentalPage() {
           vidTransRef.current.muted = true;
           vidTransRef.current.style.opacity = '0';
         }
+        
+        // হ্যাপি লুপ (End) চালু এবং স্যাড বা ট্রানজিশনের সাউন্ড সম্পূর্ণ অফ রাখা
         if (vidEndRef.current) {
           vidEndRef.current.style.opacity = '1';
           vidEndRef.current.currentTime = 0;
-          vidEndRef.current.muted = isMuted;
+          vidEndRef.current.muted = isMuted; // হ্যাপি লুপ তার নিজস্ব সাউন্ড পাবে
           vidEndRef.current.loop = true;
           vidEndRef.current.play().catch(() => {
             if (vidEndRef.current) {
@@ -297,13 +305,14 @@ export default function DentalPage() {
     if (knobSvgRef.current) knobSvgRef.current.style.transform = 'rotate(0deg)';
   };
 
+  // ড্রয়ার ফর্ম সাবমিশন (সঠিক এপিআই পাথ: /api/booking/create)
   const submitDrawerForm = async () => {
     if (!drawerName.trim() || !drawerPhone.trim()) {
       alert('Please fill in both your name and phone number.');
       return;
     }
     try {
-      const response = await fetch('/api/booking', {
+      const response = await fetch('/api/booking/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -327,13 +336,14 @@ export default function DentalPage() {
     }
   };
 
+  // মেইন ফর্ম সাবমিশন (সঠিক এপিআই পাথ: /api/booking/create বা /api/leads)
   const submitMainForm = async () => {
     if (!mainName.trim() || !mainPhone.trim() || !mainAppointmentDate) {
       alert('Please fill in your name, phone number, and select a preferred consultation date.');
       return;
     }
     try {
-      const response = await fetch('/api/leads', {
+      const response = await fetch('/api/booking/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -374,7 +384,7 @@ export default function DentalPage() {
     const wantsBooking = bookingKeywords.some(keyword => text.toLowerCase().includes(keyword));
 
     try {
-      const response = await fetch('/api/gemini-concierge', {
+      const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -404,7 +414,7 @@ export default function DentalPage() {
     }
     setChatSlotStatus({ text: 'Syncing appointment...', color: '#0071e3' });
     try {
-      const response = await fetch('/api/booking', {
+      const response = await fetch('/api/booking/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -672,7 +682,7 @@ export default function DentalPage() {
         .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
         .map-icon-btn:hover { transform: translateY(-2px); }
 
-        /* FIXED FLOATING AI (Guaranteed Sticky at Bottom Right without overlapping map/footer) */
+        /* FIXED FLOATING AI (Bottom Right Corner) */
         .floating-ai { 
           position: fixed !important; 
           bottom: 32px !important; 
@@ -699,7 +709,7 @@ export default function DentalPage() {
         .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
         .status-dot-tiny { width: 11px; height: 11px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; box-shadow: 0 0 6px rgba(52, 199, 89, 0.8); }
         
-        /* FIXED AI CHAT MODAL (Anchored safely above the floating trigger) */
+        /* FIXED AI CHAT MODAL */
         .ai-chat-modal { 
           position: fixed !important; 
           bottom: 104px !important; 
