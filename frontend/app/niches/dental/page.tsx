@@ -124,7 +124,7 @@ export default function DentalPage() {
     }
   }, [chatMessages, showCalendarWidget]);
 
-  if (!mounted) return null; // রিফ্রেশ গ্লিচ ও হাইড্রেশন সমস্যা রোধ করতে
+  if (!mounted) return null;
 
   const toggleSound = () => {
     triggerHaptic(20);
@@ -297,7 +297,6 @@ export default function DentalPage() {
     if (knobSvgRef.current) knobSvgRef.current.style.transform = 'rotate(0deg)';
   };
 
-  // ইউনিভার্সাল এপিআই ও মেটাডেটা কি (sourceNiche & landingPageId) সহ ড্রয়ার ফর্ম সাবমিশন
   const submitDrawerForm = async () => {
     if (!drawerName.trim() || !drawerPhone.trim()) {
       alert('Please fill in both your name and phone number.');
@@ -328,7 +327,6 @@ export default function DentalPage() {
     }
   };
 
-  // ইউনিভার্সাল এপিআই ও মেটাডেটা কি (sourceNiche & landingPageId) সহ মেইন ফর্ম সাবমিশন
   const submitMainForm = async () => {
     if (!mainName.trim() || !mainPhone.trim() || !mainAppointmentDate) {
       alert('Please fill in your name, phone number, and select a preferred consultation date.');
@@ -360,7 +358,6 @@ export default function DentalPage() {
     }
   };
 
-  // এআই অ্যাসিস্ট্যান্ট চ্যাট হ্যান্ডলার (Gemini Concierge API)
   const sendAiMessage = async () => {
     if (!userInput.trim()) return;
     const text = userInput.trim();
@@ -592,4 +589,498 @@ export default function DentalPage() {
         .glass-sound-btn svg { width: 19px; height: 19px; fill: rgba(255, 255, 255, 0.98); }
         
         .swipe-interactive-zone { position: absolute; bottom: 155px; left: 20px; right: 20px; height: 90px; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; padding: 0 6px; z-index: 25; touch-action: none; }
-        .swipe-arrow-handle { height: 84px; width: 96px; background: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center;
+        .swipe-arrow-handle { height: 84px; width: 96px; background: transparent !important; border: none !important; box-shadow: none !important; display: flex; align-items: center; justify-content: center; cursor: grab; position: absolute; left: 6px; top: 50%; transform: translate3d(0, -50%, 0); z-index: 30; }
+        .swipe-arrow-handle svg { width: 80px; height: 80px; fill: #ffffff !important; filter: drop-shadow(0 3px 10px rgba(0,0,0,0.8)); pointer-events: none; }
+
+        .half-form-drawer { position: absolute; bottom: 0; left: 0; right: 0; height: 56%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 12px 12px 0 0; box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.15); z-index: 40; display: flex; flex-direction: column; padding: 26px 22px; transform: translate3d(0, 100%, 0); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); border-top: 1.5px solid var(--apple-border); overflow-y: auto; }
+        .half-form-drawer.open { transform: translate3d(0, 0, 0); }
+        .drawer-header { text-align: center; margin-bottom: 14px; padding-right: 20px; }
+        .drawer-title { color: var(--apple-dark); font-size: 1.25rem; font-weight: 800; }
+        .drawer-sub { color: var(--apple-gray); font-size: 0.78rem; margin-top: 4px; }
+        .drawer-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 13px 16px; border-radius: 6px; font-size: 0.9rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
+        .drawer-btn { width: 100%; background: var(--apple-blue); border: none; padding: 14px; border-radius: 6px; color: #ffffff; font-size: 0.95rem; font-weight: 700; cursor: pointer; box-shadow: 0 6px 18px rgba(0,113,227,0.35); transition: transform 0.2s ease; }
+        .drawer-btn:hover { transform: translateY(-2px); }
+        .drawer-dismiss { position: absolute; top: 18px; right: 18px; background: var(--page-cream); border: none; width: 30px; height: 30px; border-radius: 50%; color: var(--apple-gray); font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform, opacity; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .content-container { max-width: 1000px; margin: 0 auto; width: 100%; padding: 0 28px; }
+        .section-padding { padding: 70px 0; }
+        .section-top-tight { padding-top: 20px; }
+        .sec-tag { font-size: 0.85rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--apple-blue); margin-bottom: 12px; }
+        .sec-heading { font-size: 2.5rem; font-weight: 800; color: var(--apple-dark); letter-spacing: -0.035em; line-height: 1.2; margin-bottom: 30px; }
+        
+        .doctor-card { position: relative; border-radius: 10px; overflow: hidden; margin-bottom: 32px; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .doctor-card:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
+        .doc-img { width: 100%; height: 580px; object-fit: cover; object-position: center 20%; display: block; background: #f1f5f9; }
+        .doc-tag { position: absolute; top: 24px; right: 24px; background: rgba(255, 255, 255, 0.97); padding: 10px 20px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: var(--apple-blue); border: 1px solid var(--apple-border); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
+        
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .stat-pill { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; padding: 26px 20px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .stat-pill:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 20px 45px rgba(0, 113, 227, 0.15); }
+        .stat-num { font-size: 2.2rem; font-weight: 900; color: var(--apple-dark); margin-bottom: 6px; }
+        .stat-label { font-size: 0.86rem; font-weight: 600; color: var(--apple-gray); }
+        
+        .accreditation-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; justify-content: center; }
+        .acc-badge { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); color: var(--apple-dark); font-size: 0.84rem; font-weight: 700; padding: 11px 22px; border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .acc-badge:hover { transform: translateY(-3px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 12px 30px rgba(0, 113, 227, 0.12); }
+        
+        .infinite-marquee-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
+        .infinite-marquee-inner { display: flex; gap: 24px; width: max-content; }
+        
+        .review-bubble { width: 340px; flex-shrink: 0; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; padding: 28px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .review-bubble:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 22px 50px rgba(0, 113, 227, 0.15); }
+        .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .rev-name { font-size: 0.96rem; font-weight: 800; color: var(--apple-dark); }
+        .rev-quote { font-size: 0.92rem; line-height: 1.65; color: var(--apple-gray); }
+        
+        .interactive-cases-box { width: 100%; overflow: hidden; position: relative; margin: 16px 0 24px 0; cursor: grab; touch-action: pan-y pinch-zoom; }
+        .interactive-cases-inner { display: flex; gap: 24px; width: max-content; }
+        .case-card-stream { width: 340px; flex-shrink: 0; background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; padding: 20px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .case-card-stream:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 22px 50px rgba(0, 113, 227, 0.15); }
+        .case-photo-slot { position: relative; border-radius: 6px; overflow: hidden; height: 260px; margin-bottom: 14px; background: #e2e5e9; }
+        .case-photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) brightness(1.02); }
+        
+        .faq-list { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .faq-item:hover { border-color: rgba(0, 113, 227, 0.3); background: rgba(0, 113, 227, 0.01); }
+        .faq-question { width: 100%; padding: 22px 26px; background: transparent; border: none; outline: none; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; color: var(--apple-dark); text-align: left; cursor: pointer; }
+        .faq-chevron { font-size: 1.4rem; color: var(--apple-gray); transition: transform 0.3s ease; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s ease; padding: 0 26px; font-size: 0.92rem; color: var(--apple-gray); line-height: 1.7; }
+        .faq-item.active .faq-answer { max-height: 220px; padding-bottom: 22px; }
+        .faq-item.active .faq-chevron { transform: rotate(45deg); color: var(--apple-blue); }
+
+        .consult-card { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 10px; padding: 42px 36px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06); margin-bottom: 34px; transition: all 0.4s ease; }
+        .consult-card:hover { border-color: rgba(0, 113, 227, 0.4); box-shadow: 0 28px 70px rgba(0, 113, 227, 0.12); }
+        .slots-pill { display: inline-flex; align-items: center; gap: 8px; background: #fff8eb; border: 1px solid #ffe2b3; padding: 9px 18px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; color: #b25e00; margin-bottom: 20px; }
+        .slots-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff9500; }
+        .guarantee-strip { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 10px; background: #f2faf4; border: 1px solid #d1edd8; border-radius: 6px; padding: 18px 20px; margin-top: 14px; margin-bottom: 24px; font-size: 0.86rem; font-weight: 700; color: #248a3d; width: 100%; }
+        
+        .form-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 16px 20px; border-radius: 6px; font-size: 0.98rem; color: var(--apple-dark); margin-bottom: 16px; outline: none; transition: border-color 0.2s ease; }
+        .form-input:focus { border-color: var(--apple-blue); }
+        
+        .btn-confirm { width: 100%; background: var(--apple-blue); color: #ffffff; padding: 18px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; cursor: pointer; border: none; box-shadow: 0 10px 25px rgba(0, 113, 227, 0.25); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .btn-confirm:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(0, 113, 227, 0.35); background: #0077ed; }
+        
+        .map-preview-card { position: relative; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--apple-border); background: #ffffff; display: flex; flex-direction: column; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); }
+        .map-preview-iframe-container { position: relative; width: 100%; height: 400px; background: #e5e3df; }
+        .map-preview-iframe-container iframe { width: 100%; height: 100%; border: 0; display: block; }
+        .map-floating-badge { position: absolute; top: 20px; left: 20px; background: #ffffff; border-radius: 6px; padding: 16px 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); display: flex; align-items: center; justify-content: space-between; gap: 20px; max-width: 360px; width: calc(100% - 40px); z-index: 10; border: 1px solid var(--apple-border); }
+        .map-badge-title { font-size: 0.95rem; font-weight: 800; color: var(--apple-dark); line-height: 1.2; }
+        .map-badge-sub { font-size: 0.78rem; color: var(--apple-gray); margin-top: 3px; }
+        .map-badge-icons { display: flex; gap: 10px; align-items: center; }
+        .map-icon-btn { width: 36px; height: 36px; border-radius: 6px; background: #f0f4fd; border: 1px solid rgba(0, 113, 227, 0.2); display: flex; align-items: center; justify-content: center; color: var(--apple-blue); text-decoration: none; font-size: 1rem; transition: transform 0.2s ease; }
+        .map-icon-btn:hover { transform: translateY(-2px); }
+
+        .floating-ai { 
+          position: fixed !important; 
+          bottom: 32px !important; 
+          right: 32px !important; 
+          top: auto !important; 
+          left: auto !important; 
+          transform: none !important; 
+          z-index: 2147483647 !important; 
+          background: rgba(255, 255, 255, 0.98); 
+          border: 1.5px solid var(--apple-border); 
+          width: 60px; 
+          height: 60px; 
+          border-radius: 50%; 
+          display: flex !important; 
+          align-items: center; 
+          justify-content: center; 
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15); 
+          cursor: pointer; 
+          transition: transform 0.4s ease; 
+        }
+        .floating-ai.rotated { 
+          transform: rotate(360deg) scale(1.05) !important; 
+        }
+        .ai-avatar { font-size: 1.7rem; line-height: 1; display: inline-block; transition: transform 0.4s ease; }
+        .status-dot-tiny { width: 11px; height: 11px; border-radius: 50%; background: #34c759; position: absolute; top: 4px; right: 4px; border: 2px solid #ffffff; box-shadow: 0 0 6px rgba(52, 199, 89, 0.8); }
+        
+        .ai-chat-modal { 
+          position: fixed !important; 
+          bottom: 104px !important; 
+          right: 32px !important; 
+          top: auto !important; 
+          left: auto !important; 
+          transform: none !important; 
+          width: 420px !important; 
+          max-width: calc(100vw - 32px) !important; 
+          height: 580px !important; 
+          max-height: calc(100vh - 130px) !important; 
+          z-index: 2147483646 !important; 
+          display: flex !important; 
+          flex-direction: column !important; 
+          opacity: 0; 
+          pointer-events: none; 
+          transform-origin: bottom right; 
+          transition: all 0.3s ease; 
+        }
+        .ai-chat-modal.active { 
+          opacity: 1 !important; 
+          pointer-events: auto !important; 
+          transform: none !important; 
+        }
+        .ai-chat-window { background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2); border: 1px solid var(--apple-border); overflow: hidden; }
+        
+        .ai-chat-header { padding: 0 !important; background: #ffffff !important; border-bottom: 1px solid var(--apple-border); display: flex; align-items: center; justify-content: space-between; height: 64px; padding-left: 20px; padding-right: 20px; }
+        .ai-header-left { display: flex; align-items: center; gap: 8px; color: var(--apple-dark); }
+        .ai-header-right { display: flex; align-items: center; }
+
+        .ai-chat-body { flex: 1; padding: 22px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; background: var(--page-cream); }
+        .ai-msg { max-width: 85%; padding: 13px 18px; border-radius: 8px; font-size: 0.9rem; line-height: 1.55; }
+        .ai-bot { background: #ffffff; color: var(--apple-dark); align-self: flex-start; border: 1px solid var(--apple-border); }
+        .ai-user { background: var(--apple-blue); color: #ffffff; align-self: flex-end; }
+        .ai-chat-footer { padding: 16px 22px; border-top: 1px solid var(--apple-border); display: flex; gap: 12px; background: #ffffff; }
+        .ai-chat-input { flex: 1; border: 1px solid var(--apple-border); background: var(--card-pure-white); border-radius: 6px; padding: 12px 20px; font-size: 0.9rem; outline: none; }
+        .ai-send-btn { background: var(--apple-blue); color: #ffffff; border: none; padding: 10px 22px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; transition: transform 0.2s ease; }
+        .ai-send-btn:hover { transform: translateY(-2px); }
+        
+        .chat-calendar-card { align-self: flex-start; width: 90%; background: #ffffff; border: 1.5px solid #0071e3; border-radius: 8px; padding: 18px; box-shadow: 0 10px 28px rgba(0, 113, 227, 0.15); }
+        .chat-calendar-title { font-size: 0.9rem; font-weight: 700; color: #0071e3; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .chat-calendar-input { width: 100%; background: var(--card-pure-white); border: 1px solid var(--apple-border); padding: 11px 14px; border-radius: 6px; font-size: 0.88rem; color: var(--apple-dark); margin-bottom: 12px; outline: none; }
+        .chat-calendar-btn { width: 100%; background: #0071e3; color: #fff; border: none; padding: 12px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+        
+        .extra-features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 40px 0; }
+        .extra-feature-card { background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1.5px solid var(--apple-border); border-radius: 10px; padding: 28px; box-shadow: 0 12px 35px rgba(0, 0, 0, 0.04); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer; }
+        .extra-feature-card:hover { transform: translateY(-4px); border-color: rgba(0, 113, 227, 0.4); background: rgba(0, 113, 227, 0.02); box-shadow: 0 25px 60px rgba(0, 113, 227, 0.15); }
+        .extra-feature-icon { font-size: 2rem; margin-bottom: 12px; }
+        .extra-feature-title { font-size: 1.15rem; font-weight: 800; color: var(--apple-dark); margin-bottom: 8px; }
+        .extra-feature-desc { font-size: 0.9rem; color: var(--apple-gray); line-height: 1.6; }
+
+        footer { padding: 24px 28px 36px 28px; text-align: center; font-size: 0.84rem; color: var(--apple-gray); border-top: 1px solid var(--apple-border); background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); }
+        
+        @media (max-width: 768px) {
+          header { padding: 16px 20px; justify-content: center !important; }
+          .brand-title { font-size: 1.25rem; text-align: center; }
+          .phone-badge { display: none; }
+          .rating-strip { font-size: 0.8rem; padding: 12px 16px; text-align: center; }
+          .hero-split-grid { grid-template-columns: 1fr; padding: 0 20px 40px 20px !important; gap: 24px; text-align: center; justify-items: center; }
+          .hero-text-col { align-items: center; text-align: center; gap: 16px; width: 100%; }
+          .hero-sub-copy { max-width: 100%; text-align: center; }
+          .hero-pill-cluster { justify-content: center; }
+          .hero-box { order: -1; width: 100% !important; max-width: 100% !important; height: 75vh !important; aspect-ratio: auto !important; margin: 0 auto !important; border-radius: 12px !important; }
+          .hero-main-title { font-size: 2.5rem !important; line-height: 1.12 !important; text-align: center; }
+          .extra-features-grid { grid-template-columns: 1fr; }
+          .stats-row { grid-template-columns: 1fr; }
+          .content-container { padding: 0 16px; }
+          .ai-chat-modal { bottom: 98px !important; right: 14px !important; left: 14px !important; width: calc(100vw - 28px) !important; height: min(580px, 80vh) !important; }
+        }
+      `}</style>
+
+      <header>
+        <div className="brand-title">SmileWay<span>Studio</span></div>
+        <a href="tel:5552347890" className="phone-badge">
+          <span className="status-dot-green"></span>
+          <span>(555) 234-7890</span>
+        </a>
+      </header>
+
+      <div className="rating-strip">
+        <span className="g-icon">G</span>
+        <span className="stars">★★★★★</span>
+        <span>4.9 Rating (380+ Verified Beverly Hills Reviews)</span>
+      </div>
+
+      <section className="hero-split-grid">
+        <div className="hero-text-col">
+          <div className="hero-tagline">• BEVERLY HILLS AESTHETIC DENTISTRY</div>
+          <h1 className="hero-main-title">Architectural <span className="highlight-text">Smile Design</span> & Porcelain Art</h1>
+          <p className="hero-sub-copy">
+            Zero-pain bio-enamel restoration and <span className="highlight-text">bespoke ultra-thin veneers</span> designed for natural radiance. Zero invasive grinding, 100% harmonious bite alignment, and private VIP treatment suites.
+          </p>
+          <div className="hero-pill-cluster">
+            <div className="h-pill service-trigger-btn" data-topic="Zero-Prep Micro Veneers" style={{cursor: 'pointer'}}><span>✨</span> Zero-Prep Micro Veneers</div>
+            <div className="h-pill service-trigger-btn" data-topic="10-Year Structural Warranty" style={{cursor: 'pointer'}}><span>🛡</span> 10-Year Structural Warranty</div>
+            <div className="h-pill service-trigger-btn" data-topic="48-Hour Digital Smile Preview" style={{cursor: 'pointer'}}><span>⏱️</span> 48-Hour Digital Smile Preview</div>
+          </div>
+          <div style={{ marginTop: '16px', width: '100%', display: 'flex' }}>
+            <a href="#consultation-area" className="hero-cta-btn service-trigger-btn" data-topic="Priority Smile Triage">Reserve Priority Smile Triage →</a>
+          </div>
+        </div>
+
+        <div className="hero-box" id="heroSec" ref={heroBoxRef}>
+          <video ref={vidStartRef} className="hero-vid" src="/niches/dental/start.mp4" playsInline autoPlay muted loop preload="auto" style={{ zIndex: 1, opacity: 1 }}></video>
+          <video ref={vidTransRef} className="hero-vid" src="/niches/dental/trans.mp4" playsInline muted preload="auto" style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
+          <video ref={vidEndRef} className="hero-vid" src="/niches/dental/end.mp4" playsInline muted loop preload="auto" style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
+
+          <button className="glass-sound-btn" onClick={toggleSound} aria-label="Toggle Sound">
+            <svg dangerouslySetInnerHTML={{ __html: isMuted ? mutedSvg : unmutedSvg }} viewBox="0 0 24 24" />
+          </button>
+
+          <div className="swipe-interactive-zone" id="swipeTrack" ref={trackRef}>
+            <div className="swipe-arrow-handle" id="swipeKnob" ref={knobRef} onPointerDown={handlePointerDownKnob}>
+              <svg ref={knobSvgRef} viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </div>
+          </div>
+
+          <div className={`half-form-drawer ${isDrawerOpen ? 'open' : ''}`} id="heroDrawer">
+            <button className="drawer-dismiss" onClick={closeHeroDrawer}>×</button>
+            <div className="drawer-header">
+              <h3 className="drawer-title">Claim Your Confidence</h3>
+              <p className="drawer-sub">Direct senior cosmetic triage confirmed via backend.</p>
+            </div>
+            <input type="text" value={drawerName} onChange={e => setDrawerName(e.target.value)} className="drawer-input" placeholder="Your Full Name" />
+            <input type="tel" value={drawerPhone} onChange={e => setDrawerPhone(e.target.value)} className="drawer-input" placeholder="Direct Phone (SMS Enabled)" />
+            <select value={drawerTreatment} onChange={e => setDrawerTreatment(e.target.value)} className="drawer-input">
+              <option value="Handcrafted Porcelain Veneers">Handcrafted Porcelain Veneers</option>
+              <option value="Micro-Enamel Bio-Seal">Micro-Enamel Bio-Seal</option>
+              <option value="Full Arch Smile Alignment">Full Arch Smile Alignment</option>
+            </select>
+            <button className="drawer-btn" onClick={submitDrawerForm}>Confirm Priority Slot</button>
+          </div>
+        </div>
+      </section>
+
+      <div className="press-trust-bar">
+        <div className="press-trust-inner">
+          <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span> • 
+          <span>Vogue</span> • <span>Beverly Hills Living</span> • <span>LA Times</span> • <span>Forbes</span>
+        </div>
+      </div>
+
+      <div className="celebrity-ticker-bar">
+        <div className="celebrity-ticker-inner">
+          <span>🌟 Featured in Hollywood Reporter</span> • 
+          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
+          <span>⭐ Trusted by A-List LA Celebrities</span> • 
+          <span>✨ 48-Hour Digital Smile Triage</span> •
+          <span>🌟 Featured in Hollywood Reporter</span> • 
+          <span>🏆 Voted #1 Beverly Hills Smile Studio</span> • 
+          <span>⭐ Trusted by A-List LA Celebrities</span> • 
+          <span>✨ 48-Hour Digital Smile Triage</span>
+        </div>
+      </div>
+
+      <div className="content-container">
+        <section className="section-padding section-top-tight animate-on-scroll">
+          <div className="doctor-card service-trigger-btn" data-topic="Dr. Julian Vance Consultation">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1000&auto=format&fit=crop" alt="Dr Julian Vance" className="doc-img" onError={(e)=>{(e.target as HTMLElement).style.display='none'}} />
+            <div className="doc-tag">★ Chief Cosmetic Dentist</div>
+          </div>
+          <div className="sec-tag">Oral Restoration Authority</div>
+          <h2 className="sec-heading">Dr. Julian Vance, DDS</h2>
+          <p style={{ fontSize: '1.08rem', color: 'var(--apple-gray)', lineHeight: '1.75' }}>
+            Specializing in zero-pain bio-enamel restoration and handcrafted porcelain veneers. Delivering transformative bite alignment and natural aesthetic radiance for high-profile smiles.
+          </p>
+          <div className="stats-row">
+            <div className="stat-pill service-trigger-btn" data-topic="12,400+ Success Track Record">
+              <div className="stat-num">12,400+</div>
+              <div className="stat-label">Cases Handled</div>
+            </div>
+            <div className="stat-pill service-trigger-btn" data-topic="99.8% Success Rate Assurance">
+              <div className="stat-num">99.8%</div>
+              <div className="stat-label">Success Rate</div>
+            </div>
+          </div>
+          <div className="accreditation-row">
+            <span className="acc-badge service-trigger-btn" data-topic="AACD Accreditation">✓ AACD Accredited</span>
+            <span className="acc-badge service-trigger-btn" data-topic="ADA Membership">✓ ADA Member</span>
+            <span className="acc-badge service-trigger-btn" data-topic="Top Doctor Recognition">★ Top Doctor 2026</span>
+            <span className="acc-badge service-trigger-btn" data-topic="Invisalign Diamond Provider">✦ Invisalign Diamond</span>
+          </div>
+        </section>
+
+        <section className="section-padding animate-on-scroll" style={{ paddingTop: 0 }}>
+          <div className="sec-tag">Elite Standards</div>
+          <h2 className="sec-heading">Exclusive Beverly Hills Protocol</h2>
+          <div className="extra-features-grid">
+            <div className="extra-feature-card service-trigger-btn" data-topic="In-House Master Atelier Lab">
+              <div className="extra-feature-icon">🏛</div>
+              <h3 className="extra-feature-title">In-House Master Atelier Lab</h3>
+              <p className="extra-feature-desc">All porcelain art and micro-veneers are handcrafted on-site by our master ceramists, ensuring absolute shade matching and zero outsourcing delays.</p>
+            </div>
+            <div className="extra-feature-card service-trigger-btn" data-topic="VIP Sedation & Comfort Protocol">
+              <div className="extra-feature-icon">🌿</div>
+              <h3 className="extra-feature-title">VIP Sedation & Comfort Protocol</h3>
+              <p className="extra-feature-desc">Engineered for high-profile and anxiety-free visits with bespoke IV sedation, NuCalm relaxation, and complete privacy suites.</p>
+            </div>
+            <div className="extra-feature-card service-trigger-btn" data-topic="Bespoke Financing & Investment">
+              <div className="extra-feature-icon">💳</div>
+              <h3 className="extra-feature-title">Bespoke Financing & Investment</h3>
+              <p className="extra-feature-desc">Transparent 0% APR monthly installments and concierge insurance advocacy tailored for high-ticket architectural smile investments.</p>
+            </div>
+            <div className="extra-feature-card service-trigger-btn" data-topic="Step-by-Step 3D Smile Triage">
+              <div className="extra-feature-icon">✨</div>
+              <h3 className="extra-feature-title">Step-by-Step 3D Smile Triage</h3>
+              <p className="extra-feature-desc">A precise 4-stage digital workflow from 3D facial scan to virtual mockup preview, guaranteeing your exact aesthetic outcome before work starts.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding animate-on-scroll" style={{ paddingTop: 0 }}>
+          <div className="sec-tag">Real Experiences</div>
+          <h2 className="sec-heading">Google Patient Reviews</h2>
+          <div className="infinite-marquee-box" id="reviewsBox">
+            <div className="infinite-marquee-inner" ref={reviewsInnerRef}>
+              <div className="review-bubble service-trigger-btn" data-topic="Veneers Patient Review">
+                <div className="rev-head"><span className="rev-name">Elena R. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
+                <p className="rev-quote">"Got my veneers done here. 100% pain-free and natural white. Transformed my self-confidence completely!"</p>
+              </div>
+              <div className="review-bubble service-trigger-btn" data-topic="Same-Day Triage Review">
+                <div className="rev-head"><span className="rev-name">Marcus T. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
+                <p className="rev-quote">"Dr. Vance is an absolute artist. Same-day triage and the precision mapping blew my mind."</p>
+              </div>
+              <div className="review-bubble service-trigger-btn" data-topic="Private Clinic Experience Review">
+                <div className="rev-head"><span className="rev-name">Sophia L. <span style={{color:'var(--apple-blue)'}}>✓ Verified</span></span><span style={{color:'#ff9500', fontSize: '0.85rem'}}>★★★★★</span></div>
+                <p className="rev-quote">"World-class private clinic experience. Zero dentin sensitivity and an effortless radiant smile."</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding animate-on-scroll" style={{ paddingTop: 0 }}>
+          <div className="sec-tag">Proven Results</div>
+          <h2 className="sec-heading">Clinical Transformations</h2>
+          <div className="interactive-cases-box" id="casesBox">
+            <div className="interactive-cases-inner" ref={casesInnerRef}>
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #481: Micro-Thin Veneers">
+                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1606811841689-23dfddce6395?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #481: Micro-Thin Veneers</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Shade BL1 • Zero-Prep Restoration</p>
+              </div>
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #512: Full Arch Symmetry">
+                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #512: Full Arch Symmetry</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Bite Balancing • Handcrafted Ceramic</p>
+              </div>
+              <div className="case-card-stream service-trigger-btn" data-topic="Case #604: Precision Bio-Implant">
+                <div className="case-photo-slot"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop" alt="Transform" /></div>
+                <p style={{ fontSize: '0.9rem', fontWeight: 800 }}>Case #604: Precision Bio-Implant</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--apple-gray)' }}>Immediate Load • Seamless Gum Blend</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding animate-on-scroll" style={{ paddingTop: 0 }}>
+          <div className="sec-tag">Patient Guidance</div>
+          <h2 className="sec-heading">Frequently Asked Questions</h2>
+          <div className="faq-list">
+            <div className="faq-item">
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>Are zero-prep micro veneers truly reversible, and do they require shaving teeth?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>Our bio-enamel micro-veneers require zero aggressive drilling or dentin reduction, preserving 100% of your natural tooth structure while ensuring a seamless, lifelong bond.</p>
+              </div>
+            </div>
+            <div className="faq-item">
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>How does the 48-hour digital smile preview work?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>We utilize high-resolution 3D facial scanning and bite mapping to design your bespoke smile digitally, allowing you to preview and approve your exact aesthetic result before treatment starts.</p>
+              </div>
+            </div>
+            <div className="faq-item">
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>What makes SmileWay Studio's private VIP suites different?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>We offer absolute privacy with zero waiting rooms, dedicated rear valet access, personalized luxury sedation protocols, and individual attention from Chief Cosmetic Dentist Dr. Julian Vance.</p>
+              </div>
+            </div>
+            <div className="faq-item">
+              <button className="faq-question" onClick={toggleFaq}>
+                <span>What kind of structural warranty is provided?</span>
+                <span className="faq-chevron">+</span>
+              </button>
+              <div className="faq-answer">
+                <p>Every full-arch restoration and handcrafted porcelain set is backed by our comprehensive 10-Year Structural Warranty, covering any chipping, fracture, or bite alignment adjustments.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding animate-on-scroll" id="consultation-area" style={{ paddingTop: 0 }}>
+          <div className="consult-card">
+            <div className="slots-pill"><span className="slots-dot"></span><span>Only 3 Priority Triage Slots Left This Week</span></div>
+            <h3 style={{ fontSize: '1.6rem', fontWeight: 800, marginBottom: '6px' }}>Reserve Your Consultation</h3>
+            <div className="guarantee-strip">
+              <div>🛡️ 10-Year Comprehensive Structural Warranty</div>
+              <div>🔒 100% Private VIP Suite & Rear Valet Access</div>
+              <div>💳 0% APR Flexible Monthly Installments Available</div>
+            </div>
+            <input type="text" value={mainName} onChange={e => setMainName(e.target.value)} className="form-input" placeholder="Your Full Name" />
+            <input type="tel" value={mainPhone} onChange={e => setMainPhone(e.target.value)} className="form-input" placeholder="Mobile Phone (SMS Enabled)" />
+            <select value={mainTreatment} onChange={e => setMainTreatment(e.target.value)} className="form-input">
+              <option value="dental">Handcrafted Porcelain Veneers</option>
+              <option value="cosmetic">Micro-Enamel Bio-Seal</option>
+              <option value="roofing">Full Arch Smile Alignment</option>
+            </select>
+            <input type="datetime-local" value={mainAppointmentDate} onChange={e => setMainAppointmentDate(e.target.value)} className="form-input" />
+            <button className="btn-confirm service-trigger-btn" data-topic="Priority Appointment Confirmation" onClick={submitMainForm}>Confirm Priority Appointment</button>
+          </div>
+
+          <div className="map-preview-card">
+            <div className="map-floating-badge">
+              <div>
+                <div className="map-badge-title">9400 Wilshire Blvd</div>
+                <div className="map-badge-sub">9400 Wilshire Blvd, Beverly Hills, CA 90212, USA</div>
+              </div>
+              <div className="map-badge-icons">
+                <a href="https://maps.google.com/?q=9400+Wilshire+Blvd+Beverly+Hills+CA+90212" target="_blank" rel="noreferrer" className="map-icon-btn" title="Open Map">↗</a>
+                <a href="https://maps.google.com/?q=9400+Wilshire+Blvd+Beverly+Hills+CA+90212" target="_blank" rel="noreferrer" className="map-icon-btn" title="Get Directions">➔</a>
+              </div>
+            </div>
+            <div className="map-preview-iframe-container">
+              <iframe
+                title="SmileWay Studio Map Location"
+                src="https://maps.google.com/maps?q=9400%20Wilshire%20Blvd,%20Beverly%20Hills,%20CA%2090212&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                loading="lazy"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <p>© 2026 SmileWay Private Dental Studio. All Rights Reserved.</p>
+      </footer>
+
+      <div className={`floating-ai ${isChatOpen ? 'rotated' : ''}`} onClick={() => setIsChatOpen(!isChatOpen)} aria-label="Toggle AI Assistant">
+        <span className="ai-avatar">🤖</span>
+        <span className="status-dot-tiny"></span>
+      </div>
+
+      <div className={`ai-chat-modal ${isChatOpen ? 'active' : ''}`}>
+        <div className="ai-chat-window">
+          <div className="ai-chat-header">
+            <div className="ai-header-left">
+              <div style={{width:'9px', height:'9px', borderRadius:'50%', background:'#34c759'}}></div>
+              <strong>SmileWay AI Assistant</strong>
+            </div>
+            <div className="ai-header-right">
+              <button onClick={() => setIsChatOpen(false)} style={{background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer', color:'var(--apple-dark)'}}>×</button>
+            </div>
+          </div>
+          <div className="ai-chat-body" ref={chatBodyRef}>
+            {chatMessages.map((msg, idx) => (
+              <div key={idx} className={`ai-msg ${msg.sender === 'bot' ? 'ai-bot' : 'ai-user'}`}>
+                {msg.text}
+              </div>
+            ))}
+            {showCalendarWidget && (
+              <div className="chat-calendar-card">
+                <div className="chat-calendar-title">📅 Reserve Priority Consultation Slot</div>
+                <input type="datetime-local" value={chatSlot} onChange={e => setChatSlot(e.target.value)} className="chat-calendar-input" />
+                <button className="chat-calendar-btn" onClick={confirmChatSlot}>Confirm Slot Reservation</button>
+                {chatSlotStatus.text && <p style={{ fontSize: '0.78rem', marginTop: '6px', fontWeight: 600, color: chatSlotStatus.color }}>{chatSlotStatus.text}</p>}
+              </div>
+            )}
+          </div>
+          <div className="ai-chat-footer">
+            <input type="text" value={userInput} onChange={e => setUserInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && sendAiMessage()} className="ai-chat-input" maxLength={300} placeholder="Type message..." />
+            <button className="ai-send-btn" onClick={sendAiMessage}>Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
