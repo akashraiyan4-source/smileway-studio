@@ -509,7 +509,7 @@ export default function DentalPage() {
   return (
     <div className="app-shell" style={{ position: 'relative', overflowX: 'hidden' }}>
       <div className="ambient-bg-container">
-        <video className="ambient-bg-video" src="/niches/dental/start.mp4" autoPlay muted loop playsInline preload="auto"></video>
+        <video className="ambient-bg-video" src="/niches/dental/start.mp4" autoPlay muted loop playsInline preload="auto" poster="/niches/dental/start-poster.jpg"></video>
         <div className="ambient-bg-overlay"></div>
       </div>
 
@@ -804,7 +804,7 @@ export default function DentalPage() {
         </div>
 
         <div className="hero-box" id="heroSec" ref={heroBoxRef}>
-          <video ref={vidStartRef} className="hero-vid" src="/niches/dental/start.mp4" playsInline autoPlay muted loop preload="auto" style={{ zIndex: 1, opacity: 1 }}></video>
+          <video ref={vidStartRef} className="hero-vid" src="/niches/dental/start.mp4" playsInline autoPlay muted loop preload="auto" poster="/niches/dental/start-poster.jpg" style={{ zIndex: 1, opacity: 1 }}></video>
           <video ref={vidTransRef} className="hero-vid" src="/niches/dental/trans.mp4" playsInline muted preload="auto" style={{ zIndex: 2, opacity: 0, pointerEvents: 'none' }}></video>
           <video ref={vidEndRef} className="hero-vid" src="/niches/dental/end.mp4" playsInline muted loop preload="auto" style={{ zIndex: 3, opacity: 0, pointerEvents: 'none' }}></video>
 
